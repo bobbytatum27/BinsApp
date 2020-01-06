@@ -1,39 +1,38 @@
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import Login from './Login/Login.js';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
-});
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text>Bins Bins Bins Bins Bins</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
+import Screen2 from './screens/Screen2.js'
+import Screen3 from './screens/Screen3.js'
+
+const AppStack = createStackNavigator(
+  {
+    Route2: Screen2,
+    Route3: Screen3
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {backgroundColor: 'purple'},
+      title: 'Select Storage Facility',
+      headerTintColor: 'white'
+    }
   }
-}
+);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+const AuthStack = createStackNavigator(
+  {
+    LoginRoute: Login
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+  {
+    defaultNavigationOptions: {
+      header: null
+  }}
+);
+
+export default createAppContainer(createStackNavigator(
+  {
+    Auth: AuthStack,
+    App: AppStack
+  }
+));
