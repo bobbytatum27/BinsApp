@@ -14,8 +14,12 @@ const AppStack = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerStyle: {backgroundColor: 'purple'},
-      title: 'Select Storage Facility',
-      headerTintColor: 'white'
+      title: 'Bins',
+      headerTintColor: 'white',
+      headerTitleStyle: {
+        fontSize: 60,
+        marginTop: -30
+      }
     }
   }
 );

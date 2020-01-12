@@ -19,7 +19,7 @@ class Screen2 extends Component {
         value={this.state.text}
       />
         <Button onPress={() => this.props.navigation.navigate('Route3')}
-                title='Feed Item' />
+                title='Button' />
       </View>
     );
   }
