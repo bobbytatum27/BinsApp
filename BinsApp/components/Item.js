@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Image, View, Text } from 'react-native';
-
+import { Image, View, Text} from 'react-native';
 
 class Item extends Component {
   render() {
@@ -16,7 +15,7 @@ class Item extends Component {
         }}>
         <Image
           style={{width: 158, height: 100}}
-          source={require('../photos/electronics.jpg')}/>
+          source={{uri: this.props.url}}/>
         <Text>{this.props.name}</Text>
         <Text>{this.props.number}</Text>
       </View>

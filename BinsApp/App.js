@@ -1,24 +1,56 @@
-import Login from './Login/Login.js';
-
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import Screen2 from './screens/Screen2.js'
-import Screen3 from './screens/Screen3.js'
+import Landing from './screens/Landing.js';
+import Home from './screens/Home.js'
+import Inventory from './screens/Inventory.js'
+import ScheduleAppointment from './screens/ScheduleAppointment.js'
+import Review from './screens/Review.js'
+import Confirmation from './screens/Confirmation.js'
 
 const AppStack = createStackNavigator(
-  {
-    Route2: Screen2,
-    Route3: Screen3
+    {
+    HomeScreen: {
+      screen: Home,
+      navigationOptions: {
+        headerTitle: 'Bins',
+        headerTitleStyle: {
+          fontSize: 60,
+          marginTop: -30
+        }
+      }
+    },
+    InventoryScreen: {
+      screen: Inventory,
+      navigationOptions: {
+        headerTitle: 'Your Inventory'
+      }
+    },
+    ScheduleAppointmentScreen:{
+      screen: ScheduleAppointment,
+      navigationOptions: {
+        headerTitle: 'Schedule Appointment'
+      }
+    },
+    ReviewScreen:{
+      screen: Review,
+      navigationOptions: {
+        headerTitle: 'Review'
+      }
+    },
+    ConfirmationScreen:{
+      screen: Confirmation,
+      navigationOptions: {
+        headerTitle: 'Confirmation'
+      }
+    }
   },
   {
     defaultNavigationOptions: {
       headerStyle: {backgroundColor: 'purple'},
-      title: 'Bins',
       headerTintColor: 'white',
       headerTitleStyle: {
-        fontSize: 60,
-        marginTop: -30
+        fontSize: 20
       }
     }
   }
@@ -26,7 +58,7 @@ const AppStack = createStackNavigator(
 
 const AuthStack = createStackNavigator(
   {
-    LoginRoute: Login
+    LoginRoute: Landing
   },
   {
     defaultNavigationOptions: {
