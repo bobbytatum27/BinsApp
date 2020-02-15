@@ -1,39 +1,74 @@
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
-});
+import Landing from './screens/Landing.js';
+import Home from './screens/Home.js'
+import Inventory from './screens/Inventory.js'
+import ScheduleAppointment from './screens/ScheduleAppointment.js'
+import Review from './screens/Review.js'
+import Confirmation from './screens/Confirmation.js'
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text>Bins Bins Bins Bins Bins</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
+const AppStack = createStackNavigator(
+    {
+    HomeScreen: {
+      screen: Home,
+      navigationOptions: {
+        headerTitle: 'Bins',
+        headerTitleStyle: {
+          fontSize: 60,
+          marginTop: -30
+        }
+      }
+    },
+    InventoryScreen: {
+      screen: Inventory,
+      navigationOptions: {
+        headerTitle: 'Your Inventory'
+      }
+    },
+    ScheduleAppointmentScreen:{
+      screen: ScheduleAppointment,
+      navigationOptions: {
+        headerTitle: 'Schedule Appointment'
+      }
+    },
+    ReviewScreen:{
+      screen: Review,
+      navigationOptions: {
+        headerTitle: 'Review'
+      }
+    },
+    ConfirmationScreen:{
+      screen: Confirmation,
+      navigationOptions: {
+        headerTitle: 'Confirmation'
+      }
+    }
+  },
+  {
+    defaultNavigationOptions: {
+      headerStyle: {backgroundColor: 'purple'},
+      headerTintColor: 'white',
+      headerTitleStyle: {
+        fontSize: 20
+      }
+    }
   }
-}
+);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+const AuthStack = createStackNavigator(
+  {
+    LoginRoute: Landing
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+  {
+    defaultNavigationOptions: {
+      header: null
+  }}
+);
+
+export default createAppContainer(createStackNavigator(
+  {
+    Auth: AuthStack,
+    App: AppStack
+  }
+));
