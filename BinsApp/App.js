@@ -63,7 +63,7 @@ const AppStack = createStackNavigator(
 
 const AuthStack = createStackNavigator(
   {
-    LoginRoute: UserInfo
+    LoginRoute: Landing
   },
   {
     defaultNavigationOptions: {
