@@ -48,6 +48,33 @@ const AppStack = createStackNavigator(
       navigationOptions: {
         headerTitle: 'Confirmation'
       }
+    },
+    WelcomePageScreen:{
+      screen: WelcomePage,
+    },
+    SelectFacilityScreen:{
+      screen: SelectFacility,
+      navigationOptions: {
+        headerTitle: 'Select Storage Facility'
+      }
+    },
+    AppointmentSchedulerScreen:{
+      screen: AppointmentScheduler,
+      navigationOptions: {
+        headerTitle: 'Schedule Appointment'
+      }
+    },
+    AccountInfoScreen:{
+      screen: UserInfo,
+      navigationOptions: {
+        headerTitle: 'Create an Account'
+      }
+    },
+    BillingInfoScreen:{
+      screen: BillingInfo,
+      navigationOptions: {
+        headerTitle: 'Billing Info'
+      }
     }
   },
   {

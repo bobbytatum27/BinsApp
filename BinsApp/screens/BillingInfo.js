@@ -22,7 +22,7 @@ export default class BillingInfo extends React.Component {
         <View style={{paddingTop: 15}}>
           <Button
             title="Confirm Pickup"
-            onPress={()=>Alert.alert('Pickup Confirmed!')}
+            onPress={()=>this.props.navigation.navigate('HomeScreen')}
           />
         </View>
       </View>

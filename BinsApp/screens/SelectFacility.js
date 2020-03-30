@@ -59,6 +59,10 @@ export default class SelectFacility extends React.Component {
           <StorageCompanyCard companyName="Extra Space Storage" />
           <StorageCompanyCard companyName="Public Storage" />
           <Text>Map at the bottom </Text>
+          <Button
+            title='adding an onpress to storage cards (press here for now)'
+            onPress={()=>this.props.navigation.navigate('AccountInfoScreen')}
+          />
         </View>
       </View>
     );

@@ -19,7 +19,7 @@ export default class UserInfo extends React.Component {
         <FormInputHandler />
         <Button
           title="Next"
-          onPress={()=>Alert.alert('Stack navigator to handle going to next page')}
+          onPress={()=>this.props.navigation.navigate('AppointmentSchedulerScreen')}
         />
       </View>
     );

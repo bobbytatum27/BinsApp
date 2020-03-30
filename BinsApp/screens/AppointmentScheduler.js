@@ -28,7 +28,7 @@ export default class AppointmentScheduler extends React.Component {
           <FormInputHandler />
         </View>
         <Text>Please select a date</Text>
-        <Text style={{height: 200, width: 200, backgroundColor: 'blue', color: 'white'}}>Calendar goes here:</Text>
+        <Text style={{backgroundColor: 'blue', color: 'white'}}>Calendar goes here:</Text>
         <Text style={{paddingTop: 25}}>Please select a time</Text>
         <View style={{flexDirection: 'row', justifyContent: 'center', borderColor: '#d6d7da'}}>
           <Button
@@ -62,7 +62,7 @@ export default class AppointmentScheduler extends React.Component {
         </View>
         <Button
           title="Next"
-          onPress={()=>Alert.alert('Stack navigator to handle depending on next page')}
+          onPress={()=>this.props.navigation.navigate('BillingInfoScreen')}
         />
       </View>
     );
