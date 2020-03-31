@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 export default class StorageCompanyCard extends React.Component {
   constructor(props) {
@@ -9,10 +9,12 @@ export default class StorageCompanyCard extends React.Component {
 
   render() {
     return (
-      <View style={{ borderColor: '#d6d7da', flexDirection: 'column', padding: 5}}>
-        <Text style={{fontSize: 25}}>{this.props.companyName} </Text>
+      <View style={{ borderColor: '#d6d7da', flexDirection: 'column', padding: 5, borderWidth: 2}}>
+        <TouchableOpacity onPress={this.props.onPress}>
+          <Text style={{fontSize: 25}}>{this.props.companyName} </Text>
           <Text >Address</Text>
           <Text>Price</Text>
+        </TouchableOpacity>
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Picker, FlatList, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Picker, FlatList, Button, Alert, Image } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import StorageCompanyCard from '../components/StorageCompanyCard'
 
@@ -47,7 +47,7 @@ export default class SelectFacility extends React.Component {
             onPress={()=>Alert.alert('$5 pressed')}
           />
           <Button
-            title="$5"
+            title="$10"
             color='blue'
             onPress={()=>Alert.alert('$5 pressed')}
           />
@@ -55,14 +55,24 @@ export default class SelectFacility extends React.Component {
 
           <Text>Filter Option goes here </Text>
           <Text>FlatList of Storage Cards</Text>
-          <StorageCompanyCard companyName="CubeSmart" />
-          <StorageCompanyCard companyName="Extra Space Storage" />
-          <StorageCompanyCard companyName="Public Storage" />
-          <Text>Map at the bottom </Text>
-          <Button
-            title='adding an onpress to storage cards (press here for now)'
+          <StorageCompanyCard
+            companyName="CubeSmart"
             onPress={()=>this.props.navigation.navigate('AccountInfoScreen')}
           />
+          <StorageCompanyCard
+            companyName="Extra Space Storage"
+            onPress={()=>this.props.navigation.navigate('AccountInfoScreen')}
+          />
+          <StorageCompanyCard
+            companyName="Public Storage"
+            onPress={()=>this.props.navigation.navigate('AccountInfoScreen')}
+          />
+          <View style={{alignItems: 'center'}}>
+            <Image
+              style={{width: 150, height: 150}}
+              source={{uri: 'https://i.pinimg.com/originals/0a/50/5a/0a505ae5b9946975cd2347d222c5cc8a.png'}}
+            />
+          </View>
         </View>
       </View>
     );
