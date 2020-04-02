@@ -7,6 +7,11 @@ import Inventory from './screens/Inventory.js'
 import ScheduleAppointment from './screens/ScheduleAppointment.js'
 import Review from './screens/Review.js'
 import Confirmation from './screens/Confirmation.js'
+import WelcomePage from './screens/WelcomePage.js'
+import SelectFacility from './screens/SelectFacility.js'
+import BillingInfo from './screens/BillingInfo.js'
+import AppointmentScheduler from './screens/AppointmentScheduler.js'
+import UserInfo from './screens/UserInfo.js'
 
 const AppStack = createStackNavigator(
     {
@@ -42,6 +47,33 @@ const AppStack = createStackNavigator(
       screen: Confirmation,
       navigationOptions: {
         headerTitle: 'Confirmation'
+      }
+    },
+    WelcomePageScreen:{
+      screen: WelcomePage,
+    },
+    SelectFacilityScreen:{
+      screen: SelectFacility,
+      navigationOptions: {
+        headerTitle: 'Select Storage Facility'
+      }
+    },
+    AppointmentSchedulerScreen:{
+      screen: AppointmentScheduler,
+      navigationOptions: {
+        headerTitle: 'Schedule Appointment'
+      }
+    },
+    AccountInfoScreen:{
+      screen: UserInfo,
+      navigationOptions: {
+        headerTitle: 'Create an Account'
+      }
+    },
+    BillingInfoScreen:{
+      screen: BillingInfo,
+      navigationOptions: {
+        headerTitle: 'Billing Info'
       }
     }
   },

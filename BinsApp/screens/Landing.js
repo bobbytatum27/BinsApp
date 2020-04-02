@@ -13,7 +13,7 @@ class Landing extends Component {
         <Text style={styles.intro2}>Swipe to learn more.</Text>
         <Text style={styles.intro3}>Discover fell-service storage near you</Text>
         <Button
-          onPress={() => this.props.navigation.navigate('HomeScreen')}
+          onPress={() => this.props.navigation.navigate('SelectFacilityScreen')}
           title='Find a Unit' />
       </View>
     );
