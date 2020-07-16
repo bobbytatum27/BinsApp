@@ -11,12 +11,18 @@ export default class UserInfo extends React.Component {
   render() {
     return (
       <View style={{padding: 25}}>
-        <Text>Enter your full name</Text>
-        <FormInputHandler />
-        <Text>Enter your email:</Text>
-        <FormInputHandler />
-        <Text>Enter your password</Text>
-        <FormInputHandler />
+        <FormInputHandler 
+          defaultText='Enter your full name here'
+          style={styles.userInfoText}
+        />
+        <FormInputHandler 
+          defaultText='Enter your email here'
+          style={styles.userInfoText}
+        />
+        <FormInputHandler 
+          defaultText='Enter a password here'
+          style={styles.userInfoText}
+        />
         <Button
           title="Next"
           onPress={()=>this.props.navigation.navigate('AppointmentSchedulerScreen')}
@@ -32,5 +38,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  userInfoText: {
+    backgroundColor: '#F5F5F5',
+    textAlign: 'center',
+    margin: 15,
+    padding: 15,
   }
 });

@@ -102,5 +102,10 @@ export default createAppContainer(createStackNavigator(
   {
     Auth: AuthStack,
     App: AppStack
+  },
+  {
+    defaultNavigationOptions: {
+      header: null
+    }
   }
 ));

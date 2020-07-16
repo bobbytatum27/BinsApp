@@ -5,6 +5,15 @@ import FormInputHandler from '../components/FormInputHandler.js'
 export default class AppointmentScheduler extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      addressLine1: '',
+      addressLine2: '',
+      city: '',
+      state: '',
+      zip: '',
+      specialInstructions: '',
+    }
   }
 
   render() {
@@ -13,19 +22,31 @@ export default class AppointmentScheduler extends React.Component {
         <ScrollView>
           <View style={{padding: 25}}>
             <Text>Address Line 1</Text>
-            <FormInputHandler />
+            <FormInputHandler 
+              onChangeText={(text) => this.setState({addressLine1: text})}
+            />
             <Text>Address Line 2</Text>
-            <FormInputHandler />
+            <FormInputHandler 
+              onChangeText={(text) => this.setState({addressLine2: text})}
+            />
             <Text>City</Text>
-            <FormInputHandler />
+            <FormInputHandler 
+              onChangeText={(text) => this.setState({city: text})}
+            />
             <Text>State</Text>
-            <FormInputHandler />
+            <FormInputHandler 
+              onChangeText={(text) => this.setState({state: text})}
+            />
             <Text>Zip</Text>
-            <FormInputHandler />
+            <FormInputHandler 
+              onChangeText={(text) => this.setState({zip: text})}
+            />
           </View>
           <View style={{padding: 25}}>
             <Text>Special Instructions: </Text>
-            <FormInputHandler />
+            <FormInputHandler 
+              onChangeText={(text) => this.setState({specialInstructions: text})}
+            />
           </View>
           <Text>Please select a date</Text>
           <View style={{alignItems: 'center'}}>
