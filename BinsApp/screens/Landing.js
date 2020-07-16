@@ -11,7 +11,7 @@ class Landing extends Component {
         <Text style={styles.intro}>We help pick up and bring back items</Text>
         <Text style={styles.intro}>that you'd like to store in self-storage.</Text>
         <Text style={styles.intro2}>Swipe to learn more.</Text>
-        <Text style={styles.intro3}>Discover fell-service storage near you</Text>
+        <Text style={styles.intro3}>Discover full-service storage near you</Text>
         <Button
           onPress={() => this.props.navigation.navigate('SelectFacilityScreen')}
           title='Find a Unit' />

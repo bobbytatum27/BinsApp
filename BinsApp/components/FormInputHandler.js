@@ -11,9 +11,10 @@ export default class FormInputHandler extends React.Component {
   render() {
     return (
       <TextInput
-        style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-        onChangeText={(text) => this.setState({text})}
-        value={this.state.text}
+        placeholder={this.props.defaultText}
+        placeholderTextColor={this.props.defaultTextColor}
+        onChangeText={this.props.onChangeText}
+        style={this.props.style}
       />
     );
   }
@@ -25,5 +26,32 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
+  textInput: {
+    height: 100, // For dimensions
+    borderRadius: 2, // How round is the text box
+    borderWidth: 2, // Set border width.
+    borderColor: '#000000', // Set border Hex Color Code Here
+    color: '#000000', // Setting up Text Font Color.
+    backgroundColor : '#FFFFFF', // Setting Up Background Color of Text component.
+    padding : 2, // Adding padding on Text component.
+    fontSize: 14,
+    // textAlign: 'center',
+    margin: 10,
+  },
 });
+
+/*
+<View style={{ paddingTop: 30 }}>
+        <TextInput
+          style={this.props.style}
+          placeholder={this.props.title}
+          placeholderTextColor={this.props.titleColor}
+          multiline={this.props.multiline}
+          autoCapitalize={this.props.autocapital}
+          underlineColorAndroid={this.props.underlineColor}
+          onChangeText={this.props.onChangeText}
+          // value={this.state.finalText} // THIS LINE DIDN'T LET THE USER CHANGE THE TEXT
+        />
+</View>
+*/

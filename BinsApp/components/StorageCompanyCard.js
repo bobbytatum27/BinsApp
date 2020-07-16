@@ -9,7 +9,7 @@ export default class StorageCompanyCard extends React.Component {
 
   render() {
     return (
-      <View style={{ borderColor: '#d6d7da', flexDirection: 'column', padding: 5, borderWidth: 2}}>
+      <View style={styles.parentView}>
         <TouchableOpacity onPress={this.props.onPress}>
           <Text style={{fontSize: 25}}>{this.props.companyName} </Text>
           <Text >Address</Text>
@@ -26,5 +26,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
+  parentView: { 
+    borderColor: '#d6d7da', flexDirection: 'column', padding: 5, borderWidth: 2
+  },
 });
