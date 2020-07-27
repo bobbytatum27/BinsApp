@@ -3,14 +3,6 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "urlRandomness": "m2-trr",
-=======
-  "urlRandomness": "ec-6ha",
->>>>>>> Login
-=======
-  "urlRandomness": "ec-6ha",
->>>>>>> b3078fceb2673439a32a0ce38ff56adb9ef78e7f
+  "urlRandomness": null,
   "https": false
 }

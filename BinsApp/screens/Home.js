@@ -13,14 +13,15 @@ class Home extends Component {
     return (
       <ScrollView>
         <View style={styles.center}>
-          <View style={{flex:1, padding: 30}}>
+          <View style={{marginBottom: 25}}>
             <Text style={styles.sectionHeader}>Next Order</Text>
             <Textbox header='Date and Time'
                      body='Monday, January 1, 2020'
                      body2='8am - 10am'/>
-            <LongButton title ="VIEW ALL"/>
+              <LongButton title ="VIEW ALL"
+                          onPress={() => this.props.navigation.navigate('Orders')}/>
           </View>
-          <View style={{flex:1, padding: 30}}>
+          <View style={{marginBottom: 25}}>
             <Text style={styles.sectionHeader}>Items in Storage</Text>
             <Text style={styles.menuFilter}>DATE ADDED (NEWEST)</Text>
               <View style={styles.box}>
@@ -34,11 +35,11 @@ class Home extends Component {
                 <Item name='  Electronics'
                     number='  ID 123456'/>
               </View>
-              <Button
+              <LongButton
                title ="REQUEST A DELIVERY"
-               onPress={() => this.props.navigation.navigate('InventoryScreen')}/>
+               onPress={() => this.props.navigation.navigate('StorageInventoryScreen')}/>
           </View>
-          <View style={{flex:1, padding: 30}}>
+          <View style={{marginBottom: 25}}>
             <Text style={styles.sectionHeader}>Items with You</Text>
             <Text style={styles.menuFilter}>DATE ADDED (NEWEST)</Text>
               <View style={styles.box}>
@@ -51,9 +52,10 @@ class Home extends Component {
                 <Item name='  Electronics'
                     number='  ID 123456'/>
               </View>
-              <LongButton title ="REQUEST A PICKUP"/>
+              <LongButton
+               title ="REQUEST A PICKUP"
+               onPress={() => this.props.navigation.navigate('HomeInventoryScreen')}/>
           </View>
-
         </View>
       </ScrollView>
     );

@@ -23,10 +23,10 @@ export default class SelectFacility extends React.Component {
   // TODO: make sure the tab formatting is correct, some might be off (maybe)
   render() {
     return (
-      <View>
+      <View style = {styles.container}>
         <Text style={styles.findFacilityText}>Let's find a facility based on your needs:</Text>
         <View style={{padding: 25}}>
-          <FormInputHandler 
+          <FormInputHandler
             defaultText='Enter your address here'
             defaultTextColor='gray'
             onChangeText={(val) => this.setState({addressText: val})}
@@ -37,13 +37,13 @@ export default class SelectFacility extends React.Component {
         <Text style={{...styles.findFacilityText, paddingTop: 40}}>Now select the unit size you want: </Text>
         <View style={styles.unitSizeView}>
             <View style={styles.unitColumnView}>
-              <TouchableHighlight 
+              <TouchableHighlight
                 style={styles.openButton}
                 onPress={() => this.setState({ unitSize: '5x5' })}
               >
                 <Text> 5x5</Text>
               </TouchableHighlight>
-              <TouchableHighlight 
+              <TouchableHighlight
                 style={styles.openButton}
                 onPress={() => this.setState({ unitSize: '5x10' })}
               >
@@ -51,13 +51,13 @@ export default class SelectFacility extends React.Component {
               </TouchableHighlight>
             </View>
             <View style={styles.unitColumnView}>
-              <TouchableHighlight 
+              <TouchableHighlight
                 style={styles.openButton}
                 onPress={() => this.setState({ unitSize: '10x10' })}
               >
                 <Text>10x10</Text>
               </TouchableHighlight>
-              <TouchableHighlight 
+              <TouchableHighlight
                 style={styles.openButton}
                 onPress={() => this.setState({ unitSize: '10x15' })}
               >
@@ -65,13 +65,13 @@ export default class SelectFacility extends React.Component {
               </TouchableHighlight>
             </View>
             <View style={styles.unitColumnView}>
-              <TouchableHighlight 
+              <TouchableHighlight
                 style={styles.openButton}
                 onPress={() => this.setState({ unitSize: '15x15' })}
               >
                 <Text>15x15</Text>
               </TouchableHighlight>
-              <TouchableHighlight 
+              <TouchableHighlight
                 style={styles.openButton}
                 onPress={() => this.setState({ unitSize: '15x20' })}
               >
@@ -84,7 +84,7 @@ export default class SelectFacility extends React.Component {
           <Button
             title='Find a Unit!'
             onPress={() => {
-              this.state.unitSize == ''  ? Alert.alert('select unit size/input address') : 
+              this.state.unitSize == ''  ? Alert.alert('select unit size/input address') :
                 this.setState({ selectFacilityModal: true })
             }}
           />
@@ -141,16 +141,16 @@ export default class SelectFacility extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }, 
+    backgroundColor: '#261136',
+    padding: 25,
+  },
   findFacilityText: {
     flexDirection: 'row',
     fontSize: 15,
     justifyContent: 'center',
     paddingTop: 15,
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'white'
   },
   unitSizeView: {
     flexDirection: 'row',

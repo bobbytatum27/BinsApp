@@ -1,24 +1,10 @@
 {
   "devToolsPort": 19002,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b3078fceb2673439a32a0ce38ff56adb9ef78e7f
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
   "expoServerNgrokUrl": null,
   "packagerNgrokUrl": null,
-  "ngrokPid": null
-<<<<<<< HEAD
-=======
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 12768,
-  "expoServerNgrokUrl": "https://ec-6ha.anonymous.binsapp.exp.direct",
-  "packagerNgrokUrl": "https://packager.ec-6ha.anonymous.binsapp.exp.direct",
-  "ngrokPid": 13608
->>>>>>> Login
-=======
->>>>>>> b3078fceb2673439a32a0ce38ff56adb9ef78e7f
+  "ngrokPid": null,
+  "webpackServerPort": null
 }

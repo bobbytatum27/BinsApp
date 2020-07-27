@@ -11,7 +11,8 @@ class Item extends Component {
           backgroundColor: 'white',
           borderColor: 'black',
           borderWidth: '1',
-          marginBottom: 35
+          marginBottom: 15,
+          padding: 15
         }}>
         <Image
           style={{width: 158, height: 100}}

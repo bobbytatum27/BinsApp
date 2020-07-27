@@ -7,7 +7,8 @@ class LongButton extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={styles.button}>
+        style={styles.button}
+        onPress={this.props.onPress}>
         <Text style={{color: 'white'}}>{this.props.title}</Text>
       </TouchableOpacity>
     );
