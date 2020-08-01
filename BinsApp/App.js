@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createContext, useState } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -26,12 +26,22 @@ import Account from './screens/Account.js'
 import Orders from './screens/Orders.js'
 import Login from './screens/Login.js'
 
+import {LoginProvider, LoginContext} from './components/LoginProvider.js'
+
+import Amplify from "aws-amplify"
+import config from "./aws-exports"
+import { withAuthenticator } from "aws-amplify-react-native"
+Amplify.configure(config)
+
+// for stack nav
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const LandingTab = createMaterialTopTabNavigator();
 
-export default function App() {
+
+function App() {
   return (
+    <LoginProvider>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
         headerStyle: {
@@ -58,6 +68,7 @@ export default function App() {
         <Stack.Screen name='EditAccountScreen' component={Account}/>
       </Stack.Navigator>
     </NavigationContainer>
+    </LoginProvider>
   );
 }
 
@@ -104,3 +115,6 @@ function LandingTabs() {
     </LandingTab.Navigator>
   );
 }
+
+export default App;
+//export default withAuthenticator(App, true)

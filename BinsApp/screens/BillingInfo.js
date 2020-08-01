@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
+import { CreditCardInput } from 'react-native-credit-card-input'
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class BillingInfo extends React.Component {
   constructor(props) {
@@ -64,43 +66,19 @@ export default class BillingInfo extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.descriptionText}>Name on Card</Text>
-        <FormInputHandler
-          defaultText='Name on Card'
-          defaultTextColor='#8B8B8B'
-          style={styles.userInfoText}
-          onChangeText={(text) => this.setState({nameOnCard: text})}
-        />
-        <Text style={styles.descriptionText}>Credit Card</Text>
-        <FormInputHandler
-          defaultText='Credit Card Number'
-          defaultTextColor='#8B8B8B'
-          style={styles.userInfoText}
-          onChangeText={(text) => this.setState({creditCardNum: text})}
-        />
-        <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
-          <View style={{flex:1}}>
-            <Text style={styles.descriptionText}>Expiration Date</Text>
-            <FormInputHandler
-              defaultText='Expiration Date'
-              defaultTextColor='#8B8B8B'
-              style={styles.userInfoText}
-              onChangeText={(text) => this.setState({expirationDate: text})}
-            />
-          </View>
-          <View style={{flex:1}}>
-            <Text style={styles.descriptionText}>Security Code</Text>
-            <FormInputHandler
-              defaultText='Security Code'
-              defaultTextColor='#8B8B8B'
-              style={styles.userInfoText}
-              onChangeText={(text) => this.setState({securityCode: text})}
-            />
-          </View>
-        </View>
+        
         <View style = {{alignItems: 'center'}}>
           <Text style = {styles.header}>Review</Text>
         </View>
+        <ScrollView>
+        <CreditCardInput 
+          onChange={this._onChange} 
+          labelStyle={styles.creditCardLabels} 
+          inputContainerStyle={styles.creditCardInputView}
+          inputStyle={{color: 'white'}}
+          requiresName={true}
+          autoFocus={false}
+        />
         <Textbox header='Date and Time'
                  body={Object.keys(this.state.dateSelected)}
                  body2={this.state.timeSelected}/>
@@ -116,6 +94,7 @@ export default class BillingInfo extends React.Component {
             onPress={()=>{this.onSubmit(); this.props.navigation.navigate('Home')}}
           />
         </View>
+        </ScrollView>
       </View>
     );
   }
@@ -149,6 +128,16 @@ const styles = StyleSheet.create({
     fontSize: 25,
     margin: 15,
     justifyContent: 'center',
+  },
+  creditCardLabels: {
+    color: 'white',
+  },
+  creditCardInputView: {
+    borderColor: '#4826A0',
+    borderWidth: 1,
+    margin: 15,
+    paddingLeft: 5,
+    paddingTop: 5
   }
 
 });

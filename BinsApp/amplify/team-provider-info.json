@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-binsapp-dev-152926-authRole",
+            "UnauthRoleArn": "arn:aws:iam::670958809109:role/amplify-binsapp-dev-152926-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::670958809109:role/amplify-binsapp-dev-152926-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-binsapp-dev-152926-deployment",
+            "UnauthRoleName": "amplify-binsapp-dev-152926-unauthRole",
+            "StackName": "amplify-binsapp-dev-152926",
+            "StackId": "arn:aws:cloudformation:us-east-2:670958809109:stack/amplify-binsapp-dev-152926/4ca0c9c0-d37d-11ea-92db-0a0a04c5437c",
+            "AmplifyAppId": "d1gahckbajmbvk"
+        },
+        "categories": {
+            "auth": {
+                "binsapp54a02567": {}
+            }
+        }
+    }
+}
