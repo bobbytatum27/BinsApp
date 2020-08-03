@@ -30,7 +30,12 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const LandingTab = createMaterialTopTabNavigator();
 
-export default function App() {
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
+import { Authenticator, withAuthenticator } from 'aws-amplify-react-native'
+
+function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
@@ -42,8 +47,8 @@ export default function App() {
           fontWeight: 'bold',
         },
       }}>
-        <Stack.Screen name='Landing' component={LandingTabs} options={{headerShown: false}}/>
-        <Stack.Screen name='Login' component={Login}/>
+
+        <Stack.Screen name='Landing' component={AuthStack}/>
         <Stack.Screen name='SelectFacilityScreen' component={SelectFacility} options={{title: "Select Storage Facility"}}/>
         <Stack.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
         <Stack.Screen name='AccountInfoScreen' component={UserInfo} options={{title: "Create an Account"}}/>
@@ -104,3 +109,14 @@ function LandingTabs() {
     </LandingTab.Navigator>
   );
 }
+
+function AuthStack() {
+  return(
+    <Authenticator hideDefault={true}>
+
+           <Login override={'SignIn'}/>
+       </Authenticator>
+  )
+}
+
+export default App

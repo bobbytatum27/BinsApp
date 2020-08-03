@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"binsappcd2c1818": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}

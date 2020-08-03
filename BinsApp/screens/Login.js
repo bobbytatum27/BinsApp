@@ -2,8 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
+import { SignIn } from 'aws-amplify-react-native'
 
-export default class Login extends React.Component {
+export default class Login extends SignIn {
   constructor(props) {
     super(props);
     this.state = {
