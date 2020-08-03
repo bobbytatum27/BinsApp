@@ -11,6 +11,7 @@ export default class InitialAppointment extends React.Component {
     this.state = {
       name:'',
       email:'',
+      password:'',
       phone: '',
       addressLine1: '',
       addressLine2: '',
@@ -130,6 +131,7 @@ selectionOnPress(userType) {
             title="NEXT"
             onPress={()=>this.props.navigation.navigate('BillingInfoScreen', {name:this.props.route.params.name,
                                                                               email:this.props.route.params.email,
+                                                                              password:this.props.route.params.password,
                                                                               phone:this.props.route.params.phone,
                                                                               addressLine1:this.state.addressLine1,
                                                                               addressLine2:this.state.addressLine2,

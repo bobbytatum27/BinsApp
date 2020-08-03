@@ -53,13 +53,18 @@ function App() {
           fontWeight: 'bold',
         },
       }}>
+      {loginContext.isLoggedIn == false ? (
+         <>
         <Stack.Screen name='Landing' component={LandingTabs} options={{headerShown: false}}/>
-        <Stack.Screen name='Home' component={HomeTabs} options={{title: "Bins"}}/>
         <Stack.Screen name='Login' component={Login}/>
         <Stack.Screen name='SelectFacilityScreen' component={SelectFacility} options={{title: "Select Storage Facility"}}/>
         <Stack.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
         <Stack.Screen name='AccountInfoScreen' component={UserInfo} options={{title: "Create an Account"}}/>
         <Stack.Screen name='BillingInfoScreen' component={BillingInfo} options={{title: "Billing Info"}}/>
+        </>
+      ) : (
+        <>
+        <Stack.Screen name='Home' component={HomeTabs} options={{title: "Bins"}}/>
         <Stack.Screen name='StorageInventoryScreen' component={StorageInventory} options={{title: "Deliver"}}/>
         <Stack.Screen name='ScheduleAppointmentScreen' component={ScheduleAppointment} options={{title: "Schedule Appointment"}}/>
         <Stack.Screen name='ReviewScreen' component={Review} options={{title: "Review"}}/>
@@ -67,6 +72,8 @@ function App() {
         <Stack.Screen name='HomeInventoryScreen' component={HomeInventory} options={{title: "Pickup"}}/>
         <Stack.Screen name='NewItemScreen' component={NewItem} options={{title: "Pickup"}}/>
         <Stack.Screen name='EditAccountScreen' component={Account}/>
+        </>
+      )}
       </Stack.Navigator>
     </NavigationContainer>
   );

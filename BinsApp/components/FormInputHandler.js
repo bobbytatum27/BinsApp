@@ -15,6 +15,8 @@ export default class FormInputHandler extends React.Component {
         placeholderTextColor={this.props.defaultTextColor}
         onChangeText={this.props.onChangeText}
         style={this.props.style}
+        keyboardType={this.props.keyboardType}
+        secureTextEntry={this.props.secureTextEntry}
       />
     );
   }

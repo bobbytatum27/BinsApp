@@ -14,11 +14,21 @@ export default class Login extends React.Component {
     super(props);
 
     this.state = {
-      name: '',
       email: '',
-      phone: ''
+      password: '',
     };
   }
+
+  signIn() {
+      Auth.signIn({
+        username: this.state.email,
+        password: this.state.password,
+      })
+      .then(() => {
+        console.log('successful sign in!');
+        this.context.login();})
+      .catch(err => console.log('error signing in!: ', err));
+      }
 
   render() {
     return (
@@ -29,40 +39,23 @@ export default class Login extends React.Component {
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(val)=>this.setState({email:val})}
+          keyboardType='email-address'
         />
         <Text style ={styles.descriptionText}>Password</Text>
         <FormInputHandler
           defaultText='Enter a password here'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
+          onChangeText={(val)=>this.setState({password:val})}
+          secureTextEntry
         />
         <LongButton
           title="LOGIN"
-          onPress={()=>{
-            this.context.login()
+          onPress={this.signIn.bind(this)}
             // only uncomment to move between screens during testing. .login() needs to be a promise before reimplementing
             // this.props.navigation.navigate('Home')
             // the button below this needs to be removed as well.
-          }}
         />
-
-        <Button
-          title='sign up. use to add users for testing.'
-          onPress={()=>{
-            Auth.signUp({
-              username: 'bobbyt9927@yahoo.com',
-              password: 'XYZ253jksdgUUGw235',
-              attributes: {
-                name: this.state.name,
-                phone_number: '',
-                address: this.state.addressLine1+ " " + this.state.addressLine2 + " " + this.state.city + ", " + this.state.state + " " + this.state.zip,
-               },
-            })
-            .then(() => console.log('successful sign up!'))
-                .catch(err => console.log('error signing up!: ', err));
-          }}
-        />
-
         <Text style={{textAlign: 'center',
                       color: 'gray',
                       fontSize: 15,
