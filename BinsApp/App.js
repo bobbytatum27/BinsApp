@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createContext, useContext } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -26,16 +26,22 @@ import Account from './screens/Account.js'
 import Orders from './screens/Orders.js'
 import Login from './screens/Login.js'
 
+import {LoginProvider, LoginContext} from './components/LoginProvider.js'
+
+import Amplify from "aws-amplify"
+import config from "./aws-exports"
+import { withAuthenticator } from "aws-amplify-react-native"
+Amplify.configure(config)
+
+// for stack nav
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const LandingTab = createMaterialTopTabNavigator();
 
-import Amplify, { Auth } from 'aws-amplify';
-import awsconfig from './aws-exports';
-Amplify.configure(awsconfig);
-import { Authenticator, withAuthenticator } from 'aws-amplify-react-native'
-
 function App() {
+  const loginContext = useContext(LoginContext);
+  console.log(loginContext);
+
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{
@@ -47,13 +53,13 @@ function App() {
           fontWeight: 'bold',
         },
       }}>
-
-        <Stack.Screen name='Landing' component={AuthStack}/>
+        <Stack.Screen name='Landing' component={LandingTabs} options={{headerShown: false}}/>
+        <Stack.Screen name='Home' component={HomeTabs} options={{title: "Bins"}}/>
+        <Stack.Screen name='Login' component={Login}/>
         <Stack.Screen name='SelectFacilityScreen' component={SelectFacility} options={{title: "Select Storage Facility"}}/>
         <Stack.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
         <Stack.Screen name='AccountInfoScreen' component={UserInfo} options={{title: "Create an Account"}}/>
         <Stack.Screen name='BillingInfoScreen' component={BillingInfo} options={{title: "Billing Info"}}/>
-        <Stack.Screen name='Home' component={HomeTabs} options={{title: "Bins"}}/>
         <Stack.Screen name='StorageInventoryScreen' component={StorageInventory} options={{title: "Deliver"}}/>
         <Stack.Screen name='ScheduleAppointmentScreen' component={ScheduleAppointment} options={{title: "Schedule Appointment"}}/>
         <Stack.Screen name='ReviewScreen' component={Review} options={{title: "Review"}}/>
@@ -110,13 +116,14 @@ function LandingTabs() {
   );
 }
 
-function AuthStack() {
+// to provide the LoginContext to everything in app
+function AppWrapped() {
   return(
-    <Authenticator hideDefault={true}>
-
-           <Login override={'SignIn'}/>
-       </Authenticator>
+    <LoginProvider>
+      <App />
+    </LoginProvider>
   )
 }
 
-export default App
+export default AppWrapped;
+//export default withAuthenticator(App, true)

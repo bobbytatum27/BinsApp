@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
     "projectName": "binsapp",
+=======
+    "projectName": "BinsApp",
+>>>>>>> 8d9b0da6ce20a606e6a298c35a2c181bbcbece6b
     "version": "3.0",
     "frontend": "javascript",
     "javascript": {
@@ -7,8 +11,13 @@
         "config": {
             "SourceDir": "/",
             "DistributionDir": "/",
+<<<<<<< HEAD
             "BuildCommand": "npm.cmd run-script build",
             "StartCommand": "npm.cmd run-script start"
+=======
+            "BuildCommand": "npm run-script build",
+            "StartCommand": "npm run-script start"
+>>>>>>> 8d9b0da6ce20a606e6a298c35a2c181bbcbece6b
         }
     },
     "providers": [
