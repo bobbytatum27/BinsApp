@@ -15,10 +15,6 @@ export default class Login extends React.Component {
 
     this.state = {
       email: '',
-<<<<<<< HEAD
-      phone: '',
-=======
->>>>>>> 8bef0fb3b7a17adc4b92d8baa7811bafb75bf4e9
       password: '',
     };
   }
