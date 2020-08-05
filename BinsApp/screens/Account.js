@@ -3,7 +3,11 @@ import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView } from 're
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
 
+import {LoginContext} from '../components/LoginProvider.js'
+
 export default class Account extends React.Component {
+  static contextType = LoginContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -150,7 +154,10 @@ export default class Account extends React.Component {
         <View style = {{marginTop: -15}}>
         <LongButton
           title="SIGN OUT"
-          onPress={()=>this.props.navigation.navigate('Landing')}
+          onPress={()=>{
+            this.context.logout()
+            .then(() => this.props.navigation.dangerouslyGetParent().navigate('Landing'));
+          }}
         />
         </View>
         </ScrollView>

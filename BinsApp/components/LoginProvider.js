@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import { Auth } from 'aws-amplify';
 
-// for login,signup context
+// for login/signup context
 export const LoginContext = createContext();
 
 export class LoginProvider extends React.Component{
@@ -10,49 +10,90 @@ export class LoginProvider extends React.Component{
 
         this.state = {
             isLoggedIn: false,
-            test: 'Test: State passed through.'
         };
     }
-    
-    // probably need to make this a promise! so on .then you can navigate.
-    login = () => {
-        console.log('working...')   // to verify the func is running
-        Auth.signIn({
-            username: 'bogustestbnb@gmail.com',
-            password: 'XYZ253jksdgUUGw235',
-        })
-        .then(() => {
-            console.log('successful sign in!');
-            console.log('isLoggedIn before: ' + this.state.isLoggedIn); // should be false
-            this.setState({isLoggedIn: true});
-            console.log('isLoggedIn after: ' + this.state.isLoggedIn);  // should be true
-        })
-        .catch(err => console.log('error signing in!: ', err));
+
+    /*
+     * Login Promise
+     * To login a user via AWS Amplify. Also changes isLoggedIn boolean, which 
+     * conditionally renders appropriate screens (pending state).
+     * 
+     * @param email: string of user email
+     * @param password: string of user password
+     * @return Promise
+     */ 
+    login = (email, password) => {
+        return new Promise((resolve, reject) => {
+            Auth.signIn({
+                username: email,
+                password: password,
+            })
+            .then(() => {
+                this.setState({isLoggedIn: true});
+                resolve('Successful Sign In');
+            })
+            .catch(err => reject('Error Signing In: ' + err));
+        });
     }
 
-    // still needs to be written
-    logout = () => this.setState({isLoggedIn: false});
+    /*
+     * Logout Promise
+     * To log a user out via AWS Amplify. Also changes isLoggedIn boolean, which forces user back
+     * to Landing page.
+     * 
+     * @return Promise
+     */
+    logout = () => {
+        return new Promise((resolve, reject) => {
+            console.log('login state before signout: ' + this.state.isLoggedIn);
+            Auth.signOut()
+            .then(() => {
+                this.setState({isLoggedIn: false});
+                console.log('login state after logout: ' + this.state.isLoggedIn);
+                resolve('successful sign out');
+            })
+            .catch(err => reject('error signing out!'));
+        });
+    }
+
+    /*
+     * Signup Promise
+     * Registers a user via AWS Amplify. Also changes the isLoggedIn boolean to
+     * force the user to the Home Page. TODO arg check in login page? or here? A thought - before new Promise, can check for input validation and return Alert if invalid. 
+     * Note that Auth.signUp may force errors so they need to be checked here too.
+     * 
+     * @param email: The user's email as a string
+     * @param password: The user's password as a string
+     * @param name: The user's name as a string
+     * @param phone_num: The user's phone num (what type is amplify looking for?)
+     * @param address: The user's address as a string, fields separated by a space
+     * @return Promise (for now only a promise)
+     */ 
+    signup = (email, password, name, phone_num, address) => {
+        return new Promise((resolve, reject) => {
+            console.log('signing up!');
+            Auth.signUp({
+                username: 'pholder@pholder.com',
+                password: 'boguspassword12',
+                attributes: {
+                  name: 'bogus placeholder',
+                  phone_number: '',
+                  address: 'fake address',
+                },
+            })
+            .then(() => {
+                this.setState({isLoggedIn: true});
+                resolve('Successful Sign Up');
+            })
+            .catch(err => reject('Error Signing Up: ' + err));
+        });
+    }
 
     render() {
         return (
-            <LoginContext.Provider value={{...this.state, login: this.login, logout: this.logout}}>
+            <LoginContext.Provider value={{...this.state, login: this.login, logout: this.logout, signup: this.signup}}>
                 {this.props.children}
             </LoginContext.Provider>
         );
     }
 }
-
-
-
-/*
-    For reference: this is the original context code in function form
-
-export function LoginProvider(props) {
-  const [isLoggedIn, login] = useState(0);      // to be used for the actual login context value
-  return (
-    <LoginContext.Provider value={isLoggedIn}>
-      {props.children}
-    </LoginContext.Provider>
-  )
-}
-*/

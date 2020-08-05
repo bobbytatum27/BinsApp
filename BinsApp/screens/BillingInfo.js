@@ -6,7 +6,11 @@ import LongButton from '../components/LongButton.js'
 import { CreditCardInput } from 'react-native-credit-card-input'
 import { ScrollView } from 'react-native-gesture-handler';
 
+import {LoginContext} from '../components/LoginProvider.js';
+
 export default class BillingInfo extends React.Component {
+  static contextType = LoginContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -66,7 +70,6 @@ export default class BillingInfo extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        
         <View style = {{alignItems: 'center'}}>
           <Text style = {styles.header}>Review</Text>
         </View>
@@ -91,7 +94,14 @@ export default class BillingInfo extends React.Component {
         <View style = {{marginTop: 15}}>
           <LongButton
             title="CONFIRM PICKUP"
-            onPress={()=>{this.onSubmit(); this.props.navigation.navigate('Home')}}
+            onPress={()=>{
+              const address = 
+                this.state.addressLine1 + ' ' + this.state.addressLine2 + ' ' + 
+                this.state.city + ' ' + this.state.state + ' ' + this.state.zip;
+              this.context.signup(this.state.email, 'pword placeholder', this.state.name, this.state.phone, address)
+              .catch((err)=>console.log('error signing up!' + err))
+              // this.onSubmit(); to be nested inside the .then() of signup
+            }}
           />
         </View>
         </ScrollView>

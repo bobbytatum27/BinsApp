@@ -10,13 +10,19 @@ export default class Landing extends Component {
   // this.context is set to the state of the LoginProvider
   static contextType = LoginContext;
 
+  componentDidMount() {
+    this.props.navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+    })
+  }
+
   render() {
     return (
       <View style={{flex: 1,
         backgroundColor: '#261136',
         padding: 30}}>
         <View style={{flex:5}}>
-        <Text style={styles.header}>Bins Storage {this.context.test}</Text>
+        <Text style={styles.header}>Bins Storage</Text>
           <Text style={styles.intro}>We help pick up and bring back items that you'd like to store in self-storage.</Text>
           <Text style={styles.intro}>Swipe to learn more.</Text>
         </View>
