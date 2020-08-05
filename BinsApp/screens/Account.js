@@ -6,8 +6,6 @@ import {LoginContext} from '../components/LoginProvider.js'
 
 import {Auth} from 'aws-amplify';
 
-import {LoginContext} from '../components/LoginProvider.js'
-
 export default class Account extends React.Component {
   static contextType = LoginContext;
 

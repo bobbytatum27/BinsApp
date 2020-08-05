@@ -8,8 +8,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
 
-import {LoginContext} from '../components/LoginProvider.js';
-
 export default class BillingInfo extends React.Component {
   static contextType = LoginContext;
 
@@ -119,8 +117,8 @@ export default class BillingInfo extends React.Component {
           <LongButton
             title="CONFIRM PICKUP"
             onPress={()=>{
-              const address = 
-                this.state.addressLine1 + ' ' + this.state.addressLine2 + ' ' + 
+              const address =
+                this.state.addressLine1 + ' ' + this.state.addressLine2 + ' ' +
                 this.state.city + ' ' + this.state.state + ' ' + this.state.zip;
               this.context.signup(this.state.email, 'pword placeholder', this.state.name, this.state.phone, address)
               .catch((err)=>console.log('error signing up!' + err))
