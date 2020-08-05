@@ -5,8 +5,9 @@ import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import { CreditCardInput } from 'react-native-credit-card-input'
 import { ScrollView } from 'react-native-gesture-handler';
-import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
+
+import { LoginContext } from '../components/LoginProvider.js';
 
 export default class BillingInfo extends React.Component {
   static contextType = LoginContext;
