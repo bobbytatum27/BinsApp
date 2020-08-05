@@ -53,10 +53,9 @@ function App() {
           fontWeight: 'bold',
         },
       }}>
-        {loginContext.isLoggedIn == false ? (
+      {loginContext.isLoggedIn == false ? (
          <>
-        <Stack.Screen name='Landing' component={LandingTabs} options={{headerShown: false, animationEnabled: false}}/>
-        <Stack.Screen name='Home' component={HomeTabs} options={{title: "Bins"}}/>
+        <Stack.Screen name='Landing' component={LandingTabs} options={{headerShown: false}}/>
         <Stack.Screen name='Login' component={Login}/>
         <Stack.Screen name='SelectFacilityScreen' component={SelectFacility} options={{title: "Select Storage Facility"}}/>
         <Stack.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>

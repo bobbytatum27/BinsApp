@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "features":
   {
@@ -10,4 +11,18 @@
       "defaultquery": true
     }
   }
+=======
+{
+  "features":
+  {
+    "graphqltransformer":
+    {
+      "transformerversion": 5
+    },
+    "keytransformer":
+    {
+      "defaultquery": true
+    }
+  }
+>>>>>>> 8d9b0da6ce20a606e6a298c35a2c181bbcbece6b
 }

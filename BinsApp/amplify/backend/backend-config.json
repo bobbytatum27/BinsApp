@@ -1,6 +1,10 @@
 {
 	"auth": {
+<<<<<<< HEAD
+		"binsappcd2c1818": {
+=======
 		"binsapp54a02567": {
+>>>>>>> 8d9b0da6ce20a606e6a298c35a2c181bbcbece6b
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],

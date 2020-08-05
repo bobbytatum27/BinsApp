@@ -9,6 +9,7 @@ export default class UserInfo extends React.Component {
     this.state = {
       name: '',
       email: '',
+      password: '',
       phone: ''
     };
   }
@@ -29,12 +30,15 @@ export default class UserInfo extends React.Component {
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(val)=>this.setState({email:val})}
+          keyboardType='email-address'
         />
         <Text style ={styles.descriptionText}>Password</Text>
         <FormInputHandler
           defaultText='Enter a password here'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
+          onChangeText={(val)=>this.setState({password:val})}
+          secureTextEntry
         />
         <Text style ={styles.descriptionText}>Phone</Text>
         <FormInputHandler
@@ -45,7 +49,7 @@ export default class UserInfo extends React.Component {
         />
         <LongButton
           title="NEXT"
-          onPress={()=>this.props.navigation.navigate('InitialAppointmentScreen', {name:this.state.name, email:this.state.email, phone:this.state.phone})}
+          onPress={()=>this.props.navigation.navigate('InitialAppointmentScreen', {name:this.state.name, email:this.state.email, password:this.state.password, phone:this.state.phone})}
         />
       </View>
     );

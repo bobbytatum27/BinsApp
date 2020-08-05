@@ -14,12 +14,25 @@ export default class Login extends React.Component {
     super(props);
 
     this.state = {
-      name: '',
       email: '',
+<<<<<<< HEAD
       phone: '',
+=======
+>>>>>>> 8bef0fb3b7a17adc4b92d8baa7811bafb75bf4e9
       password: '',
     };
   }
+
+  signIn() {
+      Auth.signIn({
+        username: this.state.email,
+        password: this.state.password,
+      })
+      .then(() => {
+        console.log('successful sign in!');
+        this.context.login();})
+      .catch(err => console.log('error signing in!: ', err));
+      }
 
   render() {
     return (
@@ -30,6 +43,7 @@ export default class Login extends React.Component {
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(val)=>this.setState({email:val})}
+          keyboardType='email-address'
         />
         <Text style ={styles.descriptionText}>Password</Text>
         <FormInputHandler

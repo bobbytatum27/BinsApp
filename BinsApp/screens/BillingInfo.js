@@ -5,6 +5,8 @@ import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import { CreditCardInput } from 'react-native-credit-card-input'
 import { ScrollView } from 'react-native-gesture-handler';
+import {LoginContext} from '../components/LoginProvider.js'
+import {Auth} from 'aws-amplify';
 
 import {LoginContext} from '../components/LoginProvider.js';
 
@@ -16,6 +18,7 @@ export default class BillingInfo extends React.Component {
     this.state = {
       name:'',
       email:'',
+      password: '',
       phone: '',
       addressLine1: '',
       addressLine2: '',
@@ -32,6 +35,22 @@ export default class BillingInfo extends React.Component {
     }
   }
 
+  signUp() {
+      Auth.signUp({
+        username: this.state.email,
+        password: this.state.password,
+        attributes: {
+          name: this.state.name,
+          phone_number: this.state.phone,
+          address: this.state.addressLine1+ " " + this.state.addressLine2 + " " + this.state.city + ", " + this.state.state + " " + this.state.zip,
+         },
+      })
+      .then(() => {
+        console.log('successful sign in!');
+        this.context.login();})
+          .catch(err => console.log('error signing up!: ', err));
+      }
+
   onSubmit() {
     fetch('http://192.168.1.247:5000/customers',{
       method: 'POST',
@@ -45,6 +64,7 @@ export default class BillingInfo extends React.Component {
   componentDidMount(){
       const name = this.props.route.params?.name??'';
       const email = this.props.route.params?.email??'';
+      const password = this.props.route.params?.password??'';
       const phone = this.props.route.params?.phone??'';
       const addressLine1 = this.props.route.params?.addressLine1??'';
       const addressLine2 = this.props.route.params?.addressLine2??'';
@@ -56,6 +76,7 @@ export default class BillingInfo extends React.Component {
       const timeSelected = this.props.route.params?.timeSelected??'';
       this.setState({name});
       this.setState({email});
+      this.setState({password});
       this.setState({phone});
       this.setState({addressLine1});
       this.setState({addressLine2});
@@ -74,14 +95,17 @@ export default class BillingInfo extends React.Component {
           <Text style = {styles.header}>Review</Text>
         </View>
         <ScrollView>
-        <CreditCardInput 
-          onChange={this._onChange} 
-          labelStyle={styles.creditCardLabels} 
+        <CreditCardInput
+          onChange={this._onChange}
+          labelStyle={styles.creditCardLabels}
           inputContainerStyle={styles.creditCardInputView}
           inputStyle={{color: 'white'}}
           requiresName={true}
           autoFocus={false}
         />
+        <View style = {{alignItems: 'center'}}>
+          <Text style = {styles.header}>Review</Text>
+        </View>
         <Textbox header='Date and Time'
                  body={Object.keys(this.state.dateSelected)}
                  body2={this.state.timeSelected}/>

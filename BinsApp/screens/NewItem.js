@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity } from 'react-native';
+import {Auth} from 'aws-amplify';
 
 import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import FormInputHandler from '../components/FormInputHandler.js'
+import {LoginContext} from '../components/LoginProvider.js'
 
 export default class NewItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
       itemName: '',
+      email: Auth.user.attributes.email,
       };
   }
 
   onSubmit() {
-    fetch('http://192.168.1.247:5000/inventory',{
+    fetch('http://192.168.1.247:5000//inventory',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
