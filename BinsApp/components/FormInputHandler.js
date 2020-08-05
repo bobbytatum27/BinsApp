@@ -17,6 +17,7 @@ export default class FormInputHandler extends React.Component {
         style={this.props.style}
         keyboardType={this.props.keyboardType}
         secureTextEntry={this.props.secureTextEntry}
+        defaultValue={this.props.defaultValue}
       />
     );
   }

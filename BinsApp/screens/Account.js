@@ -13,9 +13,9 @@ export default class Account extends React.Component {
     super(props);
     this.state = {
       id: 14,
-      name: 'Sarah Parmenter',
-      email: 'sarah@youknowwho.com',
-      phone: '(888) 888-8888',
+      name: 'Sarah Parameter',
+      email: 'sarah@gmail.com',
+      phone: '888 888 8888',
       addressLine1: '123 New York Avenue',
       addressLine2: '',
       city: 'Los Angeles',
@@ -46,48 +46,48 @@ export default class Account extends React.Component {
         <Text style={styles.sectionHeader}>Your Account</Text>
         <Text style ={styles.descriptionText}>Full Name</Text>
         <FormInputHandler
-          defaultText={this.state.name}
+          defaultValue={this.state.name}
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(val)=>this.setState({name:val})}
         />
         <Text style ={styles.descriptionText}>Email </Text>
         <FormInputHandler
-          defaultText={this.state.email}
+          defaultValue={this.state.email}
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(val)=>this.setState({email:val})}
         />
         <Text style ={styles.descriptionText}>Password</Text>
         <FormInputHandler
-          defaultText='Password'
+          defaultValue='Password'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
         />
         <Text style ={styles.descriptionText}>Phone</Text>
         <FormInputHandler
-          defaultText={this.state.phone}
+          defaultValue={this.state.phone}
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(val)=>this.setState({phone:val})}
         />
         <Text style ={styles.descriptionText}>Address Line 1</Text>
         <FormInputHandler
-          defaultText={this.state.addressLine1}
+          defaultValue={this.state.addressLine1}
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(text) => this.setState({addressLine1: text})}
         />
         <Text style ={styles.descriptionText}>Address Line 2</Text>
         <FormInputHandler
-          defaultText={this.state.addressLine2}
+          defaultValue={this.state.addressLine2}
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(text) => this.setState({addressLine2: text})}
         />
         <Text style ={styles.descriptionText}>City</Text>
         <FormInputHandler
-          defaultText={this.state.city}
+          defaultValue={this.state.city}
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(text) => this.setState({city: text})}
@@ -96,7 +96,7 @@ export default class Account extends React.Component {
           <View style={{flex:1}}>
             <Text style ={styles.descriptionText}>State</Text>
             <FormInputHandler
-              defaultText={this.state.state}
+              defaultValue={this.state.state}
               defaultTextColor='#8B8B8B'
               style={styles.userInfoText}
               onChangeText={(text) => this.setState({state: text})}
@@ -105,7 +105,7 @@ export default class Account extends React.Component {
           <View style={{flex:1}}>
             <Text style ={styles.descriptionText}>Zip</Text>
             <FormInputHandler
-              defaultText={this.state.zip}
+              defaultValue={this.state.zip}
               style={styles.userInfoText}
               defaultTextColor='#8B8B8B'
               onChangeText={(text) => this.setState({zip: text})}
