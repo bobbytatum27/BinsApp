@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity, Image } from 'react-native';
 import {Auth} from 'aws-amplify';
+import * as ImagePicker from 'expo-image-picker';
 
 import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
@@ -14,11 +15,12 @@ export default class NewItem extends Component {
     this.state = {
       itemName: '',
       email: Auth.user.attributes.email,
+      image: null,
       };
   }
 
   onSubmit() {
-    fetch('http://192.168.1.247:5000//inventory',{
+    fetch('http://192.168.1.247:5000/inventory',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -27,19 +29,45 @@ export default class NewItem extends Component {
       body: JSON.stringify(this.state)
   })}
 
+  _pickImage = async () => {
+      try {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+        if (!result.cancelled) {
+          this.setState({ image: result.uri });
+        }
+
+        console.log(result.uri);
+      } catch (E) {
+        console.log(E);
+      }
+    };
+
   render() {
+    let { image } = this.state;
+
     return (
         <View style={styles.container}>
-            <Text style={styles.sectionHeader}>New Item</Text>
-              <Text style ={styles.descriptionText}>Name of Bin</Text>
-              <FormInputHandler
-                defaultText='Ex: Winter Clothes, Camping Gear'
-                defaultTextColor='#8B8B8B'
-                style={styles.userInfoText}
-                onChangeText={(text) => this.setState({itemName: text})}/>
-              <Button title ="Save"
-                      onPress={()=>{this.onSubmit(); this.props.navigation.navigate('HomeInventoryScreen')}}/>
+          <Text style={styles.sectionHeader}>New Item</Text>
+          <TouchableOpacity style = {styles.button2}
+                            onPress={this._pickImage}>
 
+                          <Text style={{color: '#000', fontSize: 16}}>Add Photo</Text>
+          </TouchableOpacity>
+          <Text style ={styles.descriptionText}>Name of Bin</Text>
+          <FormInputHandler defaultText='Ex: Winter Clothes, Camping Gear'
+                            defaultTextColor='#8B8B8B'
+                            style={styles.userInfoText}
+                            onChangeText={(text) => this.setState({itemName: text})}/>
+          <View style = {{alignItems: 'center'}}>
+          {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+          </View>
+          <LongButton title ="SAVE"
+                  onPress={()=>{this.onSubmit(); this.props.navigation.navigate('HomeInventoryScreen')}}/>
         </View>
     );
   }
@@ -62,13 +90,20 @@ const styles = StyleSheet.create({
   descriptionText:{
     marginBottom: -10,
     marginLeft: 15,
+    marginTop: 10,
     color: 'white',
   },
   sectionHeader: {
       color: '#AAB5E0',
       fontSize: 25,
       marginLeft: 15,
-      marginBottom: 25,
+      marginBottom: 10,
     },
-
+  button2: {
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    padding: 15,
+    margin: 15,
+    borderRadius: 5,
+  },
   });

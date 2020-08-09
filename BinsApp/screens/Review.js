@@ -3,14 +3,22 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
-
+import { LoginContext } from '../components/LoginProvider.js';
+import {Auth} from 'aws-amplify';
 
 export default class Review extends Component {
+  static contextType = LoginContext;
+
   constructor(props) {
     super(props);
     this.state = {
       dateSelected: '',
       timeSelected: '',
+      address: Auth.user.attributes.address,
+      email: Auth.user.attributes.email,
+      phone: Auth.user.attributes.phone_number,
+      selected: '',
+      type: '',
     }
   }
 
@@ -27,8 +35,13 @@ export default class Review extends Component {
   componentDidMount(){
       const dateSelected = this.props.route.params?.dateSelected??'';
       const timeSelected = this.props.route.params?.timeSelected??'';
+      const selectedArray = this.props.route.params?.selected??'';
+      const selected = selectedArray.toString();
+      const type = this.props.route.params?.type??'';
       this.setState({dateSelected});
       this.setState({timeSelected});
+      this.setState({selected});
+      this.setState({type});
     }
 
   render() {
@@ -38,23 +51,28 @@ export default class Review extends Component {
           <Text style = {styles.header}>Review</Text>
         </View>
         <Textbox header='Date and Time'
-                 body={Object.keys(this.state.dateSelected)}
+                 body={this.state.dateSelected}
                  body2={this.state.timeSelected}/>
         <Textbox header='Address'
-                 body={this.state.addressLine1}
-                 body2={this.state.city + ", " + this.state.state + " " + this.state.zip}/>
-        <Textbox header='Unit'
-                 body=''
-                 body2=''/>
+                 body={this.state.address}/>
+        <Textbox header='Items'
+                 body={this.state.selected}
+                 body2={''}/>
+        <Textbox header='Order Type'
+                body={this.state.type}/>
         <Textbox header='Total'
                           body=''
                           body2=''/>
         <View style = {{marginTop: 15}}>
           <LongButton
             title="CONFIRM"
-            onPress={()=>this.props.navigation.navigate('ConfirmationScreen', {dateSelected: this.state.dateSelected,
-                                                                               timeSelected: this.state.timeSelected})}
-          />
+            onPress={()=>{
+              this.onSubmit();
+              this.props.navigation.navigate('ConfirmationScreen', {dateSelected: this.state.dateSelected,
+                                                                    timeSelected: this.state.timeSelected,
+                                                                    address: this.state.address,
+                                                                    type: this.state.type})
+              }}/>
         </View>
       </View>
     );

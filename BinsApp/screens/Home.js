@@ -11,8 +11,8 @@ class Home extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <View style={styles.center}>
+      <View style={styles.center}>
+        <ScrollView>
           <View style={{marginBottom: 25}}>
             <Text style={styles.sectionHeader}>Next Order</Text>
             <Textbox header='Date and Time'
@@ -56,8 +56,8 @@ class Home extends Component {
                title ="REQUEST A PICKUP"
                onPress={() => this.props.navigation.navigate('HomeInventoryScreen')}/>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     );
   }
 }

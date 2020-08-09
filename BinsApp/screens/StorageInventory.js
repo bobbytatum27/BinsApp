@@ -13,14 +13,15 @@ export default class StorageInventory extends Component {
     super();
     this.state = {
       dataSource: [],
-      selectedItems: ''
+      selected: [],
+      type: "Delivery",
     }
   }
 
   selectItem = data => {
     data.item.isSelect = !data.item.isSelect;
     data.item.selectedClass = data.item.isSelect
-     ? styles.button2: styles.button;
+     ? styles.selected: styles.button;
 
   const index = this.state.dataSource.findIndex(
      item => data.item.id === item.id
@@ -32,11 +33,11 @@ export default class StorageInventory extends Component {
   };
 
   renderItem = data => {
-    if (data.item.isInStorage == 'Yes' && data.item.owner == Auth.user.attributes.email) {
+    if (data.item.owner == Auth.user.attributes.email && data.item.isInStorage == 'Yes') {
       return (
       <TouchableOpacity
         style={styles.button, data.item.selectedClass}
-        onPress={() => this.selectItem(data)}>
+        onPress={() => {this.selectItem(data); this.getSelected(this.state.dataSource);}}>
         <Image style={{width: 150, height: 150}}
                source={{uri: data.item.photo}}/>
         <View>
@@ -48,7 +49,14 @@ export default class StorageInventory extends Component {
     )
   }
 }
-  componentDidMount() {
+
+getSelected = array => {
+  const arr = array.filter(d => d.isSelect)
+  const result = arr.map(a => a.description)
+  this.setState({selected: result})
+}
+
+  fetchData() {
     fetch('http://192.168.1.247:5000/render')
     .then((response) => response.json())
     .then((responseJson) => {
@@ -57,11 +65,18 @@ export default class StorageInventory extends Component {
         item.selectedClass = styles.button;
         return item;
       });
-      this.setState({dataSource: responseJson});
+      const responseJson2 = responseJson.filter(function(item){
+        return item.isInStorage == 'Yes' && item.owner == Auth.user.attributes.email
+      });
+      this.setState({dataSource: responseJson2});
     })
     .catch((error) => {
       console.log(error)
     })
+  }
+
+  componentDidMount() {
+    this.fetchData();
   }
 
   render() {
@@ -77,7 +92,7 @@ export default class StorageInventory extends Component {
                   extraData={this.state}
                 />
             <LongButton title ="DELIVER SELECTED ITEMS TO ME"
-                      onPress={() => this.props.navigation.navigate('ScheduleAppointmentScreen')}/>
+                      onPress={() => {this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type})}}/>
         </View>
     );
   }
@@ -109,13 +124,13 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1
   },
-  button2: {
+  selected: {
     margin: 15,
     alignItems: 'center',
-    height: 170,
-    width: 152,
+    height: 174,
+    width: 160,
     backgroundColor: 'white',
-    borderColor: 'black',
+    borderColor: '#7B1FA2',
     borderWidth: 5
   },
 })

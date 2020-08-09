@@ -1,44 +1,80 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList, TouchableOpacity, RefreshControl } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
+import {LoginContext} from '../components/LoginProvider.js'
+import {Auth} from 'aws-amplify';
 
 export default class Orders extends Component {
-  constructor(props) {
-    super(props);
+  static contextType = LoginContext;
+  constructor() {
+    super();
     this.state = {
+      dataSource: [],
       dateSelected: '',
       timeSelected: '',
+      refreshing: false
     }
   }
+
+  renderItem = data => {
+    if (data.item.name == Auth.user.attributes.email) {
+      return (
+        <View style = {{margin: 10, backgroundColor: 'white', borderRadius: 15}}>
+        <Textbox header='Date and Time'
+                 body={data.item.date}
+                 body2={data.item.time} />
+        <Textbox header='Address'
+                 body={data.item.address}/>
+        <Textbox header='Order Type'
+                 body='Pickup'/>
+        </View>
+    )
+  }
+}
+
+_onRefresh = () => {
+  this.setState({refreshing: true});
+  fetch('http://192.168.1.247:5000/renderorders')
+  .then((response) => response.json())
+  .then((responseJson) => {
+    this.setState({dataSource: responseJson});
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+  .then(() => {
+    this.setState({refreshing: false});
+  });
+}
+
+componentDidMount() {
+  fetch('http://192.168.1.247:5000/renderorders')
+  .then((response) => response.json())
+  .then((responseJson) => {
+    this.setState({dataSource: responseJson});
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
 
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.sectionHeader}>Upcoming Orders</Text>
-        <Textbox header='Date and Time'
-                 body='Monday, January 1, 2020'
-                 body2='8am - 10am'/>
-        <Textbox header='Address'
-                 body='123 New York Avenue'
-                 body2='Los Angeles, CA 92001'/>
-        <Textbox header='Order Type'
-                 body='Pickup'/>
-        <View style={{flexDirection: 'row',
-                      backgroundColor: 'white',
-                      padding: 10,
-                      marginLeft: 15,
-                      marginRight: 15,
-                      marginBottom: 1,
-                    }}>
-          <View>
-          <Text style={{fontSize:12}}>Order Type</Text>
-          <Text style={{fontSize:25}}>Pickup</Text>
-          </View>
-          <View>
-          <Button title='VIEW'/>
-          </View>
-        </View>
+          <FlatList
+            data={this.state.dataSource}
+            renderItem={this.renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            extraData={this.state}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+                tintColor = 'white'  />
+            }
+          />
       </View>
     );
   }
@@ -79,5 +115,12 @@ export default class Orders extends Component {
     marginLeft: 15,
     marginBottom: 25
   },
-
+  textbox: {
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    padding: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 1,
+  },
   });

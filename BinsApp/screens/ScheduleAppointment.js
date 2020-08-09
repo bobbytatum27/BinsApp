@@ -9,9 +9,11 @@ export default class ScheduleAppointment extends Component {
     super(props);
 
     this.state = {
-      dateSelected: '',
+      dateSelected: {},
       timeSelected: '',
       selectedButton: null,
+      selected: [],
+      type: '',
     }
     this.selectionOnPress = this.selectionOnPress.bind(this)
   }
@@ -71,8 +73,10 @@ export default class ScheduleAppointment extends Component {
             </View>
           <LongButton
             title="NEXT"
-            onPress={()=>this.props.navigation.navigate('ReviewScreen', {dateSelected: this.state.dateSelected,
-                                                                         timeSelected: this.state.timeSelected})}
+            onPress={()=>this.props.navigation.navigate('ReviewScreen', {dateSelected: Object.keys(this.state.dateSelected)[0],
+                                                                         timeSelected: this.state.timeSelected,
+                                                                         selected: this.props.route.params?.selected??'',
+                                                                         type: this.props.route.params?.type??''})}
           />
         </ScrollView>
       </View>

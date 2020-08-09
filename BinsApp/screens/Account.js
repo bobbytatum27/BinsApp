@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView } from 're
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
 import { LoginContext } from '../components/LoginProvider.js';
-
 import {Auth} from 'aws-amplify';
 
 export default class Account extends React.Component {
@@ -13,9 +12,9 @@ export default class Account extends React.Component {
     super(props);
     this.state = {
       id: 14,
-      name: 'Sarah Parameter',
-      email: 'sarah@gmail.com',
-      phone: '888 888 8888',
+      name: Auth.user.attributes.name,
+      email: Auth.user.attributes.email,
+      phone: Auth.user.attributes.phone_number,
       addressLine1: '123 New York Avenue',
       addressLine2: '',
       city: 'Los Angeles',

@@ -10,14 +10,20 @@ export default class Confirmation extends Component {
     this.state = {
       dateSelected: '',
       timeSelected: '',
+      address: '',
+      type: '',
     }
   }
 
   componentDidMount(){
       const dateSelected = this.props.route.params?.dateSelected??'';
       const timeSelected = this.props.route.params?.timeSelected??'';
+      const address = this.props.route.params?.address??'';
+      const type = this.props.route.params?.type??'';
+      this.setState({type});
       this.setState({dateSelected});
       this.setState({timeSelected});
+      this.setState({address});
     }
 
   render() {
@@ -25,20 +31,19 @@ export default class Confirmation extends Component {
         <View style={styles.container}>
           <Text style={styles.header}>Your Order Has Been Placed Successfully!</Text>
           <Textbox header='Date and Time'
-                   body={Object.keys(this.state.dateSelected)}
+                   body={this.state.dateSelected}
                    body2={this.state.timeSelected}/>
           <Textbox header='Address'
-                   body={this.state.addressLine1}
-                   body2={this.state.city + ", " + this.state.state + " " + this.state.zip}/>
+                   body={this.state.address}/>
           <Textbox header='Order Type'
-                   body=''/>
+                   body={this.state.type}/>
           <View>
             <LongButton title ="VIEW SCHEDULED ORDERS"
-                    onPress={() => this.props.navigation.navigate('Orders')}/>
+                        onPress={() => this.props.navigation.navigate('Orders')}/>
           </View>
           <View style = {{marginTop: -15}}>
             <LongButton title ="MAKE ANOTHER ORDER"
-                    onPress={() => this.props.navigation.navigate('Home')}/>
+                        onPress={() => this.props.navigation.navigate('Home')}/>
           </View>
         </View>
     );

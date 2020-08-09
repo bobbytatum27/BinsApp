@@ -19,7 +19,7 @@ export default class InitialAppointment extends React.Component {
       state: '',
       zip: '',
       specialInstructions: '',
-      dateSelected: '',
+      dateSelected: {},
       timeSelected: '',
       selectedButton: null,
     }

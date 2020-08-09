@@ -47,6 +47,7 @@ export default class Login extends React.Component {
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(val)=>this.setState({password: val})}
+          secureTextEntry
         />
         <LongButton
           title="LOGIN"
