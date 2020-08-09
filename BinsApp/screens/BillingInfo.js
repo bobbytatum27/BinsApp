@@ -15,16 +15,6 @@ export default class BillingInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name:'',
-      email:'',
-      password: '',
-      phone: '',
-      addressLine1: '',
-      addressLine2: '',
-      city: '',
-      state: '',
-      zip: '',
-      specialInstructions: '',
       dateSelected: '',
       timeSelected: '',
       nameOnCard: '',
@@ -34,6 +24,7 @@ export default class BillingInfo extends React.Component {
     }
   }
 
+  // this func is not in use in this file anymore
   signUp() {
       Auth.signUp({
         username: this.state.email,
@@ -61,30 +52,9 @@ export default class BillingInfo extends React.Component {
   })}
 
   componentDidMount(){
-      const name = this.props.route.params?.name??'';
-      const email = this.props.route.params?.email??'';
-      const password = this.props.route.params?.password??'';
-      const phone = this.props.route.params?.phone??'';
-      const addressLine1 = this.props.route.params?.addressLine1??'';
-      const addressLine2 = this.props.route.params?.addressLine2??'';
-      const city = this.props.route.params?.city??'';
-      const state = this.props.route.params?.state??'';
-      const zip = this.props.route.params?.zip??'';
-      const specialInstructions = this.props.route.params?.specialInstructions??'';
       const dateSelected = this.props.route.params?.dateSelected??'';
       const timeSelected = this.props.route.params?.timeSelected??'';
-      this.setState({name});
-      this.setState({email});
-      this.setState({password});
-      this.setState({phone});
-      this.setState({addressLine1});
-      this.setState({addressLine2});
-      this.setState({city});
-      this.setState({state});
-      this.setState({zip});
-      this.setState({specialInstructions});
-      this.setState({dateSelected});
-      this.setState({timeSelected});
+      this.setState({dateSelected: dateSelected, timeSelected: timeSelected});
     }
 
   render() {
@@ -118,10 +88,11 @@ export default class BillingInfo extends React.Component {
           <LongButton
             title="CONFIRM PICKUP"
             onPress={()=>{
+              // initial signup in user info, this just updates user in user pool and changes isLoggedIn
               const address =
                 this.state.addressLine1 + ' ' + this.state.addressLine2 + ' ' +
                 this.state.city + ' ' + this.state.state + ' ' + this.state.zip;
-              this.context.signup(this.state.email, 'pword placeholder', this.state.name, this.state.phone, address)
+              this.context.completeSignup(this.props.route.params.specialInstructions)
               .catch((err)=>console.log('error signing up!' + err))
               // this.onSubmit(); to be nested inside the .then() of signup
             }}
