@@ -67,31 +67,38 @@ export class LoginProvider extends React.Component{
      * @param name: The user's name as a string
      * @param phone_num: The user's phone num (what type is amplify looking for?)
      * @param address: The user's address as a string, fields separated by a space
-     * @return Promise (for now only a promise)
+     * @return Promise (for now only a promise, potentially Error obj in future)
      */ 
     signup = (email, password, name, phone_num, address) => {
         return new Promise((resolve, reject) => {
             console.log('signing up!');
             Auth.signUp({
-                username: 'pholder@pholder.com',
-                password: 'boguspassword12',
+                username: email,
+                password: password,
                 attributes: {
-                  name: 'bogus placeholder',
-                  phone_number: '',
-                  address: 'fake address',
+                  name: name,
+                  phone_number: phone_num,
+                  address: address,
                 },
             })
             .then(() => {
-                this.setState({isLoggedIn: true});
                 resolve('Successful Sign Up');
             })
-            .catch(err => reject('Error Signing Up: ' + err));
+            .catch(err => reject(err));
+        });
+    }
+
+    completeSignup = (specialInstructions) => {
+        return new Promise((resolve, reject) => {
+            console.log(specialInstructions)
+            this.setState({isLoggedIn: true});
+            resolve('successful sign up completed.');
         });
     }
 
     render() {
         return (
-            <LoginContext.Provider value={{...this.state, login: this.login, logout: this.logout, signup: this.signup}}>
+            <LoginContext.Provider value={{...this.state, login: this.login, logout: this.logout, signup: this.signup, completeSignup: this.completeSignup}}>
                 {this.props.children}
             </LoginContext.Provider>
         );
