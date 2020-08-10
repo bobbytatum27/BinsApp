@@ -156,7 +156,7 @@ export default class UserInfo extends React.Component {
                                      this.props.route.params.city + ' ' + this.props.route.params.state + ' ' + this.props.route.params.zip;
 
                 this.context.signup(this.state.email, this.state.password, this.state.name, '+1' + this.state.phone, wholeAddress)
-                .then(() => this.props.navigation.navigate('InitialAppointmentScreen', {specialInstructions: this.props.route.params.specialInstructions}))
+                .then(() => this.props.navigation.navigate('ConfirmContactInfo', {email: this.state.email, specialInstructions: this.props.route.params.specialInstructions}))
                 .catch((err) => {
                   console.log('error signing up - see below', JSON.stringify(err));
                   if (err.code == 'UsernameExistsException') {

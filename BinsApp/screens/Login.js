@@ -54,7 +54,7 @@ export default class Login extends React.Component {
           onPress={()=>{
             this.context.login(this.state.email, this.state.password)
             .then((msg)=>console.log('successful sign in'))
-            .catch(err => console.log(err));
+            .catch(err => console.log('Error signing in: ', err));
           }}
         />
         <Button

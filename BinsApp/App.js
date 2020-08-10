@@ -26,6 +26,7 @@ import Account from './screens/Account.js'
 import Orders from './screens/Orders.js'
 import Login from './screens/Login.js'
 import PasswordReset from './screens/PasswordReset.js'
+import ConfirmContactInfo from './screens/ConfirmContactInfo.js'
 
 import {LoginProvider, LoginContext} from './components/LoginProvider.js'
 
@@ -59,6 +60,7 @@ function App() {
          <>
         <Stack.Screen name='Landing' component={LandingTabs} options={{headerShown: false}}/>
         <Stack.Screen name='Login' component={Login}/>
+        <Stack.Screen name='ConfirmContactInfo' component={ConfirmContactInfo}/>
         <Stack.Screen name='PasswordReset' component={PasswordReset}/>
         <Stack.Screen name='SelectFacilityScreen' component={SelectFacility} options={{title: "Select Storage Facility"}}/>
         <Stack.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
