@@ -62,10 +62,8 @@ export default class Login extends React.Component {
             this.context.login('bogustestbnb@gmail.com', 'XYZ253jksdgUUGw235')
           }}
           />
-        <Text style={{textAlign: 'center',
-                      color: 'gray',
-                      fontSize: 15,
-                      marginTop: 10}}>Forgot Password?</Text>
+        <Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
+              onPress={() => this.props.navigation.navigate('PasswordReset')}>Forgot Password?</Text>
       </View>
     );
   }
