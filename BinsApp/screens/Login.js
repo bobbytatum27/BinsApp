@@ -19,6 +19,7 @@ export default class Login extends React.Component {
     };
   }
 
+  // moved to LoginProvider
   signIn() {
       Auth.signIn({
         username: this.state.email,
