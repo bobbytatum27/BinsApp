@@ -25,12 +25,14 @@ import NewItem from './screens/NewItem.js'
 import Account from './screens/Account.js'
 import Orders from './screens/Orders.js'
 import Login from './screens/Login.js'
+import PasswordReset from './screens/PasswordReset.js'
 
 import {LoginProvider, LoginContext} from './components/LoginProvider.js'
 
 import Amplify from "aws-amplify"
 import config from "./aws-exports"
 import { withAuthenticator } from "aws-amplify-react-native"
+
 Amplify.configure(config)
 
 // for stack nav
@@ -57,6 +59,7 @@ function App() {
          <>
         <Stack.Screen name='Landing' component={LandingTabs} options={{headerShown: false}}/>
         <Stack.Screen name='Login' component={Login}/>
+        <Stack.Screen name='PasswordReset' component={PasswordReset}/>
         <Stack.Screen name='SelectFacilityScreen' component={SelectFacility} options={{title: "Select Storage Facility"}}/>
         <Stack.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
         <Stack.Screen name='AccountInfoScreen' component={UserInfo} options={{title: "Create an Account"}}/>

@@ -96,9 +96,26 @@ export class LoginProvider extends React.Component{
         });
     }
 
+    resetPassword = (email) => {
+        return new Promise((resolve, reject) => {
+            console.log('Initiating Password Reset...');
+            Auth.forgotPassword(email)
+            .then(() => resolve('code sent'))
+            .catch((err) => reject(err));
+        });
+    }
+
+    confirmResetPassword = (email, code, password) => {
+        return new Promise((resolve, reject) => {
+            Auth.forgotPasswordSubmit(email, code, password)
+            .then(() => resolve('Successfully Reset Password'))
+            .catch((err) => reject(err));
+        });
+    }
+
     render() {
         return (
-            <LoginContext.Provider value={{...this.state, login: this.login, logout: this.logout, signup: this.signup, completeSignup: this.completeSignup}}>
+            <LoginContext.Provider value={{...this.state, login: this.login, logout: this.logout, signup: this.signup, completeSignup: this.completeSignup, resetPassword: this.resetPassword, confirmResetPassword: this.confirmResetPassword}}>
                 {this.props.children}
             </LoginContext.Provider>
         );
