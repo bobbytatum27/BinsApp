@@ -12,6 +12,7 @@ export default class InitialAppointment extends React.Component {
       dateSelected: {},
       timeSelected: '',
       selectedButton: null,
+      selected: [],
     }
     this.selectionOnPress = this.selectionOnPress.bind(this)
   }
@@ -29,7 +30,7 @@ selectionOnPress(userType) {
           <Calendar
             style={{margin:15}}
             onDayPress={(day) => {this.setState({dateSelected:{[day.dateString]:{selected: true, selectedColor: '#466A8F'}}})}}
-            markedDates={{dateSelected: this.state.dateSelected}}/>
+            markedDates={this.state.dateSelected}/>
           <Text style={styles.descriptionText}>Please select a time</Text>
           <View style={{flexDirection: 'row', justifyContent: 'space-around', borderColor: '#d6d7da', flexWrap: 'wrap', marginTop: 25}}>
             <TouchableOpacity

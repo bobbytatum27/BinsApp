@@ -7,7 +7,7 @@ class Textbox extends Component {
     return (
       <View style={{
                     flexDirection: 'column',
-                    backgroundColor: 'white',
+                    backgroundColor: '#E5E7E9',
                     padding: 10,
                     marginLeft: 15,
                     marginRight: 15,

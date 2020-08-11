@@ -11,7 +11,6 @@ export default class Account extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 14,
       name: Auth.user.attributes.name,
       email: Auth.user.attributes.email,
       phone: Auth.user.attributes.phone_number,

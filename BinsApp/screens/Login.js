@@ -58,12 +58,6 @@ export default class Login extends React.Component {
             .catch(err => console.log(err));
           }}
         />
-        <Button
-          title='Use this to login with a test account.'
-          onPress={() => {
-            this.context.login('bogustestbnb@gmail.com', 'XYZ253jksdgUUGw235')
-          }}
-          />
         <Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
               onPress={() => this.props.navigation.navigate('PasswordReset')}>Forgot Password?</Text>
       </View>

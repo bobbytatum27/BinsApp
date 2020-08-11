@@ -25,21 +25,6 @@ export default class BillingInfo extends React.Component {
   }
 
   // this func is not in use in this file anymore
-  signUp() {
-      Auth.signUp({
-        username: this.state.email,
-        password: this.state.password,
-        attributes: {
-          name: this.state.name,
-          phone_number: this.state.phone,
-          address: this.state.addressLine1+ " " + this.state.addressLine2 + " " + this.state.city + ", " + this.state.state + " " + this.state.zip,
-         },
-      })
-      .then(() => {
-        console.log('successful sign in!');
-        this.context.login();})
-          .catch(err => console.log('error signing up!: ', err));
-      }
 
   onSubmit() {
     fetch('http://192.168.1.247:5000/customers',{
@@ -81,7 +66,7 @@ export default class BillingInfo extends React.Component {
         <Textbox header='Address'
                  body={this.state.addressLine1}
                  body2={this.state.city + ", " + this.state.state + " " + this.state.zip}/>
-        <Textbox header='Unit'
+        <Textbox header='Total'
                  body=''
                  body2=''/>
         <View style = {{marginTop: 15}}>

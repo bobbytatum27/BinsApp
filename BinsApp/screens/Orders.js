@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList, TouchableOpacity, RefreshControl } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
 import {LoginContext} from '../components/LoginProvider.js'
@@ -10,6 +10,7 @@ export default class Orders extends Component {
   constructor() {
     super();
     this.state = {
+      isLoading: true,
       dataSource: [],
       dateSelected: '',
       timeSelected: '',
@@ -20,12 +21,14 @@ export default class Orders extends Component {
   renderItem = data => {
     if (data.item.name == Auth.user.attributes.email) {
       return (
-        <View style = {{margin: 10, backgroundColor: 'white', borderRadius: 15}}>
+        <View style = {{margin: 10, backgroundColor: '#E5E7E9', borderRadius: 15}}>
         <Textbox header='Date and Time'
                  body={data.item.date}
                  body2={data.item.time} />
+        <View style = {styles.lineStyle} />
         <Textbox header='Address'
                  body={data.item.address}/>
+        <View style = {styles.lineStyle} />
         <Textbox header='Order Type'
                  body='Pickup'/>
         </View>
@@ -52,7 +55,7 @@ componentDidMount() {
   fetch('http://192.168.1.247:5000/renderorders')
   .then((response) => response.json())
   .then((responseJson) => {
-    this.setState({dataSource: responseJson});
+    this.setState({dataSource: responseJson, isLoading: false});
   })
   .catch((error) => {
     console.log(error)
@@ -62,6 +65,14 @@ componentDidMount() {
   render() {
     return (
       <View style={styles.container}>
+      {this.state.isLoading ? (
+        <>
+          <View>
+            <ActivityIndicator />
+          </View>
+        </>
+      ) : (
+        <>
         <Text style={styles.sectionHeader}>Upcoming Orders</Text>
           <FlatList
             data={this.state.dataSource}
@@ -75,6 +86,8 @@ componentDidMount() {
                 tintColor = 'white'  />
             }
           />
+          </>
+        )}
       </View>
     );
   }
@@ -115,12 +128,10 @@ componentDidMount() {
     marginLeft: 15,
     marginBottom: 25
   },
-  textbox: {
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    padding: 10,
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 1,
+  lineStyle:{
+    borderWidth: 0.5,
+    borderColor:'black',
+    marginLeft: 25,
+    marginRight: 25,
   },
   });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, Button, TouchableOpacity, StyleSheet, FlatList, Image, RefreshControl } from 'react-native';
+import { ScrollView, View, Text, Button, TouchableOpacity, StyleSheet, FlatList, Image, RefreshControl, Alert } from 'react-native';
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
 
@@ -15,8 +15,8 @@ export default class HomeInventory extends Component {
       dataSource: [],
       selected: [],
       type: "Pickup",
-      refreshing: false
-
+      refreshing: false,
+      filter: 'Newest'
     }
   }
 
@@ -48,7 +48,6 @@ export default class HomeInventory extends Component {
       </TouchableOpacity>
     )
   }
-
 
 getSelected = array => {
   const arr = array.filter(d => d.isSelect)
@@ -97,6 +96,8 @@ componentDidMount() {
               <Text style={{color: 'white', fontSize: 16}}>Click Here to Create New Bin</Text>
             </TouchableOpacity>
             <Text style={styles.menuFilter}>DATE ADDED (NEWEST)</Text>
+            {this.state.filter == "Newest" ? (
+              <>
             <FlatList
               numColumns={2}
               data={this.state.dataSource}
@@ -110,9 +111,27 @@ componentDidMount() {
                   tintColor = 'white'/>
               }
             />
-            <LongButton title ="DELIVER SELECTED ITEMS TO ME"
-                        onPress={() => {this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type})}}/>
-
+            </>
+          ) : (
+            <>
+            <FlatList
+              numColumns={2}
+              data={this.state.dataSource}
+              renderItem={this.renderItem}
+              keyExtractor={(item, index) => index.toString()}
+              extraData={this.state}
+              refreshControl={
+                <RefreshControl
+                  refreshing={this.state.refreshing}
+                  onRefresh={this.onRefresh}
+                  tintColor = 'white'/>
+              }
+              />
+            </> )}
+            <LongButton title ="PICK UP SELECTED ITEMS FROM ME"
+                        onPress={() => {
+                          this.state.selected.length == 0 ? Alert.alert('Please Select Items') :
+                          this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type})}}/>
         </View>
     );
   }

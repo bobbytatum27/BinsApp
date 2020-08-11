@@ -7629,6 +7629,14 @@ react-native-credit-card-input@^0.4.1:
     prop-types "^15.6.0"
     react-native-flip-card "^3.4.1"
 
+react-native-dropdown-picker@^3.1.11:
+  version "3.1.11"
+  resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-3.1.11.tgz#663efcef168e7e56bb34fb8e1d54bc5e2de82b22"
+  integrity sha512-2dY5Kt9iVN/IXSfruU89rIEM0WXjfspKuJ/hVobaHYiTzJ2gy7xHRakUYkbDrsWrMgAq7+Q+iTp3c92CQjnTWg==
+  dependencies:
+    prop-types "^15.7.2"
+    react-native-vector-icons "^7.0.0"
+
 react-native-elements@^0.19.1:
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-0.19.1.tgz#f92b69d864a150215d01f81fe3c52a9cada83e45"
