@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, SafeAreaView, StyleSheet, Text, TouchableHighlight, View, TextInput, Picker, FlatList, Button, Alert, Image } from 'react-native';
+import { Modal, SafeAreaView, StyleSheet, Text, TouchableHighlight, View, TextInput, Picker, FlatList, Button, Alert, Image, ScrollView } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import StorageCompanyCard from '../components/StorageCompanyCard'
 import LongButton from '../components/LongButton.js'
@@ -31,7 +31,7 @@ export default class SelectFacility extends React.Component {
   // TODO: make sure the tab formatting is correct, some might be off (maybe)
   render() {
     return (
-      <View style = {styles.container}>
+      <ScrollView style = {styles.container}>
         <Text style={styles.findFacilityText}>Let's find a facility based on your needs:</Text>
         <Text style ={styles.descriptionText}>Address Line 1</Text>
         <FormInputHandler
@@ -82,61 +82,10 @@ export default class SelectFacility extends React.Component {
             onChangeText={(text) => this.setState({specialInstructions: text})}
         />
 
-        <Text style={{...styles.findFacilityText, paddingTop: 40}}>Now select the unit size you want: </Text>
-        <View style={styles.unitSizeView}>
-            <View style={styles.unitColumnView}>
-              <TouchableHighlight
-                style={{...styles.openButton, borderWidth: this.state.unitSize == '5x5' ? 2 : 0}}
-                onPress={() => this.setState({ unitSize: '5x5' })}
-                underlayColor='white'
-              >
-                <Text style={{color:'white'}}> 5x5</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={{...styles.openButton, borderWidth: this.state.unitSize == '5x10' ? 2 : 0}}
-                onPress={() => this.setState({ unitSize: '5x10' })}
-                underlayColor='white'
-              >
-                <Text style={{color:'white'}}>5x10</Text>
-              </TouchableHighlight>
-            </View>
-            <View style={styles.unitColumnView}>
-              <TouchableHighlight
-                style={{...styles.openButton, borderWidth: this.state.unitSize == '10x10' ? 2 : 0}}
-                onPress={() => this.setState({ unitSize: '10x10' })}
-                underlayColor='white'
-              >
-                <Text style={{color:'white'}}>10x10</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={{...styles.openButton, borderWidth: this.state.unitSize == '10x15' ? 2 : 0}}
-                onPress={() => this.setState({ unitSize: '10x15' })}
-                underlayColor='white'
-              >
-                <Text style={{color:'white'}}>10x15</Text>
-              </TouchableHighlight>
-            </View>
-            <View style={styles.unitColumnView}>
-              <TouchableHighlight
-                style={{...styles.openButton, borderWidth: this.state.unitSize == '15x15' ? 2 : 0}}
-                onPress={() => this.setState({ unitSize: '15x15' })}
-                underlayColor='white'
-              >
-                <Text style={{color:'white'}}>15x15</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={{...styles.openButton, borderWidth: this.state.unitSize == '15x20' ? 2 : 0}}
-                onPress={() => this.setState({ unitSize: '15x20' })}
-                underlayColor='white'
-              >
-                <Text style={{color:'white'}}>15x20</Text>
-              </TouchableHighlight>
-            </View>
-         </View>
-
+        
         {this.state.storageCardIsVisible ? (
           <>
-          <View style={{backgroundColor: 'white', padding: 15, marginTop: 15}}>
+          <View style={{padding: 15, marginTop: 15}}>
             <TouchableOpacity onPress={() => {
               this.state.unitSize == ''  ? Alert.alert('select unit size/input address') :
               this.props.navigation.navigate('AccountInfoScreen', 
@@ -144,73 +93,110 @@ export default class SelectFacility extends React.Component {
                  city: this.state.city, state: this.state.state, zip: this.state.zip, 
                  specialInstructions: this.state.specialInstructions});
             }}>
-              <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
-              <Text>855 Parr Boulevard</Text>
-              <Text>{this.state.unitSize} Unit @ $45/month.</Text>
+              <View style={{flexDirection: 'row', backgroundColor: 'white', padding: 10, borderRadius: 10}}>
+                <View style={{flex: 1}}>
+                  <Image style={{width: 50, height: 50}} source={require('../photos/csimini.png') }/>
+                </View>
+                <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
+                  <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
+                  <Text>855 Parr Boulevard, Richmond, CA 94801</Text>
+                  <Text>Unit: {this.state.unitSize} @ $50/month.</Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+            <View style={{height: 5}}>
+            </View>
+            <TouchableOpacity onPress={() => {
+              this.state.unitSize == ''  ? Alert.alert('select unit size/input address') :
+              this.props.navigation.navigate('AccountInfoScreen', 
+                {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2, 
+                 city: this.state.city, state: this.state.state, zip: this.state.zip, 
+                 specialInstructions: this.state.specialInstructions});
+            }}>
+              <View style={{flexDirection: 'row', backgroundColor: 'white', padding: 10, borderRadius: 10}}>
+                <View style={{flex: 1}}>
+                  <Image style={{width: 50, height: 50}} source={require('../photos/csimini.png') }/>
+                </View>
+                <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
+                  <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
+                  <Text>51 West Hornet Avenue, Alameda, CA 94501</Text>
+                  <Text>Unit: {this.state.unitSize} @ $50/month.</Text>
+                </View>
+              </View>
             </TouchableOpacity>
           </View>
           </>
         ) : (
           <>
+          <Text style={{...styles.findFacilityText, paddingTop: 40}}>Now select the unit size you want: </Text>
+          <View style={styles.unitSizeView}>
+              <View style={styles.unitColumnView}>
+                <TouchableHighlight
+                  style={{...styles.openButton, borderWidth: this.state.unitSize == '5x5' ? 2 : 0}}
+                  onPress={() => this.setState({ unitSize: '5x5' })}
+                  underlayColor='white'
+                >
+                  <Text style={{color:'white'}}> 5x5</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={{...styles.openButton, borderWidth: this.state.unitSize == '5x10' ? 2 : 0}}
+                  onPress={() => this.setState({ unitSize: '5x10' })}
+                  underlayColor='white'
+                >
+                  <Text style={{color:'white'}}>5x10</Text>
+                </TouchableHighlight>
+              </View>
+              <View style={styles.unitColumnView}>
+                <TouchableHighlight
+                  style={{...styles.openButton, borderWidth: this.state.unitSize == '10x10' ? 2 : 0}}
+                  onPress={() => this.setState({ unitSize: '10x10' })}
+                  underlayColor='white'
+                >
+                  <Text style={{color:'white'}}>10x10</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={{...styles.openButton, borderWidth: this.state.unitSize == '10x15' ? 2 : 0}}
+                  onPress={() => this.setState({ unitSize: '10x15' })}
+                  underlayColor='white'
+                >
+                  <Text style={{color:'white'}}>10x15</Text>
+                </TouchableHighlight>
+              </View>
+              <View style={styles.unitColumnView}>
+                <TouchableHighlight
+                  style={{...styles.openButton, borderWidth: this.state.unitSize == '15x15' ? 2 : 0}}
+                  onPress={() => this.setState({ unitSize: '15x15' })}
+                  underlayColor='white'
+                >
+                  <Text style={{color:'white'}}>15x15</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={{...styles.openButton, borderWidth: this.state.unitSize == '15x20' ? 2 : 0}}
+                  onPress={() => this.setState({ unitSize: '15x20' })}
+                  underlayColor='white'
+                >
+                  <Text style={{color:'white'}}>15x20</Text>
+                </TouchableHighlight>
+              </View>
+          </View>
+
           <View style={{paddingTop: 40}}>
           <LongButton
             title='Find a Unit!'
             onPress={() => {
-              this.setState({storageCardIsVisible: true});
+              if (this.state.unitSize != '') {
+                this.setState({storageCardIsVisible: true});
+              } else {
+                Alert.alert('Please select a unit size.');
+              }
             }}
           />
         </View>
           </>
         )}
-      </View>
+      </ScrollView>
     );
   }
-
-
-  // THIS IS THE CODE FOR THE MODAL in case we determine it should be added back in
-  /*
-    <View style={styles.selectFacilityModalView}>
-          <Modal
-            animationType='fade'
-            transparent={true}
-            visible={this.state.selectFacilityModal}
-          >
-            <SafeAreaView style={styles.selectFacilityModalView}>
-              <StorageCompanyCard
-                companyName="CubeSmart"
-                onPress={()=>{
-                  this.setState({ selectFacilityModal: false })
-                  this.props.navigation.navigate('AccountInfoScreen')
-                }}
-              />
-              <StorageCompanyCard
-                companyName="Extra Space Storage"
-                onPress={()=>{
-                  this.setState({ selectFacilityModal: false })
-                  this.props.navigation.navigate('AccountInfoScreen')
-                }}
-              />
-              <StorageCompanyCard
-                companyName="Public Storage"
-                onPress={()=>{
-                  this.setState({ selectFacilityModal: false })
-                  this.props.navigation.navigate('AccountInfoScreen')
-                }}
-              />
-              <View style={{alignItems: 'center'}}>
-                <Image
-                  style={styles.map}
-                  source={{uri: 'https://i.pinimg.com/originals/0a/50/5a/0a505ae5b9946975cd2347d222c5cc8a.png'}}
-                />
-              </View>
-              <Button
-                title='Cancel'
-                onPress={() => this.setState({ selectFacilityModal: false })}
-              />
-            </SafeAreaView>
-          </Modal>
-        </View>
-  */
 
 }
 
