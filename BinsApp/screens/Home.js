@@ -33,13 +33,19 @@ class Home extends Component {
   }
 
   fetchOrders(){
+    let email = ''
+    Auth.currentUserInfo().then((userInfo) => {
+      const { attributes = {} } = userInfo;
+      email = attributes['email'];
+    })
     fetch('http://192.168.1.247:5000/renderorders')
     .then((response) => response.json())
     .then((responseJson) => {
       const responseJson2 = responseJson.filter(function(item){
-        return item.name == Auth.user.attributes.email
+        return item.name == email //Auth.user.attributes.email
       });
       this.setState({dataSourceOrders: responseJson2, isLoading:false});
+      console.log(email);
     })
     .catch((error) => {
       console.log(error)
@@ -52,7 +58,7 @@ class Home extends Component {
   }
 
   renderItem = ({item}) => {
-    if (item.owner == Auth.user.attributes.email && item.isInStorage == 'No') {
+    if (item.owner == 'bigzhang17@gmail.com' /*Auth.currentUserInfo*/&& item.isInStorage == 'No') {
       return (
       <View style = {styles.button}>
         <Image style={{width: 150, height: 150}}
@@ -68,7 +74,7 @@ class Home extends Component {
   }
 
   renderItemsInStorage = ({item}) => {
-    if (item.owner == Auth.user.attributes.email && item.isInStorage == 'Yes') {
+    if (item.owner == 'bigzhang17@gmail.com' /*Auth.user.attributes.email */ && item.isInStorage == 'Yes') {
       return (
       <View style = {styles.button}>
         <Image style={{width: 150, height: 150}}
@@ -170,7 +176,8 @@ const styles = StyleSheet.create({
     width: 152,
     backgroundColor: 'white',
     borderColor: 'black',
-    borderWidth: 1
+    borderWidth: 1,
+    borderRadius: 5
   },
   selected: {
     margin: 15,
