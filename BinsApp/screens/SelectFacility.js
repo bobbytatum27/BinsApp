@@ -86,6 +86,7 @@ export default class SelectFacility extends React.Component {
         {this.state.storageCardIsVisible ? (
           <>
           <View style={{padding: 15, marginTop: 15}}>
+            <Text style={{fontSize: 15, color: 'white', marginBottom: 15, textAlign: 'center'}}>Here's what we found based on your address above.</Text>
             <TouchableOpacity onPress={() => {
               this.state.unitSize == ''  ? Alert.alert('select unit size/input address') :
               this.props.navigation.navigate('AccountInfoScreen', 
