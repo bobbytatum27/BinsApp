@@ -120,7 +120,7 @@ export default class SelectFacility extends React.Component {
                 </View>
                 <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
                   <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
-                  <Text>51 West Hornet Avenue, Alameda, CA 94501</Text>
+                  <Text>51 West Hornet Ave., Alameda, CA 94501</Text>
                   <Text>Unit: {this.state.unitSize} @ $50/month.</Text>
                 </View>
               </View>
