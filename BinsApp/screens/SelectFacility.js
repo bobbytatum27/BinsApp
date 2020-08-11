@@ -3,6 +3,7 @@ import { Modal, SafeAreaView, StyleSheet, Text, TouchableHighlight, View, TextIn
 import FormInputHandler from '../components/FormInputHandler.js'
 import StorageCompanyCard from '../components/StorageCompanyCard'
 import LongButton from '../components/LongButton.js'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class SelectFacility extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export default class SelectFacility extends React.Component {
       state: '',
       zip: '',
       specialInstructions: '',
+      storageCardIsVisible: false
     };
   }
 
@@ -132,18 +134,34 @@ export default class SelectFacility extends React.Component {
             </View>
          </View>
 
-        <View style={{paddingTop: 40}}>
+        {this.state.storageCardIsVisible ? (
+          <>
+          <View style={{backgroundColor: 'white', padding: 15, marginTop: 15}}>
+            <TouchableOpacity onPress={() => {
+              this.state.unitSize == ''  ? Alert.alert('select unit size/input address') :
+              this.props.navigation.navigate('AccountInfoScreen', 
+                {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2, 
+                 city: this.state.city, state: this.state.state, zip: this.state.zip, 
+                 specialInstructions: this.state.specialInstructions});
+            }}>
+              <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
+              <Text>855 Parr Boulevard</Text>
+              <Text>{this.state.unitSize} Unit @ $45/month.</Text>
+            </TouchableOpacity>
+          </View>
+          </>
+        ) : (
+          <>
+          <View style={{paddingTop: 40}}>
           <LongButton
             title='Find a Unit!'
             onPress={() => {
-              this.state.unitSize == ''  ? Alert.alert('select unit size/input address') :
-                this.props.navigation.navigate('AccountInfoScreen', 
-                  {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2, 
-                   city: this.state.city, state: this.state.state, zip: this.state.zip, 
-                   specialInstructions: this.state.specialInstructions});
+              this.setState({storageCardIsVisible: true});
             }}
           />
         </View>
+          </>
+        )}
       </View>
     );
   }
