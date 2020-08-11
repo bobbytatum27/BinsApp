@@ -47,7 +47,7 @@ export default class PasswordReset extends React.Component {
             title="Confirm New Password"
             onPress={()=>{
               console.log('Confirming...');
-              this.confirmResetPassword(this.state.email, this.state.code, this.state.password)
+              this.context.confirmResetPassword(this.state.email, this.state.code, this.state.password)
               .then(() => console.log('success'))
               .catch((err) => console.log('error on confirmation step: ', err))
             }}
@@ -72,7 +72,6 @@ export default class PasswordReset extends React.Component {
                 this.setState({confirmationCodeSent: true})
               })
               .catch((err) => console.log('error: ', err));
-              console.log(this.state.email);
             }}
           />
           </>

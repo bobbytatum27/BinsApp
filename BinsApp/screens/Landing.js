@@ -50,7 +50,6 @@ export default class Landing extends Component {
             onPress={() => this.props.navigation.navigate('Login')}
             title='LOGIN'
             color= 'white' />
-          
         </View>
       </View>
     );

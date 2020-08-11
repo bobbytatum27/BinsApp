@@ -32,7 +32,7 @@ export class LoginProvider extends React.Component{
                 this.setState({isLoggedIn: true});
                 resolve('Successful Sign In');
             })
-            .catch(err => reject('Error Signing In: ' + err));
+            .catch(err => reject(err));
         });
     }
 
@@ -88,9 +88,17 @@ export class LoginProvider extends React.Component{
         });
     }
 
+    contactConfirmation = (email, code) => {
+        return new Promise((resolve, reject) => {
+            Auth.confirmSignUp(email, code)
+            .then(() => resolve('Code Confirmed'))
+            .catch((err) => reject(err));
+        });
+    }
+
     completeSignup = (specialInstructions) => {
         return new Promise((resolve, reject) => {
-            console.log(specialInstructions)
+            console.log(specialInstructions, 'Special Instr. still need to be pushed!')
             this.setState({isLoggedIn: true});
             resolve('successful sign up completed.');
         });
@@ -115,7 +123,7 @@ export class LoginProvider extends React.Component{
 
     render() {
         return (
-            <LoginContext.Provider value={{...this.state, login: this.login, logout: this.logout, signup: this.signup, completeSignup: this.completeSignup, resetPassword: this.resetPassword, confirmResetPassword: this.confirmResetPassword}}>
+            <LoginContext.Provider value={{...this.state, login: this.login, logout: this.logout, signup: this.signup, contactConfirmation: this.contactConfirmation, completeSignup: this.completeSignup, resetPassword: this.resetPassword, confirmResetPassword: this.confirmResetPassword}}>
                 {this.props.children}
             </LoginContext.Provider>
         );
