@@ -4,13 +4,13 @@ import FormInputHandler from '../components/FormInputHandler.js'
 import StorageCompanyCard from '../components/StorageCompanyCard'
 import LongButton from '../components/LongButton.js'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import InputValidator from '../components/InputValidator.js'
 
 export default class SelectFacility extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       unitSize: '',    // may want error handling in case they try and press without selecting unit size
-      selectFacilityModal: false,
       addressLine1: '',
       addressLine2: '',
       city: '',
@@ -21,6 +21,7 @@ export default class SelectFacility extends React.Component {
     };
   }
 
+  // I think this is no longer in use, it was for the flatlist that got taken out
   UnitSizeSeparator = () => {
     return(
       <View style={{padding: 5}}>
@@ -33,53 +34,89 @@ export default class SelectFacility extends React.Component {
     return (
       <ScrollView style = {styles.container}>
         <Text style={styles.findFacilityText}>Let's find a facility based on your needs:</Text>
-        <Text style ={styles.descriptionText}>Address Line 1</Text>
-        <FormInputHandler
+        <InputValidator 
+          titleText='Address Line 1'
           defaultText='Address Line 1'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(text) => this.setState({addressLine1: text})}
+          errorMessage='Do not leave this field empty!'
+          checkInput={() => {
+            if (this.state.addressLine1 == '') {
+              return false;
+            } else {
+              return true;
+            }
+          }}
         />
-        <Text style ={styles.descriptionText}>Address Line 2</Text>
-        <FormInputHandler
+        <InputValidator 
+          titleText='Address Line 2'
           defaultText='Address Line 2'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(text) => this.setState({addressLine2: text})}
+          errorMessage='Do not leave this field empty!'
+          checkInput={() => true /*this field is optional, so automatically valid*/}
         />
-        <Text style ={styles.descriptionText}>City</Text>
-        <FormInputHandler
+        <InputValidator 
+          titleText='City'
           defaultText='City'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(text) => this.setState({city: text})}
+          errorMessage='Do not leave this field empty!'
+          checkInput={() => {
+            if (this.state.city == '') {
+              return false;
+            } else {
+              return true;
+            }
+          }}
         />
         <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
           <View style={{flex:1}}>
-            <Text style ={styles.descriptionText}>State</Text>
-            <FormInputHandler
+            <InputValidator 
+              titleText='State'
               defaultText='State'
               defaultTextColor='#8B8B8B'
               style={styles.userInfoText}
               onChangeText={(text) => this.setState({state: text})}
+              errorMessage='Do not leave this field empty!'
+              checkInput={() => {
+                if (this.state.state == '') {
+                  return false;
+                } else {
+                  return true;
+                }
+              }}
             />
           </View>
           <View style={{flex:1}}>
-            <Text style ={styles.descriptionText}>Zip</Text>
-            <FormInputHandler
-              defaultText='Zip Code'
-              style={styles.userInfoText}
+            <InputValidator 
+              titleText='ZIP'
+              defaultText='ZIP'
               defaultTextColor='#8B8B8B'
+              style={styles.userInfoText}
               onChangeText={(text) => this.setState({zip: text})}
+              errorMessage='Invalid ZIP Code!'
+              checkInput={() => {
+                if (this.state.zip == '' || this.state.zip.length != 5) { // still need to validate only numbers
+                  return false;
+                } else {
+                  return true;
+                }
+              }}
             />
           </View>
         </View>
-        <Text style ={styles.descriptionText}>Special Instructions</Text>
-        <FormInputHandler
-            defaultText='Ex: Gate code, apartment number'
-            style={styles.userInfoText}
-            defaultTextColor='#8B8B8B'
-            onChangeText={(text) => this.setState({specialInstructions: text})}
+        <InputValidator 
+          titleText='Special Instructions'
+          defaultText='Ex: Gate Code, Apartment Number'
+          defaultTextColor='#8B8B8B'
+          style={styles.userInfoText}
+          onChangeText={(text) => this.setState({specialInstructions: text})}
+          errorMessage='Do not leave this field empty!'
+          checkInput={() => true /*this field is optional, so automatically valid*/}
         />
 
         
@@ -185,10 +222,12 @@ export default class SelectFacility extends React.Component {
           <LongButton
             title='Find a Unit!'
             onPress={() => {
-              if (this.state.unitSize != '') {
-                this.setState({storageCardIsVisible: true});
-              } else {
+              if (this.state.unitSize == '') {
                 Alert.alert('Please select a unit size.');
+              } else if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '') {
+                Alert.alert('You\'ve left an important field empty in your address!');
+              } else {
+                this.setState({storageCardIsVisible: true});
               }
             }}
           />
