@@ -4,6 +4,7 @@ import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 export default class Orders extends Component {
   static contextType = LoginContext;
@@ -14,12 +15,13 @@ export default class Orders extends Component {
       dataSource: [],
       dateSelected: '',
       timeSelected: '',
-      refreshing: false
+      refreshing: false,
+      email: '',
+      filter: 'Upcoming',
     }
   }
 
   renderItem = data => {
-    if (data.item.name == Auth.user.attributes.email) {
       return (
         <View style = {{margin: 10, backgroundColor: '#E5E7E9', borderRadius: 15}}>
         <Textbox header='Date and Time'
@@ -32,35 +34,73 @@ export default class Orders extends Component {
         <Textbox header='Order Type'
                  body='Pickup'/>
         </View>
-    )
+      )
+    }
+
+  onRefresh = () => {
+    this.setState({refreshing: true});
+    if (this.state.filter == 'Upcoming') {
+    this.fetchData();
+    } else {
+    this.fetchPastOrders();
+    }
   }
-}
 
-_onRefresh = () => {
-  this.setState({refreshing: true});
-  fetch('http://192.168.1.247:5000/renderorders')
-  .then((response) => response.json())
-  .then((responseJson) => {
-    this.setState({dataSource: responseJson});
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-  .then(() => {
-    this.setState({refreshing: false});
-  });
-}
+  onSort(val) {
+    this.setState({filter:val});
+    console.log(val, this.state.filter);
+    if (val == 'Past') {
+    this.fetchPastOrders();
+    } else {
+      this.fetchData();
+    }
+  }
 
-componentDidMount() {
-  fetch('http://192.168.1.247:5000/renderorders')
-  .then((response) => response.json())
-  .then((responseJson) => {
-    this.setState({dataSource: responseJson, isLoading: false});
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-}
+  getEmail(){
+    Auth.currentUserInfo().then((userInfo) => {
+      const { attributes = {} } = userInfo;
+      this.setState({email:attributes['email']});
+    })
+  }
+
+  fetchData(){
+    fetch('http://192.168.1.247:5000/renderorders')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      const responseJson2 = responseJson.filter(function(item){
+        return item.name == Auth.user.attributes.email
+      });
+      this.setState({dataSource: responseJson2, isLoading: false});
+    })
+    .then(() => {
+     this.setState({refreshing: false});
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  fetchPastOrders(){
+    fetch('http://192.168.1.247:5000/renderpastorders')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      const responseJson2 = responseJson.filter(function(item){
+        return item.name == Auth.user.attributes.email
+      });
+      this.setState({dataSource: responseJson2, isLoading: false});
+    })
+    .then(() => {
+     this.setState({refreshing: false});
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  componentDidMount() {
+    this.getEmail();
+    this.fetchData();
+  }
 
   render() {
     return (
@@ -73,7 +113,18 @@ componentDidMount() {
         </>
       ) : (
         <>
-        <Text style={styles.sectionHeader}>Upcoming Orders</Text>
+        <Text style={styles.sectionHeader}>Orders</Text>
+        <DropDownPicker
+          items={[
+                {label: 'Upcoming', value: 'Upcoming'},
+                {label: 'Past', value: 'Past'}
+          ]}
+          placeholder={"Upcoming"}
+          arrowSize={10}
+          itemStyle={{justifyContent: 'flex-start'}}
+          containerStyle={{marginLeft: 15, marginBottom: 5, height: 35, width: 110}}
+          onChangeItem={item => {this.onSort(item.value)}}
+        />
           <FlatList
             data={this.state.dataSource}
             renderItem={this.renderItem}
@@ -82,7 +133,7 @@ componentDidMount() {
             refreshControl={
               <RefreshControl
                 refreshing={this.state.refreshing}
-                onRefresh={this._onRefresh}
+                onRefresh={this.onRefresh}
                 tintColor = 'white'  />
             }
           />

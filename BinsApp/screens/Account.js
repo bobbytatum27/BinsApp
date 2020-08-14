@@ -11,9 +11,9 @@ export default class Account extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: Auth.user.attributes.name,
-      email: Auth.user.attributes.email,
-      phone: Auth.user.attributes.phone_number,
+      name: '',
+      email: '',
+      phone: '',
       addressLine1: '123 New York Avenue',
       addressLine2: '',
       city: 'Los Angeles',
@@ -36,6 +36,17 @@ export default class Account extends React.Component {
     },
       body: JSON.stringify(this.state)
   })}
+
+  componentDidMount(){
+    Auth.currentUserInfo().then((userInfo) => {
+      const { attributes = {} } = userInfo;
+      this.setState({name:attributes['name']});
+      this.setState({email:attributes['email']});
+      this.setState({phone:attributes['phone_number']});
+      this.setState({address:attributes['address']});
+      console.log(attributes);
+    })
+  }
 
   render() {
     return (

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, View, Text, Button, TouchableOpacity, FlatList, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { Ionicons } from '@expo/vector-icons';
 
 import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
@@ -14,18 +14,30 @@ class Home extends Component {
     super();
     this.state = {
       isLoading: true,
-      dataSource: [],
+      dataSourceStorage: [],
+      dataSourceHome: [],
       dateSourceOrders: [],
+      email: ' ',
     }
   }
 
   fetchData() {
+    let email = ''
+    Auth.currentUserInfo().then((userInfo) => {
+      const { attributes = {} } = userInfo;
+      email = attributes['email'];
+    })
     fetch('http://192.168.1.247:5000/render')
     .then((response) => response.json())
     .then((responseJson) => {
-      this.setState({
-        dataSource: responseJson
-      })
+      const responseJson2 = responseJson.filter(function(item){
+        return item.isInStorage == 'No' && item.owner == email
+      });
+      const responseJson3 = responseJson.filter(function(item){
+        return item.isInStorage == 'Yes' && item.owner == email
+      });
+      this.setState({dataSourceHome: responseJson2})
+      this.setState({dataSourceStorage: responseJson3})
     })
     .catch((error) => {
       console.log(error)
@@ -42,15 +54,16 @@ class Home extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       const responseJson2 = responseJson.filter(function(item){
-        return item.name == email //Auth.user.attributes.email
+        return item.name == email
       });
       this.setState({dataSourceOrders: responseJson2, isLoading:false});
-      console.log(email);
     })
     .catch((error) => {
       console.log(error)
     })
   }
+
+
 
   componentDidMount() {
     this.fetchData();
@@ -58,7 +71,6 @@ class Home extends Component {
   }
 
   renderItem = ({item}) => {
-    if (item.owner == 'bigzhang17@gmail.com' /*Auth.currentUserInfo*/&& item.isInStorage == 'No') {
       return (
       <View style = {styles.button}>
         <Image style={{width: 150, height: 150}}
@@ -70,11 +82,9 @@ class Home extends Component {
         </View>
       </View>
     )
-  }
   }
 
   renderItemsInStorage = ({item}) => {
-    if (item.owner == 'bigzhang17@gmail.com' /*Auth.user.attributes.email */ && item.isInStorage == 'Yes') {
       return (
       <View style = {styles.button}>
         <Image style={{width: 150, height: 150}}
@@ -86,7 +96,6 @@ class Home extends Component {
         </View>
       </View>
     )
-  }
   }
 
   renderOrders = data => {
@@ -110,38 +119,72 @@ class Home extends Component {
     ) : (
       <>
         <ScrollView>
-          <View style={{marginBottom: 25}}>
+          <View>
+            <Ionicons name={'ios-help-circle-outline'} size={25} color={'white'} style={{textAlign: 'right', marginRight: 10}} onPress={() => this.props.navigation.navigate('HelpScreen')}/>
             <Text style={styles.sectionHeader}>Upcoming Orders</Text>
+          {this.state.dataSourceOrders.length == 0 ? (
+            <>
+                <View style = {styles.textbox}>
+            <Text style = {{textAlign: 'center'}}>No Upcoming Orders</Text>
+            </View>
+          </>
+        ) : (
+          <>
             <FlatList
               horizontal={true}
               data={this.state.dataSourceOrders}
               renderItem={this.renderOrders}/>
             <LongButton title ="VIEW ALL"
                         onPress={() => this.props.navigation.navigate('Orders')}/>
+          </>
+        )}
           </View>
           <View style={{marginBottom: 25}}>
             <Text style={styles.sectionHeader}>Items in Storage</Text>
+            {this.state.dataSourceStorage.length == 0 ? (
+              <>
+                  <View style = {styles.textbox}>
+              <Text style = {{textAlign: 'center'}}>No Items</Text>
+              </View>
+            </>
+          ) : (
+            <>
             <FlatList
               horizontal={true}
-              data={this.state.dataSource}
+              data={this.state.dataSourceStorage}
               renderItem={this.renderItemsInStorage}
               keyExtractor={(item, index) => index.toString()}
             />
               <LongButton
                title ="REQUEST A DELIVERY"
                onPress={() => this.props.navigation.navigate('StorageInventoryScreen')}/>
+            </>
+          )}
           </View>
           <View style={{marginBottom: 25}}>
             <Text style={styles.sectionHeader}>Items with You</Text>
+            {this.state.dataSourceHome.length == 0 ? (
+              <>
+                  <View style = {styles.textbox}>
+              <Text style = {{textAlign: 'center'}}>No Items</Text>
+              </View>
+              <LongButton
+               title ="CREATE A NEW BIN"
+               onPress={() => this.props.navigation.navigate('NewItemScreen')}/>
+            </>
+          ) : (
+            <>
               <FlatList
                 horizontal={true}
-                data={this.state.dataSource}
+                data={this.state.dataSourceHome}
                 renderItem={this.renderItem}
                 keyExtractor={(item, index) => index.toString()}
               />
               <LongButton
                title ="REQUEST A PICKUP"
                onPress={() => this.props.navigation.navigate('HomeInventoryScreen')}/>
+            </>
+          )}
           </View>
         </ScrollView>
       </>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView, View, Text, Button, TouchableOpacity, StyleSheet, FlatList, Image, RefreshControl, Alert } from 'react-native';
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
@@ -16,7 +17,7 @@ export default class HomeInventory extends Component {
       selected: [],
       type: "Pickup",
       refreshing: false,
-      filter: 'Newest'
+      filter: ' ',
     }
   }
 
@@ -49,90 +50,95 @@ export default class HomeInventory extends Component {
     )
   }
 
-getSelected = array => {
-  const arr = array.filter(d => d.isSelect)
-  const result = arr.map(a => a.description)
-  this.setState({selected: result})
-}
+  getSelected = array => {
+    const arr = array.filter(d => d.isSelect)
+    const result = arr.map(a => a.description)
+    this.setState({selected: result})
+  }
 
-onRefresh = () => {
-   this.setState({refreshing: true});
-   this.fetchData();
- }
+  onRefresh = () => {
+     this.setState({refreshing: true});
+     this.fetchData();
+   }
 
-fetchData() {
-  fetch('http://192.168.1.247:5000/render')
-  .then((response) => response.json())
-  .then((responseJson) => {
-    responseJson = responseJson.map(item => {
-      item.isSelect = false;
-      item.selectedClass = styles.button;
-      return item;
-    });
-    const responseJson2 = responseJson.filter(function(item){
-      return item.isInStorage == 'No' && item.owner == Auth.user.attributes.email
-    });
-    this.setState({dataSource: responseJson2});
-  })
-  .then(() => {
-   this.setState({refreshing: false});
-  })
-  .catch((error) => {
-    console.log(error)
-  })
-}
+  onSort(val) {
+    this.setState({filter:val});
+    console.log(val, this.state.filter);
+    if (val == 'Alphabetical') {
+    this.state.dataSource.sort((a, b) => a.description.localeCompare(b.description));
+    } else {
+      this.state.dataSource.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
+    }
+  }
 
-componentDidMount() {
-  this.fetchData();
-}
+  fetchData() {
+    fetch('http://192.168.1.247:5000/render')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      responseJson = responseJson.map(item => {
+        item.isSelect = false;
+        item.selectedClass = styles.button;
+        return item;
+      });
+      const responseJson2 = responseJson.filter(function(item){
+        return item.isInStorage == 'No' && item.owner == Auth.user.attributes.email
+      });
+      this.setState({dataSource: responseJson2});
+      if (this.state.filter == 'Alphabetical') {
+      this.state.dataSource.sort((a, b) => a.description.localeCompare(b.description));
+      }
+    })
+    .then(() => {
+     this.setState({refreshing: false});
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
 
   render() {
     return (
     <View style={styles.container}>
-            <Text style={styles.sectionHeader}>Items with You</Text>
+        <Text style={styles.sectionHeader}>Items with You</Text>
 
-            <TouchableOpacity style = {styles.button2}
-                              onPress = {() => this.props.navigation.navigate('NewItemScreen')}>
-              <Text style={{color: 'white', fontSize: 16}}>Click Here to Create New Bin</Text>
-            </TouchableOpacity>
-            <Text style={styles.menuFilter}>DATE ADDED (NEWEST)</Text>
-            {this.state.filter == "Newest" ? (
-              <>
-            <FlatList
-              numColumns={2}
-              data={this.state.dataSource}
-              renderItem={this.renderItem}
-              keyExtractor={(item, index) => index.toString()}
-              extraData={this.state}
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this.onRefresh}
-                  tintColor = 'white'/>
-              }
+        <TouchableOpacity style = {styles.button2}
+                          onPress = {() => this.props.navigation.navigate('NewItemScreen')}>
+          <Text style={{color: 'white', fontSize: 16}}>Click Here to Create New Bin</Text>
+        </TouchableOpacity>
+        <DropDownPicker
+          items={[
+                {label: 'Date Added (Newest)', value: 'Newest'},
+                {label: 'A -> Z', value: 'Alphabetical'}
+          ]}
+          placeholder={"Sort By"}
+          arrowSize={10}
+          itemStyle={{justifyContent: 'flex-start'}}
+          containerStyle={{marginLeft: 15, marginBottom: 5, height: 35, width: 110}}
+          onChangeItem={item => {this.onSort(item.value)}}
+        />
+        <FlatList
+          numColumns={2}
+          data={this.state.dataSource}
+          renderItem={this.renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          extraData={this.state}
+          refreshControl={
+            <RefreshControl
+               refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh}
+                tintColor = 'white'
             />
-            </>
-          ) : (
-            <>
-            <FlatList
-              numColumns={2}
-              data={this.state.dataSource}
-              renderItem={this.renderItem}
-              keyExtractor={(item, index) => index.toString()}
-              extraData={this.state}
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this.onRefresh}
-                  tintColor = 'white'/>
-              }
-              />
-            </> )}
-            <LongButton title ="PICK UP SELECTED ITEMS FROM ME"
-                        onPress={() => {
-                          this.state.selected.length == 0 ? Alert.alert('Please Select Items') :
-                          this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type})}}/>
-        </View>
+          }
+        />
+        <LongButton title ="PICK UP SELECTED ITEMS FROM ME"
+                    onPress={() => {
+                      this.state.selected.length == 0 ? Alert.alert('Please Select Items') :
+                      this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type})}}/>
+      </View>
     );
   }
 }

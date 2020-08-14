@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, Button, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
+import { ScrollView, View, Text, Button, TouchableOpacity, FlatList, StyleSheet, Image, RefreshControl, Alert } from 'react-native';
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
@@ -15,6 +16,8 @@ export default class StorageInventory extends Component {
       dataSource: [],
       selected: [],
       type: "Delivery",
+      refreshing: false,
+      filter: ' ',
     }
   }
 
@@ -33,7 +36,6 @@ export default class StorageInventory extends Component {
   };
 
   renderItem = data => {
-    if (data.item.owner == Auth.user.attributes.email && data.item.isInStorage == 'Yes') {
       return (
       <TouchableOpacity
         style={styles.button, data.item.selectedClass}
@@ -46,15 +48,30 @@ export default class StorageInventory extends Component {
           </Text>
         </View>
       </TouchableOpacity>
-    )
-  }
-}
+      )
+    }
 
-getSelected = array => {
-  const arr = array.filter(d => d.isSelect)
-  const result = arr.map(a => a.description)
-  this.setState({selected: result})
-}
+  getSelected = array => {
+    const arr = array.filter(d => d.isSelect)
+    const result = arr.map(a => a.description)
+    this.setState({selected: result})
+  }
+
+  onRefresh = () => {
+     this.setState({refreshing: true});
+     this.fetchData();
+     console.log(this.state.filter);
+   }
+
+   onSort(val) {
+     this.setState({filter:val});
+     console.log(val, this.state.filter);
+     if (val == 'Alphabetical') {
+     this.state.dataSource.sort((a, b) => a.description.localeCompare(b.description));
+     } else {
+       this.state.dataSource.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
+     }
+   }
 
   fetchData() {
     fetch('http://192.168.1.247:5000/render')
@@ -69,6 +86,12 @@ getSelected = array => {
         return item.isInStorage == 'Yes' && item.owner == Auth.user.attributes.email
       });
       this.setState({dataSource: responseJson2});
+      if (this.state.filter == 'Alphabetical') {
+      this.state.dataSource.sort((a, b) => a.description.localeCompare(b.description));
+      }
+    })
+    .then(() => {
+     this.setState({refreshing: false});
     })
     .catch((error) => {
       console.log(error)
@@ -83,16 +106,35 @@ getSelected = array => {
     return (
         <View style={styles.container}>
             <Text style={styles.sectionHeader}>Items in Storage</Text>
-            <Text style={styles.menuFilter}>DATE ADDED (NEWEST)</Text>
-                <FlatList
-                  numColumns={2}
-                  data={this.state.dataSource}
-                  renderItem={this.renderItem}
-                  keyExtractor={(item, index) => index.toString()}
-                  extraData={this.state}
+            <DropDownPicker
+              items={[
+                    {label: 'Date Added (Newest)', value: 'Newest'},
+                    {label: 'A -> Z', value: 'Alphabetical'}
+              ]}
+              placeholder={"Sort By"}
+              arrowSize={10}
+              itemStyle={{justifyContent: 'flex-start'}}
+              containerStyle={{marginLeft: 15, marginBottom: 5, height: 35, width: 110}}
+              onChangeItem={item => {this.onSort(item.value)}}
+            />
+            <FlatList
+              numColumns={2}
+              data={this.state.dataSource}
+              renderItem={this.renderItem}
+              keyExtractor={(item, index) => index.toString()}
+              extraData={this.state}
+              refreshControl={
+                <RefreshControl
+                   refreshing={this.state.refreshing}
+                    onRefresh={this.onRefresh}
+                    tintColor = 'white'
                 />
+              }
+            />
             <LongButton title ="DELIVER SELECTED ITEMS TO ME"
-                      onPress={() => {this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type})}}/>
+                      onPress={() => {
+                        this.state.selected.length == 0 ? Alert.alert('Please Select Items') :
+                        this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type})}}/>
         </View>
     );
   }

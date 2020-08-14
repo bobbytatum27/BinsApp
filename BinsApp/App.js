@@ -11,6 +11,7 @@ import Landing2 from './screens/Landing2.js';
 import Landing3 from './screens/Landing3.js';
 import Landing4 from './screens/Landing4.js';
 import Home from './screens/Home.js'
+import Help from './screens/Help.js'
 import StorageInventory from './screens/StorageInventory.js'
 import ScheduleAppointment from './screens/ScheduleAppointment.js'
 import Review from './screens/Review.js'
@@ -70,6 +71,7 @@ function App() {
       ) : (
         <>
         <Stack.Screen name='Home' component={HomeTabs} options={{title: "Bins"}}/>
+        <Stack.Screen name='HelpScreen' component={Help} options={{title: "Help"}}/>
         <Stack.Screen name='StorageInventoryScreen' component={StorageInventory} options={{title: "Deliver"}}/>
         <Stack.Screen name='ScheduleAppointmentScreen' component={ScheduleAppointment} options={{title: "Schedule Appointment"}}/>
         <Stack.Screen name='ReviewScreen' component={Review} options={{title: "Review"}}/>

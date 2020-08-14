@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, Alert, Image, ScrollView, To
 import FormInputHandler from '../components/FormInputHandler.js'
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import LongButton from '../components/LongButton.js'
+import moment from 'moment';
 
 export default class ScheduleAppointment extends Component {
   constructor(props) {
@@ -24,12 +25,16 @@ export default class ScheduleAppointment extends Component {
 
 
   render() {
+
+    const today = moment().format("YYYY-MM-DD");
+
     return (
       <View style={styles.container}>
         <ScrollView style={{marginBottom:25}}>
             <Text style ={styles.descriptionText}>Please Select a Date</Text>
             <Calendar
               style={{margin:15}}
+              minDate={today}
               onDayPress={(day) => {this.setState({dateSelected:{[day.dateString]:{selected: true, selectedColor: '#466A8F'}}})}}
               markedDates={this.state.dateSelected}/>
             <Text style={styles.descriptionText}>Please select a time</Text>

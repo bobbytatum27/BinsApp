@@ -17,7 +17,8 @@ export default class SelectFacility extends React.Component {
       state: '',
       zip: '',
       specialInstructions: '',
-      storageCardIsVisible: false
+      storageCardIsVisible: true,
+      modalVisible: true,
     };
   }
 
@@ -82,17 +83,11 @@ export default class SelectFacility extends React.Component {
             onChangeText={(text) => this.setState({specialInstructions: text})}
         />
 
-        
         {this.state.storageCardIsVisible ? (
           <>
           <View style={{padding: 15, marginTop: 15}}>
             <Text style={{fontSize: 15, color: 'white', marginBottom: 15, textAlign: 'center'}}>Here's what we found based on your address above.</Text>
-            <TouchableOpacity onPress={() => {
-              this.state.unitSize == ''  ? Alert.alert('select unit size/input address') :
-              this.props.navigation.navigate('AccountInfoScreen', 
-                {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2, 
-                 city: this.state.city, state: this.state.state, zip: this.state.zip, 
-                 specialInstructions: this.state.specialInstructions});
+            <TouchableOpacity onPress={() => {this.setState({modalVisible:true})
             }}>
               <View style={{flexDirection: 'row', backgroundColor: 'white', padding: 10, borderRadius: 10}}>
                 <View style={{flex: 1}}>
@@ -109,9 +104,9 @@ export default class SelectFacility extends React.Component {
             </View>
             <TouchableOpacity onPress={() => {
               this.state.unitSize == ''  ? Alert.alert('select unit size/input address') :
-              this.props.navigation.navigate('AccountInfoScreen', 
-                {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2, 
-                 city: this.state.city, state: this.state.state, zip: this.state.zip, 
+              this.props.navigation.navigate('AccountInfoScreen',
+                {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                 city: this.state.city, state: this.state.state, zip: this.state.zip,
                  specialInstructions: this.state.specialInstructions});
             }}>
               <View style={{flexDirection: 'row', backgroundColor: 'white', padding: 10, borderRadius: 10}}>
@@ -120,7 +115,7 @@ export default class SelectFacility extends React.Component {
                 </View>
                 <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
                   <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
-                  <Text>51 West Hornet Avenue, Alameda, CA 94501</Text>
+                  <Text>51 West Hornet Ave., Alameda, CA 94501</Text>
                   <Text>Unit: {this.state.unitSize} @ $50/month.</Text>
                 </View>
               </View>
@@ -195,6 +190,22 @@ export default class SelectFacility extends React.Component {
         </View>
           </>
         )}
+        <Modal visible={this.state.modalVisible} transparent={true}>
+            <View style = {styles.modalView}>
+              <Image resizeMode={'contain'} source={require('../photos/csimini.png')} style = {{width: 350, borderRadius: 20}} />
+              <TouchableOpacity style={styles.openButton}
+                                onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                  {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                   city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                   specialInstructions: this.state.specialInstructions}); this.setState({modalVisible:false});
+                                 }}>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.openButton}
+                                onPress={() => {this.setState({modalVisible:false})}}>
+                <Text>Close</Text>
+              </TouchableOpacity>
+            </View>
+        </Modal>
       </ScrollView>
     );
   }
@@ -267,5 +278,16 @@ const styles = StyleSheet.create({
     marginBottom: -10,
     marginLeft: 15,
     color: 'white',
+  },
+  modalView:{
+    flex: 1,
+    marginTop: 120,
+    marginBottom: 50,
+    marginLeft: 25,
+    marginRight: 25,
+    backgroundColor: "white",
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: 'flex-start',
   },
 });
