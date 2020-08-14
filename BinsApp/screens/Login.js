@@ -19,18 +19,6 @@ export default class Login extends React.Component {
     };
   }
 
-  // moved to LoginProvider
-  signIn() {
-      Auth.signIn({
-        username: this.state.email,
-        password: this.state.password,
-      })
-      .then(() => {
-        console.log('successful sign in!');
-        this.context.login();})
-      .catch(err => console.log('error signing in!: ', err));
-      }
-
   render() {
     return (
       <View style={styles.container}>
