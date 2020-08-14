@@ -4,6 +4,7 @@ import FormInputHandler from '../components/FormInputHandler.js'
 import StorageCompanyCard from '../components/StorageCompanyCard'
 import LongButton from '../components/LongButton.js'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class SelectFacility extends React.Component {
   constructor(props) {
@@ -17,8 +18,8 @@ export default class SelectFacility extends React.Component {
       state: '',
       zip: '',
       specialInstructions: '',
-      storageCardIsVisible: true,
-      modalVisible: true,
+      storageCardIsVisible: false,
+      modalVisible: false,
     };
   }
 
@@ -192,18 +193,64 @@ export default class SelectFacility extends React.Component {
         )}
         <Modal visible={this.state.modalVisible} transparent={true}>
             <View style = {styles.modalView}>
-              <Image resizeMode={'contain'} source={require('../photos/csimini.png')} style = {{width: 350, borderRadius: 20}} />
-              <TouchableOpacity style={styles.openButton}
-                                onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
-                                  {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
-                                   city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                   specialInstructions: this.state.specialInstructions}); this.setState({modalVisible:false});
-                                 }}>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.openButton}
-                                onPress={() => {this.setState({modalVisible:false})}}>
-                <Text>Close</Text>
-              </TouchableOpacity>
+              <View style={{flex:1, alignItems: 'center'}}>
+                <Image resizeMode={'contain'} source={require('../photos/csimini.png')} style={{flex:1}}/>
+              </View>
+              <Ionicons style={styles.close} name="ios-close-circle" size={25} onPress={() => {this.setState({modalVisible:false})}}/>
+              <View style={{flex:2, margin: 10}}>
+                <Text style={{fontSize: 30, marginLeft: 10}}>CSI Mini Storage</Text>
+                <Text style={{marginLeft: 10}}>855 Parr Boulevard, Richmond, CA 94801</Text>
+                <Text style={{marginLeft: 10}}>csiministorage.com</Text>
+                <Text style={{fontSize: 15, marginTop: 10, marginLeft: 10}}>Units Available</Text>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>Small</Text>
+                  <Text style={styles.sectionHeader}>$99/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>8.5x6 (51 Sq. Ft.)</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>Medium</Text>
+                  <Text style={styles.sectionHeader}>$150/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>8.5x12 (102 Sq. Ft.)</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>Large</Text>
+                  <Text style={styles.sectionHeader}>$195/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>8.5x16 (136 Sq. Ft.)</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>Pay by Item</Text>
+                  <Text style={styles.sectionHeader}>$7/bin/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>12'x8' (84 Sq. In.)</Text>
+                </TouchableOpacity>
+              </View>
             </View>
         </Modal>
       </ScrollView>
@@ -238,8 +285,7 @@ const styles = StyleSheet.create({
   },
   openButton: {
     backgroundColor: "#7B1FA2",
-    borderRadius: 20,
-    elevation: 2,
+    borderRadius: 5,
     margin: 10,
     padding: 10,
     borderColor: '#FFF'
@@ -286,8 +332,21 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginRight: 25,
     backgroundColor: "white",
-    borderRadius: 20,
-    alignItems: "center",
+    borderRadius: 10,
     justifyContent: 'flex-start',
+    overflow: "hidden",
+  },
+  close: {
+    margin: 5,
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: 25,
+    height: 25,
+    color: "#FFF"
+  },
+  sectionHeader: {
+    color: '#FFF',
+    fontSize: 25,
   },
 });
