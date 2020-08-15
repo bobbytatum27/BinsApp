@@ -220,7 +220,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
-    borderRadius: 5
+    borderRadius: 5,
+    overflow: "hidden",
   },
   selected: {
     margin: 15,

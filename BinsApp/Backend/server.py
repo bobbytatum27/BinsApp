@@ -32,11 +32,7 @@ def log2():
         modifyCustomer(customerInfo['name'],
                        customerInfo['email'],
                        customerInfo['phone'],
-                       customerInfo['addressLine1'],
-                       customerInfo['addressLine2'],
-                       customerInfo['city'],
-                       customerInfo['state'],
-                       customerInfo['zip'],
+                       customerInfo['address'],
                        customerInfo['specialInstructions'])
 
     except:

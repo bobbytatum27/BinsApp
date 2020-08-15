@@ -20,8 +20,7 @@ def addCustomer(name, email, phone, addressLine1, addressLine2, city, state, zip
     request = service.spreadsheets().values().append(spreadsheetId=spreadsheet_id, range=range_, valueInputOption=value_input_option, body=value_range_body)
     response = request.execute()
 
-def modifyCustomer(name, email, phone, addressLine1, addressLine2, city, state, zip, specialInstructions):
-    address = addressLine1 + addressLine2 + ', ' + city + ' ' + state + ' ' + zip
+def modifyCustomer(name, email, phone, address, specialInstructions):
     customerID = email
     range_ = "Customers!A:A"
     value_render_option = "UNFORMATTED_VALUE"

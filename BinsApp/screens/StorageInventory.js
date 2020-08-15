@@ -164,7 +164,9 @@ const styles = StyleSheet.create({
     width: 152,
     backgroundColor: 'white',
     borderColor: 'black',
-    borderWidth: 1
+    borderWidth: 1,
+    borderRadius: 5,
+    overflow: "hidden",
   },
   selected: {
     margin: 15,

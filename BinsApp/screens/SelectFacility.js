@@ -170,7 +170,7 @@ export default class SelectFacility extends React.Component {
                   onPress={() => this.setState({ unitSize: '5x5' })}
                   underlayColor='white'
                 >
-                  <Text style={{color:'white'}}> 5x5</Text>
+                  <Text style={{color:'white'}}>5x5</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
                   style={{...styles.openButton, borderWidth: this.state.unitSize == '5x10' ? 2 : 0}}

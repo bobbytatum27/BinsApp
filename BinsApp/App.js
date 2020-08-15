@@ -28,6 +28,9 @@ import Orders from './screens/Orders.js'
 import Login from './screens/Login.js'
 import PasswordReset from './screens/PasswordReset.js'
 import ConfirmContactInfo from './screens/ConfirmContactInfo.js'
+import Profile from './screens/Profile.js'
+import EditAddress from './screens/EditAddress.js'
+import EditBilling from './screens/EditBilling.js'
 
 import {LoginProvider, LoginContext} from './components/LoginProvider.js'
 
@@ -41,6 +44,7 @@ Amplify.configure(config)
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const LandingTab = createMaterialTopTabNavigator();
+const AccountTab = createMaterialTopTabNavigator();
 
 function App() {
   const loginContext = useContext(LoginContext);
@@ -78,7 +82,7 @@ function App() {
         <Stack.Screen name='ConfirmationScreen' component={Confirmation} options={{title: "Confirmation"}}/>
         <Stack.Screen name='HomeInventoryScreen' component={HomeInventory} options={{title: "Pickup"}}/>
         <Stack.Screen name='NewItemScreen' component={NewItem} options={{title: "Pickup"}}/>
-        <Stack.Screen name='EditAccountScreen' component={Account}/>
+        <Stack.Screen name='EditAccountScreen' component={AccountTabs}/>
         </>
       )}
       </Stack.Navigator>
@@ -112,7 +116,7 @@ function HomeTabs() {
       >
       <Tab.Screen name="Orders" component={Orders}/>
       <Tab.Screen name="Home" component={Home}/>
-      <Tab.Screen name="Account" component={Account}/>
+      <Tab.Screen name="Account" component={AccountTabs}/>
     </Tab.Navigator>
   );
 }
@@ -127,6 +131,16 @@ function LandingTabs() {
       <LandingTab.Screen name="Landing3" component={Landing3}/>
       <LandingTab.Screen name="Landing4" component={Landing4}/>
     </LandingTab.Navigator>
+  );
+}
+
+function AccountTabs() {
+  return(
+    <AccountTab.Navigator initialRouteName='Profile'>
+      <AccountTab.Screen name="My Profile" component={Profile}/>
+      <AccountTab.Screen name="Address" component={EditAddress}/>
+      <AccountTab.Screen name="Billing Info" component={EditBilling}/>
+    </AccountTab.Navigator>
   );
 }
 
