@@ -160,11 +160,11 @@ export default class SelectFacility extends React.Component {
           <LongButton
             title='Find a Unit!'
             onPress={() => {
-              /*  if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '') {
+              if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '') {
                 Alert.alert('You\'ve left an important field empty in your address!');
-              } else { */
+              } else {
                 this.setState({storageCardIsVisible: true});
-              //}
+              }
             }}
           />
         </View>
