@@ -14,16 +14,13 @@ export default class EditAddress extends React.Component {
       name: '',
       email: '',
       phone: '',
-      addressLine1: '123 New York Avenue',
-      addressLine2: '',
-      city: 'Los Angeles',
-      state: 'CA',
-      zip: '90021',
-      specialInstructions: 'Gate Code',
+      address: '',
+      specialInstructions: '',
     }
   }
 
   onSubmit() {
+    this.updateUser()
     fetch('http://192.168.1.247:5000/modifycustomers',{
       method: 'POST',
       headers: {
@@ -33,6 +30,15 @@ export default class EditAddress extends React.Component {
       body: JSON.stringify(this.state)
   })}
 
+  async updateUser() {
+    let user = await Auth.currentAuthenticatedUser();
+
+    let result = await Auth.updateUserAttributes(user, {
+      'address': this.state.address,
+      'custom:specialInstructions': this.state.specialInstructions,
+    });
+  }
+
   componentDidMount(){
     Auth.currentUserInfo().then((userInfo) => {
       const { attributes = {} } = userInfo;
@@ -40,7 +46,7 @@ export default class EditAddress extends React.Component {
       this.setState({email:attributes['email']});
       this.setState({phone:attributes['phone_number']});
       this.setState({address:attributes['address']});
-      console.log(attributes);
+      this.setState({specialInstructions:attributes['custom:specialInstructions']});
     })
   }
 
@@ -49,47 +55,20 @@ export default class EditAddress extends React.Component {
       <View style={styles.container}>
         <View style={{flex: 5}}>
           <Text style={styles.sectionHeader}>Edit Address</Text>
-          <Text style ={styles.descriptionText}>Address Line 1</Text>
+          <Text style ={styles.descriptionText}>Address</Text>
           <FormInputHandler
-            defaultValue={this.state.addressLine1}
+            defaultValue={this.state.address}
             defaultTextColor='#8B8B8B'
             style={styles.userInfoText}
             onChangeText={(text) => this.setState({addressLine1: text})}
           />
-          <Text style ={styles.descriptionText}>Address Line 2</Text>
+          <Text style ={styles.descriptionText}>Special Instructions</Text>
           <FormInputHandler
-            defaultValue={this.state.addressLine2}
+            defaultValue={this.state.specialInstructions}
             defaultTextColor='#8B8B8B'
             style={styles.userInfoText}
-            onChangeText={(text) => this.setState({addressLine2: text})}
+            onChangeText={(text) => this.setState({specialInstructions: text})}
           />
-          <Text style ={styles.descriptionText}>City</Text>
-          <FormInputHandler
-            defaultValue={this.state.city}
-            defaultTextColor='#8B8B8B'
-            style={styles.userInfoText}
-            onChangeText={(text) => this.setState({city: text})}
-          />
-          <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
-            <View style={{flex:1}}>
-              <Text style ={styles.descriptionText}>State</Text>
-              <FormInputHandler
-                defaultValue={this.state.state}
-                defaultTextColor='#8B8B8B'
-                style={styles.userInfoText}
-                onChangeText={(text) => this.setState({state: text})}
-              />
-            </View>
-            <View style={{flex:1}}>
-              <Text style ={styles.descriptionText}>Zip</Text>
-              <FormInputHandler
-                defaultValue={this.state.zip}
-                style={styles.userInfoText}
-                defaultTextColor='#8B8B8B'
-                onChangeText={(text) => this.setState({zip: text})}
-              />
-            </View>
-          </View>
         </View>
         <View style={{flex:1, justifyContent: 'space-around'}}>
           <LongButton

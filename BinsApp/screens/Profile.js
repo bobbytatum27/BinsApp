@@ -15,12 +15,13 @@ export default class Profile extends React.Component {
       email: '',
       phone: '',
       address: '',
-      specialInstructions: 'Gate Code',
+      specialInstructions: '',
     }
   }
 
   onSubmit() {
-    fetch('http://192.168.1.247:5000/modifycustomers',{
+      this.updateUser()
+      fetch('http://192.168.1.247:5000/modifycustomers',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -29,6 +30,15 @@ export default class Profile extends React.Component {
       body: JSON.stringify(this.state)
   })}
 
+  async updateUser() {
+    let user = await Auth.currentAuthenticatedUser();
+
+    let result = await Auth.updateUserAttributes(user, {
+      'name': this.state.name,
+      'phone_number': this.state.phone,
+    });
+      }
+
   componentDidMount(){
     Auth.currentUserInfo().then((userInfo) => {
       const { attributes = {} } = userInfo;
@@ -36,7 +46,7 @@ export default class Profile extends React.Component {
       this.setState({email:attributes['email']});
       this.setState({phone:attributes['phone_number']});
       this.setState({address:attributes['address']});
-      console.log(attributes);
+      this.setState({specialInstructions:attributes['custom:specialInstructions']});
     })
   }
 
@@ -59,12 +69,6 @@ export default class Profile extends React.Component {
             defaultTextColor='#8B8B8B'
             style={styles.userInfoText}
             onChangeText={(val)=>this.setState({name:val})}
-          />
-          <Text style ={styles.descriptionText}>Password</Text>
-          <FormInputHandler
-            defaultValue='Password'
-            defaultTextColor='#8B8B8B'
-            style={styles.userInfoText}
           />
           <Text style ={styles.descriptionText}>Phone</Text>
           <FormInputHandler

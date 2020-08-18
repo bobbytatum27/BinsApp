@@ -14,12 +14,8 @@ export default class EditBilling extends React.Component {
       name: '',
       email: '',
       phone: '',
-      addressLine1: '123 New York Avenue',
-      addressLine2: '',
-      city: 'Los Angeles',
-      state: 'CA',
-      zip: '90021',
-      specialInstructions: 'Gate Code',
+      address: '',
+      specialInstructions: '',
       nameOnCard: '',
       creditCardNum: '',
       expirationDate: '',
@@ -44,7 +40,7 @@ export default class EditBilling extends React.Component {
       this.setState({email:attributes['email']});
       this.setState({phone:attributes['phone_number']});
       this.setState({address:attributes['address']});
-      console.log(attributes);
+      this.setState({specialInstructions:attributes['custom:specialInstructions']});
     })
   }
 

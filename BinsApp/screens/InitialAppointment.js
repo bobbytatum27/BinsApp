@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TextInput, Button, Alert, Image, ScrollView, To
 import FormInputHandler from '../components/FormInputHandler.js'
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import LongButton from '../components/LongButton.js'
+import {Auth} from 'aws-amplify';
+import moment from 'moment';
 
 export default class InitialAppointment extends React.Component {
   constructor(props) {
@@ -17,18 +19,28 @@ export default class InitialAppointment extends React.Component {
     this.selectionOnPress = this.selectionOnPress.bind(this)
   }
 
-selectionOnPress(userType) {
-  this.setState({selectedButton: userType})
-}
+  selectionOnPress(userType) {
+    this.setState({selectedButton: userType})
+  }
 
+  componentDidMount(){
+    Auth.signIn({
+        username: this.props.route.params?.email??'',
+        password: this.props.route.params?.password??'',
+    })
+  }
 
   render() {
+
+    const today = moment().format("YYYY-MM-DD");
+
     return (
       <View style={styles.container}>
         <ScrollView style={{marginBottom:25}}>
           <Text style ={styles.descriptionText}>Please Select a Date</Text>
           <Calendar
             style={{margin:15}}
+            minDate={today}
             onDayPress={(day) => {this.setState({dateSelected:{[day.dateString]:{selected: true, selectedColor: '#466A8F'}}})}}
             markedDates={this.state.dateSelected}/>
           <Text style={styles.descriptionText}>Please select a time</Text>
@@ -72,8 +84,11 @@ selectionOnPress(userType) {
           </View>
           <LongButton
             title="NEXT"
-            onPress={()=>this.props.navigation.navigate('BillingInfoScreen', {specialInstructions:this.props.route.params.specialInstructions,
-                                                                              dateSelected: this.state.dateSelected,
+            onPress={()=>this.props.navigation.navigate('BillingInfoScreen', {email: this.props.route.params.email,
+                                                                              password: this.props.route.params.password,
+                                                                              address: this.props.route.params.address,
+                                                                              size: this.props.route.params.size,
+                                                                              dateSelected: Object.keys(this.state.dateSelected)[0],
                                                                               timeSelected: this.state.timeSelected})}
           />
         </ScrollView>

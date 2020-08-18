@@ -9,12 +9,11 @@ client = gspread.authorize(creds)
 service = discovery.build('sheets', 'v4', credentials=creds)
 spreadsheet_id = '18l4cO3X1dp8MCWqDencHYUTidUhXb7u9IHFp_vg_5uQ'
 
-def addCustomer(name, email, phone, addressLine1, addressLine2, city, state, zip, specialInstructions):
-    address = addressLine1 + addressLine2 + ', ' + city + ' ' + state + ' ' + zip
-    range_ = 'Customers!C3:G3'
+def addCustomer(name, email, phone, address, specialInstructions):
+    range_ = 'Customers!A3:F3'
     value_range_body = {
         "majorDimension": "COLUMNS",
-        "values": [[name], [email], [phone], [address], [specialInstructions]]
+        "values": [[email], [name], [phone], [address], [specialInstructions]]
     }
     value_input_option = 'USER_ENTERED'
     request = service.spreadsheets().values().append(spreadsheetId=spreadsheet_id, range=range_, valueInputOption=value_input_option, body=value_range_body)
@@ -34,7 +33,7 @@ def modifyCustomer(name, email, phone, address, specialInstructions):
                 return counter
     value_range_body = {
         "majorDimension": "COLUMNS",
-        "values": [[email], [''], [name], [phone], [address], [specialInstructions]]}
+        "values": [[email], [name], [phone], [address], [specialInstructions]]}
     row = findRow([customerID])
     value_input_option = "RAW"
     range_2 = "Customers!A" + str(row) + ":F" + str(row)

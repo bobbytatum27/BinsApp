@@ -17,29 +17,40 @@ export default class BillingInfo extends React.Component {
     this.state = {
       dateSelected: '',
       timeSelected: '',
+      address: Auth.user.attributes.address,
+      email: Auth.user.attributes.email,
+      phone: Auth.user.attributes.phone_number,
+      type: 'Pickup',
+      selected: 'Initial',
       nameOnCard: '',
       creditCardNum: '',
       expirationDate: '',
       securityCode: '',
+      size: '',
     }
   }
 
-  // this func is not in use in this file anymore
-
   onSubmit() {
-    fetch('http://192.168.1.247:5000/customers',{
+    fetch('http://192.168.1.247:5000/orders',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
     },
       body: JSON.stringify(this.state)
-  })}
+  })
+}
 
   componentDidMount(){
       const dateSelected = this.props.route.params?.dateSelected??'';
       const timeSelected = this.props.route.params?.timeSelected??'';
       this.setState({dateSelected: dateSelected, timeSelected: timeSelected});
+      Auth.currentUserInfo().then((userInfo) => {
+        const { attributes = {} } = userInfo;
+
+        this.setState({size:attributes['custom:size']});
+        console.log(this.state);
+      })
     }
 
   render() {
@@ -61,27 +72,22 @@ export default class BillingInfo extends React.Component {
           <Text style = {styles.header}>Review</Text>
         </View>
         <Textbox header='Date and Time'
-                 body={Object.keys(this.state.dateSelected)}
+                 body={this.state.dateSelected}
                  body2={this.state.timeSelected}/>
         <Textbox header='Address'
-                 body={this.state.addressLine1}
-                 body2={this.state.city + ", " + this.state.state + " " + this.state.zip}/>
+                 body={this.state.address}/>
         <Textbox header='Total'
-                 body=''
-                 body2=''/>
+                 body={this.state.size}/>
         <View style = {{marginTop: 15}}>
           <LongButton
             title="CONFIRM PICKUP"
             onPress={()=>{
-              // initial signup in user info, this just updates user in user pool and changes isLoggedIn
-              const address =
-                this.state.addressLine1 + ' ' + this.state.addressLine2 + ' ' +
-                this.state.city + ' ' + this.state.state + ' ' + this.state.zip;
-              this.context.completeSignup(this.props.route.params.specialInstructions)
-              .catch((err)=>console.log('error signing up!' + err))
-              // this.onSubmit(); to be nested inside the .then() of signup
-            }}
-          />
+              this.onSubmit();
+              this.props.navigation.navigate('InitialConfirmationScreen', {dateSelected: this.state.dateSelected,
+                                                                    timeSelected: this.state.timeSelected,
+                                                                    address: this.state.address,
+                                                                    type: this.state.type})
+              }}/>
         </View>
         </ScrollView>
       </View>

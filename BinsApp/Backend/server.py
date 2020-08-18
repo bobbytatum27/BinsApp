@@ -14,11 +14,7 @@ def log():
         addCustomer(loginInfo['name'],
                     loginInfo['email'],
                     loginInfo['phone'],
-                    loginInfo['addressLine1'],
-                    loginInfo['addressLine2'],
-                    loginInfo['city'],
-                    loginInfo['state'],
-                    loginInfo['zip'],
+                    loginInfo['address'],
                     loginInfo['specialInstructions'])
     except:
         print('exception')

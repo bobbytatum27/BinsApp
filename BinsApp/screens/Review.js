@@ -42,6 +42,7 @@ export default class Review extends Component {
       this.setState({timeSelected});
       this.setState({selected});
       this.setState({type});
+      console.log(this.state);
     }
 
   render() {

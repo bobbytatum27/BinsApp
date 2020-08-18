@@ -20,6 +20,7 @@ export default class SelectFacility extends React.Component {
       specialInstructions: '',
       storageCardIsVisible: false,
       modalVisible: false,
+      storageAddress: '',
     };
   }
 
@@ -125,7 +126,7 @@ export default class SelectFacility extends React.Component {
           <>
           <View style={{padding: 15, marginTop: 15}}>
             <Text style={{fontSize: 15, color: 'white', marginBottom: 15, textAlign: 'center'}}>Here's what we found based on your address above.</Text>
-            <TouchableOpacity onPress={() => {this.setState({modalVisible:true})
+            <TouchableOpacity onPress={() => {this.setState({modalVisible:true, storageAddress: '855 Parr Boulevard, Richmond, CA 94801'})
             }}>
               <View style={{flexDirection: 'row', backgroundColor: 'white', padding: 10, borderRadius: 10}}>
                 <View style={{flex: 1}}>
@@ -134,18 +135,12 @@ export default class SelectFacility extends React.Component {
                 <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
                   <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
                   <Text>855 Parr Boulevard, Richmond, CA 94801</Text>
-                  <Text>Unit: {this.state.unitSize} @ $50/month.</Text>
                 </View>
               </View>
             </TouchableOpacity>
             <View style={{height: 5}}>
             </View>
-            <TouchableOpacity onPress={() => {
-              this.state.unitSize == ''  ? Alert.alert('select unit size/input address') :
-              this.props.navigation.navigate('AccountInfoScreen',
-                {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
-                 city: this.state.city, state: this.state.state, zip: this.state.zip,
-                 specialInstructions: this.state.specialInstructions});
+            <TouchableOpacity onPress={() => {this.setState({modalVisible:true, storageAddress: '51 West Hornet Ave., Alameda, CA 94501'})
             }}>
               <View style={{flexDirection: 'row', backgroundColor: 'white', padding: 10, borderRadius: 10}}>
                 <View style={{flex: 1}}>
@@ -154,7 +149,6 @@ export default class SelectFacility extends React.Component {
                 <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
                   <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
                   <Text>51 West Hornet Ave., Alameda, CA 94501</Text>
-                  <Text>Unit: {this.state.unitSize} @ $50/month.</Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -162,69 +156,15 @@ export default class SelectFacility extends React.Component {
           </>
         ) : (
           <>
-          <Text style={{...styles.findFacilityText, paddingTop: 40}}>Now select the unit size you want: </Text>
-          <View style={styles.unitSizeView}>
-              <View style={styles.unitColumnView}>
-                <TouchableHighlight
-                  style={{...styles.openButton, borderWidth: this.state.unitSize == '5x5' ? 2 : 0}}
-                  onPress={() => this.setState({ unitSize: '5x5' })}
-                  underlayColor='white'
-                >
-                  <Text style={{color:'white'}}>5x5</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                  style={{...styles.openButton, borderWidth: this.state.unitSize == '5x10' ? 2 : 0}}
-                  onPress={() => this.setState({ unitSize: '5x10' })}
-                  underlayColor='white'
-                >
-                  <Text style={{color:'white'}}>5x10</Text>
-                </TouchableHighlight>
-              </View>
-              <View style={styles.unitColumnView}>
-                <TouchableHighlight
-                  style={{...styles.openButton, borderWidth: this.state.unitSize == '10x10' ? 2 : 0}}
-                  onPress={() => this.setState({ unitSize: '10x10' })}
-                  underlayColor='white'
-                >
-                  <Text style={{color:'white'}}>10x10</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                  style={{...styles.openButton, borderWidth: this.state.unitSize == '10x15' ? 2 : 0}}
-                  onPress={() => this.setState({ unitSize: '10x15' })}
-                  underlayColor='white'
-                >
-                  <Text style={{color:'white'}}>10x15</Text>
-                </TouchableHighlight>
-              </View>
-              <View style={styles.unitColumnView}>
-                <TouchableHighlight
-                  style={{...styles.openButton, borderWidth: this.state.unitSize == '15x15' ? 2 : 0}}
-                  onPress={() => this.setState({ unitSize: '15x15' })}
-                  underlayColor='white'
-                >
-                  <Text style={{color:'white'}}>15x15</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                  style={{...styles.openButton, borderWidth: this.state.unitSize == '15x20' ? 2 : 0}}
-                  onPress={() => this.setState({ unitSize: '15x20' })}
-                  underlayColor='white'
-                >
-                  <Text style={{color:'white'}}>15x20</Text>
-                </TouchableHighlight>
-              </View>
-          </View>
-
-          <View style={{paddingTop: 40}}>
+          <View>
           <LongButton
             title='Find a Unit!'
             onPress={() => {
-              if (this.state.unitSize == '') {
-                Alert.alert('Please select a unit size.');
-              } else if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '') {
+              /*  if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '') {
                 Alert.alert('You\'ve left an important field empty in your address!');
-              } else {
+              } else { */
                 this.setState({storageCardIsVisible: true});
-              }
+              //}
             }}
           />
         </View>
@@ -238,14 +178,14 @@ export default class SelectFacility extends React.Component {
               <Ionicons style={styles.close} name="ios-close-circle" size={25} onPress={() => {this.setState({modalVisible:false})}}/>
               <View style={{flex:2, margin: 10}}>
                 <Text style={{fontSize: 30, marginLeft: 10}}>CSI Mini Storage</Text>
-                <Text style={{marginLeft: 10}}>855 Parr Boulevard, Richmond, CA 94801</Text>
+                <Text style={{marginLeft: 10}}>{this.state.storageAddress}</Text>
                 <Text style={{marginLeft: 10}}>csiministorage.com</Text>
                 <Text style={{fontSize: 15, marginTop: 10, marginLeft: 10}}>Units Available</Text>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
                                     {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
                                      city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions}); this.setState({modalVisible:false});
+                                     specialInstructions: this.state.specialInstructions, size: 'Small - $99'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <Text style={styles.sectionHeader}>Small</Text>
@@ -257,7 +197,7 @@ export default class SelectFacility extends React.Component {
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
                                     {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
                                      city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions}); this.setState({modalVisible:false});
+                                     specialInstructions: this.state.specialInstructions, size: 'Medium - $150'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <Text style={styles.sectionHeader}>Medium</Text>
@@ -269,7 +209,7 @@ export default class SelectFacility extends React.Component {
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
                                     {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
                                      city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions}); this.setState({modalVisible:false});
+                                     specialInstructions: this.state.specialInstructions, size: 'Large - $195'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <Text style={styles.sectionHeader}>Large</Text>
@@ -281,7 +221,7 @@ export default class SelectFacility extends React.Component {
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
                                     {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
                                      city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions}); this.setState({modalVisible:false});
+                                     specialInstructions: this.state.specialInstructions, size: '$7/Item'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <Text style={styles.sectionHeader}>Pay by Item</Text>

@@ -15,13 +15,15 @@ export default class UserInfo extends React.Component {
       password: '',
       passwordReentry: '',
       phone: '',
+      address: '',
+      specialInstructions: '',
       validInput: false,
       validEmail: false,
       validPassword: false,
       validPhone: false,
       nonemptyName: false,
       // these are for rendering a red box on invalid input
-      validNameUI: true, 
+      validNameUI: true,
       validPhoneUI: true,
       validEmailUI: true,
       validPasswordUI: true,
@@ -41,6 +43,25 @@ export default class UserInfo extends React.Component {
     if (this.state.password != this.state.passwordReentry) {
       this.setState({validPasswordReentry: false})
     }
+  }
+
+  componentDidMount() {
+    const wholeAddress = this.props.route.params.addressLine1 + ' ' + this.props.route.params.addressLine2 + ' ' +
+                         this.props.route.params.city + ', ' + this.props.route.params.state + ' ' + this.props.route.params.zip;
+    const specialInstructions = this.props.route.params.specialInstructions;
+    this.setState({address: wholeAddress});
+    this.setState({specialInstructions: specialInstructions});
+  }
+
+  onSubmit() {
+    fetch('http://192.168.1.247:5000/customers',{
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+    },
+      body: JSON.stringify(this.state)
+    })
   }
 
   render() {
@@ -110,7 +131,7 @@ export default class UserInfo extends React.Component {
           secureTextEntry
           onEndEditing={(val) => {
             // regex to check if password has number
-            const hasNumberRegex = /\d/;  
+            const hasNumberRegex = /\d/;
             if (this.state.password.length >= 8 && hasNumberRegex.test(this.state.password)) {
               this.setState({validPassword: true, validPasswordUI: true})
             } else {
@@ -152,11 +173,8 @@ export default class UserInfo extends React.Component {
             <LongButton
               title="NEXT"
               onPress={()=>{
-                const wholeAddress = this.props.route.params.addressLine1 + ' ' + this.props.route.params.addressLine2 + ' ' +
-                                     this.props.route.params.city + ' ' + this.props.route.params.state + ' ' + this.props.route.params.zip;
-
-                this.context.signup(this.state.email, this.state.password, this.state.name, '+1' + this.state.phone, wholeAddress)
-                .then(() => this.props.navigation.navigate('ConfirmContactInfo', {email: this.state.email, specialInstructions: this.props.route.params.specialInstructions}))
+                this.context.signup(this.state.email, this.state.password, this.state.name, '+1' + this.state.phone, this.state.address, this.props.route.params.specialInstructions, this.props.route.params.size)
+                .then(() => {this.onSubmit(); this.props.navigation.navigate('ConfirmContactInfo', {email: this.state.email, password: this.state.password})})
                 .catch((err) => {
                   console.log('error signing up - see below', JSON.stringify(err));
                   if (err.code == 'UsernameExistsException') {

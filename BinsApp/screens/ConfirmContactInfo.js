@@ -33,7 +33,7 @@ export default class ConfirmContactInfo extends React.Component {
           title="Confirm Account"
           onPress={()=>{
             this.context.contactConfirmation(this.props.route.params.email, this.state.code)
-            .then(() => this.props.navigation.navigate('InitialAppointmentScreen', {specialInstructions: this.props.route.params.specialInstructions}))
+            .then(() => this.props.navigation.navigate('InitialAppointmentScreen', {email: this.props.route.params.email, password: this.props.route.params.password}))
             .catch((err) => console.log('error confirming: ', err))
           }}
         />

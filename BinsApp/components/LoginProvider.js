@@ -15,13 +15,13 @@ export class LoginProvider extends React.Component{
 
     /*
      * Login Promise
-     * To login a user via AWS Amplify. Also changes isLoggedIn boolean, which 
+     * To login a user via AWS Amplify. Also changes isLoggedIn boolean, which
      * conditionally renders appropriate screens (pending state).
-     * 
+     *
      * @param email: string of user email
      * @param password: string of user password
      * @return Promise
-     */ 
+     */
     login = (email, password) => {
         return new Promise((resolve, reject) => {
             Auth.signIn({
@@ -40,7 +40,7 @@ export class LoginProvider extends React.Component{
      * Logout Promise
      * To log a user out via AWS Amplify. Also changes isLoggedIn boolean, which forces user back
      * to Landing page.
-     * 
+     *
      * @return Promise
      */
     logout = () => {
@@ -59,17 +59,17 @@ export class LoginProvider extends React.Component{
     /*
      * Signup Promise
      * Registers a user via AWS Amplify. Also changes the isLoggedIn boolean to
-     * force the user to the Home Page. TODO arg check in login page? or here? A thought - before new Promise, can check for input validation and return Alert if invalid. 
+     * force the user to the Home Page. TODO arg check in login page? or here? A thought - before new Promise, can check for input validation and return Alert if invalid.
      * Note that Auth.signUp may force errors so they need to be checked here too.
-     * 
+     *
      * @param email: The user's email as a string
      * @param password: The user's password as a string
      * @param name: The user's name as a string
      * @param phone_num: The user's phone num (what type is amplify looking for?)
      * @param address: The user's address as a string, fields separated by a space
      * @return Promise (for now only a promise, potentially Error obj in future)
-     */ 
-    signup = (email, password, name, phone_num, address) => {
+     */
+    signup = (email, password, name, phone_num, address, specialInstructions, size) => {
         return new Promise((resolve, reject) => {
             console.log('signing up!');
             Auth.signUp({
@@ -79,6 +79,8 @@ export class LoginProvider extends React.Component{
                   name: name,
                   phone_number: phone_num,
                   address: address,
+                  'custom:specialInstructions': specialInstructions,
+                  'custom:size': size,
                 },
             })
             .then(() => {
@@ -96,9 +98,8 @@ export class LoginProvider extends React.Component{
         });
     }
 
-    completeSignup = (specialInstructions) => {
+    completeSignup = () => {
         return new Promise((resolve, reject) => {
-            console.log(specialInstructions, 'Special Instr. still need to be pushed!')
             this.setState({isLoggedIn: true});
             resolve('successful sign up completed.');
         });

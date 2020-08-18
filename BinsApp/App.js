@@ -20,6 +20,7 @@ import WelcomePage from './screens/WelcomePage.js'
 import SelectFacility from './screens/SelectFacility.js'
 import BillingInfo from './screens/BillingInfo.js'
 import InitialAppointment from './screens/InitialAppointment.js'
+import InitialConfirmation from './screens/InitialConfirmation.js'
 import UserInfo from './screens/UserInfo.js'
 import HomeInventory from './screens/HomeInventory.js'
 import NewItem from './screens/NewItem.js'
@@ -71,6 +72,7 @@ function App() {
         <Stack.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
         <Stack.Screen name='AccountInfoScreen' component={UserInfo} options={{title: "Create an Account"}}/>
         <Stack.Screen name='BillingInfoScreen' component={BillingInfo} options={{title: "Billing Info"}}/>
+        <Stack.Screen name='InitialConfirmationScreen' component={InitialConfirmation} options={{title: "Confirmation", headerLeft: null}}/>
         </>
       ) : (
         <>
@@ -123,9 +125,7 @@ function HomeTabs() {
 
 function LandingTabs() {
   return(
-    <LandingTab.Navigator swipeEnabled='true'
-        initialRouteName='Landing'
-        tabBarOptions={{showLabel: false}}>
+    <LandingTab.Navigator tabBarOptions={{showLabel: false}}>
       <LandingTab.Screen name="Landing" component={Landing}/>
       <LandingTab.Screen name="Landing2" component={Landing2}/>
       <LandingTab.Screen name="Landing3" component={Landing3}/>
@@ -136,7 +136,7 @@ function LandingTabs() {
 
 function AccountTabs() {
   return(
-    <AccountTab.Navigator initialRouteName='Profile'>
+    <AccountTab.Navigator swipeEnabled={false}>
       <AccountTab.Screen name="My Profile" component={Profile}/>
       <AccountTab.Screen name="Address" component={EditAddress}/>
       <AccountTab.Screen name="Billing Info" component={EditBilling}/>
