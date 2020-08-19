@@ -88,6 +88,7 @@ export default class EditBilling extends React.Component {
               />
             </View>
           </View>
+          <Text style = {{marginLeft: 15, marginTop: 10, marginRight: 15, color: 'gray'}}>Next Payment: </Text>
         </View>
         <View style={{flex:1, justifyContent: 'flex-end'}}>
           <LongButton

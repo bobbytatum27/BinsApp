@@ -110,7 +110,7 @@ export default class EditSubscription extends React.Component {
             </TouchableOpacity>
         </View>
         <View style={{flex:1, justifyContent: 'flex-end'}}>
-        <TouchableOpacity style = {styles.cancelButton}>
+        <TouchableOpacity style = {styles.cancelButton} onPress = {() => {Alert.alert("Are you sure you want to cancel?")}}>
           <Text style={{color: 'white', fontSize: 16, textAlign: 'center'}}>Cancel Plan</Text>
         </TouchableOpacity>
         <Text style = {{marginLeft: 15, marginTop: 10, marginRight: 15, color: 'gray'}}>If you cancel now, you can still store items until ___________________</Text>

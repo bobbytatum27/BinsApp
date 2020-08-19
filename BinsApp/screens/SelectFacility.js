@@ -135,6 +135,7 @@ export default class SelectFacility extends React.Component {
                 <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
                   <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
                   <Text>855 Parr Boulevard, Richmond, CA 94801</Text>
+                  <Text>$19.99/delivery, free initial move-in</Text>
                 </View>
               </View>
             </TouchableOpacity>
@@ -149,6 +150,7 @@ export default class SelectFacility extends React.Component {
                 <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
                   <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
                   <Text>51 West Hornet Ave., Alameda, CA 94501</Text>
+                  <Text>$19.99/delivery, free initial move-in</Text>
                 </View>
               </View>
             </TouchableOpacity>
