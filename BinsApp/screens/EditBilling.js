@@ -4,6 +4,7 @@ import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
 import { LoginContext } from '../components/LoginProvider.js';
 import {Auth} from 'aws-amplify';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class EditBilling extends React.Component {
   static contextType = LoginContext;
@@ -48,7 +49,11 @@ export default class EditBilling extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flex: 5}}>
-          <Text style={styles.sectionHeader}>Edit Billing Info</Text>
+          <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={styles.sectionHeader}>Edit Billing</Text>
+            <Ionicons name={'ios-log-out'} size={25} color={'white'} style={{textAlign: 'right', marginRight: 10}} onPress={() =>
+              {this.context.logout().then(() => this.props.navigation.dangerouslyGetParent().navigate('Landing'));}}/>
+          </View>
           <Text style={styles.descriptionText}>Name on Card</Text>
           <FormInputHandler
             defaultText='Name on Card'
@@ -84,17 +89,10 @@ export default class EditBilling extends React.Component {
             </View>
           </View>
         </View>
-        <View style={{flex:1, justifyContent: 'space-around'}}>
+        <View style={{flex:1, justifyContent: 'flex-end'}}>
           <LongButton
             title="SAVE INFO"
             onPress={()=>{this.onSubmit(); this.props.navigation.navigate('Home')}}
-          />
-          <LongButton
-            title="SIGN OUT"
-            onPress={()=>{
-              this.context.logout()
-              .then(() => this.props.navigation.dangerouslyGetParent().navigate('Landing'));
-            }}
           />
         </View>
       </View>

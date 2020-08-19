@@ -56,13 +56,6 @@ export default class Orders extends Component {
     }
   }
 
-  getEmail(){
-    Auth.currentUserInfo().then((userInfo) => {
-      const { attributes = {} } = userInfo;
-      this.setState({email:attributes['email']});
-    })
-  }
-
   fetchData(){
     fetch('http://192.168.1.247:5000/renderorders')
     .then((response) => response.json())
@@ -98,7 +91,6 @@ export default class Orders extends Component {
   }
 
   componentDidMount() {
-    this.getEmail();
     this.fetchData();
   }
 

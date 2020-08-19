@@ -62,8 +62,7 @@ export default class Review extends Component {
         <Textbox header='Order Type'
                 body={this.state.type}/>
         <Textbox header='Total'
-                          body=''
-                          body2=''/>
+                          body='$19.99'/>
         <View style = {{marginTop: 15}}>
           <LongButton
             title="CONFIRM"

@@ -4,8 +4,9 @@ import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
 import { LoginContext } from '../components/LoginProvider.js';
 import {Auth} from 'aws-amplify';
+import { Ionicons } from '@expo/vector-icons';
 
-export default class Profile extends React.Component {
+export default class EditProfile extends React.Component {
   static contextType = LoginContext;
 
   constructor(props) {
@@ -36,6 +37,8 @@ export default class Profile extends React.Component {
     let result = await Auth.updateUserAttributes(user, {
       'name': this.state.name,
       'phone_number': this.state.phone,
+      'address': this.state.address,
+      'custom:specialInstructions': this.state.specialInstructions,
     });
       }
 
@@ -54,15 +57,11 @@ export default class Profile extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flex:5}}>
-          <Text style={styles.sectionHeader}>Personal Information</Text>
-          <Text style ={styles.descriptionText}>Email </Text>
-          <FormInputHandler
-            defaultText={this.state.email}
-            defaultTextColor='#8B8B8B'
-            style={styles.userInfoText}
-            onChangeText={(val)=>this.setState({email:val})}
-            editable={false}
-          />
+          <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={styles.sectionHeader}>Edit Profile</Text>
+            <Ionicons name={'ios-log-out'} size={25} color={'white'} style={{textAlign: 'right', marginRight: 10}} onPress={() =>
+              {this.context.logout().then(() => this.props.navigation.dangerouslyGetParent().navigate('Landing'));}}/>
+          </View>
           <Text style ={styles.descriptionText}>Full Name</Text>
           <FormInputHandler
             defaultValue={this.state.name}
@@ -77,18 +76,25 @@ export default class Profile extends React.Component {
             style={styles.userInfoText}
             onChangeText={(val)=>this.setState({phone:val})}
           />
+          <Text style ={styles.descriptionText}>Address</Text>
+          <FormInputHandler
+            defaultValue={this.state.address}
+            defaultTextColor='#8B8B8B'
+            style={styles.userInfoText}
+            onChangeText={(text) => this.setState({addressLine1: text})}
+          />
+          <Text style ={styles.descriptionText}>Special Instructions</Text>
+          <FormInputHandler
+            defaultValue={this.state.specialInstructions}
+            defaultTextColor='#8B8B8B'
+            style={styles.userInfoText}
+            onChangeText={(text) => this.setState({specialInstructions: text})}
+          />
         </View>
-        <View style={{flex:1, justifyContent: 'space-around'}}>
+        <View style={{flex:1, justifyContent: 'flex-end'}}>
           <LongButton
             title="SAVE INFO"
             onPress={()=>{this.onSubmit(); this.props.navigation.navigate('Home')}}
-          />
-          <LongButton
-            title="SIGN OUT"
-            onPress={()=>{
-              this.context.logout()
-              .then(() => this.props.navigation.dangerouslyGetParent().navigate('Landing'));
-            }}
           />
         </View>
       </View>

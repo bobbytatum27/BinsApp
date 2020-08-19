@@ -29,9 +29,9 @@ import Orders from './screens/Orders.js'
 import Login from './screens/Login.js'
 import PasswordReset from './screens/PasswordReset.js'
 import ConfirmContactInfo from './screens/ConfirmContactInfo.js'
-import Profile from './screens/Profile.js'
-import EditAddress from './screens/EditAddress.js'
+import EditProfile from './screens/EditProfile.js'
 import EditBilling from './screens/EditBilling.js'
+import EditSubscription from './screens/EditSubscription.js'
 
 import {LoginProvider, LoginContext} from './components/LoginProvider.js'
 
@@ -137,9 +137,9 @@ function LandingTabs() {
 function AccountTabs() {
   return(
     <AccountTab.Navigator swipeEnabled={false}>
-      <AccountTab.Screen name="My Profile" component={Profile}/>
-      <AccountTab.Screen name="Address" component={EditAddress}/>
-      <AccountTab.Screen name="Billing Info" component={EditBilling}/>
+      <AccountTab.Screen name="Profile" component={EditProfile}/>
+      <AccountTab.Screen name="Billing" component={EditBilling}/>
+      <AccountTab.Screen name="Plan" component={EditSubscription}/>
     </AccountTab.Navigator>
   );
 }

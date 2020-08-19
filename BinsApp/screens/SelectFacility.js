@@ -185,49 +185,49 @@ export default class SelectFacility extends React.Component {
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
                                     {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
                                      city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions, size: 'Small - $99'}); this.setState({modalVisible:false});
-                                   }}>
-                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>Small</Text>
-                  <Text style={styles.sectionHeader}>$99/month</Text>
-                </View>
-                <Text style={{color: '#AAB5E0'}}>8.5x6 (51 Sq. Ft.)</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.openButton}
-                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
-                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
-                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions, size: 'Medium - $150'}); this.setState({modalVisible:false});
-                                   }}>
-                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>Medium</Text>
-                  <Text style={styles.sectionHeader}>$150/month</Text>
-                </View>
-                <Text style={{color: '#AAB5E0'}}>8.5x12 (102 Sq. Ft.)</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.openButton}
-                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
-                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
-                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions, size: 'Large - $195'}); this.setState({modalVisible:false});
-                                   }}>
-                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>Large</Text>
-                  <Text style={styles.sectionHeader}>$195/month</Text>
-                </View>
-                <Text style={{color: '#AAB5E0'}}>8.5x16 (136 Sq. Ft.)</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.openButton}
-                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
-                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
-                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions, size: '$7/Item'}); this.setState({modalVisible:false});
+                                     specialInstructions: this.state.specialInstructions, size: 'ByItem'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <Text style={styles.sectionHeader}>Pay by Item</Text>
                   <Text style={styles.sectionHeader}>$7/bin/month</Text>
                 </View>
                 <Text style={{color: '#AAB5E0'}}>12'x8' (84 Sq. In.)</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions, size: 'Small'}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>Small</Text>
+                  <Text style={styles.sectionHeader}>$99/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>8.5x6 (20 Bins)</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions, size: 'Medium'}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>Medium</Text>
+                  <Text style={styles.sectionHeader}>$150/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>8.5x12 (50 Bins)</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions, size: 'Large'}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>Large</Text>
+                  <Text style={styles.sectionHeader}>$195/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>8.5x16 (75 Bins)</Text>
                 </TouchableOpacity>
               </View>
             </View>

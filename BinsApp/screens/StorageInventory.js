@@ -17,7 +17,9 @@ export default class StorageInventory extends Component {
       selected: [],
       type: "Delivery",
       refreshing: false,
-      filter: ' ',
+      filter: '',
+      count: '',
+      max: '',
     }
   }
 
@@ -86,6 +88,7 @@ export default class StorageInventory extends Component {
         return item.isInStorage == 'Yes' && item.owner == Auth.user.attributes.email
       });
       this.setState({dataSource: responseJson2});
+      this.setState({count: responseJson2.length});
       if (this.state.filter == 'Alphabetical') {
       this.state.dataSource.sort((a, b) => a.description.localeCompare(b.description));
       }
@@ -98,14 +101,28 @@ export default class StorageInventory extends Component {
     })
   }
 
+  getMax(){
+    Auth.currentUserInfo().then((userInfo) => {
+      const { attributes = {} } = userInfo;
+      if (attributes['custom:size']=='Small'){
+        this.setState({max:'/20'});
+      } else if (attributes['custom:size']=='Medium'){
+        this.setState({max:'/50'});
+      } else if (attributes['custom:size']=='Large'){
+        this.setState({max:'/75'});
+      }
+    })
+  }
+
   componentDidMount() {
     this.fetchData();
+    this.getMax();
   }
 
   render() {
     return (
         <View style={styles.container}>
-            <Text style={styles.sectionHeader}>Items in Storage</Text>
+            <Text style={styles.sectionHeader}>Items in Storage - ({this.state.count}{this.state.max})</Text>
             <DropDownPicker
               items={[
                     {label: 'Date Added (Newest)', value: 'Newest'},
