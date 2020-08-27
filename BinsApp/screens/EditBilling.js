@@ -93,7 +93,7 @@ export default class EditBilling extends React.Component {
         <View style={{flex:1, justifyContent: 'flex-end'}}>
           <LongButton
             title="SAVE INFO"
-            onPress={()=>{this.onSubmit(); this.props.navigation.navigate('Home')}}
+            onPress={()=>{this.onSubmit(); Alert.alert("Your Information Has Been Saved")}}
           />
         </View>
       </View>

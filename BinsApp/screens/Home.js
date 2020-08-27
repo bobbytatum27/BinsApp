@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SafeAreaView, ScrollView, View, Text, Button, TouchableOpacity, FlatList, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { SafeAreaView, ScrollView, View, Text, Button, TouchableOpacity, FlatList, StyleSheet, Image, ActivityIndicator, RefreshControl } from 'react-native';
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,6 +18,7 @@ class Home extends Component {
       dataSourceHome: [],
       dateSourceOrders: [],
       email: ' ',
+      refreshing: false,
     }
   }
 
@@ -56,14 +57,12 @@ class Home extends Component {
       const responseJson2 = responseJson.filter(function(item){
         return item.name == email
       });
-      this.setState({dataSourceOrders: responseJson2, isLoading:false});
+      this.setState({dataSourceOrders: responseJson2, isLoading:false, refreshing: false});
     })
     .catch((error) => {
       console.log(error)
     })
   }
-
-
 
   componentDidMount() {
     this.fetchData();
@@ -107,6 +106,12 @@ class Home extends Component {
     )
   }
 
+  onRefresh = () => {
+    this.setState({refreshing: true});
+    this.fetchData();
+    this.fetchOrders();
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -118,7 +123,12 @@ class Home extends Component {
       </>
     ) : (
       <>
-        <ScrollView>
+        <ScrollView refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh}
+            tintColor = 'white'  />
+        }>
           <View>
             <Ionicons name={'ios-help-circle-outline'} size={25} color={'white'} style={{textAlign: 'right', marginRight: 10}} onPress={() => this.props.navigation.navigate('HelpScreen')}/>
             <Text style={styles.sectionHeader}>Upcoming Orders</Text>
@@ -144,7 +154,7 @@ class Home extends Component {
             {this.state.dataSourceStorage.length == 0 ? (
               <>
                   <View style = {styles.textbox}>
-              <Text style = {{textAlign: 'center'}}>No Items</Text>
+              <Text style = {{textAlign: 'center'}}>No Items Yet - Will Appear Once You Have Items</Text>
               </View>
             </>
           ) : (
@@ -166,7 +176,7 @@ class Home extends Component {
             {this.state.dataSourceHome.length == 0 ? (
               <>
                   <View style = {styles.textbox}>
-              <Text style = {{textAlign: 'center'}}>No Items</Text>
+              <Text style = {{textAlign: 'center'}}>No Items Yet - Will Appear Once You Have Items</Text>
               </View>
               <LongButton
                title ="CREATE A NEW BIN"

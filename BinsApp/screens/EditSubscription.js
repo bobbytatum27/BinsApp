@@ -116,7 +116,7 @@ export default class EditSubscription extends React.Component {
         <Text style = {{marginLeft: 15, marginTop: 10, marginRight: 15, color: 'gray'}}>If you cancel now, you can still store items until ___________________</Text>
           <LongButton
             title="SAVE INFO"
-            onPress={()=>{this.onSubmit(); this.props.navigation.navigate('Home')}}
+            onPress={()=>{this.onSubmit(); Alert.alert("Your Information Has Been Saved")}}
           />
         </View>
       </View>
