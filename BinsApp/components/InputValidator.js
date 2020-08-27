@@ -25,6 +25,7 @@ export default class InputValidator extends React.Component {
                 keyboardType={this.props.keyboardType}
                 secureTextEntry={this.props.secureTextEntry}
                 keyboardType={this.props.keyboardType}
+                autoCapitalize={this.props.autoCapitalize}
                 returnKeyType={this.props.returnKeyType}
                 onBlur={() => {
                     this.props.checkInput() ? this.validInput() : this.invalidInput()

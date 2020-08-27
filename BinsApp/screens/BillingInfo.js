@@ -17,9 +17,9 @@ export default class BillingInfo extends React.Component {
     this.state = {
       dateSelected: '',
       timeSelected: '',
-      address: Auth.user.attributes.address,
-      email: Auth.user.attributes.email,
-      phone: Auth.user.attributes.phone_number,
+      address: '',
+      email: '',
+      phone: '',
       type: 'Pickup',
       selected: 'Initial',
       nameOnCard: '',
@@ -47,7 +47,9 @@ export default class BillingInfo extends React.Component {
       this.setState({dateSelected: dateSelected, timeSelected: timeSelected});
       Auth.currentUserInfo().then((userInfo) => {
         const { attributes = {} } = userInfo;
-
+        this.setState({address:attributes['address']});
+        this.setState({email:attributes['email']});
+        this.setState({phone:attributes['phone_number']});
         this.setState({size:attributes['custom:size']});
         console.log(this.state);
       })
@@ -57,7 +59,7 @@ export default class BillingInfo extends React.Component {
     return (
       <View style={styles.container}>
         <View style = {{alignItems: 'center'}}>
-          <Text style = {styles.header}>Review</Text>
+          <Text style = {styles.header}>Billing Info</Text>
         </View>
         <ScrollView>
         <CreditCardInput
@@ -76,7 +78,7 @@ export default class BillingInfo extends React.Component {
                  body2={this.state.timeSelected}/>
         <Textbox header='Address'
                  body={this.state.address}/>
-        <Textbox header='Total'
+        <Textbox header='Option'
                  body={this.state.size}/>
         <View style = {{marginTop: 15}}>
           <LongButton

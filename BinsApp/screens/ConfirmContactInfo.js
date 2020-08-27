@@ -27,7 +27,7 @@ export default class ConfirmContactInfo extends React.Component {
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
           onChangeText={(val)=>this.setState({code: val})}
-          keyboardType='email-address'
+          keyboardType='numeric'
         />
         <LongButton
           title="Confirm Account"
@@ -37,7 +37,6 @@ export default class ConfirmContactInfo extends React.Component {
             .catch((err) => console.log('error confirming: ', err))
           }}
         />
-        <Button title='Print Email' onPress={() => console.log(this.props.route.params.email)}/>
       </View>
     );
   }

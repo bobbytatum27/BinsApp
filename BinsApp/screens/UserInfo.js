@@ -72,6 +72,7 @@ export default class UserInfo extends React.Component {
           defaultText='Enter your full name here'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
+          autoCapitalize='words'
           onChangeText={(val)=>this.setState({name: val, validInput: false})}
           onEndEditing={(val) => {
             if (this.state.name.length == 0) {

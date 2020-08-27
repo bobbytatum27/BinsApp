@@ -6,5 +6,11 @@
 			"dependsOn": [],
 			"customAuth": false
 		}
+	},
+	"storage": {
+		"BinsAppUserPics": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
 	}
 }

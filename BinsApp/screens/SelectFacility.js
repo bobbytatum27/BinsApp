@@ -42,6 +42,8 @@ export default class SelectFacility extends React.Component {
           defaultText='Address Line 1'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
+          autoCapitalize='words'
+          returnKeyType='next'
           onChangeText={(text) => this.setState({addressLine1: text})}
           errorMessage='Do not leave this field empty!'
           checkInput={() => {
@@ -57,6 +59,8 @@ export default class SelectFacility extends React.Component {
           defaultText='Address Line 2'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
+          autoCapitalize='words'
+          returnKeyType='next'
           onChangeText={(text) => this.setState({addressLine2: text})}
           errorMessage='Do not leave this field empty!'
           checkInput={() => true /*this field is optional, so automatically valid*/}
@@ -66,6 +70,8 @@ export default class SelectFacility extends React.Component {
           defaultText='City'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
+          autoCapitalize='words'
+          returnKeyType='next'
           onChangeText={(text) => this.setState({city: text})}
           errorMessage='Do not leave this field empty!'
           checkInput={() => {
@@ -83,8 +89,10 @@ export default class SelectFacility extends React.Component {
               defaultText='State'
               defaultTextColor='#8B8B8B'
               style={styles.userInfoText}
+              autoCapitalize='characters'
+              returnKeyType='next'
               onChangeText={(text) => this.setState({state: text})}
-              errorMessage='Do not leave this field empty!'
+              errorMessage='Please Enter'
               checkInput={() => {
                 if (this.state.state == '') {
                   return false;
@@ -100,6 +108,8 @@ export default class SelectFacility extends React.Component {
               defaultText='ZIP'
               defaultTextColor='#8B8B8B'
               style={styles.userInfoText}
+              keyboardType='number-pad'
+              returnKeyType='next'
               onChangeText={(text) => this.setState({zip: text})}
               errorMessage='Invalid ZIP Code!'
               checkInput={() => {
@@ -117,6 +127,7 @@ export default class SelectFacility extends React.Component {
           defaultText='Ex: Gate Code, Apartment Number'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
+          returnKeyType='next'
           onChangeText={(text) => this.setState({specialInstructions: text})}
           errorMessage='Do not leave this field empty!'
           checkInput={() => true /*this field is optional, so automatically valid*/}
@@ -187,7 +198,7 @@ export default class SelectFacility extends React.Component {
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
                                     {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
                                      city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions, size: 'ByItem'}); this.setState({modalVisible:false});
+                                     specialInstructions: this.state.specialInstructions, size: 'By Item'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
                   <Text style={styles.sectionHeader}>Pay by Item</Text>

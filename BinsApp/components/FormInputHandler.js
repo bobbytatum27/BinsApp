@@ -23,6 +23,7 @@ export default class FormInputHandler extends React.Component {
         onBlur={this.props.onBlur}
         returnKeyType={this.props.returnKeyType}
         editable={this.props.editable}
+        autoCapitalize={this.props.autoCapitalize}
       />
     );
   }
