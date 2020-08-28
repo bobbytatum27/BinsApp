@@ -19,6 +19,8 @@ export default class Review extends Component {
       phone: Auth.user.attributes.phone_number,
       selected: '',
       type: '',
+      id: '',
+      isInStorage: 'In Transit',
     }
   }
 
@@ -32,17 +34,32 @@ export default class Review extends Component {
       body: JSON.stringify(this.state)
   })}
 
+  onSubmit2() {
+    fetch('http://192.168.1.247:5000/modifybin',{
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+    },
+      body: JSON.stringify(this.state)
+  })}
+
+
   componentDidMount(){
       const dateSelected = this.props.route.params?.dateSelected??'';
       const timeSelected = this.props.route.params?.timeSelected??'';
       const selectedArray = this.props.route.params?.selected??'';
       const selected = selectedArray.toString();
       const type = this.props.route.params?.type??'';
+      const idArray = this.props.route.params?.id??'';
+      const idString = idArray.toString();
+      const id = parseInt(idString, 10);
       this.setState({dateSelected});
       this.setState({timeSelected});
       this.setState({selected});
       this.setState({type});
-      console.log(this.state);
+      this.setState({id});
+      console.log(id);
     }
 
   render() {
@@ -68,6 +85,7 @@ export default class Review extends Component {
             title="CONFIRM"
             onPress={()=>{
               this.onSubmit();
+              this.onSubmit2();
               this.props.navigation.navigate('ConfirmationScreen', {dateSelected: this.state.dateSelected,
                                                                     timeSelected: this.state.timeSelected,
                                                                     address: this.state.address,

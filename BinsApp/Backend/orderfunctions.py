@@ -20,23 +20,23 @@ def addOrder(date, time, address, email, phone, type, items):
     response = request.execute()
 
 def renderOrders():
-    range_ = "Orders!A3:F"
+    range_ = "Orders!A3:H"
     value_render_option = "FORMATTED_VALUE"
     date_time_render_option = 'FORMATTED_STRING'
     request2 = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_, valueRenderOption=value_render_option, dateTimeRenderOption = date_time_render_option)
     response2 = request2.execute()
     list = response2['values']
-    keys = ['id', 'date', 'time', 'address', 'name', 'phone']
+    keys = ['id', 'date', 'time', 'address', 'name', 'phone', 'type', 'items']
     result = [dict(zip(keys, entry)) for entry in list]
     return result
 
 def renderPastOrders():
-    range_ = "CompletedOrders!A3:F"
+    range_ = "CompletedOrders!A3:H"
     value_render_option = "FORMATTED_VALUE"
     date_time_render_option = 'FORMATTED_STRING'
     request2 = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_, valueRenderOption=value_render_option, dateTimeRenderOption = date_time_render_option)
     response2 = request2.execute()
     list = response2['values']
-    keys = ['id', 'date', 'time', 'address', 'name', 'phone']
+    keys = ['id', 'date', 'time', 'address', 'name', 'phone', 'type', 'items']
     result = [dict(zip(keys, entry)) for entry in list]
     return result

@@ -21,7 +21,7 @@ export default class BillingInfo extends React.Component {
       email: '',
       phone: '',
       type: 'Pickup',
-      selected: 'Initial',
+      selected: 'Initial Pickup',
       nameOnCard: '',
       creditCardNum: '',
       expirationDate: '',

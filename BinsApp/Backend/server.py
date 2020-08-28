@@ -77,5 +77,21 @@ def log7():
     list = json.dumps(renderPastOrders())
     return list
 
+@app.route("/modifybin", methods=['POST', 'GET'])
+def log8():
+    try:
+        binInfo = request.get_json(force=False, cache=True)
+        modifyBin(binInfo['id'],
+                  binInfo['selected'],
+                  binInfo['email'],
+                  binInfo['isInStorage'])
+    except:
+        print('exception')
+    x = {'a':False}
+    return jsonify(x)
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

@@ -17,7 +17,8 @@ export default class HomeInventory extends Component {
       selected: [],
       type: "Pickup",
       refreshing: false,
-      filter: ' ',
+      filter: '',
+      id: '',
     }
   }
 
@@ -53,7 +54,8 @@ export default class HomeInventory extends Component {
   getSelected = array => {
     const arr = array.filter(d => d.isSelect)
     const result = arr.map(a => a.description)
-    this.setState({selected: result})
+    const result2 = arr.map(a => a.id)
+    this.setState({selected: result, id: result2})
   }
 
   onRefresh = () => {
@@ -137,7 +139,7 @@ export default class HomeInventory extends Component {
         <LongButton title ="PICK UP SELECTED ITEMS FROM ME"
                     onPress={() => {
                       this.state.selected.length == 0 ? Alert.alert('Please Select Items') :
-                      this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type})}}/>
+                      this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type, id: this.state.id})}}/>
       </View>
     );
   }

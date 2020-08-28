@@ -33,6 +33,10 @@ export default class Orders extends Component {
         <View style = {styles.lineStyle} />
         <Textbox header='Order Type'
                  body='Pickup'/>
+        <View style = {styles.lineStyle} />
+        <Textbox header='Items'
+                 body={data.item.items}/>
+        <View style = {styles.lineStyle} />
         </View>
       )
     }

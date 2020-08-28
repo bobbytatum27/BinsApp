@@ -20,6 +20,7 @@ export default class StorageInventory extends Component {
       filter: '',
       count: '',
       max: '',
+      id: '',
     }
   }
 
@@ -53,11 +54,12 @@ export default class StorageInventory extends Component {
       )
     }
 
-  getSelected = array => {
-    const arr = array.filter(d => d.isSelect)
-    const result = arr.map(a => a.description)
-    this.setState({selected: result})
-  }
+    getSelected = array => {
+      const arr = array.filter(d => d.isSelect)
+      const result = arr.map(a => a.description)
+      const result2 = arr.map(a => a.id)
+      this.setState({selected: result, id: result2})
+    }
 
   onRefresh = () => {
      this.setState({refreshing: true});
@@ -151,7 +153,7 @@ export default class StorageInventory extends Component {
             <LongButton title ="DELIVER SELECTED ITEMS TO ME"
                       onPress={() => {
                         this.state.selected.length == 0 ? Alert.alert('Please Select Items') :
-                        this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type})}}/>
+                        this.props.navigation.navigate('ScheduleAppointmentScreen', {selected: this.state.selected, type: this.state.type, id: this.state.id})}}/>
         </View>
     );
   }

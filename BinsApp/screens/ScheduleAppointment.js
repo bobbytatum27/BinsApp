@@ -15,6 +15,7 @@ export default class ScheduleAppointment extends Component {
       selectedButton: null,
       selected: [],
       type: '',
+      id: '',
     }
     this.selectionOnPress = this.selectionOnPress.bind(this)
   }
@@ -81,7 +82,8 @@ export default class ScheduleAppointment extends Component {
             onPress={()=>this.props.navigation.navigate('ReviewScreen', {dateSelected: Object.keys(this.state.dateSelected)[0],
                                                                          timeSelected: this.state.timeSelected,
                                                                          selected: this.props.route.params?.selected??'',
-                                                                         type: this.props.route.params?.type??''})}
+                                                                         type: this.props.route.params?.type??'',
+                                                                         id: this.props.route.params?.id??''})}
           />
         </ScrollView>
       </View>

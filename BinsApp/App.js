@@ -80,7 +80,7 @@ function App() {
         <Stack.Screen name='StorageInventoryScreen' component={StorageInventory} options={{title: "Deliver"}}/>
         <Stack.Screen name='ScheduleAppointmentScreen' component={ScheduleAppointment} options={{title: "Schedule Appointment"}}/>
         <Stack.Screen name='ReviewScreen' component={Review} options={{title: "Review"}}/>
-        <Stack.Screen name='ConfirmationScreen' component={Confirmation} options={{title: "Confirmation"}}/>
+        <Stack.Screen name='ConfirmationScreen' component={Confirmation} options={{title: "Confirmation", headerLeft: null}}/>
         <Stack.Screen name='HomeInventoryScreen' component={HomeInventory} options={{title: "Pickup"}}/>
         <Stack.Screen name='NewItemScreen' component={NewItem} options={{title: "Pickup"}}/>
         <Stack.Screen name='EditAccountScreen' component={AccountTabs}/>

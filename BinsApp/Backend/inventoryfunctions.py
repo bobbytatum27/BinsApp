@@ -28,3 +28,24 @@ def renderList():
     keys = ['id', 'description', 'owner', 'isInStorage', 'photo']
     result = [dict(zip(keys, entry)) for entry in list]
     return result
+
+def modifyBin(id, description, owner, isInStorage):
+    customerID = id
+    range_ = "Inventory!A:A"
+    value_render_option = "UNFORMATTED_VALUE"
+    request3 = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_, valueRenderOption=value_render_option)
+    response3 = request3.execute()
+    values = response3['values']
+
+    def findRow(id):
+        for counter, x in enumerate(values, 1):
+            if id == x:
+                return counter
+    value_range_body = {
+        "majorDimension": "COLUMNS",
+        "values": [[id], [description], [owner], [isInStorage]]}
+    row = findRow([customerID])
+    value_input_option = "RAW"
+    range_2 = "Inventory!A" + str(row) + ":D" + str(row)
+    request4 = service.spreadsheets().values().update(spreadsheetId=spreadsheet_id, range=range_2, valueInputOption=value_input_option, body=value_range_body)
+    response4 = request4.execute()
