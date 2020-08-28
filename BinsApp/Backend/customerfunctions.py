@@ -19,7 +19,7 @@ def addCustomer(name, email, phone, address, specialInstructions, size):
     request = service.spreadsheets().values().append(spreadsheetId=spreadsheet_id, range=range_, valueInputOption=value_input_option, body=value_range_body)
     response = request.execute()
 
-def modifyCustomer(name, email, phone, address, specialInstructions):
+def modifyCustomer(name, email, phone, address, specialInstructions, size):
     customerID = email
     range_ = "Customers!A:A"
     value_render_option = "UNFORMATTED_VALUE"
@@ -33,7 +33,7 @@ def modifyCustomer(name, email, phone, address, specialInstructions):
                 return counter
     value_range_body = {
         "majorDimension": "COLUMNS",
-        "values": [[email], [name], [phone], [address], [specialInstructions]]}
+        "values": [[email], [name], [phone], [address], [specialInstructions], [size]]}
     row = findRow([customerID])
     value_input_option = "RAW"
     range_2 = "Customers!A" + str(row) + ":F" + str(row)

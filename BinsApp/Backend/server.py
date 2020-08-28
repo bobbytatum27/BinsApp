@@ -30,7 +30,8 @@ def log2():
                        customerInfo['email'],
                        customerInfo['phone'],
                        customerInfo['address'],
-                       customerInfo['specialInstructions'])
+                       customerInfo['specialInstructions'],
+                       customerInfo['selectedButton'])
 
     except:
         print('exception')
