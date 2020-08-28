@@ -9,11 +9,11 @@ client = gspread.authorize(creds)
 service = discovery.build('sheets', 'v4', credentials=creds)
 spreadsheet_id = '18l4cO3X1dp8MCWqDencHYUTidUhXb7u9IHFp_vg_5uQ'
 
-def addCustomer(name, email, phone, address, specialInstructions):
+def addCustomer(name, email, phone, address, specialInstructions, size):
     range_ = 'Customers!A3:F3'
     value_range_body = {
         "majorDimension": "COLUMNS",
-        "values": [[email], [name], [phone], [address], [specialInstructions]]
+        "values": [[email], [name], [phone], [address], [specialInstructions], [size]]
     }
     value_input_option = 'USER_ENTERED'
     request = service.spreadsheets().values().append(spreadsheetId=spreadsheet_id, range=range_, valueInputOption=value_input_option, body=value_range_body)

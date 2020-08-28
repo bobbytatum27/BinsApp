@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity, Image, Alert } from 'react-native';
 import {Auth} from 'aws-amplify';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -67,7 +67,11 @@ export default class NewItem extends Component {
           {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
           </View>
           <LongButton title ="SAVE"
-                  onPress={()=>{this.onSubmit(); this.props.navigation.navigate('HomeInventoryScreen')}}/>
+                  onPress={()=>{
+                    if (this.state.itemName == '' || this.state.image == null) {
+                      Alert.alert('Please Complete All Fields')
+                    } else {
+                    this.onSubmit(); this.props.navigation.navigate('HomeInventoryScreen')}}}/>
         </View>
     );
   }

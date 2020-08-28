@@ -15,7 +15,8 @@ def log():
                     loginInfo['email'],
                     loginInfo['phone'],
                     loginInfo['address'],
-                    loginInfo['specialInstructions'])
+                    loginInfo['specialInstructions'],
+                    loginInfo['size'])
     except:
         print('exception')
     x = {'a':False}

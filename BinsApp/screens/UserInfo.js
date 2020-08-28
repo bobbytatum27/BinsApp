@@ -17,6 +17,7 @@ export default class UserInfo extends React.Component {
       phone: '',
       address: '',
       specialInstructions: '',
+      size: '',
       validInput: false,
       validEmail: false,
       validPassword: false,
@@ -49,8 +50,10 @@ export default class UserInfo extends React.Component {
     const wholeAddress = this.props.route.params.addressLine1 + ' ' + this.props.route.params.addressLine2 + ' ' +
                          this.props.route.params.city + ', ' + this.props.route.params.state + ' ' + this.props.route.params.zip;
     const specialInstructions = this.props.route.params.specialInstructions;
+    const size = this.props.route.params.size;
     this.setState({address: wholeAddress});
     this.setState({specialInstructions: specialInstructions});
+    this.setState({size: size});
   }
 
   onSubmit() {
@@ -174,7 +177,7 @@ export default class UserInfo extends React.Component {
             <LongButton
               title="NEXT"
               onPress={()=>{
-                this.context.signup(this.state.email, this.state.password, this.state.name, '+1' + this.state.phone, this.state.address, this.props.route.params.specialInstructions, this.props.route.params.size)
+                this.context.signup(this.state.email, this.state.password, this.state.name, '+1' + this.state.phone, this.state.address, this.props.route.params.specialInstructions, this.state.size)
                 .then(() => {this.onSubmit(); this.props.navigation.navigate('ConfirmContactInfo', {email: this.state.email, password: this.state.password})})
                 .catch((err) => {
                   console.log('error signing up - see below', JSON.stringify(err));
