@@ -5,6 +5,7 @@ import LongButton from '../components/LongButton.js'
 import { LoginContext } from '../components/LoginProvider.js';
 import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
+import {Url} from '../src/components/url.js';
 
 export default class EditBilling extends React.Component {
   static contextType = LoginContext;
@@ -25,7 +26,7 @@ export default class EditBilling extends React.Component {
   }
 
   onSubmit() {
-    fetch('http://192.168.1.247:5000/modifycustomers',{
+    fetch(Url+'/modifycustomers',{
       method: 'POST',
       headers: {
         Accept: 'application/json',

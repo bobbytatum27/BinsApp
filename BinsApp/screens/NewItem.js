@@ -8,6 +8,7 @@ import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import FormInputHandler from '../components/FormInputHandler.js'
 import {LoginContext} from '../components/LoginProvider.js'
+import {Url} from '../src/components/url.js';
 
 export default class NewItem extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class NewItem extends Component {
   }
 
   onSubmit() {
-    fetch('http://192.168.1.247:5000/inventory',{
+    fetch(Url+'/inventory',{
       method: 'POST',
       headers: {
         Accept: 'application/json',

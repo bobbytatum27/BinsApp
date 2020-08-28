@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
+import {Url} from '../src/components/url.js';
 
 class Home extends Component {
   static contextType = LoginContext;
@@ -28,7 +29,7 @@ class Home extends Component {
       const { attributes = {} } = userInfo;
       email = attributes['email'];
     })
-    fetch('http://192.168.1.247:5000/render')
+    fetch(Url+'/render')
     .then((response) => response.json())
     .then((responseJson) => {
       const responseJson2 = responseJson.filter(function(item){
@@ -51,7 +52,7 @@ class Home extends Component {
       const { attributes = {} } = userInfo;
       email = attributes['email'];
     })
-    fetch('http://192.168.1.247:5000/renderorders')
+    fetch(Url+'/renderorders')
     .then((response) => response.json())
     .then((responseJson) => {
       const responseJson2 = responseJson.filter(function(item){

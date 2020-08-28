@@ -7,6 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
+import {Url} from '../src/components/url.js';
 
 export default class StorageInventory extends Component {
   static contextType = LoginContext;
@@ -78,7 +79,7 @@ export default class StorageInventory extends Component {
    }
 
   fetchData() {
-    fetch('http://192.168.1.247:5000/render')
+    fetch(Url+'/render')
     .then((response) => response.json())
     .then((responseJson) => {
       responseJson = responseJson.map(item => {

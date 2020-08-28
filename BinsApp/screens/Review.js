@@ -5,6 +5,7 @@ import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import { LoginContext } from '../components/LoginProvider.js';
 import {Auth} from 'aws-amplify';
+import {Url} from '../src/components/url.js';
 
 export default class Review extends Component {
   static contextType = LoginContext;
@@ -25,7 +26,7 @@ export default class Review extends Component {
   }
 
   onSubmit() {
-    fetch('http://192.168.1.247:5000/orders',{
+    fetch(Url+'orders',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -35,7 +36,7 @@ export default class Review extends Component {
   })}
 
   onSubmit2() {
-    fetch('http://192.168.1.247:5000/modifybin',{
+    fetch(Url+'/modifybin',{
       method: 'POST',
       headers: {
         Accept: 'application/json',

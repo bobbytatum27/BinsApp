@@ -6,6 +6,7 @@ import LongButton from '../components/LongButton.js'
 import { CreditCardInput } from 'react-native-credit-card-input'
 import { ScrollView } from 'react-native-gesture-handler';
 import {Auth} from 'aws-amplify';
+import {Url} from '../src/components/url.js';
 
 import { LoginContext } from '../components/LoginProvider.js';
 
@@ -31,7 +32,7 @@ export default class BillingInfo extends React.Component {
   }
 
   onSubmit() {
-    fetch('http://192.168.1.247:5000/orders',{
+    fetch(Url+'/orders',{
       method: 'POST',
       headers: {
         Accept: 'application/json',

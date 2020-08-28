@@ -5,6 +5,7 @@ import Textbox from '../components/Textbox.js'
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
 import DropDownPicker from 'react-native-dropdown-picker';
+import {Url} from '../src/components/url.js';
 
 export default class Orders extends Component {
   static contextType = LoginContext;
@@ -61,7 +62,7 @@ export default class Orders extends Component {
   }
 
   fetchData(){
-    fetch('http://192.168.1.247:5000/renderorders')
+    fetch(Url+'/renderorders')
     .then((response) => response.json())
     .then((responseJson) => {
       const responseJson2 = responseJson.filter(function(item){
@@ -78,7 +79,7 @@ export default class Orders extends Component {
   }
 
   fetchPastOrders(){
-    fetch('http://192.168.1.247:5000/renderpastorders')
+    fetch(Url+'/renderpastorders')
     .then((response) => response.json())
     .then((responseJson) => {
       const responseJson2 = responseJson.filter(function(item){

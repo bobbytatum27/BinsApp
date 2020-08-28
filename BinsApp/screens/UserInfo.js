@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, Alert, KeyboardAvoidingView 
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
 import { LoginContext } from '../components/LoginProvider.js';
+import {Url} from '../src/components/url.js';
 
 export default class UserInfo extends React.Component {
   static contextType = LoginContext;
@@ -57,7 +58,7 @@ export default class UserInfo extends React.Component {
   }
 
   onSubmit() {
-    fetch('http://192.168.1.247:5000/customers',{
+    fetch(Url+'customers',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
