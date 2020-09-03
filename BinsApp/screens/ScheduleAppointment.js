@@ -79,7 +79,9 @@ export default class ScheduleAppointment extends Component {
             </View>
           <LongButton
             title="NEXT"
-            onPress={()=>this.props.navigation.navigate('ReviewScreen', {dateSelected: Object.keys(this.state.dateSelected)[0],
+            onPress={()=>
+              Object.keys(this.state.dateSelected).length == 0 ? Alert.alert('Please Select Date') : this.state.timeSelected == '' ? Alert.alert('Please Select Time') :
+              this.props.navigation.navigate('ReviewScreen', {dateSelected: Object.keys(this.state.dateSelected)[0],
                                                                          timeSelected: this.state.timeSelected,
                                                                          selected: this.props.route.params?.selected??'',
                                                                          type: this.props.route.params?.type??'',

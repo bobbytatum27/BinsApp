@@ -6,6 +6,7 @@ import LongButton from '../components/LongButton.js'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import InputValidator from '../components/InputValidator.js'
+import {ZipCodes} from '../src/components/zipcodes.js';
 
 export default class SelectFacility extends React.Component {
   constructor(props) {
@@ -30,6 +31,11 @@ export default class SelectFacility extends React.Component {
       <View style={{padding: 5}}>
       </View>
     )
+  }
+
+  checkAddress() {
+    var n = ZipCodes.includes(this.state.zip)
+    return n;
   }
 
   // TODO: make sure the tab formatting is correct, some might be off (maybe)
@@ -175,8 +181,10 @@ export default class SelectFacility extends React.Component {
             onPress={() => {
               if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '') {
                 Alert.alert('You\'ve left an important field empty in your address!');
-              } else {
+              } else if (this.checkAddress()){
                 this.setState({storageCardIsVisible: true});
+              } else {
+                Alert.alert('Sorry, there are no available facilities near you yet');
               }
             }}
           />

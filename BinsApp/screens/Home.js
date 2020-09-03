@@ -75,10 +75,9 @@ class Home extends Component {
       <View style = {styles.button}>
         <Image style={{width: 150, height: 150}}
                source={{uri: item.photo}}/>
-        <View>
-          <Text>
-            {item.description}
-          </Text>
+        <View style={{padding: 10, flexDirection: 'column'}}>
+          <Text style={{fontWeight: 'bold'}}>{item.description}</Text>
+          <Text>ID #{item.id}</Text>
         </View>
       </View>
     )
@@ -86,15 +85,14 @@ class Home extends Component {
 
   renderItemsInStorage = ({item}) => {
       return (
-      <View style = {styles.button}>
-        <Image style={{width: 150, height: 150}}
-               source={{uri: item.photo}}/>
-        <View>
-          <Text>
-            {item.description}
-          </Text>
+        <View style = {styles.button}>
+          <Image style={{width: 150, height: 150}}
+                 source={{uri: item.photo}}/>
+          <View style={{padding: 10, flexDirection: 'column'}}>
+            <Text style={{fontWeight: 'bold'}}>{item.description}</Text>
+            <Text>ID #{item.id}</Text>
+          </View>
         </View>
-      </View>
     )
   }
 
@@ -124,6 +122,7 @@ class Home extends Component {
       </>
     ) : (
       <>
+      <Ionicons name={'ios-help-circle-outline'} size={25} color={'white'} style={{textAlign: 'right'}} onPress={() => this.props.navigation.navigate('HelpScreen')}/>
         <ScrollView refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}
@@ -131,7 +130,6 @@ class Home extends Component {
             tintColor = 'white'  />
         }>
           <View>
-            <Ionicons name={'ios-help-circle-outline'} size={25} color={'white'} style={{textAlign: 'right', marginRight: 10}} onPress={() => this.props.navigation.navigate('HelpScreen')}/>
             <Text style={styles.sectionHeader}>Upcoming Orders</Text>
           {this.state.dataSourceOrders.length == 0 ? (
             <>
@@ -167,7 +165,7 @@ class Home extends Component {
               keyExtractor={(item, index) => index.toString()}
             />
               <LongButton
-               title ="REQUEST A DELIVERY"
+               title ="VIEW ALL"
                onPress={() => this.props.navigation.navigate('StorageInventoryScreen')}/>
             </>
           )}
@@ -192,7 +190,7 @@ class Home extends Component {
                 keyExtractor={(item, index) => index.toString()}
               />
               <LongButton
-               title ="REQUEST A PICKUP"
+               title ="VIEW ALL"
                onPress={() => this.props.navigation.navigate('HomeInventoryScreen')}/>
             </>
           )}
@@ -225,9 +223,6 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 15,
-    alignItems: 'center',
-    height: 170,
-    width: 152,
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,

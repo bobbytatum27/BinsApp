@@ -24,20 +24,16 @@ export default class Orders extends Component {
 
   renderItem = data => {
       return (
-        <View style = {{margin: 10, backgroundColor: '#E5E7E9', borderRadius: 15}}>
+        <View style={{marginTop: 20}}>
         <Textbox header='Date and Time'
                  body={data.item.date}
-                 body2={data.item.time} />
-        <View style = {styles.lineStyle} />
+                 body2={data.item.time}/>
         <Textbox header='Address'
                  body={data.item.address}/>
-        <View style = {styles.lineStyle} />
         <Textbox header='Order Type'
                  body='Pickup'/>
-        <View style = {styles.lineStyle} />
         <Textbox header='Items'
                  body={data.item.items}/>
-        <View style = {styles.lineStyle} />
         </View>
       )
     }
@@ -53,7 +49,6 @@ export default class Orders extends Component {
 
   onSort(val) {
     this.setState({filter:val});
-    console.log(val, this.state.filter);
     if (val == 'Past') {
     this.fetchPastOrders();
     } else {

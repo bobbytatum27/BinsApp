@@ -41,19 +41,22 @@ export default class StorageInventory extends Component {
 
   renderItem = data => {
       return (
-      <TouchableOpacity
-        style={styles.button, data.item.selectedClass}
-        onPress={() => {this.selectItem(data); this.getSelected(this.state.dataSource);}}>
-        <Image style={{width: 150, height: 150}}
-               source={{uri: data.item.photo}}/>
-        <View>
-          <Text>
-            {data.item.description}
-          </Text>
+        <View style={styles.item}>
+          <Image style={{width: 150, height: 150}}
+                 source={{uri: data.item.photo}}/>
+          <View style={{padding: 10, flexDirection: 'column'}}>
+            <Text style={{fontWeight: 'bold'}}>{data.item.description}</Text>
+            <View style = {{flexDirection: 'row', justifyContent: 'space-between', marginTop: 5}}>
+              <Text>ID #{data.item.id}</Text>
+              <TouchableOpacity style = {styles.button, data.item.selectedClass}
+                                onPress={() => {this.selectItem(data); this.getSelected(this.state.dataSource);}}>
+              {data.item.isSelect ? (<Text style={{color:'white'}}>Selected</Text> ) : (<Text style={{color:'white'}}>Select</Text> )}
+              </TouchableOpacity>
+            </View>
         </View>
-      </TouchableOpacity>
-      )
-    }
+      </View>
+    )
+  }
 
     getSelected = array => {
       const arr = array.filter(d => d.isSelect)
@@ -65,12 +68,10 @@ export default class StorageInventory extends Component {
   onRefresh = () => {
      this.setState({refreshing: true});
      this.fetchData();
-     console.log(this.state.filter);
    }
 
    onSort(val) {
      this.setState({filter:val});
-     console.log(val, this.state.filter);
      if (val == 'Alphabetical') {
      this.state.dataSource.sort((a, b) => a.description.localeCompare(b.description));
      } else {
@@ -177,24 +178,24 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginLeft: 15,
   },
-  button: {
+  item: {
     margin: 15,
-    alignItems: 'center',
-    height: 170,
-    width: 152,
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 5,
     overflow: "hidden",
   },
+  button: {
+    backgroundColor: '#7B1FA2',
+    paddingLeft: 2,
+    paddingRight: 2,
+    borderRadius: 3,
+  },
   selected: {
-    margin: 15,
-    alignItems: 'center',
-    height: 174,
-    width: 160,
-    backgroundColor: 'white',
-    borderColor: '#7B1FA2',
-    borderWidth: 5
+    backgroundColor: 'green',
+    paddingLeft: 2,
+    paddingRight: 2,
+    borderRadius: 3,
   },
 })

@@ -4,7 +4,6 @@ import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import {Url} from '../src/components/url.js';
@@ -38,17 +37,20 @@ export default class HomeInventory extends Component {
 
   renderItem = data => {
       return (
-        <TouchableOpacity
-          style={styles.button, data.item.selectedClass}
-          onPress={() => {this.selectItem(data); this.getSelected(this.state.dataSource);}}>
+        <View style={styles.item}>
           <Image style={{width: 150, height: 150}}
                  source={{uri: data.item.photo}}/>
-          <View>
-          <Text>
-            {data.item.description}
-          </Text>
+          <View style={{padding: 10, flexDirection: 'column'}}>
+            <Text style={{fontWeight: 'bold'}}>{data.item.description}</Text>
+            <View style = {{flexDirection: 'row', justifyContent: 'space-between', marginTop: 5}}>
+              <Text>ID #{data.item.id}</Text>
+              <TouchableOpacity style = {styles.button, data.item.selectedClass}
+                                onPress={() => {this.selectItem(data); this.getSelected(this.state.dataSource);}}>
+              {data.item.isSelect ? (<Text style={{color:'white'}}>Selected</Text> ) : (<Text style={{color:'white'}}>Select</Text> )}
+              </TouchableOpacity>
+            </View>
         </View>
-      </TouchableOpacity>
+      </View>
     )
   }
 
@@ -66,7 +68,6 @@ export default class HomeInventory extends Component {
 
   onSort(val) {
     this.setState({filter:val});
-    console.log(val, this.state.filter);
     if (val == 'Alphabetical') {
     this.state.dataSource.sort((a, b) => a.description.localeCompare(b.description));
     } else {
@@ -163,25 +164,25 @@ const styles = StyleSheet.create({
     fontSize: 10,
     marginLeft: 15,
   },
-  button: {
+  item: {
     margin: 15,
-    alignItems: 'center',
-    height: 170,
-    width: 152,
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 5,
     overflow: "hidden",
   },
+  button: {
+    backgroundColor: '#7B1FA2',
+    paddingLeft: 2,
+    paddingRight: 2,
+    borderRadius: 3,
+  },
   selected: {
-    margin: 15,
-    alignItems: 'center',
-    height: 174,
-    width: 160,
-    backgroundColor: 'white',
-    borderColor: '#7B1FA2',
-    borderWidth: 5
+    backgroundColor: 'green',
+    paddingLeft: 2,
+    paddingRight: 2,
+    borderRadius: 3,
   },
   button2: {
     alignItems: 'center',

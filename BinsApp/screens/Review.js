@@ -21,12 +21,12 @@ export default class Review extends Component {
       selected: '',
       type: '',
       id: '',
-      isInStorage: 'In Transit',
+      isInStorage: 'In Progress',
     }
   }
 
   onSubmit() {
-    fetch(Url+'orders',{
+    fetch(Url+'/orders',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -60,7 +60,6 @@ export default class Review extends Component {
       this.setState({selected});
       this.setState({type});
       this.setState({id});
-      console.log(id);
     }
 
   render() {
