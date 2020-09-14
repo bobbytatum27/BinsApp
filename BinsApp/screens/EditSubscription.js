@@ -64,7 +64,7 @@ export default class EditSubscription extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flex: 5}}>
+        <View style={{flex: 2}}>
           <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={styles.sectionHeader}>Edit Plan</Text>
             <Ionicons name={'ios-log-out'} size={25} color={'white'} style={{textAlign: 'right', marginRight: 10}} onPress={() =>
@@ -80,35 +80,58 @@ export default class EditSubscription extends React.Component {
                 <Text>855 Parr Boulevard, Richmond, CA 94801</Text>
               </View>
             </View>
-          <Text style={styles.descriptionText}>Your Plan</Text>
+          <Text style={styles.descriptionText}>Your Plan (scroll to see all)</Text>
+            <ScrollView>
             <TouchableOpacity style={this.state.selectedButton === 'By Item' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("By Item")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <Text style={styles.buttonHeader}>By Item</Text>
                 <Text style={styles.buttonHeader}>$7/bin/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>12'x8' (84 Sq. In.)</Text>
+              <Text style={{color: '#FFF'}}>60x40x31.5cm</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={this.state.selectedButton === 'Small' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("Small")}>
+            <TouchableOpacity style={this.state.selectedButton === '2x2' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("2x2")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.buttonHeader}>Small</Text>
+                <Text style={styles.buttonHeader}>2'x2'</Text>
+                <Text style={styles.buttonHeader}>$79/month</Text>
+              </View>
+              <Text style={{color: '#FFF'}}>16 cubic ft - Hall Closet</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={this.state.selectedButton === '2x4' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("2x4")}>
+              <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={styles.buttonHeader}>2'x4'</Text>
                 <Text style={styles.buttonHeader}>$99/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>8.5x6 (20 Bins)</Text>
+              <Text style={{color: '#FFF'}}>32 cubic feet - Bedroom Closet</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={this.state.selectedButton === 'Medium' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("Medium")}>
+            <TouchableOpacity style={this.state.selectedButton === '5x5' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("5x5")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.buttonHeader}>Medium</Text>
-                <Text style={styles.buttonHeader}>$150/month</Text>
+                <Text style={styles.buttonHeader}>5'x5'</Text>
+                <Text style={styles.buttonHeader}>$134/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>8.5x12 (50 Bins)</Text>
+              <Text style={{color: '#FFF'}}>100 cubic feet - Walk-in Closet</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={this.state.selectedButton === 'Large' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("Large")}>
+            <TouchableOpacity style={this.state.selectedButton === '5x10' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("5x10")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.buttonHeader}>Large</Text>
-                <Text style={styles.buttonHeader}>$195/month</Text>
+                <Text style={styles.buttonHeader}>5'x10'</Text>
+                <Text style={styles.buttonHeader}>$157/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>8.5x16 (75 Bins)</Text>
+              <Text style={{color: '#FFF'}}>200 cubic feet - Studio Apt.</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={this.state.selectedButton === '5x15' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("5x15")}>
+              <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={styles.buttonHeader}>5'x15'</Text>
+                <Text style={styles.buttonHeader}>$191/month</Text>
+              </View>
+              <Text style={{color: '#FFF'}}>300 cubic feet - Small 1BR Apt.</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={this.state.selectedButton === '10x10' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("10x10")}>
+              <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <Text style={styles.buttonHeader}>10'x10'</Text>
+                <Text style={styles.buttonHeader}>$236/month</Text>
+              </View>
+              <Text style={{color: '#FFF'}}>400 cubic feet - 1BR Apt.</Text>
+            </TouchableOpacity>
+          </ScrollView>
         </View>
         <View style={{flex:1, justifyContent: 'flex-end'}}>
         <TouchableOpacity style = {styles.cancelButton} onPress = {() => {Alert.alert("Are you sure you want to cancel?")}}>

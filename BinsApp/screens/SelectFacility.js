@@ -20,7 +20,7 @@ export default class SelectFacility extends React.Component {
       zip: '',
       specialInstructions: '',
       storageCardIsVisible: false,
-      modalVisible: false,
+      modalVisible: true,
       storageAddress: '',
     };
   }
@@ -202,6 +202,7 @@ export default class SelectFacility extends React.Component {
                 <Text style={{marginLeft: 10}}>{this.state.storageAddress}</Text>
                 <Text style={{marginLeft: 10}}>csiministorage.com</Text>
                 <Text style={{fontSize: 15, marginTop: 10, marginLeft: 10}}>Units Available</Text>
+                <ScrollView>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
                                     {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
@@ -209,34 +210,82 @@ export default class SelectFacility extends React.Component {
                                      specialInstructions: this.state.specialInstructions, size: 'By Item'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>Pay by Item</Text>
+                  <Text style={styles.sectionHeader}>Per Bin</Text>
                   <Text style={styles.sectionHeader}>$7/bin/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>12'x8' (84 Sq. In.)</Text>
+                <Text style={{color: '#AAB5E0'}}>60x40x31.5cm</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
                                     {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
                                      city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions, size: 'Small'}); this.setState({modalVisible:false});
+                                     specialInstructions: this.state.specialInstructions, size: '2x2'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>Small</Text>
+                  <Text style={styles.sectionHeader}>2'x2' </Text>
+                  <Text style={styles.sectionHeader}>$79/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>16 cubic ft - Hall Closet</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions, size: '2x4'}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>2'x4'</Text>
                   <Text style={styles.sectionHeader}>$99/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>8.5x6 (20 Bins)</Text>
+                <Text style={{color: '#AAB5E0'}}>32 cubic feet - Bedroom Closet</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
                                     {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
                                      city: this.state.city, state: this.state.state, zip: this.state.zip,
-                                     specialInstructions: this.state.specialInstructions, size: 'Medium'}); this.setState({modalVisible:false});
+                                     specialInstructions: this.state.specialInstructions, size: '5x5'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>Medium</Text>
-                  <Text style={styles.sectionHeader}>$150/month</Text>
+                  <Text style={styles.sectionHeader}>5'x5'</Text>
+                  <Text style={styles.sectionHeader}>$134/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>8.5x12 (50 Bins)</Text>
+                <Text style={{color: '#AAB5E0'}}>100 cubic feet - Walk-in Closet</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions, size: '5x10'}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>5'x10'</Text>
+                  <Text style={styles.sectionHeader}>$157/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>200 cubic feet - Studio Apt.</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions, size: '5x15'}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>5'x15'</Text>
+                  <Text style={styles.sectionHeader}>$191/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>300 cubic feet - Small 1BR Apt.</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.openButton}
+                                  onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
+                                    {addressLine1: this.state.addressLine1, addressLine2: this.state.addressLine2,
+                                     city: this.state.city, state: this.state.state, zip: this.state.zip,
+                                     specialInstructions: this.state.specialInstructions, size: '10x10'}); this.setState({modalVisible:false});
+                                   }}>
+                <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <Text style={styles.sectionHeader}>10'x10'</Text>
+                  <Text style={styles.sectionHeader}>$236/month</Text>
+                </View>
+                <Text style={{color: '#AAB5E0'}}>400 cubic feet - 1BR Apt.</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
@@ -245,11 +294,12 @@ export default class SelectFacility extends React.Component {
                                      specialInstructions: this.state.specialInstructions, size: 'Large'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>Large</Text>
+                  <Text style={styles.sectionHeader}>5'x10'</Text>
                   <Text style={styles.sectionHeader}>$195/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>8.5x16 (75 Bins)</Text>
+                <Text style={{color: '#AAB5E0'}}>200 cubic feet - Studio Apt.</Text>
                 </TouchableOpacity>
+                </ScrollView>
               </View>
             </View>
         </Modal>

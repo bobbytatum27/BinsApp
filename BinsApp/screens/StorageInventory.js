@@ -108,11 +108,11 @@ export default class StorageInventory extends Component {
   getMax(){
     Auth.currentUserInfo().then((userInfo) => {
       const { attributes = {} } = userInfo;
-      if (attributes['custom:size']=='Small'){
+      if (attributes['custom:size']=='2x2'){
         this.setState({max:'/20'});
-      } else if (attributes['custom:size']=='Medium'){
+      } else if (attributes['custom:size']=='2x4'){
         this.setState({max:'/50'});
-      } else if (attributes['custom:size']=='Large'){
+      } else if (attributes['custom:size']=='5x5'){
         this.setState({max:'/75'});
       }
     })
