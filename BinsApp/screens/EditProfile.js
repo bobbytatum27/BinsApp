@@ -18,6 +18,11 @@ export default class EditProfile extends React.Component {
       phone: '',
       address: '',
       specialInstructions: '',
+      nameOnCard: '',
+      creditCardNum: '',
+      expirationDate: '',
+      securityCode: '',
+      selectedButton: '',
     }
   }
 
@@ -51,6 +56,7 @@ export default class EditProfile extends React.Component {
       this.setState({phone:attributes['phone_number']});
       this.setState({address:attributes['address']});
       this.setState({specialInstructions:attributes['custom:specialInstructions']});
+      this.setState({selectedButton:attributes['custom:size']});
     })
   }
 

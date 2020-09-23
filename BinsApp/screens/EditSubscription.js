@@ -81,7 +81,7 @@ export default class EditSubscription extends React.Component {
               </View>
             </View>
           <Text style={styles.descriptionText}>Your Plan (scroll to see all)</Text>
-            <ScrollView>
+            <ScrollView style={{marginTop:15}}>
             <TouchableOpacity style={this.state.selectedButton === 'By Item' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("By Item")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <Text style={styles.buttonHeader}>By Item</Text>

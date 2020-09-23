@@ -22,6 +22,7 @@ export default class EditBilling extends React.Component {
       creditCardNum: '',
       expirationDate: '',
       securityCode: '',
+      selectedButton: '',
     }
   }
 
@@ -35,6 +36,14 @@ export default class EditBilling extends React.Component {
       body: JSON.stringify(this.state)
   })}
 
+  /*async updateUser() {
+    let user = await Auth.currentAuthenticatedUser();
+
+    let result = await Auth.updateUserAttributes(user, {
+      'custom:size': this.state.selectedButton
+    });
+  }*/
+
   componentDidMount(){
     Auth.currentUserInfo().then((userInfo) => {
       const { attributes = {} } = userInfo;
@@ -43,6 +52,7 @@ export default class EditBilling extends React.Component {
       this.setState({phone:attributes['phone_number']});
       this.setState({address:attributes['address']});
       this.setState({specialInstructions:attributes['custom:specialInstructions']});
+      this.setState({selectedButton:attributes['custom:size']});
     })
   }
 

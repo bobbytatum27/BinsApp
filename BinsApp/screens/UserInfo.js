@@ -58,7 +58,7 @@ export default class UserInfo extends React.Component {
   }
 
   onSubmit() {
-    fetch(Url+'customers',{
+    fetch(Url+'/customers',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
