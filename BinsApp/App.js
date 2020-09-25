@@ -27,9 +27,12 @@ import Orders from './screens/Orders.js'
 import Login from './screens/Login.js'
 import PasswordReset from './screens/PasswordReset.js'
 import ConfirmContactInfo from './screens/ConfirmContactInfo.js'
+import ViewProfile from './screens/ViewProfile.js'
 import EditProfile from './screens/EditProfile.js'
 import EditBilling from './screens/EditBilling.js'
-import EditSubscription from './screens/EditSubscription.js'
+import ViewPlan from './screens/ViewPlan.js'
+import EditPlan from './screens/EditPlan.js'
+import Menu from './screens/Menu.js'
 
 import {LoginProvider, LoginContext} from './components/LoginProvider.js'
 
@@ -41,6 +44,9 @@ Amplify.configure(config)
 
 // for stack nav
 const Stack = createStackNavigator();
+const HomeStack = createStackNavigator();
+const OrderStack = createStackNavigator();
+const MenuStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const LandingTab = createMaterialTopTabNavigator();
 const AccountTab = createMaterialTopTabNavigator();
@@ -51,73 +57,59 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        headerStyle: {
-          backgroundColor: '#7B1FA2',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}>
       {loginContext.isLoggedIn == false ? (
-         <>
-        <Stack.Screen name='Landing' component={LandingTabs} options={{headerShown: false}}/>
-        <Stack.Screen name='Login' component={Login}/>
-        <Stack.Screen name='ConfirmContactInfo' component={ConfirmContactInfo}/>
-        <Stack.Screen name='PasswordReset' component={PasswordReset}/>
-        <Stack.Screen name='SelectFacilityScreen' component={SelectFacility} options={{title: "Select Storage Facility"}}/>
-        <Stack.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
-        <Stack.Screen name='AccountInfoScreen' component={UserInfo} options={{title: "Create an Account"}}/>
-        <Stack.Screen name='BillingInfoScreen' component={BillingInfo} options={{title: "Billing Info"}}/>
-        <Stack.Screen name='InitialConfirmationScreen' component={InitialConfirmation} options={{title: "Confirmation", headerLeft: null}}/>
+        <>
+         <Stack.Navigator screenOptions={{
+           headerStyle: {
+             backgroundColor: '#7B1FA2',
+           },
+           headerTintColor: '#fff',
+           headerTitleStyle: {
+             fontWeight: 'bold',
+           },
+         }}>
+          <Stack.Screen name='Landing' component={LandingTabs} options={{headerShown: false}}/>
+          <Stack.Screen name='Login' component={Login}/>
+          <Stack.Screen name='ConfirmContactInfo' component={ConfirmContactInfo}/>
+          <Stack.Screen name='PasswordReset' component={PasswordReset}/>
+          <Stack.Screen name='SelectFacilityScreen' component={SelectFacility} options={{title: "Select Storage Facility"}}/>
+          <Stack.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
+          <Stack.Screen name='AccountInfoScreen' component={UserInfo} options={{title: "Create an Account"}}/>
+          <Stack.Screen name='BillingInfoScreen' component={BillingInfo} options={{title: "Billing Info"}}/>
+          <Stack.Screen name='InitialConfirmationScreen' component={InitialConfirmation} options={{title: "Confirmation", headerLeft: null}}/>
+          </Stack.Navigator>
         </>
       ) : (
         <>
-        <Stack.Screen name='Home' component={HomeTabs} options={{title: "Bins"}}/>
-        <Stack.Screen name='HelpScreen' component={Help} options={{title: "Help"}}/>
-        <Stack.Screen name='StorageInventoryScreen' component={StorageInventory} options={{title: "Deliver"}}/>
-        <Stack.Screen name='ScheduleAppointmentScreen' component={ScheduleAppointment} options={{title: "Schedule Appointment"}}/>
-        <Stack.Screen name='ReviewScreen' component={Review} options={{title: "Review"}}/>
-        <Stack.Screen name='ConfirmationScreen' component={Confirmation} options={{title: "Confirmation", headerLeft: null}}/>
-        <Stack.Screen name='HomeInventoryScreen' component={HomeInventory} options={{title: "Pickup"}}/>
-        <Stack.Screen name='NewItemScreen' component={NewItem} options={{title: "Pickup"}}/>
-        <Stack.Screen name='EditAccountScreen' component={AccountTabs}/>
-        </>
-      )}
-      </Stack.Navigator>
+        <Tab.Navigator screenOptions={({ route }) => ({
+              tabBarIcon: ({color}) => {
+                let iconName;
+
+                if (route.name === 'Home') {
+                  iconName = 'ios-home';
+                } else if (route.name === 'Menu') {
+                  iconName = 'ios-list';
+                } else if (route.name === 'Orders') {
+                  iconName = 'ios-list';
+                }
+
+                return <Ionicons name={iconName} size={22} color={color} />;
+              },
+            })}
+            tabBarOptions={{
+              activeTintColor: 'white',
+              inactiveTintColor: 'gray',
+              style: {backgroundColor: '#7B1FA2'}
+            }}
+            initialRouteName='Home'
+          >
+          <Tab.Screen name="Orders" component={OrderStackScreen}/>
+          <Tab.Screen name="Home" component={HomeStackScreen}/>
+          <Tab.Screen name="Menu" component={MenuStackScreen}/>
+        </Tab.Navigator>
+      </>
+    )}
     </NavigationContainer>
-  );
-}
-
-function HomeTabs() {
-  return(
-    <Tab.Navigator screenOptions={({ route }) => ({
-          tabBarIcon: ({color}) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = 'ios-home';
-            } else if (route.name === 'Account') {
-              iconName = 'ios-person';
-            } else if (route.name === 'Orders') {
-              iconName = 'ios-list';
-            }
-
-            return <Ionicons name={iconName} size={22} color={color} />;
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: 'white',
-          inactiveTintColor: 'gray',
-          style: {backgroundColor: '#7B1FA2'}
-        }}
-        initialRouteName='Home'
-      >
-      <Tab.Screen name="Orders" component={Orders}/>
-      <Tab.Screen name="Home" component={Home}/>
-      <Tab.Screen name="Account" component={AccountTabs}/>
-    </Tab.Navigator>
   );
 }
 
@@ -132,13 +124,65 @@ function LandingTabs() {
   );
 }
 
-function AccountTabs() {
+function HomeStackScreen() {
   return(
-    <AccountTab.Navigator swipeEnabled={false}>
-      <AccountTab.Screen name="Profile" component={EditProfile}/>
-      <AccountTab.Screen name="Billing" component={EditBilling}/>
-      <AccountTab.Screen name="Plan" component={EditSubscription}/>
-    </AccountTab.Navigator>
+    <HomeStack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#7B1FA2',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}>
+      <HomeStack.Screen name='Home' component={Home}/>
+      <HomeStack.Screen name='HelpScreen' component={Help} options={{title: "Help"}}/>
+      <HomeStack.Screen name='StorageInventoryScreen' component={StorageInventory} options={{title: "Deliver"}}/>
+      <HomeStack.Screen name='ScheduleAppointmentScreen' component={ScheduleAppointment} options={{title: "Schedule Appointment"}}/>
+      <HomeStack.Screen name='ReviewScreen' component={Review} options={{title: "Review"}}/>
+      <HomeStack.Screen name='ConfirmationScreen' component={Confirmation} options={{title: "Confirmation", headerLeft: null}}/>
+      <HomeStack.Screen name='HomeInventoryScreen' component={HomeInventory} options={{title: "Pickup"}}/>
+      <HomeStack.Screen name='NewItemScreen' component={NewItem} options={{title: "Pickup"}}/>
+      <HomeStack.Screen name='Menu' component={Menu}/>
+    </HomeStack.Navigator>
+  );
+}
+
+function OrderStackScreen() {
+  return(
+    <OrderStack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#7B1FA2',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}>
+      <OrderStack.Screen name="Orders" component={Orders}/>
+    </OrderStack.Navigator>
+  );
+}
+
+function MenuStackScreen() {
+  return(
+    <MenuStack.Navigator screenOptions={{
+      headerStyle: {
+        backgroundColor: '#7B1FA2',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}>
+      <MenuStack.Screen name="Menu" component={Menu}/>
+      <MenuStack.Screen name="ViewProfile" component={ViewProfile} options={{title: "View Profile"}}/>
+      <MenuStack.Screen name="EditProfile" component={EditProfile} options={{title: "Edit Profile"}}/>
+      <MenuStack.Screen name="Billing" component={EditBilling}/>
+      <MenuStack.Screen name="ViewPlan" component={ViewPlan} options={{title: "Your Storage Plan"}}/>
+      <MenuStack.Screen name="EditPlan" component={EditPlan} options={{title: "Edit Storage Plan"}}/>
+      <MenuStack.Screen name='FAQ' component={Help}/>
+    </MenuStack.Navigator>
   );
 }
 

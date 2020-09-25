@@ -81,6 +81,7 @@ export default class Orders extends Component {
         return item.name == Auth.user.attributes.email
       });
       this.setState({dataSource: responseJson2, isLoading: false});
+      console.log(this.state.dataSource);
     })
     .then(() => {
      this.setState({refreshing: false});

@@ -122,7 +122,6 @@ class Home extends Component {
       </>
     ) : (
       <>
-      <Ionicons name={'ios-help-circle-outline'} size={25} color={'white'} style={{textAlign: 'right'}} onPress={() => this.props.navigation.navigate('HelpScreen')}/>
         <ScrollView refreshControl={
           <RefreshControl
             refreshing={this.state.refreshing}

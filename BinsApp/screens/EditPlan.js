@@ -7,7 +7,7 @@ import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
 import {Url} from '../src/components/url.js';
 
-export default class EditSubscription extends React.Component {
+export default class EditPlan extends React.Component {
   static contextType = LoginContext;
 
   constructor(props) {
@@ -23,6 +23,7 @@ export default class EditSubscription extends React.Component {
       expirationDate: '',
       securityCode: '',
       selectedButton: '',
+      options: []
     }
   }
 
@@ -65,27 +66,12 @@ export default class EditSubscription extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flex: 2}}>
-          <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={styles.sectionHeader}>Edit Plan</Text>
-            <Ionicons name={'ios-log-out'} size={25} color={'white'} style={{textAlign: 'right', marginRight: 10}} onPress={() =>
-              {this.context.logout().then(() => this.props.navigation.dangerouslyGetParent().navigate('Landing'));}}/>
-          </View>
-          <Text style={styles.descriptionText}>Your Facility</Text>
-            <View style={{flexDirection: 'row', backgroundColor: 'white', padding: 10, borderRadius: 10, margin: 15}}>
-              <View style={{flex: 1}}>
-                <Image style={{width: 50, height: 50}} source={require('../photos/csimini.png') }/>
-              </View>
-              <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
-                <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
-                <Text>855 Parr Boulevard, Richmond, CA 94801</Text>
-              </View>
-            </View>
-          <Text style={styles.descriptionText}>Your Plan (scroll to see all)</Text>
+          <Text style={styles.descriptionText}>Available Plans</Text>
             <ScrollView style={{marginTop:15}}>
             <TouchableOpacity style={this.state.selectedButton === 'By Item' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("By Item")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
                 <Text style={styles.buttonHeader}>By Item</Text>
-                <Text style={styles.buttonHeader}>$7/bin/month</Text>
+                <Text style={styles.buttonHeader}>$7/month</Text>
               </View>
               <Text style={{color: '#FFF'}}>60x40x31.5cm</Text>
             </TouchableOpacity>

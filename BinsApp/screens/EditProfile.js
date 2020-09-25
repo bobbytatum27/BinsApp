@@ -64,11 +64,6 @@ export default class EditProfile extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flex:5}}>
-          <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={styles.sectionHeader}>Edit Profile</Text>
-            <Ionicons name={'ios-log-out'} size={25} color={'white'} style={{textAlign: 'right', marginRight: 10}} onPress={() =>
-              {this.context.logout().then(() => this.props.navigation.dangerouslyGetParent().navigate('Landing'));}}/>
-          </View>
           <Text style ={styles.descriptionText}>Full Name</Text>
           <FormInputHandler
             defaultValue={this.state.name}
