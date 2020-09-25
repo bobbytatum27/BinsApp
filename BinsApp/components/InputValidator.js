@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput} from 'react-native';
 
 export default class InputValidator extends React.Component {
   constructor(props) {

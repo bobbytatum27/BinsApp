@@ -26,14 +26,10 @@ import Amplify from "aws-amplify"
 import config from "./aws-exports"
 import { withAuthenticator } from "aws-amplify-react-native"
 
-Amplify.configure(config)
+Amplify.configure(config);
 
 // for stack nav
 const Stack = createStackNavigator();
-const HomeStack = createStackNavigator();
-const OrderStack = createStackNavigator();
-const MenuStack = createStackNavigator();
-const Tab = createBottomTabNavigator();
 const LandingTab = createMaterialTopTabNavigator();
 
 

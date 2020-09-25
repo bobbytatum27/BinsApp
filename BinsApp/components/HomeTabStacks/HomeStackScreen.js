@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Home Stack Screens
 import Home from '../../screens/Home.js'
 import Help from '../../screens/Help.js'
 import StorageInventory from '../../screens/StorageInventory.js'
@@ -10,22 +11,27 @@ import HomeInventory from '../../screens/HomeInventory.js'
 import NewItem from '../../screens/NewItem.js'
 import Menu from '../../screens/Menu.js'
 
+// create Home Stack Obj with Nav, Screen Stack Components
 import { createStackNavigator } from '@react-navigation/stack';
-
 const HomeStack = createStackNavigator();
 
+/*
+ * Contains the Home Stack Navigator
+ */
 export default HomeStackScreen = () => {
+    // Used to style the Home Stack Screen Header
+    const screenOpts = {
+        headerStyle: {
+            backgroundColor: '#7B1FA2',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold'
+        },
+    }
+
     return (
-        <HomeStack.Navigator 
-            screenOptions={{
-                headerStyle: {
-                backgroundColor: '#7B1FA2',
-                },
-                headerTintColor: '#fff',
-                headerTitleStyle: {
-                fontWeight: 'bold',
-            },
-        }}>
+        <HomeStack.Navigator screenOptions={screenOpts}>
             <HomeStack.Screen name='Home' component={Home}/>
             <HomeStack.Screen name='HelpScreen' component={Help} options={{title: "Help"}}/>
             <HomeStack.Screen name='StorageInventoryScreen' component={StorageInventory} options={{title: "Deliver"}}/>
