@@ -18,7 +18,7 @@ const HomeStack = createStackNavigator();
 /*
  * Contains the Home Stack Navigator
  */
-export default HomeStackScreen = () => {
+export default HomeStackScreen = (props) => {
     // Used to style the Home Stack Screen Header
     const screenOpts = {
         headerStyle: {

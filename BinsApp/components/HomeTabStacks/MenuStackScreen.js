@@ -16,7 +16,7 @@ const MenuStack = createStackNavigator();
 /*
  * Contains the Menu Stack Navigator
  */
-export default MenuStackScreen = () => {
+export default MenuStackScreen = (props) => {
     // Used to style the Menu Stack Screen Header
     const screenOpts = {
         headerStyle: {

@@ -10,7 +10,7 @@ const OrderStack = createStackNavigator();
 /*
  * Contains the Order Stack Navigator
  */
-export default OrderStackScreen = () => {
+export default OrderStackScreen = (props) => {
     // Used to style the Order Stack Screen Header
     const screenOpts = {
         headerStyle: {

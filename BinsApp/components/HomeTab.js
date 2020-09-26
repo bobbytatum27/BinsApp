@@ -11,7 +11,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 /*
  * Contains the Tab Navigator rendered at the main Home Screen Section (Home, Orders, Menu)
  */
-export default class HomeTab extends React.Component{
+export default class HomeTab extends React.Component {
 
     /*
      * Determines the icon to put on the Tab Image by using the route name 
