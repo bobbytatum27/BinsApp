@@ -5,18 +5,21 @@ class Item extends Component {
   render() {
     return (
       <View style = {styles.button}>
-        <Image style={{width: 150, height: 150}}
-               source={this.props.source}/>
+        <Image style={{width: 150, height: 150}} source={this.props.source}/>
         <View style={{padding: 10, flexDirection: 'column'}}>
           <Text style={{fontWeight: 'bold'}}>{data.item.description}</Text>
           <Text>#{data.item.id}</Text>
-            <TouchableOpacity style = {styles.button, data.item.selectedClass}
-               onPress={() => {this.selectItem(data); this.getSelected(this.state.dataSource);}}>
-               {data.item.isSelect ? (
-                 <Text>Selected</Text> ) : (<Text>Press</Text> ) }
-               </TouchableOpacity>
-             </View>
-             </View>
+          <TouchableOpacity 
+            style = {styles.button, data.item.selectedClass}
+            onPress={() => {this.selectItem(data); this.getSelected(this.state.dataSource);}}>
+              {data.item.isSelect ? (
+                <Text>Selected</Text> 
+              ) : (
+                <Text>Press</Text> 
+              )}
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   }
 }

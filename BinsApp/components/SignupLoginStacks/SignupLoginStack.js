@@ -1,10 +1,47 @@
 import React from 'react';
 
-import { createStackNavigator } from '@react-navigation/stack';
-const SignupLoginStack = createStackNavigator();
+import SelectFacility from '../../screens/SelectFacility.js'
+import BillingInfo from '../../screens/BillingInfo.js'
+import InitialAppointment from '../../screens/InitialAppointment.js'
+import InitialConfirmation from '../../screens/InitialConfirmation.js'
+import UserInfo from '../../screens/UserInfo.js'
+import Login from '../../screens/Login.js'
+import PasswordReset from '../../screens/PasswordReset.js'
+import ConfirmContactInfo from '../../screens/ConfirmContactInfo.js'
+import LandingTabs from './LandingTabs.js'
 
+import { createStackNavigator } from '@react-navigation/stack';
+const SignupLoginStacks = createStackNavigator();
+
+/*
+ * The stack navigator entered on App launch. Only unauthenticated users can access it. 
+ * Users are authenticated in one of two ways:
+ *      1. Signup: User creates an account and inputs their basic info thru the Signup Flow
+ *      2. Login: User logs in to existing account.
+ * Once authenticated, users enter the HomeTab navigator.
+ */
 export default SignupLoginStack = (props) => {
+    const screenOpts = {
+        headerStyle: {
+            backgroundColor: '#7B1FA2',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            fontWeight: 'bold',
+        },
+    }
+
     return (
-        <Text>fjdkla</Text>
+        <SignupLoginStacks.Navigator screenOptions={screenOpts}>
+           <SignupLoginStacks.Screen name='Landing' component={LandingTabs} options={{headerShown: false}}/>
+           <SignupLoginStacks.Screen name='Login' component={Login}/>
+           <SignupLoginStacks.Screen name='ConfirmContactInfo' component={ConfirmContactInfo}/>
+           <SignupLoginStacks.Screen name='PasswordReset' component={PasswordReset}/>
+           <SignupLoginStacks.Screen name='SelectFacilityScreen' component={SelectFacility} options={{title: "Select Storage Facility"}}/>
+           <SignupLoginStacks.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
+           <SignupLoginStacks.Screen name='AccountInfoScreen' component={UserInfo} options={{title: "Create an Account"}}/>
+           <SignupLoginStacks.Screen name='BillingInfoScreen' component={BillingInfo} options={{title: "Billing Info"}}/>
+           <SignupLoginStacks.Screen name='InitialConfirmationScreen' component={InitialConfirmation} options={{title: "Confirmation", headerLeft: null}}/>
+        </SignupLoginStacks.Navigator>
     );
 }
