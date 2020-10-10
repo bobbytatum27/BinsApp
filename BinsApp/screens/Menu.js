@@ -94,7 +94,7 @@ export default class Menu extends React.Component {
           </View>
           <View style={{flex:1, justifyContent: 'flex-end', padding: 25}}>
           <LongButton
-            title="Sign Out"
+            title="SIGN OUT"
             onPress={()=>{this.context.logout();}}
           />
           </View>

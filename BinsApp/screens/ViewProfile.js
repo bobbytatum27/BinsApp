@@ -26,7 +26,22 @@ export default class ViewProfile extends React.Component {
     }
   }
 
+/*
+ * this.willFocusSubscription refreshes the screen when going back in React Navigation.
+ * The docs recommend using componentWillUnmount, but it seems to cause an issue when navigating back, so I didn't include it here.
+*/
+
   componentDidMount(){
+      this.fetchData();
+      this.willFocusSubscription = this.props.navigation.addListener(
+      'focus',
+      () => {
+        this.fetchData();
+      }
+    );
+  }
+
+  fetchData(){
     Auth.currentUserInfo().then((userInfo) => {
       const { attributes = {} } = userInfo;
       this.setState({name:attributes['name']});
@@ -42,7 +57,7 @@ export default class ViewProfile extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flex:1, marginTop: 25}}>
-          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditProfile')}>
+          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditName')}>
             <View>
               <Text style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Name</Text>
               <Text style={{color: 'white', fontSize: 20}}>{this.state.name}</Text>
@@ -50,7 +65,7 @@ export default class ViewProfile extends React.Component {
             <Text style={{color: 'white', fontSize: 20}}>></Text>
           </TouchableOpacity>
           <View style={styles.line}/>
-          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditProfile')}>
+          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditPhone')}>
             <View>
               <Text style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Phone</Text>
               <Text style={{color: 'white', fontSize: 20}}>{this.state.phone}</Text>
@@ -58,7 +73,7 @@ export default class ViewProfile extends React.Component {
             <Text style={{color: 'white', fontSize: 20}}>></Text>
           </TouchableOpacity>
           <View style={styles.line}/>
-          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditProfile')}>
+          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditAddress')}>
             <View>
               <Text style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Address</Text>
               <Text style={{color: 'white', fontSize: 20, marginRight: 15}}>{this.state.address}</Text>
@@ -66,7 +81,7 @@ export default class ViewProfile extends React.Component {
             <Text style={{color: 'white', fontSize: 20}}>></Text>
           </TouchableOpacity>
           <View style={styles.line}/>
-          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditProfile')}>
+          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditSpecialInstructions')}>
             <View>
               <Text style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Special Instructions</Text>
               <Text style={{color: 'white', fontSize: 20}}>{this.state.specialInstructions}</Text>

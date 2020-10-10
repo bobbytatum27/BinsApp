@@ -7,7 +7,7 @@ import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
 import {Url} from '../src/components/url.js';
 
-export default class EditProfile extends React.Component {
+export default class EditName extends React.Component {
   static contextType = LoginContext;
 
   constructor(props) {
@@ -70,27 +70,6 @@ export default class EditProfile extends React.Component {
             defaultTextColor='#8B8B8B'
             style={styles.userInfoText}
             onChangeText={(val)=>this.setState({name:val})}
-          />
-          <Text style ={styles.descriptionText}>Phone</Text>
-          <FormInputHandler
-            defaultValue={this.state.phone}
-            defaultTextColor='#8B8B8B'
-            style={styles.userInfoText}
-            onChangeText={(val)=>this.setState({phone:val})}
-          />
-          <Text style ={styles.descriptionText}>Address</Text>
-          <FormInputHandler
-            defaultValue={this.state.address}
-            defaultTextColor='#8B8B8B'
-            style={styles.userInfoText}
-            onChangeText={(text) => this.setState({addressLine1: text})}
-          />
-          <Text style ={styles.descriptionText}>Special Instructions</Text>
-          <FormInputHandler
-            defaultValue={this.state.specialInstructions}
-            defaultTextColor='#8B8B8B'
-            style={styles.userInfoText}
-            onChangeText={(text) => this.setState({specialInstructions: text})}
           />
         </View>
         <View style={{flex:1, justifyContent: 'flex-end'}}>

@@ -7,7 +7,7 @@ import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
 import {Url} from '../src/components/url.js';
 
-export default class EditBilling extends React.Component {
+export default class EditPhone extends React.Component {
   static contextType = LoginContext;
 
   constructor(props) {
@@ -27,7 +27,8 @@ export default class EditBilling extends React.Component {
   }
 
   onSubmit() {
-    fetch(Url+'/modifycustomers',{
+      this.updateUser()
+      fetch(Url+'/modifycustomers',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -36,13 +37,16 @@ export default class EditBilling extends React.Component {
       body: JSON.stringify(this.state)
   })}
 
-  /*async updateUser() {
+  async updateUser() {
     let user = await Auth.currentAuthenticatedUser();
 
     let result = await Auth.updateUserAttributes(user, {
-      'custom:size': this.state.selectedButton
+      'name': this.state.name,
+      'phone_number': this.state.phone,
+      'address': this.state.address,
+      'custom:specialInstructions': this.state.specialInstructions,
     });
-  }*/
+      }
 
   componentDidMount(){
     Auth.currentUserInfo().then((userInfo) => {
@@ -59,42 +63,14 @@ export default class EditBilling extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flex: 5}}>
-          <Text style={styles.descriptionText}>Name on Card</Text>
+        <View style={{flex:5}}>
+          <Text style ={styles.descriptionText}>Phone</Text>
           <FormInputHandler
-            defaultText='Name on Card'
+            defaultValue={this.state.phone}
             defaultTextColor='#8B8B8B'
             style={styles.userInfoText}
-            onChangeText={(text) => this.setState({nameOnCard: text})}
+            onChangeText={(val)=>this.setState({phone:val})}
           />
-          <Text style={styles.descriptionText}>Credit Card</Text>
-          <FormInputHandler
-            defaultText='xxxx xxxx xxxx xxxx'
-            defaultTextColor='#8B8B8B'
-            style={styles.userInfoText}
-            onChangeText={(text) => this.setState({creditCardNum: text})}
-          />
-          <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
-            <View style={{flex:1}}>
-              <Text style={styles.descriptionText}>Expiration Date</Text>
-              <FormInputHandler
-                defaultText='Expiration Date'
-                defaultTextColor='#8B8B8B'
-                style={styles.userInfoText}
-                onChangeText={(text) => this.setState({expirationDate: text})}
-              />
-            </View>
-            <View style={{flex:1}}>
-              <Text style={styles.descriptionText}>Security Code</Text>
-              <FormInputHandler
-                defaultText='Security Code'
-                defaultTextColor='#8B8B8B'
-                style={styles.userInfoText}
-                onChangeText={(text) => this.setState({securityCode: text})}
-              />
-            </View>
-          </View>
-          <Text style = {{marginLeft: 15, marginTop: 10, marginRight: 15, color: 'gray'}}>Next Payment: </Text>
         </View>
         <View style={{flex:1, justifyContent: 'flex-end'}}>
           <LongButton

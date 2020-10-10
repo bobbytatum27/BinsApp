@@ -3,7 +3,10 @@ import React from 'react';
 // Menu Stack Screens
 import Help from '../../screens/Help.js'
 import ViewProfile from '../../screens/ViewProfile.js'
-import EditProfile from '../../screens/EditProfile.js'
+import EditName from '../../screens/EditName.js'
+import EditPhone from '../../screens/EditPhone.js'
+import EditAddress from '../../screens/EditAddress.js'
+import EditSpecialInstructions from '../../screens/EditSpecialInstructions.js'
 import EditBilling from '../../screens/EditBilling.js'
 import ViewPlan from '../../screens/ViewPlan.js'
 import EditPlan from '../../screens/EditPlan.js'
@@ -32,7 +35,10 @@ export default MenuStackScreen = (props) => {
         <MenuStack.Navigator screenOptions={screenOpts}>
             <MenuStack.Screen name="Menu" component={Menu}/>
             <MenuStack.Screen name="ViewProfile" component={ViewProfile} options={{title: "View Profile"}}/>
-            <MenuStack.Screen name="EditProfile" component={EditProfile} options={{title: "Edit Profile"}}/>
+            <MenuStack.Screen name="EditName" component={EditName} options={{title: "Edit Name"}}/>
+            <MenuStack.Screen name="EditPhone" component={EditPhone} options={{title: "Edit Phone"}}/>
+            <MenuStack.Screen name="EditAddress" component={EditAddress} options={{title: "Edit Address"}}/>
+            <MenuStack.Screen name="EditSpecialInstructions" component={EditSpecialInstructions} options={{title: "Edit Special Instructions"}}/>
             <MenuStack.Screen name="Billing" component={EditBilling}/>
             <MenuStack.Screen name="ViewPlan" component={ViewPlan} options={{title: "Your Storage Plan"}}/>
             <MenuStack.Screen name="EditPlan" component={EditPlan} options={{title: "Edit Storage Plan"}}/>
