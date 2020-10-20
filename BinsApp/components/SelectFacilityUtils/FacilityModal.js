@@ -8,20 +8,20 @@ import { Ionicons } from '@expo/vector-icons';
 /*
  *
  * Props:
- * 1. modalVisible: 
+ * 1. modalVisible:
  * 2. src: Source URL for the facility's image
  * 3. onIconPress
  * 4. facilityName
  * 5. facilityAddress
  * 6. facilityWebsite
- * 7. onSelectPaymentPlan   
- *    *** This is prop drilling I think, 
- *       but it's only 3 total layers so 
+ * 7. onSelectPaymentPlan
+ *    *** This is prop drilling I think,
+ *       but it's only 3 total layers so
  *       I'm leaving it for now. ***
- * 
- * 
- * 
- * IMPORTANT: Improvement to be made: Use hooks and functional components (esp the useCallback hook 
+ *
+ *
+ *
+ * IMPORTANT: Improvement to be made: Use hooks and functional components (esp the useCallback hook
  * so the onPress prop arg is not a function copy created every time the PaymentCard component is made)
  * Refer to this for why: https://medium.com/@dan_abramov/making-sense-of-react-hooks-fdbde8803889
  * In essence: we need to make components as pure as possible, and hooks with function components are a really good way of doing this
@@ -48,11 +48,11 @@ export default class FacilityModal extends React.Component {
 
                   <View style={{flex: 2, margin: 10}}>
                     <Text style={{fontSize: 30, marginLeft: 10}}>{this.props.facilityName}</Text>
-                    <Text style={{marginLeft: 10}}>{this.props.facilityAdress}</Text>
+                    <Text style={{marginLeft: 10}}>{this.props.facilityAddress}</Text>
                     <Text style={{marginLeft: 10}}>{this.props.facilityWebsite}</Text>
                     <Text style={{fontSize: 15, marginLeft: 10, marginTop: 10}}>Options Available</Text>
                     <ScrollView>
-                      <PaymentPlanCard 
+                      <PaymentPlanCard
                         onPress={() => this.props.onSelectPaymentPlan("Pay By Bin")}
                         unitSize='Pay By Bin'
                         unitPrice='$7/month'

@@ -37,7 +37,7 @@ export default class SelectFacility extends React.Component {
   checkAddress = () => ZipCodes.includes(this.state.zip);
 
   /*
-   * 
+   *
    */
   findUnit = () => {
     if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '') {
@@ -57,16 +57,16 @@ export default class SelectFacility extends React.Component {
    */
   selectPaymentPlan = (unitSize) => {
     let addressData = {
-      addressLine1: this.state.addressLine1, 
+      addressLine1: this.state.addressLine1,
       addressLine2: this.state.addressLine2,
-      city: this.state.city, 
-      state: this.state.state, 
+      city: this.state.city,
+      state: this.state.state,
       zip: this.state.zip,
-      specialInstructions: this.state.specialInstructions, 
+      specialInstructions: this.state.specialInstructions,
       size: unitSize,
     };
 
-    this.props.navigation.navigate('AccountInfoScreen', addressData); 
+    this.props.navigation.navigate('AccountInfoScreen', addressData);
     this.setState({modalVisible:false});
   }
 
@@ -183,16 +183,10 @@ export default class SelectFacility extends React.Component {
             <View style={{padding: 15, marginTop: 15}}>
               <Text style={{fontSize: 15, color: 'white', marginBottom: 15, textAlign: 'center'}}>Here's what we found based on your address above.</Text>
               <View style={{height: 5}}>{/*for padding purposes*/}</View>
-              <FacilitySummaryCard 
-                src={require('../photos/csimini.png')} 
+              <FacilitySummaryCard
+                src={require('../photos/csimini.png')}
                 onPress={() => {this.setState({modalVisible:true, storageAddress: '855 Parr Boulevard, Richmond, CA 94801'})}}
                 address='855 Parr Boulevard, Richmond, CA 94801'
-              />
-              <View style={{height: 5}}>{/*for padding purposes*/}</View>
-              <FacilitySummaryCard 
-                src={require('../photos/csimini.png')} 
-                onPress={() => {this.setState({modalVisible:true, storageAddress: '51 West Hornet Ave., Alameda, CA 94501'})}}
-                address='51 West Hornet Ave., Alameda, CA 94501'
               />
             </View>
           </>
