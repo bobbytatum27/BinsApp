@@ -8,7 +8,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import {Url} from '../src/components/url.js';
 import moment from "moment";
 
-export default class Orders extends Component {
+export default class PastOrders extends Component {
   static contextType = LoginContext;
   constructor() {
     super();
@@ -19,13 +19,12 @@ export default class Orders extends Component {
       timeSelected: '',
       refreshing: false,
       email: '',
-      filter: 'Upcoming',
     }
   }
 
   renderItem = data => {
       return (
-        <TouchableOpacity style={{padding: 15, backgroundColor: "white", marginTop: 10, flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}} onPress={() => this.props.navigation.navigate('ViewOrder', {id: data.item.id})}>
+        <TouchableOpacity style={styles.orderbox} onPress={() => this.props.navigation.navigate('ViewPastOrder', {id: data.item.id})}>
           <View>
             <Text style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
             <Text>{data.item.time} | {data.item.type}</Text>
@@ -54,23 +53,6 @@ export default class Orders extends Component {
   }
 
   fetchData(){
-    fetch(Url+'/renderorders')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      const responseJson2 = responseJson.filter(function(item){
-        return item.name == Auth.user.attributes.email
-      });
-      this.setState({dataSource: responseJson2, isLoading: false});
-    })
-    .then(() => {
-     this.setState({refreshing: false});
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
-
-  fetchPastOrders(){
     fetch(Url+'/renderpastorders')
     .then((response) => response.json())
     .then((responseJson) => {
@@ -102,17 +84,6 @@ export default class Orders extends Component {
         </>
       ) : (
         <>
-        <DropDownPicker
-          items={[
-                {label: 'Upcoming', value: 'Upcoming'},
-                {label: 'Past', value: 'Past'}
-          ]}
-          placeholder={"Upcoming"}
-          arrowSize={10}
-          itemStyle={{justifyContent: 'flex-start'}}
-          containerStyle={{marginLeft: 15, marginBottom: 5, height: 35, width: 110}}
-          onChangeItem={item => {this.onSort(item.value)}}
-        />
           <FlatList
             data={this.state.dataSource}
             renderItem={this.renderItem}
@@ -137,39 +108,12 @@ export default class Orders extends Component {
     flex: 1,
     backgroundColor: '#261136',
   },
-  userInfoText: {
-    borderColor: '#4826A0',
-    borderWidth: 1,
-    textAlign: 'center',
-    color: 'white',
-    margin: 15,
+  orderbox:{
     padding: 15,
-  },
-  descriptionText:{
-    marginBottom: -10,
-    marginLeft: 15,
-    color: 'white',
-  },
-  questionText: {
-    fontSize: 20,
-    paddingTop: 15
-  },
-  header: {
-    color: '#AAB5E0',
-    fontSize: 25,
-    margin: 15,
-    justifyContent: 'center',
-  },
-  sectionHeader: {
-    color: '#AAB5E0',
-    fontSize: 25,
-    marginLeft: 15,
-    marginBottom: 25
-  },
-  lineStyle:{
-    borderWidth: 0.5,
-    borderColor:'black',
-    marginLeft: 25,
-    marginRight: 25,
-  },
+    backgroundColor: "white",
+    marginBottom: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: 'center'
+  }
   });

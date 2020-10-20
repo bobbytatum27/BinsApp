@@ -8,7 +8,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import {Url} from '../src/components/url.js';
 import moment from "moment";
 
-export default class Orders extends Component {
+export default class ViewOrder extends Component {
   static contextType = LoginContext;
   constructor() {
     super();
@@ -20,18 +20,23 @@ export default class Orders extends Component {
       refreshing: false,
       email: '',
       filter: 'Upcoming',
+      id: ''
     }
   }
 
   renderItem = data => {
       return (
-        <TouchableOpacity style={{padding: 15, backgroundColor: "white", marginTop: 10, flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}} onPress={() => this.props.navigation.navigate('ViewOrder', {id: data.item.id})}>
-          <View>
-            <Text style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
-            <Text>{data.item.time} | {data.item.type}</Text>
-          </View>
-          <Text>></Text>
-        </TouchableOpacity>
+        <View style={{marginTop: 20}}>
+        <Textbox header='Date and Time'
+                 body={moment(data.item.date).format('MMMM DD, YYYY')}
+                 body2={data.item.time}/>
+        <Textbox header='Address'
+                 body={data.item.address}/>
+        <Textbox header='Order Type'
+                 body='Pickup'/>
+        <Textbox header='Items'
+                 body={data.item.items}/>
+        </View>
       )
     }
 
@@ -57,25 +62,9 @@ export default class Orders extends Component {
     fetch(Url+'/renderorders')
     .then((response) => response.json())
     .then((responseJson) => {
+      const id = this.props.route.params?.id??'';
       const responseJson2 = responseJson.filter(function(item){
-        return item.name == Auth.user.attributes.email
-      });
-      this.setState({dataSource: responseJson2, isLoading: false});
-    })
-    .then(() => {
-     this.setState({refreshing: false});
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }
-
-  fetchPastOrders(){
-    fetch(Url+'/renderpastorders')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      const responseJson2 = responseJson.filter(function(item){
-        return item.name == Auth.user.attributes.email
+        return item.id == id
       });
       this.setState({dataSource: responseJson2, isLoading: false});
     })
@@ -102,17 +91,7 @@ export default class Orders extends Component {
         </>
       ) : (
         <>
-        <DropDownPicker
-          items={[
-                {label: 'Upcoming', value: 'Upcoming'},
-                {label: 'Past', value: 'Past'}
-          ]}
-          placeholder={"Upcoming"}
-          arrowSize={10}
-          itemStyle={{justifyContent: 'flex-start'}}
-          containerStyle={{marginLeft: 15, marginBottom: 5, height: 35, width: 110}}
-          onChangeItem={item => {this.onSort(item.value)}}
-        />
+        <Text>{this.state.id}</Text>
           <FlatList
             data={this.state.dataSource}
             renderItem={this.renderItem}
@@ -136,40 +115,5 @@ export default class Orders extends Component {
   container: {
     flex: 1,
     backgroundColor: '#261136',
-  },
-  userInfoText: {
-    borderColor: '#4826A0',
-    borderWidth: 1,
-    textAlign: 'center',
-    color: 'white',
-    margin: 15,
-    padding: 15,
-  },
-  descriptionText:{
-    marginBottom: -10,
-    marginLeft: 15,
-    color: 'white',
-  },
-  questionText: {
-    fontSize: 20,
-    paddingTop: 15
-  },
-  header: {
-    color: '#AAB5E0',
-    fontSize: 25,
-    margin: 15,
-    justifyContent: 'center',
-  },
-  sectionHeader: {
-    color: '#AAB5E0',
-    fontSize: 25,
-    marginLeft: 15,
-    marginBottom: 25
-  },
-  lineStyle:{
-    borderWidth: 0.5,
-    borderColor:'black',
-    marginLeft: 25,
-    marginRight: 25,
-  },
+  }
   });

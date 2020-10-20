@@ -8,6 +8,7 @@ import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import {Url} from '../src/components/url.js';
+import moment from "moment";
 
 class Home extends Component {
   static contextType = LoginContext;
@@ -99,8 +100,8 @@ class Home extends Component {
   renderOrders = data => {
       return (
         <View style = {styles.textbox}>
-        <Text style={{fontSize: 31}}>Order Date: {data.item.date}</Text>
-        <Text style={{fontSize: 31}}>Order Time: {data.item.time}</Text>
+        <Text style={{fontSize: 24}}>{moment(data.item.date).format('MMMM DD, YYYY')}</Text>
+        <Text style={{fontSize: 24}}>{data.item.time}</Text>
         </View>
     )
   }
@@ -128,8 +129,8 @@ class Home extends Component {
             onRefresh={this.onRefresh}
             tintColor = 'white'  />
         }>
-          <View>
-            <Text style={styles.sectionHeader}>Upcoming Orders</Text>
+          <View style={{padding:25}}>
+            <Text style={styles.sectionHeader}>Next Order</Text>
           {this.state.dataSourceOrders.length == 0 ? (
             <>
                 <View style = {styles.textbox}>
@@ -139,15 +140,16 @@ class Home extends Component {
         ) : (
           <>
             <FlatList
-              horizontal={true}
-              data={this.state.dataSourceOrders}
-              renderItem={this.renderOrders}/>
+              data={this.state.dataSourceOrders.slice(0,1)}
+              renderItem={this.renderOrders}
+              scrollEnabled={false}
+            />
             <LongButton title ="VIEW ALL"
                         onPress={() => this.props.navigation.navigate('Orders')}/>
           </>
         )}
           </View>
-          <View style={{marginBottom: 25}}>
+          <View style={{padding: 25}}>
             <Text style={styles.sectionHeader}>Items in Storage</Text>
             {this.state.dataSourceStorage.length == 0 ? (
               <>
@@ -159,9 +161,10 @@ class Home extends Component {
             <>
             <FlatList
               horizontal={true}
-              data={this.state.dataSourceStorage}
+              data={this.state.dataSourceStorage.slice(0,2)}
               renderItem={this.renderItemsInStorage}
               keyExtractor={(item, index) => index.toString()}
+              scrollEnabled={false}
             />
               <LongButton
                title ="VIEW ALL"
@@ -169,7 +172,7 @@ class Home extends Component {
             </>
           )}
           </View>
-          <View style={{marginBottom: 25}}>
+          <View style={{padding: 25}}>
             <Text style={styles.sectionHeader}>Items with You</Text>
             {this.state.dataSourceHome.length == 0 ? (
               <>
@@ -184,9 +187,10 @@ class Home extends Component {
             <>
               <FlatList
                 horizontal={true}
-                data={this.state.dataSourceHome}
+                data={this.state.dataSourceHome.slice(0,2)}
                 renderItem={this.renderItem}
                 keyExtractor={(item, index) => index.toString()}
+                scrollEnabled={false}
               />
               <LongButton
                title ="VIEW ALL"
@@ -206,7 +210,6 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 25,
     backgroundColor: '#261136',
   },
   sectionHeader: {

@@ -1,7 +1,10 @@
 import React from 'react';
 
 //Order Stack Screens
-import Orders from '../../screens/Orders.js'
+import UpcomingOrders from '../../screens/UpcomingOrders.js'
+import PastOrders from '../../screens/PastOrders.js'
+import ViewOrder from '../../screens/ViewOrder.js'
+import ViewPastOrder from '../../screens/ViewPastOrder.js'
 
 // create Order Stack Obj with Nav, Screen Stack Components
 import { createStackNavigator } from '@react-navigation/stack';
@@ -24,7 +27,10 @@ export default OrderStackScreen = (props) => {
 
     return (
         <OrderStack.Navigator screenOptions={screenOpts}>
-            <OrderStack.Screen name="Orders" component={Orders}/>
+            <OrderStack.Screen name="UpcomingOrders" component={UpcomingOrders} options={{title: "Upcoming Orders"}}/>
+            <OrderStack.Screen name="ViewOrder" component={ViewOrder} options={{title: "View Order"}}/>
+            <OrderStack.Screen name="PastOrders" component={PastOrders} options={{title: "Past Orders"}}/>
+            <OrderStack.Screen name="ViewPastOrder" component={ViewPastOrder} options={{title: "View Order"}}/>
         </OrderStack.Navigator>
     );
 }

@@ -14,9 +14,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 export default class HomeTab extends React.Component {
 
     /*
-     * Determines the icon to put on the Tab Image by using the route name 
+     * Determines the icon to put on the Tab Image by using the route name
      * passed from the TabNavigator.
-     * 
+     *
      * @param {route} The route obj (destructured I think)
      * @return An object called tabBarIcon which renders the appropriate Ionicon image
      */
@@ -29,7 +29,7 @@ export default class HomeTab extends React.Component {
             } else if (route.name === 'Menu') {
               iconName = 'ios-list';
             } else if (route.name === 'Orders') {
-              iconName = 'ios-list';
+              iconName = 'ios-clipboard';
             }
 
             return <Ionicons name={iconName} size={22} color={color} />;
@@ -43,11 +43,12 @@ export default class HomeTab extends React.Component {
         const tabBarOpts = {
             activeTintColor: 'white',
             inactiveTintColor: 'gray',
-            style: {backgroundColor: '#7B1FA2'}
+            style: {backgroundColor: '#7B1FA2'},
+            showLabel: false
         }
 
         return (
-            <Tab.Navigator 
+            <Tab.Navigator
                 screenOptions={this.tabImage}
                 tabBarOptions={tabBarOpts}
                 initialRouteName='Home'

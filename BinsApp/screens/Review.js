@@ -6,6 +6,7 @@ import LongButton from '../components/LongButton.js'
 import { LoginContext } from '../components/LoginProvider.js';
 import {Auth} from 'aws-amplify';
 import {Url} from '../src/components/url.js';
+import moment from "moment";
 
 export default class Review extends Component {
   static contextType = LoginContext;
@@ -69,7 +70,7 @@ export default class Review extends Component {
           <Text style = {styles.header}>Review</Text>
         </View>
         <Textbox header='Date and Time'
-                 body={this.state.dateSelected}
+                 body={moment(this.state.dateSelected).format('dddd, MMMM DD, YYYY')}
                  body2={this.state.timeSelected}/>
         <Textbox header='Address'
                  body={this.state.address}/>
