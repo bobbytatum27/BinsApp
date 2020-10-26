@@ -49,6 +49,8 @@ export const styles = StyleSheet.create({
    alignItems: 'center',
    backgroundColor: '#7B1FA2',
    padding: 10,
-   margin: 15,
+   marginTop: 15,
+   marginLeft: 15,
+   marginRight: 15,
  },
 });

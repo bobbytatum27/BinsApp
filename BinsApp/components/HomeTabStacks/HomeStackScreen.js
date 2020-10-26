@@ -10,6 +10,7 @@ import Confirmation from '../../screens/Confirmation.js'
 import HomeInventory from '../../screens/HomeInventory.js'
 import NewItem from '../../screens/NewItem.js'
 import Menu from '../../screens/Menu.js'
+import EditAddress from '../../screens/EditAddress.js'
 
 // create Home Stack Obj with Nav, Screen Stack Components
 import { createStackNavigator } from '@react-navigation/stack';
@@ -41,6 +42,7 @@ export default HomeStackScreen = (props) => {
             <HomeStack.Screen name='HomeInventoryScreen' component={HomeInventory} options={{title: "Pickup"}}/>
             <HomeStack.Screen name='NewItemScreen' component={NewItem} options={{title: "Pickup"}}/>
             <HomeStack.Screen name='Menu' component={Menu}/>
+            <HomeStack.Screen name="EditAddress" component={EditAddress} options={{title: "Edit Address"}}/>
         </HomeStack.Navigator>
     );
 }

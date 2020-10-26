@@ -16,9 +16,9 @@ export default class Review extends Component {
     this.state = {
       dateSelected: '',
       timeSelected: '',
-      address: Auth.user.attributes.address,
-      email: Auth.user.attributes.email,
-      phone: Auth.user.attributes.phone_number,
+      address: '',
+      email: '',
+      phone: '',
       selected: '',
       type: '',
       id: '',
@@ -48,30 +48,39 @@ export default class Review extends Component {
 
 
   componentDidMount(){
-      const dateSelected = this.props.route.params?.dateSelected??'';
-      const timeSelected = this.props.route.params?.timeSelected??'';
-      const selectedArray = this.props.route.params?.selected??'';
-      const selected = selectedArray.toString();
-      const type = this.props.route.params?.type??'';
-      const idArray = this.props.route.params?.id??'';
-      const idString = idArray.toString();
-      const id = parseInt(idString, 10);
-      this.setState({dateSelected});
-      this.setState({timeSelected});
-      this.setState({selected});
-      this.setState({type});
-      this.setState({id});
+    this.fetchData();
+    const dateSelected = this.props.route.params?.dateSelected??'';
+    const timeSelected = this.props.route.params?.timeSelected??'';
+    const selectedArray = this.props.route.params?.selected??'';
+    const selected = selectedArray.toString();
+    const type = this.props.route.params?.type??'';
+    const idArray = this.props.route.params?.id??'';
+    const idString = idArray.toString();
+    const id = parseInt(idString, 10);
+    this.setState({dateSelected});
+    this.setState({timeSelected});
+    this.setState({selected});
+    this.setState({type});
+    this.setState({id});
+  }
+
+    fetchData(){
+      Auth.currentUserInfo().then((userInfo) => {
+        const { attributes = {} } = userInfo;
+        this.setState({email:attributes['email']});
+        this.setState({phone:attributes['phone_number']});
+        this.setState({address:attributes['address']});
+      })
     }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style = {{alignItems: 'center'}}>
-          <Text style = {styles.header}>Review</Text>
-        </View>
-        <Textbox header='Date and Time'
-                 body={moment(this.state.dateSelected).format('dddd, MMMM DD, YYYY')}
-                 body2={this.state.timeSelected}/>
+        <View style={{margin: 10}}/>
+        <Textbox header='Date'
+                 body={moment(this.state.dateSelected).format('MMMM DD, YYYY')}/>
+        <Textbox header='Time'
+                 body={this.state.timeSelected}/>
         <Textbox header='Address'
                  body={this.state.address}/>
         <Textbox header='Items'
@@ -102,7 +111,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#261136',
-    padding: 25
   },
   userInfoText: {
     borderColor: '#4826A0',
@@ -127,5 +135,4 @@ const styles = StyleSheet.create({
     margin: 15,
     justifyContent: 'center',
   }
-
   });

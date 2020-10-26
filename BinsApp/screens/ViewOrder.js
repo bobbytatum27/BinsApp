@@ -26,16 +26,17 @@ export default class ViewOrder extends Component {
 
   renderItem = data => {
       return (
-        <View style={{marginTop: 20}}>
-        <Textbox header='Date and Time'
-                 body={moment(data.item.date).format('MMMM DD, YYYY')}
-                 body2={data.item.time}/>
-        <Textbox header='Address'
-                 body={data.item.address}/>
-        <Textbox header='Order Type'
-                 body='Pickup'/>
-        <Textbox header='Items'
-                 body={data.item.items}/>
+        <View style={{marginTop: 10}}>
+          <Textbox header='Date and Time'
+                   body={moment(data.item.date).format('MMMM DD, YYYY')}/>
+          <Textbox header='Time'
+                   body={data.item.time}/>
+          <Textbox header='Address'
+                   body={data.item.address}/>
+          <Textbox header='Order Type'
+                   body='Pickup'/>
+          <Textbox header='Items'
+                   body={data.item.items}/>
         </View>
       )
     }

@@ -4,6 +4,7 @@ import FormInputHandler from '../components/FormInputHandler.js'
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import LongButton from '../components/LongButton.js'
 import moment from 'moment';
+import {Auth} from 'aws-amplify';
 
 export default class ScheduleAppointment extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export default class ScheduleAppointment extends Component {
       selected: [],
       type: '',
       id: '',
+      address: '',
     }
     this.selectionOnPress = this.selectionOnPress.bind(this)
   }
@@ -24,6 +26,16 @@ export default class ScheduleAppointment extends Component {
   this.setState({selectedButton: userType})
   }
 
+  fetchData(){
+    Auth.currentUserInfo().then((userInfo) => {
+      const { attributes = {} } = userInfo;
+      this.setState({address:attributes['address']});
+    })
+  }
+
+  componentDidMount(){
+    this.fetchData();
+  }
 
   render() {
 
@@ -38,8 +50,8 @@ export default class ScheduleAppointment extends Component {
               minDate={today}
               onDayPress={(day) => {this.setState({dateSelected:{[day.dateString]:{selected: true, selectedColor: '#466A8F'}}})}}
               markedDates={this.state.dateSelected}/>
-            <Text style={styles.descriptionText}>Please select a time</Text>
-            <View style={{flexDirection: 'row', justifyContent: 'space-around', borderColor: '#d6d7da', flexWrap: 'wrap', marginTop: 25}}>
+            <Text style={styles.descriptionText}>Please Select a Time</Text>
+            <View style={{flexDirection: 'row', justifyContent: 'space-around', borderColor: '#d6d7da', flexWrap: 'wrap', marginTop: 25, margin: 25, marginLeft: 5, marginRight:5}}>
               <TouchableOpacity
                 style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '8am-10am' ? 2 : 0}}
                 onPress={() => this.selectionOnPress("8am-10am")}
@@ -77,6 +89,12 @@ export default class ScheduleAppointment extends Component {
               <Text style={styles.switchButtonsText}>6pm-8pm</Text>
               </TouchableOpacity>
             </View>
+            <Text style={styles.descriptionText}>Address</Text>
+            <TouchableOpacity style={styles.textbox}
+                              onPress={() => this.props.navigation.navigate('EditAddress')}>
+              <Text style={styles.header}>{this.state.address}</Text>
+              <Text style={styles.header}>></Text>
+            </TouchableOpacity>
           <LongButton
             title="NEXT"
             onPress={()=>
@@ -99,14 +117,6 @@ export default class ScheduleAppointment extends Component {
     backgroundColor: '#261136',
     padding: 25
   },
-  userInfoText: {
-    borderColor: '#4826A0',
-    borderWidth: 1,
-    textAlign: 'center',
-    color: 'white',
-    margin: 15,
-    padding: 15,
-  },
   descriptionText:{
     marginBottom: -10,
     marginLeft: 15,
@@ -119,5 +129,17 @@ export default class ScheduleAppointment extends Component {
   timeButton:{
     margin: 10
   },
-
+  textbox: {
+    flexDirection: 'row',
+    backgroundColor: '#7B1FA2',
+    padding: 10,
+    justifyContent: 'space-between',
+    margin: 15,
+    borderRadius: 10,
+    alignItems: 'center'
+  },
+  header: {
+    fontSize: 20,
+    color: '#FFF'
+  },
   });

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
+import moment from "moment";
 
 export default class Confirmation extends Component {
   constructor(props) {
@@ -30,18 +31,18 @@ export default class Confirmation extends Component {
     return (
         <View style={styles.container}>
           <Text style={styles.header}>Your Order Has Been Placed Successfully!</Text>
-          <Textbox header='Date and Time'
-                   body={this.state.dateSelected}
-                   body2={this.state.timeSelected}/>
+          <Textbox header='Date'
+                   body={moment(this.state.dateSelected).format('MMMM DD, YYYY')}/>
+          <Textbox header='Time'
+                   body={this.state.timeSelected}/>
           <Textbox header='Address'
                    body={this.state.address}/>
           <Textbox header='Order Type'
                    body={this.state.type}/>
-          <View>
+          <View style={{marginTop: 10}}>
             <LongButton title ="VIEW SCHEDULED ORDERS"
                         onPress={() => this.props.navigation.navigate('Orders')}/>
-          </View>
-          <View style = {{marginTop: -15}}>
+
             <LongButton title ="MAKE ANOTHER ORDER"
                         onPress={() => this.props.navigation.navigate('Home')}/>
           </View>
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
 container: {
   flex: 1,
   backgroundColor: '#261136',
-  padding: 25
 },
 userInfoText: {
   borderColor: '#4826A0',

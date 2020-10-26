@@ -149,6 +149,7 @@ class Home extends Component {
           </>
         )}
           </View>
+          <View style={styles.line}/>
           <View style={{padding: 25}}>
             <Text style={styles.sectionHeader}>Items in Storage</Text>
             {this.state.dataSourceStorage.length == 0 ? (
@@ -172,6 +173,7 @@ class Home extends Component {
             </>
           )}
           </View>
+          <View style={styles.line}/>
           <View style={{padding: 25}}>
             <Text style={styles.sectionHeader}>Items with You</Text>
             {this.state.dataSourceHome.length == 0 ? (
@@ -213,10 +215,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#261136',
   },
   sectionHeader: {
-    color: '#AAB5E0',
+    color: '#FFF',
     fontSize: 25,
     marginBottom: 10,
-    marginLeft: 15
+    marginLeft: 15,
   },
   menuFilter: {
     color: 'white',
@@ -249,11 +251,15 @@ const styles = StyleSheet.create({
  },
   textbox: {
     flexDirection: 'column',
-    backgroundColor: '#E5E7E9',
+    backgroundColor: '#FFF',
     padding: 10,
     marginLeft: 15,
     marginRight: 15,
-    marginBottom: 1,
+
     borderRadius: 5
   },
+  line: {
+    borderBottomColor: '#4826A0',
+    borderBottomWidth: 3,
+  }
 })
