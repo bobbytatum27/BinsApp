@@ -69,7 +69,12 @@ class Home extends Component {
   componentDidMount() {
     this.fetchData();
     this.fetchOrders();
+    this.willFocusSubscription = this.props.navigation.addListener('focus', () => {this.fetchData();});
   }
+
+  componentWillUnmount() {
+    this.props.navigation.removeListener();
+ }
 
   renderItem = ({item}) => {
       return (
@@ -181,9 +186,6 @@ class Home extends Component {
                   <View style = {styles.textbox}>
               <Text style = {{textAlign: 'center'}}>No Items Yet - Will Appear Once You Have Items</Text>
               </View>
-              <LongButton
-               title ="CREATE A NEW BIN"
-               onPress={() => this.props.navigation.navigate('NewItemScreen')}/>
             </>
           ) : (
             <>

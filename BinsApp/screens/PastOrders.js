@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
-import FormInputHandler from '../components/FormInputHandler.js'
-import Textbox from '../components/Textbox.js'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -36,20 +34,7 @@ export default class PastOrders extends Component {
 
   onRefresh = () => {
     this.setState({refreshing: true});
-    if (this.state.filter == 'Upcoming') {
     this.fetchData();
-    } else {
-    this.fetchPastOrders();
-    }
-  }
-
-  onSort(val) {
-    this.setState({filter:val});
-    if (val == 'Past') {
-    this.fetchPastOrders();
-    } else {
-      this.fetchData();
-    }
   }
 
   fetchData(){

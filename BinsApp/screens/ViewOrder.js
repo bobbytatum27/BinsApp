@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
-import FormInputHandler from '../components/FormInputHandler.js'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
 import Textbox from '../components/Textbox.js'
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
-import DropDownPicker from 'react-native-dropdown-picker';
 import {Url} from '../src/components/url.js';
 import moment from "moment";
 
@@ -19,7 +17,6 @@ export default class ViewOrder extends Component {
       timeSelected: '',
       refreshing: false,
       email: '',
-      filter: 'Upcoming',
       id: ''
     }
   }
@@ -41,23 +38,10 @@ export default class ViewOrder extends Component {
       )
     }
 
-  onRefresh = () => {
-    this.setState({refreshing: true});
-    if (this.state.filter == 'Upcoming') {
-    this.fetchData();
-    } else {
-    this.fetchPastOrders();
-    }
-  }
-
-  onSort(val) {
-    this.setState({filter:val});
-    if (val == 'Past') {
-    this.fetchPastOrders();
-    } else {
+    onRefresh = () => {
+      this.setState({refreshing: true});
       this.fetchData();
     }
-  }
 
   fetchData(){
     fetch(Url+'/renderorders')

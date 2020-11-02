@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
-import FormInputHandler from '../components/FormInputHandler.js'
-import Textbox from '../components/Textbox.js'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
 import {LoginContext} from '../components/LoginProvider.js'
 import {Auth} from 'aws-amplify';
 import {Url} from '../src/components/url.js';
@@ -18,7 +16,6 @@ export default class UpcomingOrders extends Component {
       timeSelected: '',
       refreshing: false,
       email: '',
-      filter: 'Upcoming',
     }
   }
 
@@ -36,20 +33,7 @@ export default class UpcomingOrders extends Component {
 
   onRefresh = () => {
     this.setState({refreshing: true});
-    if (this.state.filter == 'Upcoming') {
     this.fetchData();
-    } else {
-    this.fetchPastOrders();
-    }
-  }
-
-  onSort(val) {
-    this.setState({filter:val});
-    if (val == 'Past') {
-    this.fetchPastOrders();
-    } else {
-      this.fetchData();
-    }
   }
 
   fetchData(){

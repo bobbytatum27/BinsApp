@@ -32,14 +32,13 @@ export default class ViewProfile extends React.Component {
 */
 
   componentDidMount(){
-      this.fetchData();
-      this.willFocusSubscription = this.props.navigation.addListener(
-      'focus',
-      () => {
-        this.fetchData();
-      }
-    );
+    this.fetchData();
+    this.willFocusSubscription = this.props.navigation.addListener('focus', () => {this.fetchData();});
   }
+
+  componentWillUnmount() {
+    this.props.navigation.removeListener();
+ }
 
   fetchData(){
     Auth.currentUserInfo().then((userInfo) => {
