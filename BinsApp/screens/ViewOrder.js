@@ -23,7 +23,7 @@ export default class ViewOrder extends Component {
 
   renderItem = data => {
       return (
-        <View style={{marginTop: 10}}>
+        <View style={{marginTop: 0}}>
           <Textbox header='Date and Time'
                    body={moment(data.item.date).format('MMMM DD, YYYY')}/>
           <Textbox header='Time'
@@ -76,7 +76,6 @@ export default class ViewOrder extends Component {
         </>
       ) : (
         <>
-        <Text>{this.state.id}</Text>
           <FlatList
             data={this.state.dataSource}
             renderItem={this.renderItem}

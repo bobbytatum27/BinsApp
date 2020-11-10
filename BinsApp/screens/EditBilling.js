@@ -59,49 +59,10 @@ export default class EditBilling extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flex: 5}}>
-          <Text style={styles.descriptionText}>Name on Card</Text>
-          <FormInputHandler
-            defaultText='Name on Card'
-            defaultTextColor='#8B8B8B'
-            style={styles.userInfoText}
-            onChangeText={(text) => this.setState({nameOnCard: text})}
-          />
-          <Text style={styles.descriptionText}>Credit Card</Text>
-          <FormInputHandler
-            defaultText='xxxx xxxx xxxx xxxx'
-            defaultTextColor='#8B8B8B'
-            style={styles.userInfoText}
-            onChangeText={(text) => this.setState({creditCardNum: text})}
-          />
-          <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
-            <View style={{flex:1}}>
-              <Text style={styles.descriptionText}>Expiration Date</Text>
-              <FormInputHandler
-                defaultText='Expiration Date'
-                defaultTextColor='#8B8B8B'
-                style={styles.userInfoText}
-                onChangeText={(text) => this.setState({expirationDate: text})}
-              />
-            </View>
-            <View style={{flex:1}}>
-              <Text style={styles.descriptionText}>Security Code</Text>
-              <FormInputHandler
-                defaultText='Security Code'
-                defaultTextColor='#8B8B8B'
-                style={styles.userInfoText}
-                onChangeText={(text) => this.setState({securityCode: text})}
-              />
-            </View>
-          </View>
-          <Text style = {{marginLeft: 15, marginTop: 10, marginRight: 15, color: 'gray'}}>Next Payment: </Text>
-        </View>
-        <View style={{flex:1, justifyContent: 'flex-end'}}>
-          <LongButton
-            title="SAVE INFO"
-            onPress={()=>{this.onSubmit(); Alert.alert("Your Information Has Been Saved")}}
-          />
-        </View>
+        <Text style={styles.sectionHeader}>To update your billing info, please contact us:</Text>
+        <Text style={styles.sectionHeaderWhite}>Phone:</Text>
+        <Text style={styles.sectionHeaderWhite}>Email:</Text>
+
       </View>
 
     );
@@ -129,8 +90,60 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     color: '#AAB5E0',
-    fontSize: 25,
+    fontSize: 15,
+    marginBottom: 25,
+    marginLeft: 15
+  },
+  sectionHeaderWhite: {
+    color: '#FFF',
+    fontSize: 20,
     marginBottom: 25,
     marginLeft: 15
   },
 });
+
+/*
+<View style={{flex: 5}}>
+  <Text style={styles.descriptionText}>Name on Card</Text>
+  <FormInputHandler
+    defaultText='Name on Card'
+    defaultTextColor='#8B8B8B'
+    style={styles.userInfoText}
+    onChangeText={(text) => this.setState({nameOnCard: text})}
+  />
+  <Text style={styles.descriptionText}>Credit Card</Text>
+  <FormInputHandler
+    defaultText='xxxx xxxx xxxx xxxx'
+    defaultTextColor='#8B8B8B'
+    style={styles.userInfoText}
+    onChangeText={(text) => this.setState({creditCardNum: text})}
+  />
+  <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+    <View style={{flex:1}}>
+      <Text style={styles.descriptionText}>Expiration Date</Text>
+      <FormInputHandler
+        defaultText='Expiration Date'
+        defaultTextColor='#8B8B8B'
+        style={styles.userInfoText}
+        onChangeText={(text) => this.setState({expirationDate: text})}
+      />
+    </View>
+    <View style={{flex:1}}>
+      <Text style={styles.descriptionText}>Security Code</Text>
+      <FormInputHandler
+        defaultText='Security Code'
+        defaultTextColor='#8B8B8B'
+        style={styles.userInfoText}
+        onChangeText={(text) => this.setState({securityCode: text})}
+      />
+    </View>
+  </View>
+  <Text style = {{marginLeft: 15, marginTop: 10, marginRight: 15, color: 'gray'}}>Next Payment: </Text>
+</View>
+<View style={{flex:1, justifyContent: 'flex-end'}}>
+  <LongButton
+    title="SAVE INFO"
+    onPress={()=>{this.onSubmit(); Alert.alert("Your Information Has Been Saved")}}
+  />
+</View>
+*/

@@ -36,7 +36,9 @@ export default class Review extends Component {
       body: JSON.stringify(this.state)
   })}
 
-  onSubmit2() {
+  //Changing storage status of an item does not currently work if there are multiple items
+
+  /*onSubmit2() {
     fetch(Url+'/modifybin',{
       method: 'POST',
       headers: {
@@ -45,7 +47,7 @@ export default class Review extends Component {
     },
       body: JSON.stringify(this.state)
   })}
-
+  */
 
   componentDidMount(){
     this.fetchData();
@@ -95,7 +97,6 @@ export default class Review extends Component {
             title="CONFIRM"
             onPress={()=>{
               this.onSubmit();
-              this.onSubmit2();
               this.props.navigation.navigate('ConfirmationScreen', {dateSelected: this.state.dateSelected,
                                                                     timeSelected: this.state.timeSelected,
                                                                     address: this.state.address,

@@ -19,8 +19,6 @@ export default class StorageInventory extends Component {
       type: "Delivery",
       refreshing: false,
       filter: '',
-      count: '',
-      max: '',
       id: '',
     }
   }
@@ -126,7 +124,6 @@ export default class StorageInventory extends Component {
   render() {
     return (
         <View style={styles.container}>
-            <Text style={styles.sectionHeader}>Items in Storage - ({this.state.count}{this.state.max})</Text>
             <DropDownPicker
               items={[
                     {label: 'Date Added (Newest)', value: 'Newest'},

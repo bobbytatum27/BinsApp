@@ -69,21 +69,20 @@ export default class ViewPlan extends React.Component {
                 <Text>855 Parr Boulevard, Richmond, CA 94801</Text>
               </View>
             </View>
-          <Text style={styles.descriptionText}>Your Plan</Text>
+          <Text style={styles.descriptionText}>Your Plan - % Used</Text>
           <FlatList
             data={this.state.options}
             renderItem={this.renderItem}
             keyExtractor={(item, index) => index.toString()}
             scrollEnabled={false}
           />
-          <TouchableOpacity style = {styles.cancelButton} onPress = {() => this.props.navigation.navigate('EditPlan')}>
-            <Text style={{color: 'white', fontSize: 16, textAlign: 'center'}}>Manage Plan</Text>
-          </TouchableOpacity>
+          <Text style={styles.sectionHeader}>To cancel your plan, please contact us:</Text>
+          <Text style={styles.sectionHeaderWhite}>Phone:</Text>
+          <Text style={styles.sectionHeaderWhite}>Email:</Text>
         </View>
-        <View style={{flex:1.8}}>
+        <View style={{flex:0.95}}>
         </View>
       </View>
-
     );
   }
 }
@@ -109,7 +108,13 @@ const styles = StyleSheet.create({
   },
   sectionHeader: {
     color: '#AAB5E0',
-    fontSize: 25,
+    fontSize: 15,
+    marginBottom: 25,
+    marginLeft: 15
+  },
+  sectionHeaderWhite: {
+    color: '#FFF',
+    fontSize: 20,
     marginBottom: 25,
     marginLeft: 15
   },
@@ -145,3 +150,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
 });
+
+//Button to go to Edit Plan
+
+/*
+<TouchableOpacity style = {styles.cancelButton} onPress = {() => this.props.navigation.navigate('EditPlan')}>
+  <Text style={{color: 'white', fontSize: 16, textAlign: 'center'}}>Manage Plan</Text>
+</TouchableOpacity>
+*/

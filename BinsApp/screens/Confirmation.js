@@ -40,10 +40,7 @@ export default class Confirmation extends Component {
           <Textbox header='Order Type'
                    body={this.state.type}/>
           <View style={{marginTop: 10}}>
-            <LongButton title ="VIEW SCHEDULED ORDERS"
-                        onPress={() => this.props.navigation.navigate('Orders')}/>
-
-            <LongButton title ="MAKE ANOTHER ORDER"
+            <LongButton title ="GO TO HOME"
                         onPress={() => this.props.navigation.navigate('Home')}/>
           </View>
         </View>

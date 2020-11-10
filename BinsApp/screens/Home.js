@@ -19,8 +19,9 @@ class Home extends Component {
       dataSourceStorage: [],
       dataSourceHome: [],
       dateSourceOrders: [],
-      email: ' ',
+      email: '',
       refreshing: false,
+      id: '',
     }
   }
 
@@ -69,7 +70,7 @@ class Home extends Component {
   componentDidMount() {
     this.fetchData();
     this.fetchOrders();
-    this.willFocusSubscription = this.props.navigation.addListener('focus', () => {this.fetchData();});
+    this.willFocusSubscription = this.props.navigation.addListener('focus', () => {this.fetchData(), this.fetchOrders()});
   }
 
   componentWillUnmount() {
@@ -104,9 +105,13 @@ class Home extends Component {
 
   renderOrders = data => {
       return (
-        <View style = {styles.textbox}>
-        <Text style={{fontSize: 24}}>{moment(data.item.date).format('MMMM DD, YYYY')}</Text>
-        <Text style={{fontSize: 24}}>{data.item.time}</Text>
+        <View style={{flexDirection:'row'}}>
+          <View>
+            <Text style={{fontSize: 20}}>{moment(data.item.date).format('MMMM DD, YYYY')}, {data.item.time}</Text>
+          </View>
+          <TouchableOpacity style={{marginLeft: 50}} onPress={() => this.props.navigation.navigate('ViewOrder', {id: data.item.id})}>
+            <Text style={{fontWeight:'bold'}}>...</Text>
+          </TouchableOpacity>
         </View>
     )
   }
@@ -134,28 +139,26 @@ class Home extends Component {
             onRefresh={this.onRefresh}
             tintColor = 'white'  />
         }>
-          <View style={{padding:25}}>
-            <Text style={styles.sectionHeader}>Next Order</Text>
           {this.state.dataSourceOrders.length == 0 ? (
             <>
-                <View style = {styles.textbox}>
-            <Text style = {{textAlign: 'center'}}>No Upcoming Orders</Text>
-            </View>
+            <TouchableOpacity style = {styles.button2} onPress={() => this.props.navigation.navigate('NewAppointment')}>
+            <Text style={{fontSize: 25, color: '#FFF'}}>Schedule Appointment</Text>
+            </TouchableOpacity>
           </>
         ) : (
           <>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionHeader}>Upcoming Order</Text>
             <FlatList
+              horizontal={true}
               data={this.state.dataSourceOrders.slice(0,1)}
               renderItem={this.renderOrders}
               scrollEnabled={false}
             />
-            <LongButton title ="VIEW ALL"
-                        onPress={() => this.props.navigation.navigate('Orders')}/>
+          </View>
           </>
         )}
-          </View>
-          <View style={styles.line}/>
-          <View style={{padding: 25}}>
+          <View style={styles.sectionContainer}>
             <Text style={styles.sectionHeader}>Items in Storage</Text>
             {this.state.dataSourceStorage.length == 0 ? (
               <>
@@ -167,24 +170,24 @@ class Home extends Component {
             <>
             <FlatList
               horizontal={true}
+              columns={2}
               data={this.state.dataSourceStorage.slice(0,2)}
               renderItem={this.renderItemsInStorage}
               keyExtractor={(item, index) => index.toString()}
               scrollEnabled={false}
             />
-              <LongButton
-               title ="VIEW ALL"
-               onPress={() => this.props.navigation.navigate('StorageInventoryScreen')}/>
+              <TouchableOpacity style={styles.button3} onPress={() => this.props.navigation.navigate('ViewStorageInventory')}>
+              <Text style={{color: 'white'}}>VIEW ALL</Text>
+              </TouchableOpacity>
             </>
           )}
           </View>
-          <View style={styles.line}/>
-          <View style={{padding: 25}}>
-            <Text style={styles.sectionHeader}>Items with You</Text>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionHeader}>Returned Items</Text>
             {this.state.dataSourceHome.length == 0 ? (
               <>
                   <View style = {styles.textbox}>
-              <Text style = {{textAlign: 'center'}}>No Items Yet - Will Appear Once You Have Items</Text>
+              <Text style = {{textAlign: 'center'}}>None of Your Items Have Been Returned Yet</Text>
               </View>
             </>
           ) : (
@@ -196,9 +199,9 @@ class Home extends Component {
                 keyExtractor={(item, index) => index.toString()}
                 scrollEnabled={false}
               />
-              <LongButton
-               title ="VIEW ALL"
-               onPress={() => this.props.navigation.navigate('HomeInventoryScreen')}/>
+              <TouchableOpacity style={styles.button3} onPress={() => this.props.navigation.navigate('HomeInventoryScreen')}>
+              <Text style={{color: 'white'}}>VIEW ALL</Text>
+              </TouchableOpacity>
             </>
           )}
           </View>
@@ -216,52 +219,45 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#261136',
   },
+  sectionContainer:{
+    margin:15,
+    backgroundColor: '#FFF',
+    borderRadius: 5,
+    padding: 25,
+  },
   sectionHeader: {
-    color: '#FFF',
+    color: '#000',
     fontSize: 25,
     marginBottom: 10,
-    marginLeft: 15,
-  },
-  menuFilter: {
-    color: 'white',
-    fontSize: 10,
-    marginLeft: 15,
   },
   button: {
-    margin: 15,
+    marginRight: 30,
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 5,
     overflow: "hidden",
   },
-  selected: {
-    margin: 15,
-    alignItems: 'center',
-    height: 174,
-    width: 160,
-    backgroundColor: 'white',
-    borderColor: '#7B1FA2',
-    borderWidth: 5
-  },
   button2: {
     alignItems: 'center',
-    backgroundColor: 'green',
+    backgroundColor: '#7B1FA2',
     padding: 10,
     margin: 15,
-    borderRadius: 3,
+    borderRadius: 5,
  },
+ button3: {
+  alignItems: 'center',
+  backgroundColor: '#7B1FA2',
+  padding: 10,
+  marginTop: 15,
+  borderRadius: 5
+},
   textbox: {
     flexDirection: 'column',
     backgroundColor: '#FFF',
     padding: 10,
     marginLeft: 15,
     marginRight: 15,
-
     borderRadius: 5
   },
-  line: {
-    borderBottomColor: '#4826A0',
-    borderBottomWidth: 3,
-  }
 })

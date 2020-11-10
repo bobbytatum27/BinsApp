@@ -27,10 +27,15 @@ export default OrderStackScreen = (props) => {
 
     return (
         <OrderStack.Navigator screenOptions={screenOpts}>
-            <OrderStack.Screen name="UpcomingOrders" component={UpcomingOrders} options={{title: "Upcoming Orders"}}/>
-            <OrderStack.Screen name="ViewOrder" component={ViewOrder} options={{title: "View Order"}}/>
-            <OrderStack.Screen name="PastOrders" component={PastOrders} options={{title: "Past Orders"}}/>
+            <OrderStack.Screen name="PastOrders" component={PastOrders} options={{title: "Order History"}}/>
             <OrderStack.Screen name="ViewPastOrder" component={ViewPastOrder} options={{title: "View Order"}}/>
         </OrderStack.Navigator>
     );
 }
+
+
+
+/*
+<OrderStack.Screen name="UpcomingOrders" component={UpcomingOrders} options={{title: "Upcoming Orders"}}/>
+<OrderStack.Screen name="ViewOrder" component={ViewOrder} options={{title: "View Order"}}/>
+*/
