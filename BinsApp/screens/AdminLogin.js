@@ -7,7 +7,7 @@ import {LoginContext} from '../components/LoginProvider.js'
 // for testing, can remove(?) after
 import {Auth} from 'aws-amplify';
 
-export default class Login extends React.Component {
+export default class AdminLogin extends React.Component {
   static contextType = LoginContext;
 
   constructor(props) {
@@ -22,14 +22,6 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style ={styles.descriptionText}>Email </Text>
-        <FormInputHandler
-          defaultText='Enter your email here'
-          defaultTextColor='#8B8B8B'
-          style={styles.userInfoText}
-          onChangeText={(val)=>this.setState({email:val})}
-          keyboardType='email-address'
-        />
         <Text style ={styles.descriptionText}>Password</Text>
         <FormInputHandler
           defaultText='Enter a password here'
@@ -40,16 +32,8 @@ export default class Login extends React.Component {
         />
         <LongButton
           title="LOGIN"
-          onPress={()=>{
-            this.context.login(this.state.email, this.state.password)
-            .then((msg)=>console.log('successful sign in'))
-            .catch(err => console.log('Error signing in: ', err));
-          }}
+          onPress={()=>{if(this.state.password=="999"){this.props.navigation.navigate('NewItem')}}}
         />
-        <Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
-              onPress={() => this.props.navigation.navigate('PasswordReset')}>Forgot Password?</Text>
-        <Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
-              onPress={() => this.props.navigation.navigate('AdminLogin')}>Admin Login</Text>
       </View>
     );
   }

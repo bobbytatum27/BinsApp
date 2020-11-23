@@ -6,15 +6,17 @@ import InitialAppointment from '../../screens/InitialAppointment.js'
 import InitialConfirmation from '../../screens/InitialConfirmation.js'
 import UserInfo from '../../screens/UserInfo.js'
 import Login from '../../screens/Login.js'
+import AdminLogin from '../../screens/AdminLogin.js'
 import PasswordReset from '../../screens/PasswordReset.js'
 import ConfirmContactInfo from '../../screens/ConfirmContactInfo.js'
 import LandingTabs from './LandingTabs.js'
+import NewItem from '../../screens/NewItem.js'
 
 import { createStackNavigator } from '@react-navigation/stack';
 const SignupLoginStacks = createStackNavigator();
 
 /*
- * The stack navigator entered on App launch. Only unauthenticated users can access it. 
+ * The stack navigator entered on App launch. Only unauthenticated users can access it.
  * Users are authenticated in one of two ways:
  *      1. Signup: User creates an account and inputs their basic info thru the Signup Flow
  *      2. Login: User logs in to existing account.
@@ -40,8 +42,10 @@ export default SignupLoginStack = (props) => {
            <SignupLoginStacks.Screen name='SelectFacilityScreen' component={SelectFacility} options={{title: "Select Storage Facility"}}/>
            <SignupLoginStacks.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
            <SignupLoginStacks.Screen name='AccountInfoScreen' component={UserInfo} options={{title: "Create an Account"}}/>
-           <SignupLoginStacks.Screen name='BillingInfoScreen' component={BillingInfo} options={{title: "Billing Info"}}/>
+           <SignupLoginStacks.Screen name='BillingInfoScreen' component={BillingInfo} options={{title: "Review"}}/>
            <SignupLoginStacks.Screen name='InitialConfirmationScreen' component={InitialConfirmation} options={{title: "Confirmation", headerLeft: null}}/>
+           <SignupLoginStacks.Screen name='AdminLogin' component={AdminLogin} options={{title: "Admin Login"}}/>
+           <SignupLoginStacks.Screen name='NewItem' component={NewItem} options={{title: "New Item", headerLeft: null}}/>
         </SignupLoginStacks.Navigator>
     );
 }

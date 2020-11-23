@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
   body: {
     fontSize: 20,
     margin: 10,
-    flexShrink: 1
+    flexShrink: 1,
+    textAlign: 'right'
   },
   textbox: {
     flexDirection: 'row',

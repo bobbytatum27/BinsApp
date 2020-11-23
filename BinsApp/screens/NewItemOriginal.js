@@ -10,12 +10,12 @@ import FormInputHandler from '../components/FormInputHandler.js'
 import {LoginContext} from '../components/LoginProvider.js'
 import {Url} from '../src/components/url.js';
 
-export default class NewItem extends Component {
+export default class NewItemOriginal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       itemName: '',
-      email: '',
+      email: Auth.user.attributes.email,
       image: null,
       };
   }
@@ -53,7 +53,6 @@ export default class NewItem extends Component {
 
     return (
         <View style={styles.container}>
-          <View>
           <Text style={styles.sectionHeader}>New Item</Text>
           <TouchableOpacity style = {styles.button2}
                             onPress={this._pickImage}>
@@ -65,9 +64,6 @@ export default class NewItem extends Component {
                             defaultTextColor='#8B8B8B'
                             style={styles.userInfoText}
                             onChangeText={(text) => this.setState({itemName: text})}/>
-          <Text style ={styles.descriptionText}>Email</Text>
-          <FormInputHandler style={styles.userInfoText}
-                            onChangeText={(text) => this.setState({email: text})}/>
           <View style = {{alignItems: 'center'}}>
           {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
           </View>
@@ -77,11 +73,6 @@ export default class NewItem extends Component {
                       Alert.alert('Please Complete All Fields')
                     } else {
                     this.onSubmit();}}}/>
-          </View>
-          <View style={{marginBottom: 25}}>
-            <LongButton title ="COMPLETE"
-                        onPress={() => this.props.navigation.navigate('Landing')}/>
-          </View>
         </View>
     );
   }
@@ -91,8 +82,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#261136',
-    padding: 25,
-    justifyContent: 'space-between'
+    padding: 25
   },
   userInfoText: {
     borderColor: '#4826A0',
@@ -101,7 +91,6 @@ const styles = StyleSheet.create({
     color: 'white',
     margin: 15,
     padding: 15,
-    borderRadius: 5,
   },
   descriptionText:{
     marginBottom: -10,

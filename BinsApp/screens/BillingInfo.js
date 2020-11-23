@@ -3,10 +3,11 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
-import { CreditCardInput } from 'react-native-credit-card-input'
+//import { CreditCardInput } from 'react-native-credit-card-input'
 import { ScrollView } from 'react-native-gesture-handler';
 import {Auth} from 'aws-amplify';
 import {Url} from '../src/components/url.js';
+import moment from "moment";
 
 import { LoginContext } from '../components/LoginProvider.js';
 
@@ -59,31 +60,17 @@ export default class BillingInfo extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style = {{alignItems: 'center'}}>
-          <Text style = {styles.header}>Billing Info</Text>
-        </View>
-        <ScrollView>
-        <CreditCardInput
-          onChange={this._onChange}
-          labelStyle={styles.creditCardLabels}
-          inputContainerStyle={styles.creditCardInputView}
-          inputStyle={{color: 'white'}}
-          requiresName={true}
-          autoFocus={false}
-        />
-        <View style = {{alignItems: 'center'}}>
-          <Text style = {styles.header}>Review</Text>
-        </View>
-        <Textbox header='Date and Time'
-                 body={this.state.dateSelected}
-                 body2={this.state.timeSelected}/>
+        <Textbox header='Date'
+                 body={moment(this.state.dateSelected).format('MMMM DD, YYYY')}/>
+        <Textbox header='Time'
+                 body={this.state.timeSelected}/>
         <Textbox header='Address'
                  body={this.state.address}/>
         <Textbox header='Option'
                  body={this.state.size}/>
-        <View style = {{marginTop: 15}}>
+        <View style = {{padding: 25}}>
           <LongButton
-            title="CONFIRM PICKUP"
+            title="CONFIRM INITIAL APPOINTMENT"
             onPress={()=>{
               this.onSubmit();
               this.props.navigation.navigate('InitialConfirmationScreen', {dateSelected: this.state.dateSelected,
@@ -92,7 +79,6 @@ export default class BillingInfo extends React.Component {
                                                                     type: this.state.type})
               }}/>
         </View>
-        </ScrollView>
       </View>
     );
   }
@@ -102,7 +88,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#261136',
-    padding: 25
   },
   userInfoText: {
     borderColor: '#4826A0',
@@ -139,3 +124,15 @@ const styles = StyleSheet.create({
   }
 
 });
+
+//Credit Card Input
+/*
+<CreditCardInput
+  onChange={this._onChange}
+  labelStyle={styles.creditCardLabels}
+  inputContainerStyle={styles.creditCardInputView}
+  inputStyle={{color: 'white'}}
+  requiresName={true}
+  autoFocus={false}
+/>
+*/

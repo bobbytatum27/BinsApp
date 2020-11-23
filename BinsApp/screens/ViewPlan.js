@@ -76,11 +76,10 @@ export default class ViewPlan extends React.Component {
             keyExtractor={(item, index) => index.toString()}
             scrollEnabled={false}
           />
-          <Text style={styles.sectionHeader}>To cancel your plan, please contact us:</Text>
-          <Text style={styles.sectionHeaderWhite}>Phone:</Text>
-          <Text style={styles.sectionHeaderWhite}>Email:</Text>
+          <Text style={styles.sectionHeader}>To cancel your plan, please email us at:</Text>
+          <Text style={styles.sectionHeaderWhite}>contact@bins-storage.com</Text>
         </View>
-        <View style={{flex:0.95}}>
+        <View style={{flex:1.85}}>
         </View>
       </View>
     );
@@ -109,13 +108,11 @@ const styles = StyleSheet.create({
   sectionHeader: {
     color: '#AAB5E0',
     fontSize: 15,
-    marginBottom: 25,
     marginLeft: 15
   },
   sectionHeaderWhite: {
     color: '#FFF',
-    fontSize: 20,
-    marginBottom: 25,
+    fontSize: 15,
     marginLeft: 15
   },
   openButton: {

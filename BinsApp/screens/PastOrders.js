@@ -69,6 +69,14 @@ export default class PastOrders extends Component {
         </>
       ) : (
         <>
+        {this.state.dataSource.length == 0 ? (
+          <>
+          <View style = {styles.textbox}>
+            <Text style = {{textAlign: 'center'}}>None of Your Items Have Been Returned Yet</Text>
+          </View>
+        </>
+      ) : (
+        <>
           <FlatList
             data={this.state.dataSource}
             renderItem={this.renderItem}
@@ -81,6 +89,8 @@ export default class PastOrders extends Component {
                 tintColor = 'white'  />
             }
           />
+          </>
+        )}
           </>
         )}
       </View>
@@ -100,5 +110,12 @@ export default class PastOrders extends Component {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: 'center'
-  }
+  },
+  textbox: {
+    flexDirection: 'column',
+    backgroundColor: '#FFF',
+    padding: 10,
+    margin: 15,
+    borderRadius: 5
+  },
   });

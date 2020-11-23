@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     color: 'white',
     margin: 15,
     padding: 15,
+    borderRadius: 5,
   },
   descriptionText:{
     marginBottom: -10,

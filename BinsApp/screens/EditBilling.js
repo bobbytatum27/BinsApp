@@ -59,10 +59,8 @@ export default class EditBilling extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.sectionHeader}>To update your billing info, please contact us:</Text>
-        <Text style={styles.sectionHeaderWhite}>Phone:</Text>
-        <Text style={styles.sectionHeaderWhite}>Email:</Text>
-
+        <Text style={styles.sectionHeader}>To update your billing info, please email us at:</Text>
+        <Text style={styles.sectionHeaderWhite}>contact@bins-storage.com</Text>
       </View>
 
     );
@@ -91,14 +89,12 @@ const styles = StyleSheet.create({
   sectionHeader: {
     color: '#AAB5E0',
     fontSize: 15,
-    marginBottom: 25,
     marginLeft: 15
   },
   sectionHeaderWhite: {
     color: '#FFF',
-    fontSize: 20,
-    marginBottom: 25,
-    marginLeft: 15
+    fontSize: 15,
+    marginLeft: 15,
   },
 });
 

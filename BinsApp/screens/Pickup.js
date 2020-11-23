@@ -13,7 +13,7 @@ export default class Pickup extends Component {
   render() {
     return (
       <View style={ styles.container}>
-          <Text style={styles.text}>neifnwinfienfinwfinew</Text>
+          <Text style={styles.text}>Details for parking, items, elevator, etc.</Text>
         <TouchableOpacity style={styles.button3} onPress={() => this.props.navigation.navigate('ScheduleAppointmentScreen', {type: this.state.type})}>
           <Text style={styles.text}>Next</Text>
         </TouchableOpacity>

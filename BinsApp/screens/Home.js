@@ -18,7 +18,7 @@ class Home extends Component {
       isLoading: true,
       dataSourceStorage: [],
       dataSourceHome: [],
-      dateSourceOrders: [],
+      dataSourceOrders: [],
       email: '',
       refreshing: false,
       id: '',
@@ -70,12 +70,8 @@ class Home extends Component {
   componentDidMount() {
     this.fetchData();
     this.fetchOrders();
-    this.willFocusSubscription = this.props.navigation.addListener('focus', () => {this.fetchData(), this.fetchOrders()});
   }
 
-  componentWillUnmount() {
-    this.props.navigation.removeListener();
- }
 
   renderItem = ({item}) => {
       return (
@@ -139,9 +135,10 @@ class Home extends Component {
             onRefresh={this.onRefresh}
             tintColor = 'white'  />
         }>
+        <View style={{marginBottom: 10}}/>
           {this.state.dataSourceOrders.length == 0 ? (
             <>
-            <TouchableOpacity style = {styles.button2} onPress={() => this.props.navigation.navigate('NewAppointment')}>
+            <TouchableOpacity style = {styles.button2} onPress={() => this.props.navigation.replace('NewAppointment')}>
             <Text style={{fontSize: 25, color: '#FFF'}}>Schedule Appointment</Text>
             </TouchableOpacity>
           </>
@@ -246,11 +243,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
  },
  button3: {
-  alignItems: 'center',
-  backgroundColor: '#7B1FA2',
-  padding: 10,
-  marginTop: 15,
-  borderRadius: 5
+   alignItems: 'center',
+   backgroundColor: '#7B1FA2',
+   padding: 10,
+   marginTop: 15,
+   borderRadius: 5
 },
   textbox: {
     flexDirection: 'column',
