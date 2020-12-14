@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, Modal, StyleSheet, ScrollView, Image} from 'react-native'
+import {Text, View, Modal, StyleSheet, ScrollView, Image, TouchableOpacity} from 'react-native'
 
 import PaymentPlanCard from './PaymentPlanCard.js'
 
@@ -50,7 +50,12 @@ export default class FacilityModal extends React.Component {
                     <Text style={{fontSize: 30, marginLeft: 10}}>{this.props.facilityName}</Text>
                     <Text style={{marginLeft: 10}}>{this.props.facilityAddress}</Text>
                     <Text style={{marginLeft: 10}}>{this.props.facilityWebsite}</Text>
-                    <Text style={{fontSize: 15, marginLeft: 10, marginTop: 10, fontWeight: '600'}}>Select a Storage Plan</Text>
+                    <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                      <Text style={{fontSize: 15, marginLeft: 10, marginTop: 10, fontWeight: '600'}}>Select a Storage Plan</Text>
+                      <TouchableOpacity>
+                        <Text style={{fontSize: 15, marginRight: 10, marginTop: 10, fontWeight: '600', textDecorationLine: 'underline'}}>Size Guide</Text>
+                      </TouchableOpacity>
+                    </View>
                     <ScrollView>
                       <PaymentPlanCard
                         onPress={() => this.props.onSelectPaymentPlan("By Item")}

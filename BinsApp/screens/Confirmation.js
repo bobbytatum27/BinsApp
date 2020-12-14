@@ -41,7 +41,7 @@ export default class Confirmation extends Component {
                    body={this.state.type}/>
           <View style={{marginTop: 10}}>
             <LongButton title ="GO TO HOME"
-                        onPress={() => this.props.navigation.navigate('Home')}/>
+                        onPress={() => this.props.navigation.replace('Home')}/>
           </View>
         </View>
     );

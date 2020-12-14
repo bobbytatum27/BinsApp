@@ -16,7 +16,9 @@ def log():
                     loginInfo['phone'],
                     loginInfo['address'],
                     loginInfo['specialInstructions'],
-                    loginInfo['size'])
+                    loginInfo['size'],
+                    loginInfo['building'],
+                    loginInfo['parking'])
     except:
         print('exception')
     x = {'a':False}
@@ -31,7 +33,9 @@ def log2():
                        customerInfo['phone'],
                        customerInfo['address'],
                        customerInfo['specialInstructions'],
-                       customerInfo['selectedButton'])
+                       customerInfo['selectedButton'],
+                       customerInfo['building'],
+                       customerInfo['parking'])
 
     except:
         print('exception')
@@ -91,6 +95,11 @@ def log8():
         print('exception')
     x = {'a':False}
     return jsonify(x)
+
+@app.route("/%used", methods=['GET'])
+def log9():
+    list = json.dumps(renderPercentages())
+    return list
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

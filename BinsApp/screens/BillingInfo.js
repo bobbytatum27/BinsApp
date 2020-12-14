@@ -23,7 +23,7 @@ export default class BillingInfo extends React.Component {
       email: '',
       phone: '',
       type: 'Pickup',
-      selected: 'Initial Pickup',
+      selected: '',
       nameOnCard: '',
       creditCardNum: '',
       expirationDate: '',
@@ -46,14 +46,14 @@ export default class BillingInfo extends React.Component {
   componentDidMount(){
       const dateSelected = this.props.route.params?.dateSelected??'';
       const timeSelected = this.props.route.params?.timeSelected??'';
-      this.setState({dateSelected: dateSelected, timeSelected: timeSelected});
+      const selectedItems = this.props.route.params?.selected??'';
+      this.setState({dateSelected: dateSelected, timeSelected: timeSelected, selected: selectedItems.toString()});
       Auth.currentUserInfo().then((userInfo) => {
         const { attributes = {} } = userInfo;
         this.setState({address:attributes['address']});
         this.setState({email:attributes['email']});
         this.setState({phone:attributes['phone_number']});
         this.setState({size:attributes['custom:size']});
-        console.log(this.state);
       })
     }
 
@@ -68,6 +68,8 @@ export default class BillingInfo extends React.Component {
                  body={this.state.address}/>
         <Textbox header='Option'
                  body={this.state.size}/>
+        <Textbox header='Items'
+                body={this.state.selected}/>
         <View style = {{padding: 25}}>
           <LongButton
             title="CONFIRM INITIAL APPOINTMENT"

@@ -14,7 +14,6 @@ export default class ScheduleAppointment extends Component {
       dateSelected: {},
       timeSelected: '',
       selectedButton: null,
-      selected: [],
       type: '',
       id: '',
       address: '',
@@ -35,7 +34,12 @@ export default class ScheduleAppointment extends Component {
 
   componentDidMount(){
     this.fetchData();
+    this.willFocusSubscription = this.props.navigation.addListener('focus', () => {this.fetchData();});
   }
+
+  componentWillUnmount() {
+    this.props.navigation.removeListener();
+ }
 
   render() {
 
@@ -53,40 +57,16 @@ export default class ScheduleAppointment extends Component {
             <Text style={styles.descriptionText}>Please Select a Time</Text>
             <View style={{flexDirection: 'row', justifyContent: 'space-around', borderColor: '#d6d7da', flexWrap: 'wrap', marginTop: 25, margin: 25, marginLeft: 5, marginRight:5}}>
               <TouchableOpacity
-                style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '8am-10am' ? 2 : 0}}
-                onPress={() => this.selectionOnPress("8am-10am")}
-                onPressIn={() => this.setState({timeSelected: '8am'})}>
-              <Text style={styles.switchButtonsText}>8am-10am</Text>
+                style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '9:00am' ? 2 : 0}}
+                onPress={() => this.selectionOnPress("9:00am")}
+                onPressIn={() => this.setState({timeSelected: '9:00am'})}>
+              <Text style={styles.switchButtonsText}>9:00am</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '10am-12pm' ? 2 : 0}}
-                onPress={() => this.selectionOnPress("10am-12pm")}
-                onPressIn={() => this.setState({timeSelected: '10am'})}>
-              <Text style={styles.switchButtonsText}>10am-12pm</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '12pm-2pm' ? 2 : 0}}
-                onPress={() => this.selectionOnPress("12pm-2pm")}
-                onPressIn={() => this.setState({timeSelected: '12pm'})}>
-              <Text style={styles.switchButtonsText}>12pm-2pm</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '2pm-4pm' ? 2 : 0}}
-                onPress={() => this.selectionOnPress("2pm-4pm")}
-                onPressIn={() => this.setState({timeSelected: '2pm'})}>
-                <Text style={styles.switchButtonsText}>2pm-4pm</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '4pm-6pm' ? 2 : 0}}
-                onPress={() => this.selectionOnPress("4pm-6pm")}
-                onPressIn={() => this.setState({timeSelected: '4pm'})}>
-              <Text style={styles.switchButtonsText}>4pm-6pm</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '6pm-8pm' ? 2 : 0}}
-                onPress={() => this.selectionOnPress("6pm-8pm")}
-                onPressIn={() => this.setState({timeSelected: '6pm'})}>
-              <Text style={styles.switchButtonsText}>6pm-8pm</Text>
+                style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '1:00pm' ? 2 : 0}}
+                onPress={() => this.selectionOnPress("1:00pm")}
+                onPressIn={() => this.setState({timeSelected: '1:00pm'})}>
+              <Text style={styles.switchButtonsText}>1:00pm</Text>
               </TouchableOpacity>
             </View>
             <Text style={styles.descriptionText}>Address</Text>

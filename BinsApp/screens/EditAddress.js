@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView,} from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
 import { LoginContext } from '../components/LoginProvider.js';
@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import {Url} from '../src/components/url.js';
 import InputValidator from '../components/InputValidator.js'
 import {ZipCodes} from '../src/components/zipcodes.js';
+import DropdownMenu from '../components/DropdownMenu.js'
 
 export default class EditAddress extends React.Component {
   static contextType = LoginContext;
@@ -25,13 +26,15 @@ export default class EditAddress extends React.Component {
       state: '',
       zip: '',
       specialInstructions: '',
+      building: '',
+      parking: '',
 
     }
   }
   checkAddress = () => ZipCodes.includes(this.state.zip);
 
   findUnit = () => {
-    if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '') {
+    if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '' || this.state.building == '' || this.state.parking == '') {
       Alert.alert('You\'ve left an important field empty in your address!');
     } else if (this.checkAddress()){
       this.setState({address: this.state.addressLine1 + ' ' + this.state.addressLine2 + ' ' + this.state.city + ', ' + this.state.state + ' ' + this.state.zip}, this.onSubmit);
@@ -78,7 +81,7 @@ export default class EditAddress extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flex:5}}>
+        <ScrollView>
           <InputValidator
             titleText='Address Line 1'
             defaultText='Address Line 1'
@@ -173,8 +176,30 @@ export default class EditAddress extends React.Component {
             errorMessage='Do not leave this field empty!'
             checkInput={() => true /*this field is optional, so automatically valid*/}
           />
-        </View>
-        <View style={{flex:1, justifyContent: 'flex-end'}}>
+          <Text style={styles.descriptionText}>Building Type</Text>
+          <DropdownMenu
+            items={[
+                  {label: 'House', value: 'House'},
+                  {label: 'Apartment', value: 'Apartment'}
+            ]}
+            placeholder={"Select an Option"}
+            onChangeItem={(item) => this.setState({building: item.value})}
+            zIndex={2}
+          />
+          <Text style={styles.descriptionText}>Where to Park</Text>
+          <DropdownMenu
+            items={[
+                  {label: 'In Front of Building', value: 'In Front of Building'},
+                  {label: 'Driveway', value: 'Driveway'},
+                  {label: 'Parking Lot', value:'Parking Lot'},
+            ]}
+            placeholder={"Select an Option"}
+            onChangeItem={(item) => this.setState({parking: item.value})}
+            zIndex={1}
+          />
+          <View style={{margin: 50}}/>
+        </ScrollView>
+        <View style={{justifyContent: 'flex-end'}}>
           <LongButton
             title="SAVE INFO"
             onPress={this.findUnit}

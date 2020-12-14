@@ -37,7 +37,7 @@ export default HomeStackScreen = (props) => {
 
     return (
         <HomeStack.Navigator screenOptions={screenOpts}>
-            <HomeStack.Screen name='Home' component={Home}/>
+            <HomeStack.Screen name='Home' component={Home} options={{headerLeft: null}}/>
             <HomeStack.Screen name='HelpScreen' component={Help} options={{title: "Help"}}/>
             <HomeStack.Screen name='StorageInventoryScreen' component={StorageInventory} options={{title: "Stored Items"}}/>
             <HomeStack.Screen name='ScheduleAppointmentScreen' component={ScheduleAppointment} options={{title: "Schedule Appointment"}}/>

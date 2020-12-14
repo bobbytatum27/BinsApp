@@ -19,6 +19,8 @@ export default class UserInfo extends React.Component {
       address: '',
       specialInstructions: '',
       size: '',
+      building: '',
+      parking: '',
       validInput: false,
       validEmail: false,
       validPassword: false,
@@ -52,9 +54,13 @@ export default class UserInfo extends React.Component {
                          this.props.route.params.city + ', ' + this.props.route.params.state + ' ' + this.props.route.params.zip;
     const specialInstructions = this.props.route.params.specialInstructions;
     const size = this.props.route.params.size;
+    const parking = this.props.route.params.parking;
+    const building = this.props.route.params.building;
     this.setState({address: wholeAddress});
     this.setState({specialInstructions: specialInstructions});
     this.setState({size: size});
+    this.setState({parking: parking});
+    this.setState({building: building});
   }
 
   onSubmit() {

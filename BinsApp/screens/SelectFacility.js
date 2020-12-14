@@ -7,6 +7,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import InputValidator from '../components/InputValidator.js'
 import {ZipCodes} from '../src/components/zipcodes.js';
+import DropdownMenu from '../components/DropdownMenu.js'
 
 // The new imports, TODO: need to remove now useless imports above
 import FacilitySummaryCard from '../components/SelectFacilityUtils/FacilitySummaryCard.js';
@@ -23,24 +24,19 @@ export default class SelectFacility extends React.Component {
       state: '',
       zip: '',
       specialInstructions: '',
-      storageCardIsVisible: false,
       modalVisible: false,
       storageAddress: '',
+      building: '',
+      parking: '',
     };
   }
 
-  /*
-   * Helper which validates ZIP code is within Bins' serviceable area
-   *
-   * @return Boolean value which determines if ZIP code is in Bins' serviceable area
-   */
-  checkAddress = () => ZipCodes.includes(this.state.zip);
 
   /*
    *
    */
   findUnit = () => {
-    if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '') {
+    if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '' || this.state.building == '' || this.state.parking == '') {
       Alert.alert('You\'ve left an important field empty in your address!');
     } else if (this.checkAddress()){
       this.setState({storageCardIsVisible: true});
@@ -57,13 +53,15 @@ export default class SelectFacility extends React.Component {
    */
   selectPaymentPlan = (unitSize) => {
     let addressData = {
-      addressLine1: this.state.addressLine1,
-      addressLine2: this.state.addressLine2,
-      city: this.state.city,
-      state: this.state.state,
-      zip: this.state.zip,
-      specialInstructions: this.state.specialInstructions,
+      addressLine1: this.props.route.params.addressLine1,
+      addressLine2: this.props.route.params.addressLine2,
+      city: this.props.route.params.city,
+      state: this.props.route.params.state,
+      zip: this.props.route.params.zip,
+      specialInstructions: this.props.route.params.specialInstructions,
       size: unitSize,
+      parking: this.props.route.params.parking,
+      building: this.props.route.params.building,
     };
 
     this.props.navigation.navigate('AccountInfoScreen', addressData);
@@ -81,106 +79,7 @@ export default class SelectFacility extends React.Component {
   render() {
     return (
       <ScrollView style = {styles.container}>
-        <Text style={styles.findFacilityText}>Let's find a facility based on your needs:</Text>
-        <InputValidator
-          titleText='Address Line 1'
-          defaultText='Address Line 1'
-          defaultTextColor='#8B8B8B'
-          style={styles.userInfoText}
-          autoCapitalize='words'
-          returnKeyType='next'
-          onChangeText={(text) => this.setState({addressLine1: text})}
-          errorMessage='Do not leave this field empty!'
-          checkInput={() => {
-            if (this.state.addressLine1 == '') {
-              return false;
-            } else {
-              return true;
-            }
-          }}
-        />
-        <InputValidator
-          titleText='Address Line 2'
-          defaultText='Address Line 2'
-          defaultTextColor='#8B8B8B'
-          style={styles.userInfoText}
-          autoCapitalize='words'
-          returnKeyType='next'
-          onChangeText={(text) => this.setState({addressLine2: text})}
-          errorMessage='Do not leave this field empty!'
-          checkInput={() => true /*this field is optional, so automatically valid*/}
-        />
-        <InputValidator
-          titleText='City'
-          defaultText='City'
-          defaultTextColor='#8B8B8B'
-          style={styles.userInfoText}
-          autoCapitalize='words'
-          returnKeyType='next'
-          onChangeText={(text) => this.setState({city: text})}
-          errorMessage='Do not leave this field empty!'
-          checkInput={() => {
-            if (this.state.city == '') {
-              return false;
-            } else {
-              return true;
-            }
-          }}
-        />
-        <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
-          <View style={{flex:1}}>
-            <InputValidator
-              titleText='State'
-              defaultText='State'
-              defaultTextColor='#8B8B8B'
-              style={styles.userInfoText}
-              autoCapitalize='characters'
-              returnKeyType='next'
-              onChangeText={(text) => this.setState({state: text})}
-              errorMessage='Please Enter'
-              checkInput={() => {
-                if (this.state.state == '') {
-                  return false;
-                } else {
-                  return true;
-                }
-              }}
-            />
-          </View>
-          <View style={{flex:1}}>
-            <InputValidator
-              titleText='ZIP'
-              defaultText='ZIP'
-              defaultTextColor='#8B8B8B'
-              style={styles.userInfoText}
-              keyboardType='number-pad'
-              returnKeyType='next'
-              onChangeText={(text) => this.setState({zip: text})}
-              errorMessage='Invalid ZIP Code!'
-              checkInput={() => {
-                if (this.state.zip == '' || this.state.zip.length != 5) { // still need to validate only numbers
-                  return false;
-                } else {
-                  return true;
-                }
-              }}
-            />
-          </View>
-        </View>
-        <InputValidator
-          titleText='Special Instructions'
-          defaultText='Ex: Gate Code, Apartment Number'
-          defaultTextColor='#8B8B8B'
-          style={styles.userInfoText}
-          returnKeyType='next'
-          onChangeText={(text) => this.setState({specialInstructions: text})}
-          errorMessage='Do not leave this field empty!'
-          checkInput={() => true /*this field is optional, so automatically valid*/}
-        />
-
-        {this.state.storageCardIsVisible ? (
-          <>
-            <View style={{padding: 15, marginTop: 15}}>
+            <View>
               <Text style={{fontSize: 15, color: 'white', marginBottom: 15, textAlign: 'center'}}>Here's what we found based on your address above.</Text>
               <View style={{height: 5}}>{/*for padding purposes*/}</View>
               <FacilitySummaryCard
@@ -189,18 +88,6 @@ export default class SelectFacility extends React.Component {
                 address='855 Parr Boulevard, Richmond, CA 94801'
               />
             </View>
-          </>
-        ) : (
-          <>
-            <View>
-              <LongButton
-                title='Find a Unit!'
-                onPress={this.findUnit}
-              />
-            </View>
-          </>
-        )}
-
         <FacilityModal
           modalVisible={this.state.modalVisible}
           src={require('../photos/csimini.png')}

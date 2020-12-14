@@ -86,8 +86,7 @@ export default class Review extends Component {
         <Textbox header='Address'
                  body={this.state.address}/>
         <Textbox header='Items'
-                 body={this.state.selected}
-                 body2={''}/>
+                 body={this.state.selected}/>
         <Textbox header='Order Type'
                 body={this.state.type}/>
         <Textbox header='Total'

@@ -79,14 +79,6 @@ export default class ViewProfile extends React.Component {
             </View>
             <Text style={{color: 'white', fontSize: 20}}>></Text>
           </TouchableOpacity>
-          <View style={styles.line}/>
-          <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditSpecialInstructions')}>
-            <View>
-              <Text style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Special Instructions</Text>
-              <Text style={{color: 'white', fontSize: 20}}>{this.state.specialInstructions}</Text>
-            </View>
-            <Text style={{color: 'white', fontSize: 20}}>></Text>
-          </TouchableOpacity>
         </View>
       </View>
 

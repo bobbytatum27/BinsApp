@@ -19,6 +19,7 @@ export default class ViewPlan extends React.Component {
       address: '',
       specialInstructions: '',
       selectedButton: '',
+      percentageUsed: '',
       options: [{"size": "By Item", "description": "60x40x31.5cm", "price": "$7/month"},
                 {"size": "2x2", "description": "16 cubic ft - Hall Closet", "price": "$79/month"},
                 {"size": "2x4", "description": "32 cubic feet - Bedroom Closet", "price": "$99/month"},
@@ -43,6 +44,20 @@ export default class ViewPlan extends React.Component {
     }
   }
 
+  fetchData(){
+    fetch(Url+'/%used')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      const responseJson2 = responseJson.filter(function(item){
+        return item.email == Auth.user.attributes.email
+      });
+      this.setState({percentageUsed: responseJson2[0].percentageUsed});
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
   componentDidMount(){
     Auth.currentUserInfo().then((userInfo) => {
       const { attributes = {} } = userInfo;
@@ -53,12 +68,13 @@ export default class ViewPlan extends React.Component {
       this.setState({specialInstructions:attributes['custom:specialInstructions']});
       this.setState({selectedButton:attributes['custom:size']});
     })
+    this.fetchData();
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={{flex:1}}>
+        <View>
           <Text style={styles.descriptionText}>Your Facility</Text>
             <View style={{flexDirection: 'row', backgroundColor: 'white', padding: 10, borderRadius: 10, margin: 15}}>
               <View style={{flex: 1}}>
@@ -69,17 +85,17 @@ export default class ViewPlan extends React.Component {
                 <Text>855 Parr Boulevard, Richmond, CA 94801</Text>
               </View>
             </View>
-          <Text style={styles.descriptionText}>Your Plan - % Used</Text>
+          <Text style={styles.descriptionText}>Your Plan - {this.state.percentageUsed} Used</Text>
           <FlatList
             data={this.state.options}
             renderItem={this.renderItem}
             keyExtractor={(item, index) => index.toString()}
             scrollEnabled={false}
           />
-          <Text style={styles.sectionHeader}>To cancel your plan, please email us at:</Text>
-          <Text style={styles.sectionHeaderWhite}>contact@bins-storage.com</Text>
-        </View>
-        <View style={{flex:1.85}}>
+          <View style={{margin: 10}}/>
+          <Text style={styles.sectionHeaderWhite}>Cancel Plan</Text>
+          <View style={{margin: 2}}/>
+          <Text style={styles.sectionHeader}>To cancel your plan, please email us at: contact@bins-storage.com</Text>
         </View>
       </View>
     );
@@ -108,7 +124,7 @@ const styles = StyleSheet.create({
   sectionHeader: {
     color: '#AAB5E0',
     fontSize: 15,
-    marginLeft: 15
+    marginLeft: 15,
   },
   sectionHeaderWhite: {
     color: '#FFF',

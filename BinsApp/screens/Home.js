@@ -138,7 +138,7 @@ class Home extends Component {
         <View style={{marginBottom: 10}}/>
           {this.state.dataSourceOrders.length == 0 ? (
             <>
-            <TouchableOpacity style = {styles.button2} onPress={() => this.props.navigation.replace('NewAppointment')}>
+            <TouchableOpacity style = {styles.button2} onPress={() => this.props.navigation.navigate('NewAppointment')}>
             <Text style={{fontSize: 25, color: '#FFF'}}>Schedule Appointment</Text>
             </TouchableOpacity>
           </>
