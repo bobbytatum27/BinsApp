@@ -22,7 +22,7 @@ export default class BillingInfo extends React.Component {
       address: '',
       email: '',
       phone: '',
-      type: 'Pickup',
+      type: 'Initial Pickup',
       selected: '',
       nameOnCard: '',
       creditCardNum: '',
@@ -72,10 +72,10 @@ export default class BillingInfo extends React.Component {
                 body={this.state.selected}/>
         <View style = {{padding: 25}}>
           <LongButton
-            title="CONFIRM INITIAL APPOINTMENT"
+            title="NEXT"
             onPress={()=>{
               this.onSubmit();
-              this.props.navigation.navigate('InitialConfirmationScreen', {dateSelected: this.state.dateSelected,
+              this.props.navigation.navigate('InitialTermsScreen', {dateSelected: this.state.dateSelected,
                                                                     timeSelected: this.state.timeSelected,
                                                                     address: this.state.address,
                                                                     type: this.state.type})

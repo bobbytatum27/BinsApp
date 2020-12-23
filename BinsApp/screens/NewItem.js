@@ -32,7 +32,7 @@ export default class NewItem extends Component {
 
   _pickImage = async () => {
       try {
-        let result = await ImagePicker.launchImageLibraryAsync({
+        let result = await ImagePicker.launchCameraAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.All,
           allowsEditing: true,
           aspect: [4, 3],
@@ -41,8 +41,6 @@ export default class NewItem extends Component {
         if (!result.cancelled) {
           this.setState({ image: result.uri });
         }
-
-        console.log(result.uri);
       } catch (E) {
         console.log(E);
       }
@@ -54,20 +52,24 @@ export default class NewItem extends Component {
     return (
         <View style={styles.container}>
           <View>
-          <Text style={styles.sectionHeader}>New Item</Text>
-          <TouchableOpacity style = {styles.button2}
-                            onPress={this._pickImage}>
-
-                          <Text style={{color: '#000', fontSize: 16}}>Add Photo</Text>
-          </TouchableOpacity>
+          <Text style ={styles.descriptionText}>Email</Text>
+          <FormInputHandler style={styles.userInfoText}
+                            onChangeText={(text) => this.setState({email: text})}/>
           <Text style ={styles.descriptionText}>Name of Bin</Text>
           <FormInputHandler defaultText='Ex: Winter Clothes, Camping Gear'
                             defaultTextColor='#8B8B8B'
                             style={styles.userInfoText}
                             onChangeText={(text) => this.setState({itemName: text})}/>
-          <Text style ={styles.descriptionText}>Email</Text>
-          <FormInputHandler style={styles.userInfoText}
-                            onChangeText={(text) => this.setState({email: text})}/>
+                            <TouchableOpacity style = {styles.button2}
+                                              onPress={this._pickImage}>
+
+                                            <Text style={{color: '#000', fontSize: 16}}>Add Photo</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style = {styles.button2}
+                                              onPress={this._pickImage}>
+
+                                            <Text style={{color: '#000', fontSize: 16}}>Scan Code</Text>
+                            </TouchableOpacity>
           <View style = {{alignItems: 'center'}}>
           {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
           </View>
@@ -76,7 +78,9 @@ export default class NewItem extends Component {
                     if (this.state.itemName == '' || this.state.image == null) {
                       Alert.alert('Please Complete All Fields')
                     } else {
-                    this.onSubmit();}}}/>
+                    this.onSubmit();
+                    Alert.alert('Item Saved')
+                    }}}/>
           </View>
           <View style={{marginBottom: 25}}>
             <LongButton title ="COMPLETE"

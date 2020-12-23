@@ -13,6 +13,7 @@ import LandingTabs from './LandingTabs.js'
 import NewItem from '../../screens/NewItem.js'
 import SelectFacility from '../../screens/SelectFacility.js'
 import InitialPickup from '../../screens/InitialPickup.js'
+import InitialTerms from '../../screens/InitialTerms.js'
 
 import { createStackNavigator } from '@react-navigation/stack';
 const SignupLoginStacks = createStackNavigator();
@@ -50,6 +51,7 @@ export default SignupLoginStack = (props) => {
            <SignupLoginStacks.Screen name='NewItem' component={NewItem} options={{title: "New Item", headerLeft: null}}/>
            <SignupLoginStacks.Screen name='SelectFacility' component={SelectFacility} options={{title: "Select Facility"}}/>
            <SignupLoginStacks.Screen name='InitialPickup' component={InitialPickup} options={{title: "Select Items"}}/>
+           <SignupLoginStacks.Screen name='InitialTermsScreen' component={InitialTerms} options={{title: "Terms and Conditions"}}/>
         </SignupLoginStacks.Navigator>
     );
 }

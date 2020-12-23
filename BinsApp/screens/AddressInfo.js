@@ -20,7 +20,7 @@ export default class AddressInfo extends React.Component {
       addressLine1: '',
       addressLine2: '',
       city: '',
-      state: '',
+      state: 'CA',
       zip: '',
       specialInstructions: '',
       building: '',
@@ -122,9 +122,10 @@ export default class AddressInfo extends React.Component {
         <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
           <View style={{flex:1}}>
             <InputValidator
+              editable={false}
               titleText='State'
-              defaultText='State'
-              defaultTextColor='#8B8B8B'
+              defaultText='CA'
+              defaultTextColor='#FFF'
               style={styles.userInfoText}
               autoCapitalize='characters'
               returnKeyType='next'
