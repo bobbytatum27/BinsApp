@@ -16,7 +16,18 @@ export default class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      emptyEmail: true,
+      emptyPassword: true,
+      validInput: false,
     };
+  }
+
+  checkAllFields = () => {
+    if (this.state.emptyEmail || this.state.emptyPassword) {
+      this.setState({validInput: false});
+    } else {
+      this.setState({validInput: true})
+    }
   }
 
   render() {
@@ -27,25 +38,55 @@ export default class Login extends React.Component {
           defaultText='Enter your email here'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
-          onChangeText={(val)=>this.setState({email:val})}
+          onChangeText={(val)=>this.setState({email:val, validInput: false})}
           keyboardType='email-address'
+          onEndEditing={(val) => {
+            if (this.state.email.length > 0) {
+              this.setState({emptyEmail: false})
+            } else {
+              this.setState({emptyEmail: true})
+            }
+            this.checkAllFields();
+          }}
+          onBlur={() => this.checkAllFields()}
+          returnKeyType='next'
         />
         <Text style ={styles.descriptionText}>Password</Text>
         <FormInputHandler
           defaultText='Enter a password here'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
-          onChangeText={(val)=>this.setState({password: val})}
+          onChangeText={(val)=>this.setState({password: val, validInput: false})}
           secureTextEntry
+          onEndEditing={(val) => {
+            if (this.state.password.length > 0) {
+              this.setState({emptyPassword: false})
+            } else {
+              this.setState({emptyPassword: true})
+            }
+            this.checkAllFields();
+          }}
+          onBlur={() => this.checkAllFields()}
+          returnKeyType='done'
         />
+        {this.state.validInput ? (
+          <>
         <LongButton
           title="LOGIN"
           onPress={()=>{
             this.context.login(this.state.email, this.state.password)
             .then((msg)=>console.log('successful sign in'))
-            .catch(err => console.log('Error signing in: ', err));
+            .catch(err => Alert.alert(err.message));
           }}
         />
+        </>
+      ) : (
+        <>
+        <View style={styles.finishUserEntry}>
+          <Text style={styles.finishUserEntryPrompt}>LOGIN</Text>
+        </View>
+        </>
+      )}
         <Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
               onPress={() => this.props.navigation.navigate('PasswordReset')}>Forgot Password?</Text>
         <Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
@@ -74,5 +115,17 @@ const styles = StyleSheet.create({
     marginBottom: -10,
     paddingLeft: 15,
     color: 'white',
-  }
+  },
+  finishUserEntry: {
+    padding: 10,
+    margin: 15,
+    backgroundColor: '#7B1FA2',
+    opacity: 0.3,
+    borderRadius: 5
+  },
+  finishUserEntryPrompt: {
+    textAlign: 'center',
+    color: 'white',
+    opacity: 1.0, // this won't overide the wrapper view's opacity :(
+  },
 });

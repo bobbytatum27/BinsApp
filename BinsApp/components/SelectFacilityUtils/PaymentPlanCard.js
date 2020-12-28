@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 /*
@@ -15,10 +15,17 @@ export default PaymentPlanCard = (props) => {
     return (
         <TouchableOpacity style={styles.OpenButton} onPress={props.onPress}>
           <View style={styles.PaymentPlanInfoContainer}>
-            <Text style={styles.SectionHeader}>{props.unitSize}</Text>
-            <Text style={styles.SectionHeader}>{props.unitPrice}</Text>
+            <Image style={{flex:1, width: 110, height: 110}} source={props.source}/>
+            <View style={{margin: 5}}/>
+            <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={styles.SectionHeader}>{props.unitSize} {props.unitDescription}</Text>
+              <View style={{flexDirection:'row'}}>
+                <Text style={{color: '#AAB5E0', fontSize: 15}}>{props.ft}</Text>
+                <Text style={{color: '#AAB5E0', fontSize: 10, lineHeight: 10}}>3</Text>
+              </View>
+              <Text style={{fontSize: 16, color: '#FFF', fontWeight: 'bold'}}>{props.unitPrice}</Text>
+            </View>
           </View>
-          <Text style={{color: '#AAB5E0'}}>{props.unitDescription}</Text>
         </TouchableOpacity>
     );
 }
@@ -33,11 +40,12 @@ const styles = StyleSheet.create({
   },
   PaymentPlanInfoContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
   },
   SectionHeader: {
     color: '#FFF',
-    fontSize: 25,
+    fontSize: 18,
+    textAlign: 'center'
   },
 })
 

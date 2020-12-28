@@ -68,17 +68,17 @@ export default class Menu extends React.Component {
           </View>
           <View style={{flex:1}}>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('ViewProfile')}>
-              <Text style={{color: 'white', fontSize: 20}}>Account Info</Text>
+              <Text style={{color: 'white', fontSize: 20}}>Account Information</Text>
               <Text style={{color: 'white', fontSize: 20}}>></Text>
             </TouchableOpacity>
             <View style={styles.line}/>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Billing')}>
-              <Text style={{color: 'white', fontSize: 20}}>Billing Info</Text>
+              <Text style={{color: 'white', fontSize: 20}}>Billing Information</Text>
               <Text style={{color: 'white', fontSize: 20}}>></Text>
             </TouchableOpacity>
             <View style={styles.line}/>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('ViewPlan')}>
-              <Text style={{color: 'white', fontSize: 20}}>Change or Cancel Storage Plan</Text>
+              <Text style={{color: 'white', fontSize: 20}}>Your Storage Plan</Text>
               <Text style={{color: 'white', fontSize: 20}}>></Text>
             </TouchableOpacity>
             <View style={styles.line}/>

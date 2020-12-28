@@ -33,7 +33,8 @@ export default class FacilityModal extends React.Component {
         super(props);
 
         this.state = {
-            a: 4
+            a: 4,
+            sizeGuideVisible: false
         }
     }
 
@@ -50,58 +51,73 @@ export default class FacilityModal extends React.Component {
                     <Text style={{fontSize: 30, marginLeft: 10}}>{this.props.facilityName}</Text>
                     <Text style={{marginLeft: 10}}>{this.props.facilityAddress}</Text>
                     <Text style={{marginLeft: 10}}>{this.props.facilityWebsite}</Text>
-                    <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                      <Text style={{fontSize: 15, marginLeft: 10, marginTop: 10, fontWeight: '600'}}>Select a Storage Plan</Text>
-                      <TouchableOpacity>
-                        <Text style={{fontSize: 15, marginRight: 10, marginTop: 10, fontWeight: '600', textDecorationLine: 'underline'}}>Size Guide</Text>
-                      </TouchableOpacity>
-                    </View>
+                    <Text style={{fontSize: 15, marginLeft: 10, marginTop: 10, fontWeight: '600'}}>Select a Storage Plan</Text>
                     <ScrollView>
                       <PaymentPlanCard
+                      source={require('../../photos/item.png')}
                         onPress={() => this.props.onSelectPaymentPlan("By Item")}
                         unitSize='Pay By Bin'
                         unitPrice='$7/month'
-                        unitDescription='60x40x31.5cm Bin'
+                        ft='1 ft'
                       />
                       <PaymentPlanCard
+                      source={require('../../photos/2x2.png')}
                         onPress={() => this.props.onSelectPaymentPlan("2x2")}
                         unitSize="2'x2'"
                         unitPrice='$79/month'
-                        unitDescription='16 Cubic ft - Hall Closet'
+                        ft='16 ft'
+                        unitDescription='(Small Closet)'
                       />
                       <PaymentPlanCard
+                      source={require('../../photos/2x4.png')}
+
                         onPress={() => this.props.onSelectPaymentPlan("2x4")}
                         unitSize="2'x4'"
                         unitPrice='$99/month'
-                        unitDescription='32 Cubic ft - Bedroom Closet'
+                        ft='32 ft'
+                        unitDescription='(Medium Closet)'
                       />
                       <PaymentPlanCard
+                      source={require('../../photos/5x5.png')}
+
                         onPress={() => this.props.onSelectPaymentPlan("5x5")}
                         unitSize="5'x5'"
                         unitPrice='$134/month'
-                        unitDescription='100 Cubic ft - Walk-In Closet'
+                        ft='100 ft'
+                        unitDescription='(Large Closet)'
                       />
                       <PaymentPlanCard
+                      source={require('../../photos/5x10.png')}
+
                         onPress={() => this.props.onSelectPaymentPlan("5x10")}
                         unitSize="5'x10'"
                         unitPrice='$157/month'
-                        unitDescription='200 Cubic ft - Studio Apartment'
+                        ft='200 ft'
+                        unitDescription='(Studio Apartment)'
                       />
                       <PaymentPlanCard
+                      source={require('../../photos/5x15.png')}
+
                         onPress={() => this.props.onSelectPaymentPlan("5x15")}
                         unitSize="5'x15'"
                         unitPrice='$191/month'
-                        unitDescription='300 Cubic ft - Small 1BR Apt.'
+                        ft='300 ft'
+                        unitDescription='(Small 1BR Apartment)'
                       />
                       <PaymentPlanCard
+                      source={require('../../photos/10x10.png')}
                         onPress={() => this.props.onSelectPaymentPlan("10x10")}
                         unitSize="10'x10'"
                         unitPrice='$236/month'
-                        unitDescription='400 Cubic ft - 1BR Apt.'
+                        ft='400 ft'
+                        unitDescription='(1BR Apartment)'
                       />
                     </ScrollView>
                   </View>
                 </View>
+              <Modal visible={this.state.sizeGuideVisible}>
+              </Modal>
+
             </Modal>
         );
     }
