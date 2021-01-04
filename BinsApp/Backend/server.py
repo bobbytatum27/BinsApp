@@ -18,7 +18,9 @@ def log():
                     loginInfo['specialInstructions'],
                     loginInfo['size'],
                     loginInfo['building'],
-                    loginInfo['parking'])
+                    loginInfo['parking'],
+                    loginInfo['licenseNumber'],
+                    loginInfo['licenseState'])
     except:
         print('exception')
     x = {'a':False}
@@ -33,9 +35,25 @@ def log2():
                        customerInfo['phone'],
                        customerInfo['address'],
                        customerInfo['specialInstructions'],
-                       customerInfo['selectedButton'],
-                       customerInfo['building'],
-                       customerInfo['parking'])
+                       customerInfo['selectedButton'])
+
+    except:
+        print('exception')
+    x = {'a':False}
+    return jsonify(x)
+
+@app.route("/modifyAddress", methods=['POST', 'GET'])
+def log3():
+    try:
+        customerAddress = request.get_json(force=False, cache=True)
+        modifyAddress(customerAddress['name'],
+                       customerAddress['email'],
+                       customerAddress['phone'],
+                       customerAddress['address'],
+                       customerAddress['specialInstructions'],
+                       customerAddress['selectedButton'],
+                       customerAddress['building'],
+                       customerAddress['parking'])
 
     except:
         print('exception')
@@ -43,7 +61,7 @@ def log2():
     return jsonify(x)
 
 @app.route("/inventory", methods=['POST', 'GET'])
-def log3():
+def log4():
     try:
         binInfo = request.get_json(force=False, cache=True)
         addBin(binInfo['itemName'], binInfo['email'], binInfo['image'])
@@ -53,12 +71,12 @@ def log3():
     return jsonify(x)
 
 @app.route("/render", methods=['GET'])
-def log4():
+def log5():
     list = json.dumps(renderList())
     return list
 
 @app.route("/orders", methods=['POST', 'GET'])
-def log5():
+def log6():
     try:
         orderInfo = request.get_json(force=False, cache=True)
         addOrder(orderInfo['dateSelected'],
@@ -74,17 +92,17 @@ def log5():
     return jsonify(x)
 
 @app.route("/renderorders", methods=['GET'])
-def log6():
+def log7():
     list = json.dumps(renderOrders())
     return list
 
 @app.route("/renderpastorders", methods=['GET'])
-def log7():
+def log8():
     list = json.dumps(renderPastOrders())
     return list
 
 @app.route("/modifybin", methods=['POST', 'GET'])
-def log8():
+def log9():
     try:
         binInfo = request.get_json(force=False, cache=True)
         modifyBin(binInfo['id'],
@@ -97,7 +115,7 @@ def log8():
     return jsonify(x)
 
 @app.route("/%used", methods=['GET'])
-def log9():
+def log10():
     list = json.dumps(renderPercentages())
     return list
 

@@ -15,7 +15,7 @@ class DropdownMenu extends Component {
         arrowColor={"#FFF"}
         itemStyle={{justifyContent: 'flex-start'}}
         containerStyle={{margin: 15, height: 50}}
-        style={{backgroundColor: '#261136', borderColor: '#4826A0', borderTopLeftRadius: 0, borderTopRightRadius: 0, borderBottomLeftRadius: 0, borderBottomRightRadius: 0,}}
+        style={{backgroundColor: '#261136', borderColor: '#4826A0', borderTopLeftRadius: 5, borderTopRightRadius: 5, borderBottomLeftRadius: 5, borderBottomRightRadius: 5,}}
         placeholderStyle={{color: '#FFF', textAlign: 'center'}}
         selectedLabelStyle={{color: '#FFF', textAlign: 'center'}}
       />

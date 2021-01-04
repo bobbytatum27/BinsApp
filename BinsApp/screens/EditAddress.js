@@ -23,7 +23,7 @@ export default class EditAddress extends React.Component {
       addressLine1: '',
       addressLine2: '',
       city: '',
-      state: '',
+      state: 'CA',
       zip: '',
       specialInstructions: '',
       building: '',
@@ -46,7 +46,7 @@ export default class EditAddress extends React.Component {
 
   onSubmit = () => {
       this.updateUser()
-      fetch(Url+'/modifycustomers',{
+      fetch(Url+'/modifyAddress',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -129,9 +129,10 @@ export default class EditAddress extends React.Component {
           <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
             <View style={{flex:1}}>
               <InputValidator
+                editable={false}
                 titleText='State'
-                defaultText='State'
-                defaultTextColor='#8B8B8B'
+                defaultText='CA'
+                defaultTextColor='#FFF'
                 style={styles.userInfoText}
                 autoCapitalize='characters'
                 returnKeyType='next'

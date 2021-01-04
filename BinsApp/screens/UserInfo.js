@@ -4,6 +4,8 @@ import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
 import { LoginContext } from '../components/LoginProvider.js';
 import {Url} from '../src/components/url.js';
+import DropdownMenu from '../components/DropdownMenu.js'
+import {ListOfStates} from '../src/components/ListOfStates.js';
 
 export default class UserInfo extends React.Component {
   static contextType = LoginContext;
@@ -21,22 +23,26 @@ export default class UserInfo extends React.Component {
       size: '',
       building: '',
       parking: '',
+      licenseNumber: '',
+      licenseState: 'CA',
       validInput: false,
       validEmail: false,
       validPassword: false,
       validPhone: false,
       nonemptyName: false,
+      validLicense: false,
       // these are for rendering a red box on invalid input
       validNameUI: true,
       validPhoneUI: true,
       validEmailUI: true,
       validPasswordUI: true,
       validPasswordReentry: true,
+      validLicenseUI: true,
     };
   }
 
   checkAllFields = () => {
-    if (this.state.validEmail && this.state.validPassword && this.state.validPhone && this.state.nonemptyName && this.state.validPasswordReentry) {
+    if (this.state.validEmail && this.state.validPassword && this.state.validPhone && this.state.nonemptyName && this.state.validPasswordReentry && this.state.validLicense) {
       this.setState({validInput: true});
     } else {
       this.setState({validInput: false})
@@ -113,6 +119,36 @@ export default class UserInfo extends React.Component {
           onBlur={() => this.checkAllFields()}
           returnKeyType='next'
         />
+        <View style={{flexDirection:'row', justifyContent: 'space-between', zIndex: 1}}>
+          <View style={{flex:2}}>
+            <Text style ={{...styles.descriptionText, color: this.state.validLicenseUI ? 'white' : 'red'}}>{this.state.validLicenseUI ? "Driver's License Number" : 'Don\'t leave this empty!'}</Text>
+            <FormInputHandler
+              defaultText="Enter DL Number"
+              defaultTextColor='#8B8B8B'
+              style={styles.userInfoText}
+              autoCapitalize='words'
+              onChangeText={(val)=>this.setState({licenseNumber: val, validInput: false})}
+              onEndEditing={(val) => {
+                if (this.state.licenseNumber.length == 0) {
+                  this.setState({validLicenseUI: false, validLicense: false})
+                } else {
+                  this.setState({validLicense: true, validLicenseUI: true})
+                }
+                this.checkAllFields();
+              }}
+              onBlur={() => this.checkAllFields()}
+              returnKeyType='next'
+            />
+          </View>
+          <View style={{flex:1}}>
+            <Text style={styles.descriptionText}>State</Text>
+            <DropdownMenu
+              items={ListOfStates}
+              defaultValue={this.state.licenseState}
+              onChangeItem={(item) => this.setState({licenseState: item.value})}
+            />
+          </View>
+        </View>
         <Text style ={{...styles.descriptionText, color: this.state.validEmailUI ? 'white' : 'red'}}>Email {this.state.validEmailUI ? '' : '- Invalid Email!'}</Text>
         <FormInputHandler
           defaultText='Enter your email here'

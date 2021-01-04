@@ -10,17 +10,38 @@ client = gspread.authorize(creds)
 service = discovery.build('sheets', 'v4', credentials=creds)
 spreadsheet_id = '18l4cO3X1dp8MCWqDencHYUTidUhXb7u9IHFp_vg_5uQ'
 
-def addCustomer(name, email, phone, address, specialInstructions, size, building, parking):
-    range_ = 'Customers!A3:I3'
+def addCustomer(name, email, phone, address, specialInstructions, size, building, parking, licenseNumber, licenseState):
+    range_ = 'Customers!A3:K3'
     value_range_body = {
         "majorDimension": "COLUMNS",
-        "values": [[email], [name], [phone], [address], [specialInstructions], [size], [building], [parking], ["0%"]]
+        "values": [[email], [name], [phone], [address], [specialInstructions], [size], [building], [parking], ["0%"], [licenseNumber], [licenseState]]
     }
     value_input_option = 'USER_ENTERED'
     request = service.spreadsheets().values().append(spreadsheetId=spreadsheet_id, range=range_, valueInputOption=value_input_option, body=value_range_body)
     response = request.execute()
 
-def modifyCustomer(name, email, phone, address, specialInstructions, size, building, parking):
+def modifyCustomer(name, email, phone, address, specialInstructions, size):
+    customerID = email
+    range_ = "Customers!A:A"
+    value_render_option = "UNFORMATTED_VALUE"
+    request2 = service.spreadsheets().values().get(spreadsheetId=spreadsheet_id, range=range_, valueRenderOption=value_render_option)
+    response2 = request2.execute()
+    values = response2['values']
+
+    def findRow(id):
+        for counter, x in enumerate(values, 1):
+            if id == x:
+                return counter
+    value_range_body = {
+        "majorDimension": "COLUMNS",
+        "values": [[email], [name], [phone], [address], [specialInstructions], [size]]}
+    row = findRow([customerID])
+    value_input_option = "RAW"
+    range_2 = "Customers!A" + str(row) + ":F" + str(row)
+    request3 = service.spreadsheets().values().update(spreadsheetId=spreadsheet_id, range=range_2, valueInputOption=value_input_option, body=value_range_body)
+    response3 = request3.execute()
+
+def modifyAddress(name, email, phone, address, specialInstructions, size, building, parking):
     customerID = email
     range_ = "Customers!A:A"
     value_render_option = "UNFORMATTED_VALUE"
