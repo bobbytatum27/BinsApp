@@ -89,8 +89,6 @@ export default class Login extends React.Component {
       )}
         <Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
               onPress={() => this.props.navigation.navigate('PasswordReset')}>Forgot Password?</Text>
-        <Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
-              onPress={() => this.props.navigation.navigate('AdminLogin')}>Admin Login</Text>
       </View>
     );
   }
@@ -129,3 +127,10 @@ const styles = StyleSheet.create({
     opacity: 1.0, // this won't overide the wrapper view's opacity :(
   },
 });
+
+/*
+Admin Login Button
+
+<Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
+      onPress={() => this.props.navigation.navigate('AdminLogin')}>Admin Login</Text>
+*/
