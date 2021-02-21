@@ -15,6 +15,15 @@ export default class FormInputHandler extends React.Component {
         placeholderTextColor={this.props.defaultTextColor}
         onChangeText={this.props.onChangeText}
         style={this.props.style}
+        keyboardType={this.props.keyboardType}
+        secureTextEntry={this.props.secureTextEntry}
+        defaultValue={this.props.defaultValue}
+        onEndEditing={this.props.onEndEditing}
+        keyboardType={this.props.keyboardType}
+        onBlur={this.props.onBlur}
+        returnKeyType={this.props.returnKeyType}
+        editable={this.props.editable}
+        autoCapitalize={this.props.autoCapitalize}
       />
     );
   }

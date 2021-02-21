@@ -1,0 +1,16 @@
+{
+	"auth": {
+		"binsapp54a02567": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	},
+	"storage": {
+		"BinsAppUserPics": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}

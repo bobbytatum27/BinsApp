@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
+import moment from "moment";
 
 export default class Confirmation extends Component {
   constructor(props) {
@@ -10,35 +11,37 @@ export default class Confirmation extends Component {
     this.state = {
       dateSelected: '',
       timeSelected: '',
+      address: '',
+      type: '',
     }
   }
 
   componentDidMount(){
       const dateSelected = this.props.route.params?.dateSelected??'';
       const timeSelected = this.props.route.params?.timeSelected??'';
+      const address = this.props.route.params?.address??'';
+      const type = this.props.route.params?.type??'';
+      this.setState({type});
       this.setState({dateSelected});
       this.setState({timeSelected});
+      this.setState({address});
     }
 
   render() {
     return (
         <View style={styles.container}>
           <Text style={styles.header}>Your Order Has Been Placed Successfully!</Text>
-          <Textbox header='Date and Time'
-                   body={Object.keys(this.state.dateSelected)}
-                   body2={this.state.timeSelected}/>
+          <Textbox header='Date'
+                   body={moment(this.state.dateSelected).format('MMMM DD, YYYY')}/>
+          <Textbox header='Time'
+                   body={this.state.timeSelected}/>
           <Textbox header='Address'
-                   body={this.state.addressLine1}
-                   body2={this.state.city + ", " + this.state.state + " " + this.state.zip}/>
+                   body={this.state.address}/>
           <Textbox header='Order Type'
-                   body=''/>
-          <View>
-            <LongButton title ="VIEW SCHEDULED ORDERS"
-                    onPress={() => this.props.navigation.navigate('Orders')}/>
-          </View>
-          <View style = {{marginTop: -15}}>
-            <LongButton title ="MAKE ANOTHER ORDER"
-                    onPress={() => this.props.navigation.navigate('Home')}/>
+                   body={this.state.type}/>
+          <View style={{marginTop: 10}}>
+            <LongButton title ="GO TO HOME"
+                        onPress={() => this.props.navigation.replace('Home')}/>
           </View>
         </View>
     );
@@ -49,7 +52,6 @@ const styles = StyleSheet.create({
 container: {
   flex: 1,
   backgroundColor: '#261136',
-  padding: 25
 },
 userInfoText: {
   borderColor: '#4826A0',

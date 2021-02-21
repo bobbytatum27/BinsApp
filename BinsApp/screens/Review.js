@@ -3,19 +3,31 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
-
+import { LoginContext } from '../components/LoginProvider.js';
+import {Auth} from 'aws-amplify';
+import {Url} from '../src/components/url.js';
+import moment from "moment";
 
 export default class Review extends Component {
+  static contextType = LoginContext;
+
   constructor(props) {
     super(props);
     this.state = {
       dateSelected: '',
       timeSelected: '',
+      address: '',
+      email: '',
+      phone: '',
+      selected: '',
+      type: '',
+      id: '',
+      isInStorage: 'In Progress',
     }
   }
 
   onSubmit() {
-    fetch('http://192.168.1.247:5000/orders',{
+    fetch(Url+'/orders',{
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -24,48 +36,81 @@ export default class Review extends Component {
       body: JSON.stringify(this.state)
   })}
 
+  //Changing storage status of an item does not currently work if there are multiple items
+
+  /*onSubmit2() {
+    fetch(Url+'/modifybin',{
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+    },
+      body: JSON.stringify(this.state)
+  })}
+  */
+
   componentDidMount(){
-      const dateSelected = this.props.route.params?.dateSelected??'';
-      const timeSelected = this.props.route.params?.timeSelected??'';
-      this.setState({dateSelected});
-      this.setState({timeSelected});
+    this.fetchData();
+    const dateSelected = this.props.route.params?.dateSelected??'';
+    const timeSelected = this.props.route.params?.timeSelected??'';
+    const selectedArray = this.props.route.params?.selected??'';
+    const selected = selectedArray.toString();
+    const type = this.props.route.params?.type??'';
+    const idArray = this.props.route.params?.id??'';
+    const idString = idArray.toString();
+    const id = parseInt(idString, 10);
+    this.setState({dateSelected});
+    this.setState({timeSelected});
+    this.setState({selected});
+    this.setState({type});
+    this.setState({id});
+  }
+
+    fetchData(){
+      Auth.currentUserInfo().then((userInfo) => {
+        const { attributes = {} } = userInfo;
+        this.setState({email:attributes['email']});
+        this.setState({phone:attributes['phone_number']});
+        this.setState({address:attributes['address']});
+      })
     }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style = {{alignItems: 'center'}}>
-          <Text style = {styles.header}>Review</Text>
-        </View>
-        <Textbox header='Date and Time'
-                 body={Object.keys(this.state.dateSelected)}
-                 body2={this.state.timeSelected}/>
+        <View style={{margin: 10}}/>
+        <Textbox header='Date'
+                 body={moment(this.state.dateSelected).format('MMMM DD, YYYY')}/>
+        <Textbox header='Time'
+                 body={this.state.timeSelected}/>
         <Textbox header='Address'
-                 body={this.state.addressLine1}
-                 body2={this.state.city + ", " + this.state.state + " " + this.state.zip}/>
-        <Textbox header='Unit'
-                 body=''
-                 body2=''/>
+                 body={this.state.address}/>
+        <Textbox header='Items'
+                 body={this.state.selected}/>
+        <Textbox header='Order Type'
+                body={this.state.type}/>
         <Textbox header='Total'
-                          body=''
-                          body2=''/>
+                          body='$19.99'/>
         <View style = {{marginTop: 15}}>
           <LongButton
             title="CONFIRM"
-            onPress={()=>this.props.navigation.navigate('ConfirmationScreen', {dateSelected: this.state.dateSelected,
-                                                                               timeSelected: this.state.timeSelected})}
-          />
+            onPress={()=>{
+              this.onSubmit();
+              this.props.navigation.navigate('ConfirmationScreen', {dateSelected: this.state.dateSelected,
+                                                                    timeSelected: this.state.timeSelected,
+                                                                    address: this.state.address,
+                                                                    type: this.state.type})
+              }}/>
         </View>
       </View>
     );
   }
   }
 
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#261136',
-    padding: 25
   },
   userInfoText: {
     borderColor: '#4826A0',
@@ -90,5 +135,4 @@ export default class Review extends Component {
     margin: 15,
     justifyContent: 'center',
   }
-
   });

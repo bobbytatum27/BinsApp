@@ -18,7 +18,7 @@ export default class Landing2 extends Component {
         <View style={{flex:5}}>
         <Text style={styles.intro3}>Discover full-service storage near you</Text>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('SelectFacilityScreen')}
+          onPress={() => this.props.navigation.navigate('AddressInfo')}
           style = {{alignItems: 'center',
                     backgroundColor: '#E0B141',
                     padding: 7,

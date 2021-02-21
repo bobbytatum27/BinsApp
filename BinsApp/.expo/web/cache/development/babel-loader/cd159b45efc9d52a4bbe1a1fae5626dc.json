@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var Url = 'http://192.168.1.247:5000';","map":{"version":3,"sources":["C:/Users/azhan/desktop/binsapp/binsapp/src/components/url.js"],"names":["Url"],"mappings":"AAAA,OAAO,IAAMA,GAAG,GAAG,2BAAZ","sourcesContent":["export const Url = 'http://192.168.1.247:5000'\r\n\r\n//http://192.168.1.247:5000/\r\n"]},"metadata":{},"sourceType":"module"}

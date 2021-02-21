@@ -1,44 +1,132 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
+import {LoginContext} from '../components/LoginProvider.js'
+import {Auth} from 'aws-amplify';
+import DropDownPicker from 'react-native-dropdown-picker';
+import {Url} from '../src/components/url.js';
+import moment from "moment";
 
 export default class Orders extends Component {
-  constructor(props) {
-    super(props);
+  static contextType = LoginContext;
+  constructor() {
+    super();
     this.state = {
+      isLoading: true,
+      dataSource: [],
       dateSelected: '',
       timeSelected: '',
+      refreshing: false,
+      email: '',
+      filter: 'Upcoming',
     }
+  }
+
+  renderItem = data => {
+      return (
+        <TouchableOpacity style={{padding: 15, backgroundColor: "white", marginTop: 10, flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}} onPress={() => this.props.navigation.navigate('ViewOrder', {id: data.item.id})}>
+          <View>
+            <Text style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
+            <Text>{data.item.time} | {data.item.type}</Text>
+          </View>
+          <Text>></Text>
+        </TouchableOpacity>
+      )
+    }
+
+  onRefresh = () => {
+    this.setState({refreshing: true});
+    if (this.state.filter == 'Upcoming') {
+    this.fetchData();
+    } else {
+    this.fetchPastOrders();
+    }
+  }
+
+  onSort(val) {
+    this.setState({filter:val});
+    if (val == 'Past') {
+    this.fetchPastOrders();
+    } else {
+      this.fetchData();
+    }
+  }
+
+  fetchData(){
+    fetch(Url+'/renderorders')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      const responseJson2 = responseJson.filter(function(item){
+        return item.name == Auth.user.attributes.email
+      });
+      this.setState({dataSource: responseJson2, isLoading: false});
+    })
+    .then(() => {
+     this.setState({refreshing: false});
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  fetchPastOrders(){
+    fetch(Url+'/renderpastorders')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      const responseJson2 = responseJson.filter(function(item){
+        return item.name == Auth.user.attributes.email
+      });
+      this.setState({dataSource: responseJson2, isLoading: false});
+    })
+    .then(() => {
+     this.setState({refreshing: false});
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
+  componentDidMount() {
+    this.fetchData();
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.sectionHeader}>Upcoming Orders</Text>
-        <Textbox header='Date and Time'
-                 body='Monday, January 1, 2020'
-                 body2='8am - 10am'/>
-        <Textbox header='Address'
-                 body='123 New York Avenue'
-                 body2='Los Angeles, CA 92001'/>
-        <Textbox header='Order Type'
-                 body='Pickup'/>
-        <View style={{flexDirection: 'row',
-                      backgroundColor: 'white',
-                      padding: 10,
-                      marginLeft: 15,
-                      marginRight: 15,
-                      marginBottom: 1,
-                    }}>
+      {this.state.isLoading ? (
+        <>
           <View>
-          <Text style={{fontSize:12}}>Order Type</Text>
-          <Text style={{fontSize:25}}>Pickup</Text>
+            <ActivityIndicator />
           </View>
-          <View>
-          <Button title='VIEW'/>
-          </View>
-        </View>
+        </>
+      ) : (
+        <>
+        <DropDownPicker
+          items={[
+                {label: 'Upcoming', value: 'Upcoming'},
+                {label: 'Past', value: 'Past'}
+          ]}
+          placeholder={"Upcoming"}
+          arrowSize={10}
+          itemStyle={{justifyContent: 'flex-start'}}
+          containerStyle={{marginLeft: 15, marginBottom: 5, height: 35, width: 110}}
+          onChangeItem={item => {this.onSort(item.value)}}
+        />
+          <FlatList
+            data={this.state.dataSource}
+            renderItem={this.renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            extraData={this.state}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this.onRefresh}
+                tintColor = 'white'  />
+            }
+          />
+          </>
+        )}
       </View>
     );
   }
@@ -48,7 +136,6 @@ export default class Orders extends Component {
   container: {
     flex: 1,
     backgroundColor: '#261136',
-    padding: 25
   },
   userInfoText: {
     borderColor: '#4826A0',
@@ -79,5 +166,10 @@ export default class Orders extends Component {
     marginLeft: 15,
     marginBottom: 25
   },
-
+  lineStyle:{
+    borderWidth: 0.5,
+    borderColor:'black',
+    marginLeft: 25,
+    marginRight: 25,
+  },
   });

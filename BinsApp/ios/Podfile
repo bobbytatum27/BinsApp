@@ -43,4 +43,6 @@ target 'BinsApp' do
 
   # Automatically detect installed unimodules
   use_unimodules!
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
 end
