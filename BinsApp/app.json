@@ -12,5 +12,9 @@
       "android",
       "web"
     ]
+  },
+  "icon": "./Logo.png",
+  "ios": {
+    "bundleIdentifier": "com.bins-storage.Bins"
   }
 }
