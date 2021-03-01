@@ -7,6 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import {Url} from '../src/components/url.js';
+import {S3url} from '../src/components/s3url.js';
 
 export default class HomeInventory extends Component {
   static contextType = LoginContext;
@@ -39,7 +40,7 @@ export default class HomeInventory extends Component {
       return (
         <View style={styles.item}>
           <Image style={{width: 150, height: 150}}
-                 source={{uri: data.item.photo}}/>
+                 source={{uri: S3url + data.item.photo}}/>
           <View style={{padding: 10, flexDirection: 'column'}}>
             <Text style={{fontWeight: 'bold'}}>{data.item.description}</Text>
               <Text>ID #{data.item.id}</Text>

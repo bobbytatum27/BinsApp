@@ -8,6 +8,8 @@ import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import {Url} from '../src/components/url.js';
+import {S3url} from '../src/components/s3url.js';
+
 import moment from "moment";
 
 class Home extends Component {
@@ -77,7 +79,7 @@ class Home extends Component {
       return (
       <View style = {styles.button}>
         <Image style={{width: 150, height: 150}}
-               source={{uri: item.photo}}/>
+               source={{uri: S3url + item.photo}}/>
         <View style={{padding: 10, flexDirection: 'column'}}>
           <Text style={{fontWeight: 'bold'}}>{item.description}</Text>
           <Text>ID #{item.id}</Text>
@@ -90,7 +92,7 @@ class Home extends Component {
       return (
         <View style = {styles.button}>
           <Image style={{width: 150, height: 150}}
-                 source={{uri: item.photo}}/>
+                 source={{uri: S3url + item.photo}}/>
           <View style={{padding: 10, flexDirection: 'column'}}>
             <Text style={{fontWeight: 'bold'}}>{item.description}</Text>
             <Text>ID #{item.id}</Text>

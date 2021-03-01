@@ -11,7 +11,10 @@
       "ios",
       "android",
       "web"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "com.bins-storage.TenantApp"
+    }
   },
   "icon": "./Logo.png",
   "ios": {
