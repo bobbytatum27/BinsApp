@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, View, Text, Button, TouchableOpacity, Image, Alert } from 'react-native';
-import {Auth} from 'aws-amplify';
+import {Auth, Storage} from 'aws-amplify';
 import * as ImagePicker from 'expo-image-picker';
 
 import Item from '../components/Item.js'
@@ -30,6 +30,19 @@ export default class NewItem extends Component {
       body: JSON.stringify(this.state)
   })}
 
+  pathToImageFile = async () => {
+    try {
+      const response = await fetch(this.state.image);
+      const blob = await response.blob();
+      await Storage.put(this.state.itemName, blob, {
+        contentType: 'image/jpeg', // contentType is optional
+      });
+    } catch (err) {
+      console.log('Error uploading file:', err);
+    }
+  }
+
+
   _pickImage = async () => {
       try {
         let result = await ImagePicker.launchCameraAsync({
@@ -45,6 +58,8 @@ export default class NewItem extends Component {
         console.log(E);
       }
     };
+
+
 
   render() {
     let { image } = this.state;
@@ -73,6 +88,7 @@ export default class NewItem extends Component {
           <View style = {{alignItems: 'center'}}>
           {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
           </View>
+          <Button title="Upload image" onPress={this.pathToImageFile} />
           <LongButton title ="SAVE"
                   onPress={()=>{
                     if (this.state.itemName == '' || this.state.image == null) {

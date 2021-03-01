@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 /*
  * Imports for the main two navigation flows.
- * 
+ *
  * HomeTab: The tab navigator contained at the home screen (for authenticated users only).
  * SignupLoginStack: The stack navigator used for authentication. Initiates either signup or login flow.
  */
@@ -16,8 +16,7 @@ import {LoginProvider, LoginContext} from './components/LoginProvider.js'
 import Amplify from "aws-amplify"
 import config from "./aws-exports"
 
-Amplify.configure(config);
-
+Amplify.configure({...config, Storage: {AWSS3: "bins-test-bucket"}})
 
 function App() {
   const loginContext = useContext(LoginContext);

@@ -173,10 +173,11 @@ class Home extends Component {
               keyExtractor={(item, index) => index.toString()}
               scrollEnabled={false}
             />
-              <TouchableOpacity style={styles.button3} onPress={() => this.props.navigation.navigate('ViewStorageInventory')}>
+              <TouchableOpacity style={styles.button3} onPress={() => this.props.navigation.navigate('NewItemScreen')}>
               <Text style={{color: 'white'}}>VIEW ALL</Text>
               </TouchableOpacity>
             </>
+
           )}
           </View>
           <View style={styles.sectionContainer}>
