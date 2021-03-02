@@ -3,9 +3,10 @@
   "displayName": "Welcome to Bins!",
   "expo": {
     "name": "BinsApp",
+    "icon": "./Logo.png",
     "slug": "expo-template-bare",
     "privacy": "unlisted",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "entryPoint": "node_modules/expo/AppEntry.js",
     "platforms": [
       "ios",
@@ -13,11 +14,7 @@
       "web"
     ],
     "ios": {
-      "bundleIdentifier": "com.bins-storage.TenantApp"
+      "bundleIdentifier": "com.bins-storage.Bins"
     }
-  },
-  "icon": "./Logo.png",
-  "ios": {
-    "bundleIdentifier": "com.bins-storage.Bins"
   }
 }
