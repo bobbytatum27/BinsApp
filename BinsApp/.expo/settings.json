@@ -5,5 +5,6 @@
   "minify": false,
   "urlRandomness": "2x-4jx",
   "https": false,
-  "scheme": null
+  "scheme": null,
+  "devClient": false
 }

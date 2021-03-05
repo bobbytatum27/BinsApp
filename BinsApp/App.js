@@ -21,7 +21,6 @@ Amplify.configure(config);
 
 function App() {
   const loginContext = useContext(LoginContext);
-  console.log("------------------At app----------------------");
 
   return (
     <NavigationContainer>
