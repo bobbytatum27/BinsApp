@@ -35,10 +35,10 @@ export default class ViewPlan extends React.Component {
       return (
         <View style={styles.openButton}>
           <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text style={styles.buttonHeader}>{data.item.size}</Text>
-            <Text style={styles.buttonHeader}>{data.item.price}</Text>
+            <Text allowFontScaling={false} style={styles.buttonHeader}>{data.item.size}</Text>
+            <Text allowFontScaling={false} style={styles.buttonHeader}>{data.item.price}</Text>
           </View>
-          <Text style={{color: '#FFF'}}>{data.item.description}</Text>
+          <Text allowFontScaling={false} style={{color: '#FFF'}}>{data.item.description}</Text>
         </View>
       )
     }
@@ -75,17 +75,17 @@ export default class ViewPlan extends React.Component {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.descriptionText}>Your Facility</Text>
+          <Text allowFontScaling={false} style={styles.descriptionText}>Your Facility</Text>
             <View style={{flexDirection: 'row', backgroundColor: 'white', padding: 10, borderRadius: 10, margin: 15}}>
               <View style={{flex: 1}}>
                 <Image style={{width: 50, height: 50}} source={require('../photos/csimini.png') }/>
               </View>
               <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
-                <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
-                <Text>855 Parr Boulevard, Richmond, CA 94801</Text>
+                <Text allowFontScaling={false} style={{fontSize: 20}}>CSI Mini Storage</Text>
+                <Text allowFontScaling={false}>855 Parr Boulevard, Richmond, CA 94801</Text>
               </View>
             </View>
-          <Text style={styles.descriptionText}>Your Plan - {this.state.percentageUsed} Used</Text>
+          <Text allowFontScaling={false} style={styles.descriptionText}>Your Plan - {this.state.percentageUsed} Used</Text>
           <FlatList
             data={this.state.options}
             renderItem={this.renderItem}
@@ -93,9 +93,9 @@ export default class ViewPlan extends React.Component {
             scrollEnabled={false}
           />
           <View style={{margin: 10}}/>
-          <Text style={styles.sectionHeaderWhite}>Cancel Plan</Text>
+          <Text allowFontScaling={false} style={styles.sectionHeaderWhite}>Cancel Plan</Text>
           <View style={{margin: 2}}/>
-          <Text style={styles.sectionHeader}>To cancel your plan, please email us at: contact@bins-storage.com</Text>
+          <Text allowFontScaling={false} style={styles.sectionHeader}>To cancel your plan, please email us at: contact@bins-storage.com</Text>
         </View>
       </View>
     );
@@ -168,6 +168,6 @@ const styles = StyleSheet.create({
 
 /*
 <TouchableOpacity style = {styles.cancelButton} onPress = {() => this.props.navigation.navigate('EditPlan')}>
-  <Text style={{color: 'white', fontSize: 16, textAlign: 'center'}}>Manage Plan</Text>
+  <Text allowFontScaling={false} style={{color: 'white', fontSize: 16, textAlign: 'center'}}>Manage Plan</Text>
 </TouchableOpacity>
 */

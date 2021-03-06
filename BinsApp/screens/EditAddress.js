@@ -177,7 +177,7 @@ export default class EditAddress extends React.Component {
             errorMessage='Do not leave this field empty!'
             checkInput={() => true /*this field is optional, so automatically valid*/}
           />
-          <Text style={styles.descriptionText}>Building Type</Text>
+          <Text allowFontScaling={false} style={styles.descriptionText}>Building Type</Text>
           <DropdownMenu
             items={[
                   {label: 'House', value: 'House'},
@@ -187,7 +187,7 @@ export default class EditAddress extends React.Component {
             onChangeItem={(item) => this.setState({building: item.value})}
             zIndex={2}
           />
-          <Text style={styles.descriptionText}>Where to Park</Text>
+          <Text allowFontScaling={false} style={styles.descriptionText}>Where to Park</Text>
           <DropdownMenu
             items={[
                   {label: 'In Front of Building', value: 'In Front of Building'},

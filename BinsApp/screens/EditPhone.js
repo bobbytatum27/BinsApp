@@ -64,7 +64,7 @@ export default class EditPhone extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flex:5}}>
-          <Text style ={styles.descriptionText}>Phone</Text>
+          <Text allowFontScaling={false} style ={styles.descriptionText}>Phone</Text>
           <FormInputHandler
             defaultValue={this.state.phone}
             defaultTextColor='#8B8B8B'

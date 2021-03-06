@@ -44,12 +44,12 @@ export default class StorageInventory extends Component {
           <Image style={{width: 150, height: 150}}
                  source={{uri: S3url + data.item.photo}}/>
           <View style={{padding: 10, flexDirection: 'column'}}>
-            <Text style={{fontWeight: 'bold'}}>{data.item.description}</Text>
+            <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{data.item.description}</Text>
             <View style = {{flexDirection: 'row', justifyContent: 'space-between', marginTop: 5}}>
-              <Text>ID #{data.item.id}</Text>
+              <Text allowFontScaling={false}>ID #{data.item.id}</Text>
               <TouchableOpacity style = {styles.button, data.item.selectedClass}
                                 onPress={() => {this.selectItem(data); this.getSelected(this.state.dataSource);}}>
-              {data.item.isSelect ? (<Text style={{color:'white'}}>Selected</Text> ) : (<Text style={{color:'white'}}>Select</Text> )}
+              {data.item.isSelect ? (<Text allowFontScaling={false} style={{color:'white'}}>Selected</Text> ) : (<Text allowFontScaling={false} style={{color:'white'}}>Select</Text> )}
               </TouchableOpacity>
             </View>
         </View>

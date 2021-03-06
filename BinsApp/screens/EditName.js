@@ -64,7 +64,7 @@ export default class EditName extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flex:5}}>
-          <Text style ={styles.descriptionText}>Full Name</Text>
+          <Text allowFontScaling={false} style ={styles.descriptionText}>Full Name</Text>
           <FormInputHandler
             defaultValue={this.state.name}
             defaultTextColor='#8B8B8B'

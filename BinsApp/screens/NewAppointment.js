@@ -6,10 +6,10 @@ export default class NewAppointment extends Component {
     return (
       <View style={ styles.container}>
         <TouchableOpacity style={styles.button3} onPress={() => this.props.navigation.navigate('StorageInventoryScreen')}>
-          <Text style={styles.text}>Deliver Items to Me</Text>
+          <Text allowFontScaling={false} style={styles.text}>Deliver Items to Me</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button3} onPress={() => this.props.navigation.navigate('Pickup')}>
-          <Text style={styles.text}>Pick Up Items From Me</Text>
+          <Text allowFontScaling={false} style={styles.text}>Pick Up Items From Me</Text>
         </TouchableOpacity>
       </View>
       )

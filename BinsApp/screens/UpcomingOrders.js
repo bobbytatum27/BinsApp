@@ -23,10 +23,10 @@ export default class UpcomingOrders extends Component {
       return (
         <TouchableOpacity style={styles.orderbox} onPress={() => this.props.navigation.navigate('ViewOrder', {id: data.item.id})}>
           <View>
-            <Text style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
-            <Text>{data.item.time} | {data.item.type}</Text>
+            <Text allowFontScaling={false} style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
+            <Text allowFontScaling={false}>{data.item.time} | {data.item.type}</Text>
           </View>
-          <Text>></Text>
+          <Text allowFontScaling={false}>></Text>
         </TouchableOpacity>
       )
     }
@@ -90,7 +90,7 @@ export default class UpcomingOrders extends Component {
                       marginLeft: 130,
                       marginRight: 130,
                       borderRadius: 20, }} >
-            <Text style = {{color: 'white'}}>View Past Orders</Text>
+            <Text allowFontScaling={false} style = {{color: 'white'}}>View Past Orders</Text>
           </TouchableOpacity>
           </>
         )}

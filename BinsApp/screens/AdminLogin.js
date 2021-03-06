@@ -22,7 +22,7 @@ export default class AdminLogin extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style ={styles.descriptionText}>Password</Text>
+        <Text allowFontScaling={false} style ={styles.descriptionText}>Password</Text>
         <FormInputHandler
           defaultText='Enter a password here'
           defaultTextColor='#8B8B8B'

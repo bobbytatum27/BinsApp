@@ -5,7 +5,7 @@ export default class Boilerplate extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Boilerplate placeholder</Text>
+        <Text allowFontScaling={false}>Boilerplate placeholder</Text>
       </View>
     );
   }

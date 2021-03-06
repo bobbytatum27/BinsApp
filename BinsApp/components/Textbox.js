@@ -7,8 +7,8 @@ class Textbox extends Component {
     return (
       <View style={styles.textbox}
                         onPress={this.props.onPress}>
-        <Text style={styles.header}>{this.props.header}:</Text>
-        <Text style={styles.body}>{this.props.body}</Text>
+        <Text allowFontScaling={false} style={styles.header}>{this.props.header}:</Text>
+        <Text allowFontScaling={false} style={styles.body}>{this.props.body}</Text>
       </View>
     );
   }

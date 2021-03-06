@@ -44,9 +44,9 @@ export default class ViewStorageInventory extends Component {
           <Image style={{width: 150, height: 150}}
                  source={{uri: S3url + data.item.photo}}/>
           <View style={{padding: 10, flexDirection: 'column'}}>
-            <Text style={{fontWeight: 'bold'}}>{data.item.description}</Text>
+            <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{data.item.description}</Text>
             <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text>ID #{data.item.id}</Text>
+              <Text allowFontScaling={false}>ID #{data.item.id}</Text>
             </View>
         </View>
       </View>

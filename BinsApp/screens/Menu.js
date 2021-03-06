@@ -64,32 +64,32 @@ export default class Menu extends React.Component {
     return (
       <View style={styles.container}>
           <View style = {{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flex:1}}>
-            <Text style={styles.bins}>Bins</Text>
+            <Text allowFontScaling={false} style={styles.bins}>Bins</Text>
           </View>
           <View style={{flex:1}}>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('ViewProfile')}>
-              <Text style={{color: 'white', fontSize: 20}}>Account Information</Text>
-              <Text style={{color: 'white', fontSize: 20}}>></Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Account Information</Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
             </TouchableOpacity>
             <View style={styles.line}/>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Billing')}>
-              <Text style={{color: 'white', fontSize: 20}}>Billing Information</Text>
-              <Text style={{color: 'white', fontSize: 20}}>></Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Billing Information</Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
             </TouchableOpacity>
             <View style={styles.line}/>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('ViewPlan')}>
-              <Text style={{color: 'white', fontSize: 20}}>Your Storage Plan</Text>
-              <Text style={{color: 'white', fontSize: 20}}>></Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Your Storage Plan</Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
             </TouchableOpacity>
             <View style={styles.line}/>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('FAQ')}>
-              <Text style={{color: 'white', fontSize: 20}}>FAQ</Text>
-              <Text style={{color: 'white', fontSize: 20}}>></Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>FAQ</Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
             </TouchableOpacity>
             <View style={styles.line}/>
             <TouchableOpacity style={styles.button}>
-              <Text style={{color: 'white', fontSize: 20}}>Terms and Conditions</Text>
-              <Text style={{color: 'white', fontSize: 20}}>></Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Terms and Conditions</Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
             </TouchableOpacity>
           </View>
           <View style={{flex:1, justifyContent: 'flex-end', padding: 25}}>

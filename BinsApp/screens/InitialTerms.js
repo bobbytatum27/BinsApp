@@ -7,7 +7,7 @@ export default class InitialTerms extends Component {
     return (
       <View style={ styles.container }>
         <ScrollView>
-          <Text style = {styles.sectionHeader}>Terms and Conditions</Text>
+          <Text allowFontScaling={false} style = {styles.sectionHeader}>Terms and Conditions</Text>
           <LongButton
             title="I HAVE READ AND AGREE TO THE TERMS AND CONDITIONS"
             onPress={()=>{

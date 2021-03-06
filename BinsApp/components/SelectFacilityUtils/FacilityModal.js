@@ -48,10 +48,10 @@ export default class FacilityModal extends React.Component {
                   <Ionicons style={styles.CloseModalButton} name="ios-close-circle" size={25} onPress={this.props.onIconPress}/>
 
                   <View style={{flex: 2, margin: 10}}>
-                    <Text style={{fontSize: 30, marginLeft: 10}}>{this.props.facilityName}</Text>
-                    <Text style={{marginLeft: 10}}>{this.props.facilityAddress}</Text>
-                    <Text style={{marginLeft: 10}}>{this.props.facilityWebsite}</Text>
-                    <Text style={{fontSize: 15, marginLeft: 10, marginTop: 10, fontWeight: '600'}}>Select a Storage Plan</Text>
+                    <Text allowFontScaling={false} style={{fontSize: 30, marginLeft: 10}}>{this.props.facilityName}</Text>
+                    <Text allowFontScaling={false} style={{marginLeft: 10}}>{this.props.facilityAddress}</Text>
+                    <Text allowFontScaling={false} style={{marginLeft: 10}}>{this.props.facilityWebsite}</Text>
+                    <Text allowFontScaling={false} style={{fontSize: 15, marginLeft: 10, marginTop: 10, fontWeight: '600'}}>Select a Storage Plan</Text>
                     <ScrollView>
                       <PaymentPlanCard
                       source={require('../../photos/item.png')}
@@ -159,10 +159,10 @@ const styles = StyleSheet.create({
               </View>
               <Ionicons style={styles.close} name="ios-close-circle" size={25} onPress={() => {this.setState({modalVisible:false})}}/>
               <View style={{flex:2, margin: 10}}>
-                <Text style={{fontSize: 30, marginLeft: 10}}>CSI Mini Storage</Text>
-                <Text style={{marginLeft: 10}}>{this.state.storageAddress}</Text>
-                <Text style={{marginLeft: 10}}>csiministorage.com</Text>
-                <Text style={{fontSize: 15, marginTop: 10, marginLeft: 10}}>Options Available</Text>
+                <Text allowFontScaling={false} style={{fontSize: 30, marginLeft: 10}}>CSI Mini Storage</Text>
+                <Text allowFontScaling={false} style={{marginLeft: 10}}>{this.state.storageAddress}</Text>
+                <Text allowFontScaling={false} style={{marginLeft: 10}}>csiministorage.com</Text>
+                <Text allowFontScaling={false} style={{fontSize: 15, marginTop: 10, marginLeft: 10}}>Options Available</Text>
                 <ScrollView>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
@@ -171,10 +171,10 @@ const styles = StyleSheet.create({
                                      specialInstructions: this.state.specialInstructions, size: 'By Item'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>Pay By Bin</Text>
-                  <Text style={styles.sectionHeader}>$7/month</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>Pay By Bin</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>$7/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>60x40x31.5cm</Text>
+                <Text allowFontScaling={false} style={{color: '#AAB5E0'}}>60x40x31.5cm</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
@@ -183,10 +183,10 @@ const styles = StyleSheet.create({
                                      specialInstructions: this.state.specialInstructions, size: '2x2'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>2'x2' </Text>
-                  <Text style={styles.sectionHeader}>$79/month</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>2'x2' </Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>$79/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>16 cubic ft - Hall Closet</Text>
+                <Text allowFontScaling={false} style={{color: '#AAB5E0'}}>16 cubic ft - Hall Closet</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
@@ -195,10 +195,10 @@ const styles = StyleSheet.create({
                                      specialInstructions: this.state.specialInstructions, size: '2x4'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>2'x4'</Text>
-                  <Text style={styles.sectionHeader}>$99/month</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>2'x4'</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>$99/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>32 cubic feet - Bedroom Closet</Text>
+                <Text allowFontScaling={false} style={{color: '#AAB5E0'}}>32 cubic feet - Bedroom Closet</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
@@ -207,10 +207,10 @@ const styles = StyleSheet.create({
                                      specialInstructions: this.state.specialInstructions, size: '5x5'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>5'x5'</Text>
-                  <Text style={styles.sectionHeader}>$134/month</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>5'x5'</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>$134/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>100 cubic feet - Walk-in Closet</Text>
+                <Text allowFontScaling={false} style={{color: '#AAB5E0'}}>100 cubic feet - Walk-in Closet</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
@@ -219,10 +219,10 @@ const styles = StyleSheet.create({
                                      specialInstructions: this.state.specialInstructions, size: '5x10'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>5'x10'</Text>
-                  <Text style={styles.sectionHeader}>$157/month</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>5'x10'</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>$157/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>200 cubic feet - Studio Apt.</Text>
+                <Text allowFontScaling={false} style={{color: '#AAB5E0'}}>200 cubic feet - Studio Apt.</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
@@ -231,10 +231,10 @@ const styles = StyleSheet.create({
                                      specialInstructions: this.state.specialInstructions, size: '5x15'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>5'x15'</Text>
-                  <Text style={styles.sectionHeader}>$191/month</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>5'x15'</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>$191/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>300 cubic feet - Small 1BR Apt.</Text>
+                <Text allowFontScaling={false} style={{color: '#AAB5E0'}}>300 cubic feet - Small 1BR Apt.</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.openButton}
                                   onPress={() => {this.props.navigation.navigate('AccountInfoScreen',
@@ -243,10 +243,10 @@ const styles = StyleSheet.create({
                                      specialInstructions: this.state.specialInstructions, size: '10x10'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>10'x10'</Text>
-                  <Text style={styles.sectionHeader}>$236/month</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>10'x10'</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>$236/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>400 cubic feet - 1BR Apt.</Text>
+                <Text allowFontScaling={false} style={{color: '#AAB5E0'}}>400 cubic feet - 1BR Apt.</Text>
                 </TouchableOpacity>
                 </ScrollView>
               </View>

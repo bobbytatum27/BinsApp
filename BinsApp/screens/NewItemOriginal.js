@@ -53,13 +53,13 @@ export default class NewItemOriginal extends Component {
 
     return (
         <View style={styles.container}>
-          <Text style={styles.sectionHeader}>New Item</Text>
+          <Text allowFontScaling={false} style={styles.sectionHeader}>New Item</Text>
           <TouchableOpacity style = {styles.button2}
                             onPress={this._pickImage}>
 
-                          <Text style={{color: '#000', fontSize: 16}}>Add Photo</Text>
+                          <Text allowFontScaling={false} style={{color: '#000', fontSize: 16}}>Add Photo</Text>
           </TouchableOpacity>
-          <Text style ={styles.descriptionText}>Name of Bin</Text>
+          <Text allowFontScaling={false} style ={styles.descriptionText}>Name of Bin</Text>
           <FormInputHandler defaultText='Ex: Winter Clothes, Camping Gear'
                             defaultTextColor='#8B8B8B'
                             style={styles.userInfoText}

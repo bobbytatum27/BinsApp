@@ -16,7 +16,7 @@ export default class InputValidator extends React.Component {
   render() {
     return (
         <View>
-            <Text style={{...styles.descriptionText, color: this.state.validUI ? 'white' : 'red'}}>{this.props.titleText} {this.state.validUI ? '' : ' - ' + this.props.errorMessage}</Text>
+            <Text allowFontScaling={false} style={{...styles.descriptionText, color: this.state.validUI ? 'white' : 'red'}}>{this.props.titleText} {this.state.validUI ? '' : ' - ' + this.props.errorMessage}</Text>
             <TextInput
                 editable={this.props.editable}
                 placeholder={this.props.defaultText}

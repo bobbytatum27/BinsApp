@@ -21,7 +21,7 @@ export default class ConfirmContactInfo extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style ={styles.descriptionText}>Check your email or phone for a confirmation code to verify your account. </Text>
+        <Text allowFontScaling={false} style ={styles.descriptionText}>Check your email or phone for a confirmation code to verify your account. </Text>
         <FormInputHandler
           defaultText='Enter your confirmation code here'
           defaultTextColor='#8B8B8B'

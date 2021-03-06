@@ -10,12 +10,12 @@ export default class Landing3 extends Component {
                     backgroundColor: '#261136',
                     padding: 30}}>
         <View style={{flex:5}}>
-        <Text style={{fontSize: 40, textAlign: 'center', color: 'white', marginBottom: 30, marginTop: 100}}>Manage Inventory</Text>
-        <Text style={styles.intro}>Easily view your belongings from your phone or desktop. You can edit your items or add new ones to the database.</Text>
-        <Text style={styles.intro}>Swipe to learn more.</Text>
+        <Text allowFontScaling={false} style={{fontSize: 40, textAlign: 'center', color: 'white', marginBottom: 30, marginTop: 100}}>Manage Inventory</Text>
+        <Text allowFontScaling={false} style={styles.intro}>Easily view your belongings from your phone or desktop. You can edit your items or add new ones to the database.</Text>
+        <Text allowFontScaling={false} style={styles.intro}>Swipe to learn more.</Text>
         </View>
         <View style={{flex:5}}>
-        <Text style={styles.intro3}>Discover full-service storage near you</Text>
+        <Text allowFontScaling={false} style={styles.intro3}>Discover full-service storage near you</Text>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('AddressInfo')}
           style = {{alignItems: 'center',
@@ -25,11 +25,11 @@ export default class Landing3 extends Component {
                     marginLeft: 120,
                     marginRight: 120,
                     borderRadius: 20, }} >
-          <Text>Find a Unit</Text>
+          <Text allowFontScaling={false}>Find a Unit</Text>
         </TouchableOpacity>
         </View>
         <View style={{flex:3}}>
-        <Text style={{textAlign: 'center',
+        <Text allowFontScaling={false} style={{textAlign: 'center',
           color: 'gray',
           fontSize: 15,
           marginTop: 100}}>Returing User?</Text>

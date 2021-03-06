@@ -59,42 +59,42 @@ export default class Pickup extends Component {
   render() {
     return (
       <View style={styles.container}>
-      <Text style={styles.header}>Do you plan on storing miscellaneous items? Ex: clothes, kitchenware, etc.</Text>
+      <Text allowFontScaling={false} style={styles.header}>Do you plan on storing miscellaneous items? Ex: clothes, kitchenware, etc.</Text>
       <View style={{flexDirection: 'row', justifyContent: 'space-around', borderColor: '#d6d7da', flexWrap: 'wrap', marginTop: 25, margin: 25, marginLeft: 5, marginRight:5}}>
         <TouchableOpacity
           style = {{margin: 5, borderRadius: 10, padding: 10, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === 'Yes' ? 2 : 0}}
           onPress={() => this.setState({selectedButton: 'Yes'})}>
-        <Text style={styles.text}>Yes</Text>
+        <Text allowFontScaling={false} style={styles.text}>Yes</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={{margin: 5, borderRadius: 10, padding: 10, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === 'No' ? 2 : 0}}
           onPress={() => this.setState({selectedButton: 'No'})}>
-        <Text style={styles.text}>No</Text>
+        <Text allowFontScaling={false} style={styles.text}>No</Text>
         </TouchableOpacity>
       </View>
-          <Text style={styles.header}>How many of these items are you storing?</Text>
+          <Text allowFontScaling={false} style={styles.header}>How many of these items are you storing?</Text>
           <View style={styles.row}>
-            <Text style={styles.text}>Desks</Text>
+            <Text allowFontScaling={false} style={styles.text}>Desks</Text>
             <Counter start={0} onChange={this.changeDesk.bind(this)}/>
           </View>
           <View style={styles.row}>
-            <Text style={styles.text}>Couches</Text>
+            <Text allowFontScaling={false} style={styles.text}>Couches</Text>
             <Counter start={0} onChange={this.changeCouch.bind(this)}/>
           </View>
           <View style={styles.row}>
-            <Text style={styles.text}>Beds</Text>
+            <Text allowFontScaling={false} style={styles.text}>Beds</Text>
             <Counter start={0} onChange={this.changeBed.bind(this)}/>
           </View>
           <View style={styles.row}>
-            <Text style={styles.text}>Tables</Text>
+            <Text allowFontScaling={false} style={styles.text}>Tables</Text>
             <Counter start={0} onChange={this.changeTable.bind(this)}/>
           </View>
           <View style={styles.row}>
-            <Text style={styles.text}>Other Large Furniture</Text>
+            <Text allowFontScaling={false} style={styles.text}>Other Large Furniture</Text>
             <Counter start={0}/>
           </View>
         <TouchableOpacity style={styles.button3} onPress={() => this.getSelected()}>
-          <Text style={styles.text}>Next</Text>
+          <Text allowFontScaling={false} style={styles.text}>Next</Text>
         </TouchableOpacity>
       </View>
       )

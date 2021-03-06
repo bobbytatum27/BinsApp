@@ -52,10 +52,10 @@ export default class NewItem extends Component {
     return (
         <View style={styles.container}>
           <View>
-          <Text style ={styles.descriptionText}>Email</Text>
+          <Text allowFontScaling={false} style ={styles.descriptionText}>Email</Text>
           <FormInputHandler style={styles.userInfoText}
                             onChangeText={(text) => this.setState({email: text})}/>
-          <Text style ={styles.descriptionText}>Name of Bin</Text>
+          <Text allowFontScaling={false} style ={styles.descriptionText}>Name of Bin</Text>
           <FormInputHandler defaultText='Ex: Winter Clothes, Camping Gear'
                             defaultTextColor='#8B8B8B'
                             style={styles.userInfoText}
@@ -63,12 +63,12 @@ export default class NewItem extends Component {
                             <TouchableOpacity style = {styles.button2}
                                               onPress={this._pickImage}>
 
-                                            <Text style={{color: '#000', fontSize: 16}}>Add Photo</Text>
+                                            <Text allowFontScaling={false} style={{color: '#000', fontSize: 16}}>Add Photo</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style = {styles.button2}
                                               onPress={this._pickImage}>
 
-                                            <Text style={{color: '#000', fontSize: 16}}>Scan Code</Text>
+                                            <Text allowFontScaling={false} style={{color: '#000', fontSize: 16}}>Scan Code</Text>
                             </TouchableOpacity>
           <View style = {{alignItems: 'center'}}>
           {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}

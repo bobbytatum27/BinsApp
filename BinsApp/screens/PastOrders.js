@@ -24,10 +24,10 @@ export default class PastOrders extends Component {
       return (
         <TouchableOpacity style={styles.orderbox} onPress={() => this.props.navigation.navigate('ViewPastOrder', {id: data.item.id})}>
           <View>
-            <Text style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
-            <Text>{data.item.time} | {data.item.type}</Text>
+            <Text allowFontScaling={false} style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
+            <Text allowFontScaling={false}>{data.item.time} | {data.item.type}</Text>
           </View>
-          <Text>></Text>
+          <Text allowFontScaling={false}>></Text>
         </TouchableOpacity>
       )
     }
@@ -72,7 +72,7 @@ export default class PastOrders extends Component {
         {this.state.dataSource.length == 0 ? (
           <>
           <View style = {styles.textbox}>
-            <Text style = {{textAlign: 'center'}}>None of Your Items Have Been Returned Yet</Text>
+            <Text allowFontScaling={false} style = {{textAlign: 'center'}}>None of Your Items Have Been Returned Yet</Text>
           </View>
         </>
       ) : (

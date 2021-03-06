@@ -18,12 +18,12 @@ export default PaymentPlanCard = (props) => {
             <Image style={{flex:1, width: 110, height: 110}} source={props.source}/>
             <View style={{margin: 5}}/>
             <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-              <Text style={styles.SectionHeader}>{props.unitSize} {props.unitDescription}</Text>
+              <Text allowFontScaling={false} style={styles.SectionHeader}>{props.unitSize} {props.unitDescription}</Text>
               <View style={{flexDirection:'row'}}>
-                <Text style={{color: '#AAB5E0', fontSize: 15}}>{props.ft}</Text>
-                <Text style={{color: '#AAB5E0', fontSize: 10, lineHeight: 10}}>3</Text>
+                <Text allowFontScaling={false} style={{color: '#AAB5E0', fontSize: 15}}>{props.ft}</Text>
+                <Text allowFontScaling={false} style={{color: '#AAB5E0', fontSize: 10, lineHeight: 10}}>3</Text>
               </View>
-              <Text style={{fontSize: 16, color: '#FFF', fontWeight: 'bold'}}>{props.unitPrice}</Text>
+              <Text allowFontScaling={false} style={{fontSize: 16, color: '#FFF', fontWeight: 'bold'}}>{props.unitPrice}</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
                                      specialInstructions: this.state.specialInstructions, size: '2x4'}); this.setState({modalVisible:false});
                                    }}>
                 <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                  <Text style={styles.sectionHeader}>2'x4'</Text>
-                  <Text style={styles.sectionHeader}>$99/month</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>2'x4'</Text>
+                  <Text allowFontScaling={false} style={styles.sectionHeader}>$99/month</Text>
                 </View>
-                <Text style={{color: '#AAB5E0'}}>32 cubic feet - Bedroom Closet</Text>
+                <Text allowFontScaling={false} style={{color: '#AAB5E0'}}>32 cubic feet - Bedroom Closet</Text>
 </TouchableOpacity>
                 */

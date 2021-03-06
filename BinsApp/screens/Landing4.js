@@ -10,12 +10,12 @@ export default class Landing4 extends Component {
                     backgroundColor: '#261136',
                     padding: 30}}>
         <View style={{flex:5}}>
-        <Text style={{fontSize: 40, textAlign: 'center', color: 'white', marginBottom: 30, marginTop: 100}}>Request Deliveries</Text>
-        <Text style={styles.intro}>When you want your items back, simply request a delivery and we'll bring it back.</Text>
-        <Text style={styles.intro}>Avoid renting a truck, hiring movers, or just the inconvinience of constantly having to drive to the facility.</Text>
+        <Text allowFontScaling={false} style={{fontSize: 40, textAlign: 'center', color: 'white', marginBottom: 30, marginTop: 100}}>Request Deliveries</Text>
+        <Text allowFontScaling={false} style={styles.intro}>When you want your items back, simply request a delivery and we'll bring it back.</Text>
+        <Text allowFontScaling={false} style={styles.intro}>Avoid renting a truck, hiring movers, or just the inconvinience of constantly having to drive to the facility.</Text>
         </View>
         <View style={{flex:5}}>
-        <Text style={styles.intro3}>Discover full-service storage near you</Text>
+        <Text allowFontScaling={false} style={styles.intro3}>Discover full-service storage near you</Text>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('AddressInfo')}
           style = {{alignItems: 'center',
@@ -25,11 +25,11 @@ export default class Landing4 extends Component {
                     marginLeft: 120,
                     marginRight: 120,
                     borderRadius: 20, }} >
-          <Text>Find a Unit</Text>
+          <Text allowFontScaling={false}>Find a Unit</Text>
         </TouchableOpacity>
         </View>
         <View style={{flex:3}}>
-        <Text style={{textAlign: 'center',
+        <Text allowFontScaling={false} style={{textAlign: 'center',
           color: 'gray',
           fontSize: 15,
           marginTop: 100}}>Returing User?</Text>

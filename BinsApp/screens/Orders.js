@@ -27,10 +27,10 @@ export default class Orders extends Component {
       return (
         <TouchableOpacity style={{padding: 15, backgroundColor: "white", marginTop: 10, flexDirection: "row", justifyContent: "space-between", alignItems: 'center'}} onPress={() => this.props.navigation.navigate('ViewOrder', {id: data.item.id})}>
           <View>
-            <Text style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
-            <Text>{data.item.time} | {data.item.type}</Text>
+            <Text allowFontScaling={false} style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
+            <Text allowFontScaling={false}>{data.item.time} | {data.item.type}</Text>
           </View>
-          <Text>></Text>
+          <Text allowFontScaling={false}>></Text>
         </TouchableOpacity>
       )
     }

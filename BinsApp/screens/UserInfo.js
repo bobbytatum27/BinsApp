@@ -83,7 +83,7 @@ export default class UserInfo extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style ={{...styles.descriptionText, color: this.state.validNameUI ? 'white' : 'red'}}>Full Name {this.state.validNameUI ? '' : ' - Don\'t leave this empty!'}</Text>
+        <Text allowFontScaling={false} style ={{...styles.descriptionText, color: this.state.validNameUI ? 'white' : 'red'}}>Full Name {this.state.validNameUI ? '' : ' - Don\'t leave this empty!'}</Text>
         <FormInputHandler
           defaultText='Enter your full name here'
           defaultTextColor='#8B8B8B'
@@ -101,7 +101,7 @@ export default class UserInfo extends React.Component {
           onBlur={() => this.checkAllFields()}
           returnKeyType='next'
         />
-        <Text style ={{...styles.descriptionText, color: this.state.validPhoneUI ? 'white' : 'red'}}>Phone {this.state.validPhoneUI ? '' : ' - Must be 10 digits!'}</Text>
+        <Text allowFontScaling={false} style ={{...styles.descriptionText, color: this.state.validPhoneUI ? 'white' : 'red'}}>Phone {this.state.validPhoneUI ? '' : ' - Must be 10 digits!'}</Text>
         <FormInputHandler
           defaultText='Enter your phone number here'
           defaultTextColor='#8B8B8B'
@@ -121,7 +121,7 @@ export default class UserInfo extends React.Component {
         />
         <View style={{flexDirection:'row', justifyContent: 'space-between', zIndex: 1}}>
           <View style={{flex:2}}>
-            <Text style ={{...styles.descriptionText, color: this.state.validLicenseUI ? 'white' : 'red'}}>{this.state.validLicenseUI ? "Driver's License Number" : 'Don\'t leave this empty!'}</Text>
+            <Text allowFontScaling={false} style ={{...styles.descriptionText, color: this.state.validLicenseUI ? 'white' : 'red'}}>{this.state.validLicenseUI ? "Driver's License Number" : 'Don\'t leave this empty!'}</Text>
             <FormInputHandler
               defaultText="Enter DL Number"
               defaultTextColor='#8B8B8B'
@@ -141,7 +141,7 @@ export default class UserInfo extends React.Component {
             />
           </View>
           <View style={{flex:1}}>
-            <Text style={styles.descriptionText}>State</Text>
+            <Text allowFontScaling={false} style={styles.descriptionText}>State</Text>
             <DropdownMenu
               items={ListOfStates}
               defaultValue={this.state.licenseState}
@@ -149,7 +149,7 @@ export default class UserInfo extends React.Component {
             />
           </View>
         </View>
-        <Text style ={{...styles.descriptionText, color: this.state.validEmailUI ? 'white' : 'red'}}>Email {this.state.validEmailUI ? '' : '- Invalid Email!'}</Text>
+        <Text allowFontScaling={false} style ={{...styles.descriptionText, color: this.state.validEmailUI ? 'white' : 'red'}}>Email {this.state.validEmailUI ? '' : '- Invalid Email!'}</Text>
         <FormInputHandler
           defaultText='Enter your email here'
           defaultTextColor='#8B8B8B'
@@ -169,7 +169,7 @@ export default class UserInfo extends React.Component {
           onBlur={() => this.checkAllFields()}
           returnKeyType='next'
         />
-        <Text style ={{...styles.descriptionText, color: this.state.validPasswordUI ? 'white' : 'red'}}>Password {this.state.validPasswordUI ? '' : ' - Must be 8 characters and contain a number!'}</Text>
+        <Text allowFontScaling={false} style ={{...styles.descriptionText, color: this.state.validPasswordUI ? 'white' : 'red'}}>Password {this.state.validPasswordUI ? '' : ' - Must be 8 characters and contain a number!'}</Text>
         <FormInputHandler
           defaultText='Enter a password here'
           defaultTextColor='#8B8B8B'
@@ -193,7 +193,7 @@ export default class UserInfo extends React.Component {
           }}
           returnKeyType='next'
         />
-        <Text style ={{...styles.descriptionText, color: this.state.validPasswordReentry ? 'white' : 'red'}}>Confirm Password {this.state.validPasswordReentry ? '' : ' - Passwords do not match!'}</Text>
+        <Text allowFontScaling={false} style ={{...styles.descriptionText, color: this.state.validPasswordReentry ? 'white' : 'red'}}>Confirm Password {this.state.validPasswordReentry ? '' : ' - Passwords do not match!'}</Text>
         <FormInputHandler
           defaultText='Confirm your password here'
           defaultTextColor='#8B8B8B'
@@ -234,13 +234,13 @@ export default class UserInfo extends React.Component {
         ) : (
           <>
             <View style={styles.finishUserEntry}>
-              <Text style={styles.finishUserEntryPrompt}>Fill out your information before you move on.</Text>
+              <Text allowFontScaling={false} style={styles.finishUserEntryPrompt}>Fill out your information before you move on.</Text>
             </View>
             <View>
-              <Text style={{...styles.validInputInstructions, color: this.state.validPhone ? '#3DED97' : 'red'}}>
+              <Text allowFontScaling={false} style={{...styles.validInputInstructions, color: this.state.validPhone ? '#3DED97' : 'red'}}>
                 Your phone number must be 10 digits. Please do not include the country code.
               </Text>
-              <Text style={{...styles.validInputInstructions, color: this.state.validPassword ? '#3DED97' : 'red'}}>
+              <Text allowFontScaling={false} style={{...styles.validInputInstructions, color: this.state.validPassword ? '#3DED97' : 'red'}}>
                 Your password must be at least 8 characters and include a number.
               </Text>
             </View>

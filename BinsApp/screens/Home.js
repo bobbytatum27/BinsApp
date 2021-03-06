@@ -81,8 +81,8 @@ class Home extends Component {
         <Image style={{width: 150, height: 150}}
                source={{uri: S3url + item.photo}}/>
         <View style={{padding: 10, flexDirection: 'column'}}>
-          <Text style={{fontWeight: 'bold'}}>{item.description}</Text>
-          <Text>ID #{item.id}</Text>
+          <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{item.description}</Text>
+          <Text allowFontScaling={false}>ID #{item.id}</Text>
         </View>
       </View>
     )
@@ -94,8 +94,8 @@ class Home extends Component {
           <Image style={{width: 150, height: 150}}
                  source={{uri: S3url + item.photo}}/>
           <View style={{padding: 10, flexDirection: 'column'}}>
-            <Text style={{fontWeight: 'bold'}}>{item.description}</Text>
-            <Text>ID #{item.id}</Text>
+            <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{item.description}</Text>
+            <Text allowFontScaling={false}>ID #{item.id}</Text>
           </View>
         </View>
     )
@@ -105,10 +105,10 @@ class Home extends Component {
       return (
         <View style={{flexDirection:'row'}}>
           <View>
-            <Text style={{fontSize: 20}}>{moment(data.item.date).format('MMMM DD, YYYY')}, {data.item.time}</Text>
+            <Text allowFontScaling={false} style={{fontSize: 20}}>{moment(data.item.date).format('MMMM DD, YYYY')}, {data.item.time}</Text>
           </View>
           <TouchableOpacity style={{marginLeft: 50}} onPress={() => this.props.navigation.navigate('ViewOrder', {id: data.item.id})}>
-            <Text style={{fontWeight:'bold'}}>...</Text>
+            <Text allowFontScaling={false} style={{fontWeight:'bold'}}>...</Text>
           </TouchableOpacity>
         </View>
     )
@@ -141,13 +141,13 @@ class Home extends Component {
           {this.state.dataSourceOrders.length == 0 ? (
             <>
             <TouchableOpacity style = {styles.button2} onPress={() => this.props.navigation.navigate('NewAppointment')}>
-            <Text style={{fontSize: 25, color: '#FFF'}}>Schedule Appointment</Text>
+            <Text allowFontScaling={false} style={{fontSize: 25, color: '#FFF'}}>Schedule Appointment</Text>
             </TouchableOpacity>
           </>
         ) : (
           <>
           <View style={styles.sectionContainer}>
-            <Text style={styles.sectionHeader}>Upcoming Order</Text>
+            <Text allowFontScaling={false} style={styles.sectionHeader}>Upcoming Order</Text>
             <FlatList
               horizontal={true}
               data={this.state.dataSourceOrders.slice(0,1)}
@@ -158,11 +158,11 @@ class Home extends Component {
           </>
         )}
           <View style={styles.sectionContainer}>
-            <Text style={styles.sectionHeader}>Items in Storage</Text>
+            <Text allowFontScaling={false} style={styles.sectionHeader}>Items in Storage</Text>
             {this.state.dataSourceStorage.length == 0 ? (
               <>
                   <View style = {styles.textbox}>
-              <Text style = {{textAlign: 'center'}}>No Items Yet - Will Appear Once You Have Items</Text>
+              <Text allowFontScaling={false} style = {{textAlign: 'center'}}>No Items Yet - Will Appear Once You Have Items</Text>
               </View>
             </>
           ) : (
@@ -176,17 +176,17 @@ class Home extends Component {
               scrollEnabled={false}
             />
               <TouchableOpacity style={styles.button3} onPress={() => this.props.navigation.navigate('ViewStorageInventory')}>
-              <Text style={{color: 'white'}}>VIEW ALL</Text>
+              <Text allowFontScaling={false} style={{color: 'white'}}>VIEW ALL</Text>
               </TouchableOpacity>
             </>
           )}
           </View>
           <View style={styles.sectionContainer}>
-            <Text style={styles.sectionHeader}>Returned Items</Text>
+            <Text allowFontScaling={false} style={styles.sectionHeader}>Returned Items</Text>
             {this.state.dataSourceHome.length == 0 ? (
               <>
                   <View style = {styles.textbox}>
-              <Text style = {{textAlign: 'center'}}>None of Your Items Have Been Returned Yet</Text>
+              <Text allowFontScaling={false} style = {{textAlign: 'center'}}>None of Your Items Have Been Returned Yet</Text>
               </View>
             </>
           ) : (
@@ -199,7 +199,7 @@ class Home extends Component {
                 scrollEnabled={false}
               />
               <TouchableOpacity style={styles.button3} onPress={() => this.props.navigation.navigate('HomeInventoryScreen')}>
-              <Text style={{color: 'white'}}>VIEW ALL</Text>
+              <Text allowFontScaling={false} style={{color: 'white'}}>VIEW ALL</Text>
               </TouchableOpacity>
             </>
           )}

@@ -57,7 +57,7 @@ export default class PasswordReset extends React.Component {
       <View style={styles.container}>
         {this.state.confirmationCodeSent ? (
           <>
-          <Text style ={styles.descriptionText}>Confirmation Code</Text>
+          <Text allowFontScaling={false} style ={styles.descriptionText}>Confirmation Code</Text>
           <FormInputHandler
             defaultText='Enter the code sent to your email here.'
             defaultTextColor='#8B8B8B'
@@ -65,7 +65,7 @@ export default class PasswordReset extends React.Component {
             onChangeText={(val)=>this.setState({code: val})}
             keyboardType='email-address'
           />
-          <Text style ={{...styles.descriptionText, color: this.state.validPasswordUI ? 'white' : 'red'}}>New Password {this.state.validPasswordUI ? '' : ' - Must be 8 characters and contain a number!'}</Text>
+          <Text allowFontScaling={false} style ={{...styles.descriptionText, color: this.state.validPasswordUI ? 'white' : 'red'}}>New Password {this.state.validPasswordUI ? '' : ' - Must be 8 characters and contain a number!'}</Text>
           <FormInputHandler
             defaultText='Enter your new password here.'
             defaultTextColor='#8B8B8B'
@@ -84,7 +84,7 @@ export default class PasswordReset extends React.Component {
             }}
             secureTextEntry
           />
-          <Text style ={{...styles.descriptionText, color: this.state.validPasswordReentry ? 'white' : 'red'}}>Re-enter new password {this.state.validPasswordReentry ? '' : ' - Passwords do not match!'}</Text>
+          <Text allowFontScaling={false} style ={{...styles.descriptionText, color: this.state.validPasswordReentry ? 'white' : 'red'}}>Re-enter new password {this.state.validPasswordReentry ? '' : ' - Passwords do not match!'}</Text>
           <FormInputHandler
             defaultText='Re-enter your new password here.'
             defaultTextColor='#8B8B8B'
@@ -120,7 +120,7 @@ export default class PasswordReset extends React.Component {
           </>
         ) : (
           <>
-          <Text style ={styles.descriptionText}>Password Recovery</Text>
+          <Text allowFontScaling={false} style ={styles.descriptionText}>Password Recovery</Text>
           <FormInputHandler
             defaultText='Enter the email attached to your account here.'
             defaultTextColor='#8B8B8B'

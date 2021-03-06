@@ -48,32 +48,32 @@ export default class ScheduleAppointment extends Component {
     return (
       <View style={styles.container}>
         <ScrollView style={{marginBottom:25}}>
-            <Text style ={styles.descriptionText}>Please Select a Date</Text>
+            <Text allowFontScaling={false} style ={styles.descriptionText}>Please Select a Date</Text>
             <Calendar
               style={{margin:15}}
               minDate={today}
               onDayPress={(day) => {this.setState({dateSelected:{[day.dateString]:{selected: true, selectedColor: '#466A8F'}}})}}
               markedDates={this.state.dateSelected}/>
-            <Text style={styles.descriptionText}>Please Select a Time</Text>
+            <Text allowFontScaling={false} style={styles.descriptionText}>Please Select a Time</Text>
             <View style={{flexDirection: 'row', justifyContent: 'space-around', borderColor: '#d6d7da', flexWrap: 'wrap', marginTop: 25, margin: 25, marginLeft: 5, marginRight:5}}>
               <TouchableOpacity
                 style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '9:00am' ? 2 : 0}}
                 onPress={() => this.selectionOnPress("9:00am")}
                 onPressIn={() => this.setState({timeSelected: '9:00am'})}>
-              <Text style={styles.switchButtonsText}>9:00am</Text>
+              <Text allowFontScaling={false} style={styles.switchButtonsText}>9:00am</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style = {{margin: 5, borderRadius: 10, padding: 5, backgroundColor: '#7B1FA2', borderColor: '#FFF', borderWidth: this.state.selectedButton === '1:00pm' ? 2 : 0}}
                 onPress={() => this.selectionOnPress("1:00pm")}
                 onPressIn={() => this.setState({timeSelected: '1:00pm'})}>
-              <Text style={styles.switchButtonsText}>1:00pm</Text>
+              <Text allowFontScaling={false} style={styles.switchButtonsText}>1:00pm</Text>
               </TouchableOpacity>
             </View>
-            <Text style={styles.descriptionText}>Address</Text>
+            <Text allowFontScaling={false} style={styles.descriptionText}>Address</Text>
             <TouchableOpacity style={styles.textbox}
                               onPress={() => this.props.navigation.navigate('EditAddress')}>
-              <Text style={styles.header}>{this.state.address}</Text>
-              <Text style={styles.header}>></Text>
+              <Text allowFontScaling={false} style={styles.header}>{this.state.address}</Text>
+              <Text allowFontScaling={false} style={styles.header}>></Text>
             </TouchableOpacity>
           <LongButton
             title="NEXT"

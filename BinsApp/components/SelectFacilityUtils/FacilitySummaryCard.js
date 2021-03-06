@@ -21,9 +21,9 @@ export default FacilitySummaryCard = (props) => {
                 </View>
 
                 <View style={styles.FacilityInfoContainer}>
-                  <Text>CSI Mini Storage</Text>
-                  <Text>{props.address}</Text>
-                  <Text>$19.99/delivery, free initial move-in</Text>
+                  <Text allowFontScaling={false}>CSI Mini Storage</Text>
+                  <Text allowFontScaling={false}>{props.address}</Text>
+                  <Text allowFontScaling={false}>$19.99/delivery, free initial move-in</Text>
                 </View>
             </View>
         </TouchableOpacity>
@@ -61,9 +61,9 @@ const styles= StyleSheet.create({
                   <Image style={{width: 50, height: 50}} source={require('../photos/csimini.png') }/>
                 </View>
                 <View style={{flex: 5, backgroundColor: 'white', height: 50, paddingLeft: 10}}>
-                  <Text style={{fontSize: 20}}>CSI Mini Storage</Text>
-                  <Text>855 Parr Boulevard, Richmond, CA 94801</Text>
-                  <Text>$19.99/delivery, free initial move-in</Text>
+                  <Text allowFontScaling={false} style={{fontSize: 20}}>CSI Mini Storage</Text>
+                  <Text allowFontScaling={false}>855 Parr Boulevard, Richmond, CA 94801</Text>
+                  <Text allowFontScaling={false}>$19.99/delivery, free initial move-in</Text>
                 </View>
               </View>
             </TouchableOpacity>

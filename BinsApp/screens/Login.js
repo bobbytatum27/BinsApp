@@ -33,7 +33,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style ={styles.descriptionText}>Email </Text>
+        <Text allowFontScaling={false} style ={styles.descriptionText}>Email </Text>
         <FormInputHandler
           defaultText='Enter your email here'
           defaultTextColor='#8B8B8B'
@@ -51,7 +51,7 @@ export default class Login extends React.Component {
           onBlur={() => this.checkAllFields()}
           returnKeyType='next'
         />
-        <Text style ={styles.descriptionText}>Password</Text>
+        <Text allowFontScaling={false} style ={styles.descriptionText}>Password</Text>
         <FormInputHandler
           defaultText='Enter a password here'
           defaultTextColor='#8B8B8B'
@@ -83,11 +83,11 @@ export default class Login extends React.Component {
       ) : (
         <>
         <View style={styles.finishUserEntry}>
-          <Text style={styles.finishUserEntryPrompt}>LOGIN</Text>
+          <Text allowFontScaling={false} style={styles.finishUserEntryPrompt}>LOGIN</Text>
         </View>
         </>
       )}
-        <Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
+        <Text allowFontScaling={false} style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
               onPress={() => this.props.navigation.navigate('PasswordReset')}>Forgot Password?</Text>
       </View>
     );
@@ -131,6 +131,6 @@ const styles = StyleSheet.create({
 /*
 Admin Login Button
 
-<Text style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
+<Text allowFontScaling={false} style={{textAlign: 'center', color: 'gray', fontSize: 15, marginTop: 10}}
       onPress={() => this.props.navigation.navigate('AdminLogin')}>Admin Login</Text>
 */

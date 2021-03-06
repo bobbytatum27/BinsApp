@@ -11,9 +11,9 @@ export default class StorageCompanyCard extends React.Component {
     return (
       <View style={styles.parentView}>
         <TouchableOpacity onPress={this.props.onPress}>
-          <Text style={{fontSize: 25}}>{this.props.companyName} </Text>
-          <Text >Address</Text>
-          <Text>Price</Text>
+          <Text allowFontScaling={false} style={{fontSize: 25}}>{this.props.companyName} </Text>
+          <Text allowFontScaling={false} >Address</Text>
+          <Text allowFontScaling={false}>Price</Text>
         </TouchableOpacity>
       </View>
     );

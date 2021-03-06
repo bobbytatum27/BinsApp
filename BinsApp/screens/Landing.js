@@ -23,12 +23,12 @@ export default class Landing extends Component {
         backgroundColor: '#261136',
         padding: 30}}>
         <View style={{flex:5}}>
-        <Text style={styles.header}>Bins Storage</Text>
-          <Text style={styles.intro}>We help pick up and bring back items that you'd like to store in self-storage.</Text>
-          <Text style={styles.intro}>Swipe to learn more.</Text>
+        <Text allowFontScaling={false} style={styles.header}>Bins Storage</Text>
+          <Text allowFontScaling={false} style={styles.intro}>We help pick up and bring back items that you'd like to store in self-storage.</Text>
+          <Text allowFontScaling={false} style={styles.intro}>Swipe to learn more.</Text>
         </View>
         <View style={{flex:5}}>
-          <Text style={styles.intro3}>Discover full-service storage near you</Text>
+          <Text allowFontScaling={false} style={styles.intro3}>Discover full-service storage near you</Text>
           <TouchableOpacity
             onPress={() => this.props.navigation.navigate('AddressInfo')}
             style = {{alignItems: 'center',
@@ -38,11 +38,11 @@ export default class Landing extends Component {
                       marginLeft: 120,
                       marginRight: 120,
                       borderRadius: 20, }} >
-            <Text>Find a Unit</Text>
+            <Text allowFontScaling={false}>Find a Unit</Text>
           </TouchableOpacity>
         </View>
         <View style={{flex:3}}>
-          <Text style={{textAlign: 'center',
+          <Text allowFontScaling={false} style={{textAlign: 'center',
             color: 'gray',
             fontSize: 15,
             marginTop: 100}}>Returing User?</Text>

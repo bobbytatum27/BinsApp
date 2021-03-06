@@ -30,7 +30,7 @@ export default class Confirmation extends Component {
   render() {
     return (
         <View style={styles.container}>
-          <Text style={styles.header}>Your Order Has Been Placed Successfully!</Text>
+          <Text allowFontScaling={false} style={styles.header}>Your Order Has Been Placed Successfully!</Text>
           <Textbox header='Date'
                    body={moment(this.state.dateSelected).format('MMMM DD, YYYY')}/>
           <Textbox header='Time'

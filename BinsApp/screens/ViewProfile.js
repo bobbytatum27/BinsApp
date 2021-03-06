@@ -58,26 +58,26 @@ export default class ViewProfile extends React.Component {
         <View style={{flex:1, marginTop: 25}}>
           <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditName')}>
             <View>
-              <Text style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Name</Text>
-              <Text style={{color: 'white', fontSize: 20}}>{this.state.name}</Text>
+              <Text allowFontScaling={false} style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Name</Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{this.state.name}</Text>
             </View>
-            <Text style={{color: 'white', fontSize: 20}}>></Text>
+            <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
           </TouchableOpacity>
           <View style={styles.line}/>
           <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditPhone')}>
             <View>
-              <Text style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Phone</Text>
-              <Text style={{color: 'white', fontSize: 20}}>{this.state.phone}</Text>
+              <Text allowFontScaling={false} style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Phone</Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{this.state.phone}</Text>
             </View>
-            <Text style={{color: 'white', fontSize: 20}}>></Text>
+            <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
           </TouchableOpacity>
           <View style={styles.line}/>
           <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditAddress')}>
             <View>
-              <Text style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Address</Text>
-              <Text style={{color: 'white', fontSize: 20, marginRight: 15}}>{this.state.address}</Text>
+              <Text allowFontScaling={false} style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Address</Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20, marginRight: 15}}>{this.state.address}</Text>
             </View>
-            <Text style={{color: 'white', fontSize: 20}}>></Text>
+            <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
           </TouchableOpacity>
         </View>
       </View>

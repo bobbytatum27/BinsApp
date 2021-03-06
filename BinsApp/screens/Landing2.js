@@ -10,13 +10,13 @@ export default class Landing2 extends Component {
                     backgroundColor: '#261136',
                     padding: 30}}>
         <View style={{flex:5}}>
-        <Text style={{fontSize: 40, textAlign: 'center', color: 'white', marginBottom: 30, marginTop: 100}}>Schedule Pickups</Text>
-        <Text style={styles.intro}>We'll come pick up items that you'd like to store in your facility. </Text>
-        <Text style={styles.intro}>Schedule an appointment and drivers will stop by, saving you time and energy.</Text>
-        <Text style={styles.intro}>Swipe to learn more.</Text>
+        <Text allowFontScaling={false} style={{fontSize: 40, textAlign: 'center', color: 'white', marginBottom: 30, marginTop: 100}}>Schedule Pickups</Text>
+        <Text allowFontScaling={false} style={styles.intro}>We'll come pick up items that you'd like to store in your facility. </Text>
+        <Text allowFontScaling={false} style={styles.intro}>Schedule an appointment and drivers will stop by, saving you time and energy.</Text>
+        <Text allowFontScaling={false} style={styles.intro}>Swipe to learn more.</Text>
         </View>
         <View style={{flex:5}}>
-        <Text style={styles.intro3}>Discover full-service storage near you</Text>
+        <Text allowFontScaling={false} style={styles.intro3}>Discover full-service storage near you</Text>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('AddressInfo')}
           style = {{alignItems: 'center',
@@ -26,11 +26,11 @@ export default class Landing2 extends Component {
                     marginLeft: 120,
                     marginRight: 120,
                     borderRadius: 20, }} >
-          <Text>Find a Unit</Text>
+          <Text allowFontScaling={false}>Find a Unit</Text>
         </TouchableOpacity>
         </View>
         <View style={{flex:3}}>
-        <Text style={{textAlign: 'center',
+        <Text allowFontScaling={false} style={{textAlign: 'center',
           color: 'gray',
           fontSize: 15,
           marginTop: 100}}>Returing User?</Text>

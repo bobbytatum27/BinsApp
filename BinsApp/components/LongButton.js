@@ -10,7 +10,7 @@ class LongButton extends Component {
         style={styles.button}
         onPress={this.props.onPress}
       >
-        <Text style={{color: 'white'}}>{this.props.title}</Text>
+        <Text allowFontScaling={false} style={{color: 'white'}}>{this.props.title}</Text>
       </TouchableOpacity>
     );
   }

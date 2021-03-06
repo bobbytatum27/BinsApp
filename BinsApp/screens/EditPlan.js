@@ -66,64 +66,64 @@ export default class EditPlan extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flex: 2}}>
-          <Text style={styles.descriptionText}>Available Plans</Text>
+          <Text allowFontScaling={false} style={styles.descriptionText}>Available Plans</Text>
             <ScrollView style={{marginTop:15}}>
             <TouchableOpacity style={this.state.selectedButton === 'By Item' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("By Item")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.buttonHeader}>By Item</Text>
-                <Text style={styles.buttonHeader}>$7/month</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>By Item</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>$7/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>60x40x31.5cm</Text>
+              <Text allowFontScaling={false} style={{color: '#FFF'}}>60x40x31.5cm</Text>
             </TouchableOpacity>
             <TouchableOpacity style={this.state.selectedButton === '2x2' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("2x2")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.buttonHeader}>2'x2'</Text>
-                <Text style={styles.buttonHeader}>$79/month</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>2'x2'</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>$79/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>16 cubic ft - Hall Closet</Text>
+              <Text allowFontScaling={false} style={{color: '#FFF'}}>16 cubic ft - Hall Closet</Text>
             </TouchableOpacity>
             <TouchableOpacity style={this.state.selectedButton === '2x4' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("2x4")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.buttonHeader}>2'x4'</Text>
-                <Text style={styles.buttonHeader}>$99/month</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>2'x4'</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>$99/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>32 cubic feet - Bedroom Closet</Text>
+              <Text allowFontScaling={false} style={{color: '#FFF'}}>32 cubic feet - Bedroom Closet</Text>
             </TouchableOpacity>
             <TouchableOpacity style={this.state.selectedButton === '5x5' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("5x5")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.buttonHeader}>5'x5'</Text>
-                <Text style={styles.buttonHeader}>$134/month</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>5'x5'</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>$134/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>100 cubic feet - Walk-in Closet</Text>
+              <Text allowFontScaling={false} style={{color: '#FFF'}}>100 cubic feet - Walk-in Closet</Text>
             </TouchableOpacity>
             <TouchableOpacity style={this.state.selectedButton === '5x10' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("5x10")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.buttonHeader}>5'x10'</Text>
-                <Text style={styles.buttonHeader}>$157/month</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>5'x10'</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>$157/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>200 cubic feet - Studio Apt.</Text>
+              <Text allowFontScaling={false} style={{color: '#FFF'}}>200 cubic feet - Studio Apt.</Text>
             </TouchableOpacity>
             <TouchableOpacity style={this.state.selectedButton === '5x15' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("5x15")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.buttonHeader}>5'x15'</Text>
-                <Text style={styles.buttonHeader}>$191/month</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>5'x15'</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>$191/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>300 cubic feet - Small 1BR Apt.</Text>
+              <Text allowFontScaling={false} style={{color: '#FFF'}}>300 cubic feet - Small 1BR Apt.</Text>
             </TouchableOpacity>
             <TouchableOpacity style={this.state.selectedButton === '10x10' ? styles.selectedButton : styles.openButton} onPress={() => this.selectionOnPress("10x10")}>
               <View style= {{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.buttonHeader}>10'x10'</Text>
-                <Text style={styles.buttonHeader}>$236/month</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>10'x10'</Text>
+                <Text allowFontScaling={false} style={styles.buttonHeader}>$236/month</Text>
               </View>
-              <Text style={{color: '#FFF'}}>400 cubic feet - 1BR Apt.</Text>
+              <Text allowFontScaling={false} style={{color: '#FFF'}}>400 cubic feet - 1BR Apt.</Text>
             </TouchableOpacity>
           </ScrollView>
         </View>
         <View style={{flex:1, justifyContent: 'flex-end'}}>
         <TouchableOpacity style = {styles.cancelButton} onPress = {() => {Alert.alert("Are you sure you want to cancel?")}}>
-          <Text style={{color: 'white', fontSize: 16, textAlign: 'center'}}>Cancel Plan</Text>
+          <Text allowFontScaling={false} style={{color: 'white', fontSize: 16, textAlign: 'center'}}>Cancel Plan</Text>
         </TouchableOpacity>
-        <Text style = {{marginLeft: 15, marginTop: 10, marginRight: 15, color: 'gray'}}>If you cancel now, you can still store items until ___________________</Text>
+        <Text allowFontScaling={false} style = {{marginLeft: 15, marginTop: 10, marginRight: 15, color: 'gray'}}>If you cancel now, you can still store items until ___________________</Text>
           <LongButton
             title="SAVE INFO"
             onPress={()=>{this.onSubmit(); Alert.alert("Your Information Has Been Saved")}}

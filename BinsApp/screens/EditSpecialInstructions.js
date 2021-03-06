@@ -64,7 +64,7 @@ export default class EditSpecialInstructions extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{flex:5}}>
-          <Text style ={styles.descriptionText}>Special Instructions</Text>
+          <Text allowFontScaling={false} style ={styles.descriptionText}>Special Instructions</Text>
           <FormInputHandler
             defaultValue={this.state.specialInstructions}
             defaultTextColor='#8B8B8B'

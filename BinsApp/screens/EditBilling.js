@@ -59,8 +59,8 @@ export default class EditBilling extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.sectionHeader}>To update your billing info, please email us at:</Text>
-        <Text style={styles.sectionHeaderWhite}>contact@bins-storage.com</Text>
+        <Text allowFontScaling={false} style={styles.sectionHeader}>To update your billing info, please email us at:</Text>
+        <Text allowFontScaling={false} style={styles.sectionHeaderWhite}>contact@bins-storage.com</Text>
       </View>
 
     );
@@ -100,14 +100,14 @@ const styles = StyleSheet.create({
 
 /*
 <View style={{flex: 5}}>
-  <Text style={styles.descriptionText}>Name on Card</Text>
+  <Text allowFontScaling={false} style={styles.descriptionText}>Name on Card</Text>
   <FormInputHandler
     defaultText='Name on Card'
     defaultTextColor='#8B8B8B'
     style={styles.userInfoText}
     onChangeText={(text) => this.setState({nameOnCard: text})}
   />
-  <Text style={styles.descriptionText}>Credit Card</Text>
+  <Text allowFontScaling={false} style={styles.descriptionText}>Credit Card</Text>
   <FormInputHandler
     defaultText='xxxx xxxx xxxx xxxx'
     defaultTextColor='#8B8B8B'
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   />
   <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
     <View style={{flex:1}}>
-      <Text style={styles.descriptionText}>Expiration Date</Text>
+      <Text allowFontScaling={false} style={styles.descriptionText}>Expiration Date</Text>
       <FormInputHandler
         defaultText='Expiration Date'
         defaultTextColor='#8B8B8B'
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
       />
     </View>
     <View style={{flex:1}}>
-      <Text style={styles.descriptionText}>Security Code</Text>
+      <Text allowFontScaling={false} style={styles.descriptionText}>Security Code</Text>
       <FormInputHandler
         defaultText='Security Code'
         defaultTextColor='#8B8B8B'
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
       />
     </View>
   </View>
-  <Text style = {{marginLeft: 15, marginTop: 10, marginRight: 15, color: 'gray'}}>Next Payment: </Text>
+  <Text allowFontScaling={false} style = {{marginLeft: 15, marginTop: 10, marginRight: 15, color: 'gray'}}>Next Payment: </Text>
 </View>
 <View style={{flex:1, justifyContent: 'flex-end'}}>
   <LongButton
