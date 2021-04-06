@@ -1,0 +1,33 @@
+type Customer @model {
+  id: ID!
+  name: String
+  email: String
+  phone: String
+  address: String
+  specialInstructions: String
+  size: String
+  building: String
+  parking: String
+  licenseNumber: String
+  licenseState: String
+}
+
+type Item @model {
+  id: ID!
+  description: String
+  owner: String
+  inStorage: String
+  photo: String
+  location: String
+}
+
+type Order @model {
+  id: ID!
+  date: String
+  time: String
+  address: String
+  email: String
+  phone: String
+  type: String
+  items: String
+}

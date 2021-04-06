@@ -4,7 +4,7 @@ import { View, Text, Button, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/styles.js'
 
 import {LoginProvider, LoginContext} from '../components/LoginProvider.js'
-import {Auth} from 'aws-amplify';
+import {Auth, API, graphqlOperation } from 'aws-amplify';
 
 export default class Landing extends Component {
   // this is sets Class.context, allows you to access the context via this.context
@@ -50,6 +50,9 @@ export default class Landing extends Component {
             onPress={() => this.props.navigation.navigate('Login')}
             title='LOGIN'
             color= 'white' />
+          <Button
+          title="GraphQL Test"
+          onPress={() => this.props.navigation.navigate('testscreen')}/>
         </View>
       </View>
     );
