@@ -7,7 +7,7 @@ import {Url} from '../src/components/url.js';
 import DropdownMenu from '../components/DropdownMenu.js'
 import {ListOfStates} from '../src/components/ListOfStates.js';
 import { API, graphqlOperation } from 'aws-amplify'
-import { createCustomer } from '../src/graphql/mutations'
+import { createTenant } from '../src/graphql/mutations'
 
 export default class UserInfo extends React.Component {
   static contextType = LoginContext;
@@ -56,7 +56,7 @@ export default class UserInfo extends React.Component {
                      licenseNumber: this.state.licenseNumber, 
                      licenseState: this.state.licenseState 
                     }
-      await API.graphql(graphqlOperation(createCustomer, {input: user}))
+      await API.graphql(graphqlOperation(createTenant, {input: user}))
     } catch (err) {
       console.log('error creating:', err)
     }

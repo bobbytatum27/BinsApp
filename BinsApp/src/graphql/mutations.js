@@ -1,175 +1,778 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createCustomer = /* GraphQL */ `
-  mutation CreateCustomer(
-    $input: CreateCustomerInput!
-    $condition: ModelCustomerConditionInput
+export const createTenant = /* GraphQL */ `
+  mutation CreateTenant(
+    $input: CreateTenantInput!
+    $condition: ModelTenantConditionInput
   ) {
-    createCustomer(input: $input, condition: $condition) {
+    createTenant(input: $input, condition: $condition) {
       id
       name
       email
       phone
-      address
-      specialInstructions
-      size
-      building
-      parking
+      address {
+        id
+        owner {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        streetAddress
+        building
+        city
+        state
+        zip
+        parking
+        createdAt
+        updatedAt
+      }
       licenseNumber
       licenseState
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
+      items {
+        items {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      facility
       createdAt
       updatedAt
     }
   }
 `;
-export const updateCustomer = /* GraphQL */ `
-  mutation UpdateCustomer(
-    $input: UpdateCustomerInput!
-    $condition: ModelCustomerConditionInput
+export const updateTenant = /* GraphQL */ `
+  mutation UpdateTenant(
+    $input: UpdateTenantInput!
+    $condition: ModelTenantConditionInput
   ) {
-    updateCustomer(input: $input, condition: $condition) {
+    updateTenant(input: $input, condition: $condition) {
       id
       name
       email
       phone
-      address
-      specialInstructions
-      size
-      building
-      parking
+      address {
+        id
+        owner {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        streetAddress
+        building
+        city
+        state
+        zip
+        parking
+        createdAt
+        updatedAt
+      }
       licenseNumber
       licenseState
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
+      items {
+        items {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      facility
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteCustomer = /* GraphQL */ `
-  mutation DeleteCustomer(
-    $input: DeleteCustomerInput!
-    $condition: ModelCustomerConditionInput
+export const deleteTenant = /* GraphQL */ `
+  mutation DeleteTenant(
+    $input: DeleteTenantInput!
+    $condition: ModelTenantConditionInput
   ) {
-    deleteCustomer(input: $input, condition: $condition) {
+    deleteTenant(input: $input, condition: $condition) {
       id
       name
       email
       phone
-      address
-      specialInstructions
-      size
-      building
-      parking
+      address {
+        id
+        owner {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        streetAddress
+        building
+        city
+        state
+        zip
+        parking
+        createdAt
+        updatedAt
+      }
       licenseNumber
       licenseState
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
+      items {
+        items {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      facility
       createdAt
       updatedAt
     }
   }
 `;
-export const createItem = /* GraphQL */ `
-  mutation CreateItem(
-    $input: CreateItemInput!
-    $condition: ModelItemConditionInput
+export const createAddress = /* GraphQL */ `
+  mutation CreateAddress(
+    $input: CreateAddressInput!
+    $condition: ModelAddressConditionInput
   ) {
-    createItem(input: $input, condition: $condition) {
+    createAddress(input: $input, condition: $condition) {
       id
-      description
+      owner {
+        id
+        name
+        email
+        phone
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        licenseNumber
+        licenseState
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        items {
+          nextToken
+        }
+        facility
+        createdAt
+        updatedAt
+      }
+      streetAddress
+      building
+      city
+      state
+      zip
+      parking
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateAddress = /* GraphQL */ `
+  mutation UpdateAddress(
+    $input: UpdateAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    updateAddress(input: $input, condition: $condition) {
+      id
+      owner {
+        id
+        name
+        email
+        phone
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        licenseNumber
+        licenseState
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        items {
+          nextToken
+        }
+        facility
+        createdAt
+        updatedAt
+      }
+      streetAddress
+      building
+      city
+      state
+      zip
+      parking
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteAddress = /* GraphQL */ `
+  mutation DeleteAddress(
+    $input: DeleteAddressInput!
+    $condition: ModelAddressConditionInput
+  ) {
+    deleteAddress(input: $input, condition: $condition) {
+      id
+      owner {
+        id
+        name
+        email
+        phone
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        licenseNumber
+        licenseState
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        items {
+          nextToken
+        }
+        facility
+        createdAt
+        updatedAt
+      }
+      streetAddress
+      building
+      city
+      state
+      zip
+      parking
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createBox = /* GraphQL */ `
+  mutation CreateBox(
+    $input: CreateBoxInput!
+    $condition: ModelBoxConditionInput
+  ) {
+    createBox(input: $input, condition: $condition) {
+      id
       owner
+      date
+      time
       inStorage
       photo
       location
+      facility {
+        id
+        address
+        boxes {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        customers {
+          nextToken
+        }
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const updateItem = /* GraphQL */ `
-  mutation UpdateItem(
-    $input: UpdateItemInput!
-    $condition: ModelItemConditionInput
+export const updateBox = /* GraphQL */ `
+  mutation UpdateBox(
+    $input: UpdateBoxInput!
+    $condition: ModelBoxConditionInput
   ) {
-    updateItem(input: $input, condition: $condition) {
+    updateBox(input: $input, condition: $condition) {
       id
-      description
       owner
+      date
+      time
       inStorage
       photo
       location
+      facility {
+        id
+        address
+        boxes {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        customers {
+          nextToken
+        }
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteItem = /* GraphQL */ `
-  mutation DeleteItem(
-    $input: DeleteItemInput!
-    $condition: ModelItemConditionInput
+export const deleteBox = /* GraphQL */ `
+  mutation DeleteBox(
+    $input: DeleteBoxInput!
+    $condition: ModelBoxConditionInput
   ) {
-    deleteItem(input: $input, condition: $condition) {
+    deleteBox(input: $input, condition: $condition) {
       id
-      description
       owner
+      date
+      time
       inStorage
       photo
       location
+      facility {
+        id
+        address
+        boxes {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        customers {
+          nextToken
+        }
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const createOrder = /* GraphQL */ `
-  mutation CreateOrder(
-    $input: CreateOrderInput!
-    $condition: ModelOrderConditionInput
+export const createFacility = /* GraphQL */ `
+  mutation CreateFacility(
+    $input: CreateFacilityInput!
+    $condition: ModelFacilityConditionInput
   ) {
-    createOrder(input: $input, condition: $condition) {
+    createFacility(input: $input, condition: $condition) {
       id
-      date
-      time
       address
-      email
-      phone
-      type
-      items
+      boxes {
+        id
+        owner
+        date
+        time
+        inStorage
+        photo
+        location
+        facility {
+          id
+          address
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      customers {
+        items {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const updateOrder = /* GraphQL */ `
-  mutation UpdateOrder(
-    $input: UpdateOrderInput!
-    $condition: ModelOrderConditionInput
+export const updateFacility = /* GraphQL */ `
+  mutation UpdateFacility(
+    $input: UpdateFacilityInput!
+    $condition: ModelFacilityConditionInput
   ) {
-    updateOrder(input: $input, condition: $condition) {
+    updateFacility(input: $input, condition: $condition) {
       id
-      date
-      time
       address
-      email
-      phone
-      type
-      items
+      boxes {
+        id
+        owner
+        date
+        time
+        inStorage
+        photo
+        location
+        facility {
+          id
+          address
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      customers {
+        items {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteOrder = /* GraphQL */ `
-  mutation DeleteOrder(
-    $input: DeleteOrderInput!
-    $condition: ModelOrderConditionInput
+export const deleteFacility = /* GraphQL */ `
+  mutation DeleteFacility(
+    $input: DeleteFacilityInput!
+    $condition: ModelFacilityConditionInput
   ) {
-    deleteOrder(input: $input, condition: $condition) {
+    deleteFacility(input: $input, condition: $condition) {
       id
-      date
-      time
       address
-      email
-      phone
-      type
-      items
+      boxes {
+        id
+        owner
+        date
+        time
+        inStorage
+        photo
+        location
+        facility {
+          id
+          address
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      customers {
+        items {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
       createdAt
       updatedAt
     }

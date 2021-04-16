@@ -1,148 +1,742 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateCustomer = /* GraphQL */ `
-  subscription OnCreateCustomer {
-    onCreateCustomer {
+export const onCreateTenant = /* GraphQL */ `
+  subscription OnCreateTenant {
+    onCreateTenant {
       id
       name
       email
       phone
-      address
-      specialInstructions
-      size
-      building
-      parking
+      address {
+        id
+        owner {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        streetAddress
+        building
+        city
+        state
+        zip
+        parking
+        createdAt
+        updatedAt
+      }
       licenseNumber
       licenseState
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
+      items {
+        items {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      facility
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateCustomer = /* GraphQL */ `
-  subscription OnUpdateCustomer {
-    onUpdateCustomer {
+export const onUpdateTenant = /* GraphQL */ `
+  subscription OnUpdateTenant {
+    onUpdateTenant {
       id
       name
       email
       phone
-      address
-      specialInstructions
-      size
-      building
-      parking
+      address {
+        id
+        owner {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        streetAddress
+        building
+        city
+        state
+        zip
+        parking
+        createdAt
+        updatedAt
+      }
       licenseNumber
       licenseState
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
+      items {
+        items {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      facility
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteCustomer = /* GraphQL */ `
-  subscription OnDeleteCustomer {
-    onDeleteCustomer {
+export const onDeleteTenant = /* GraphQL */ `
+  subscription OnDeleteTenant {
+    onDeleteTenant {
       id
       name
       email
       phone
-      address
-      specialInstructions
-      size
-      building
-      parking
+      address {
+        id
+        owner {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        streetAddress
+        building
+        city
+        state
+        zip
+        parking
+        createdAt
+        updatedAt
+      }
       licenseNumber
       licenseState
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
+      items {
+        items {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      facility
       createdAt
       updatedAt
     }
   }
 `;
-export const onCreateItem = /* GraphQL */ `
-  subscription OnCreateItem {
-    onCreateItem {
+export const onCreateAddress = /* GraphQL */ `
+  subscription OnCreateAddress {
+    onCreateAddress {
       id
-      description
+      owner {
+        id
+        name
+        email
+        phone
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        licenseNumber
+        licenseState
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        items {
+          nextToken
+        }
+        facility
+        createdAt
+        updatedAt
+      }
+      streetAddress
+      building
+      city
+      state
+      zip
+      parking
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateAddress = /* GraphQL */ `
+  subscription OnUpdateAddress {
+    onUpdateAddress {
+      id
+      owner {
+        id
+        name
+        email
+        phone
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        licenseNumber
+        licenseState
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        items {
+          nextToken
+        }
+        facility
+        createdAt
+        updatedAt
+      }
+      streetAddress
+      building
+      city
+      state
+      zip
+      parking
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteAddress = /* GraphQL */ `
+  subscription OnDeleteAddress {
+    onDeleteAddress {
+      id
+      owner {
+        id
+        name
+        email
+        phone
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        licenseNumber
+        licenseState
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        items {
+          nextToken
+        }
+        facility
+        createdAt
+        updatedAt
+      }
+      streetAddress
+      building
+      city
+      state
+      zip
+      parking
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateBox = /* GraphQL */ `
+  subscription OnCreateBox {
+    onCreateBox {
+      id
       owner
+      date
+      time
       inStorage
       photo
       location
+      facility {
+        id
+        address
+        boxes {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        customers {
+          nextToken
+        }
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateItem = /* GraphQL */ `
-  subscription OnUpdateItem {
-    onUpdateItem {
+export const onUpdateBox = /* GraphQL */ `
+  subscription OnUpdateBox {
+    onUpdateBox {
       id
-      description
       owner
+      date
+      time
       inStorage
       photo
       location
+      facility {
+        id
+        address
+        boxes {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        customers {
+          nextToken
+        }
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteItem = /* GraphQL */ `
-  subscription OnDeleteItem {
-    onDeleteItem {
+export const onDeleteBox = /* GraphQL */ `
+  subscription OnDeleteBox {
+    onDeleteBox {
       id
-      description
       owner
+      date
+      time
       inStorage
       photo
       location
+      facility {
+        id
+        address
+        boxes {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        customers {
+          nextToken
+        }
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onCreateOrder = /* GraphQL */ `
-  subscription OnCreateOrder {
-    onCreateOrder {
+export const onCreateFacility = /* GraphQL */ `
+  subscription OnCreateFacility {
+    onCreateFacility {
       id
-      date
-      time
       address
-      email
-      phone
-      type
-      items
+      boxes {
+        id
+        owner
+        date
+        time
+        inStorage
+        photo
+        location
+        facility {
+          id
+          address
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      customers {
+        items {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onUpdateOrder = /* GraphQL */ `
-  subscription OnUpdateOrder {
-    onUpdateOrder {
+export const onUpdateFacility = /* GraphQL */ `
+  subscription OnUpdateFacility {
+    onUpdateFacility {
       id
-      date
-      time
       address
-      email
-      phone
-      type
-      items
+      boxes {
+        id
+        owner
+        date
+        time
+        inStorage
+        photo
+        location
+        facility {
+          id
+          address
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      customers {
+        items {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const onDeleteOrder = /* GraphQL */ `
-  subscription OnDeleteOrder {
-    onDeleteOrder {
+export const onDeleteFacility = /* GraphQL */ `
+  subscription OnDeleteFacility {
+    onDeleteFacility {
       id
-      date
-      time
       address
-      email
-      phone
-      type
-      items
+      boxes {
+        id
+        owner
+        date
+        time
+        inStorage
+        photo
+        location
+        facility {
+          id
+          address
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      customers {
+        items {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
       createdAt
       updatedAt
     }

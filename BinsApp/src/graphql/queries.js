@@ -1,44 +1,126 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getCustomer = /* GraphQL */ `
-  query GetCustomer($id: ID!) {
-    getCustomer(id: $id) {
+export const getTenant = /* GraphQL */ `
+  query GetTenant($id: ID!) {
+    getTenant(id: $id) {
       id
       name
       email
       phone
-      address
-      specialInstructions
-      size
-      building
-      parking
+      address {
+        id
+        owner {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        streetAddress
+        building
+        city
+        state
+        zip
+        parking
+        createdAt
+        updatedAt
+      }
       licenseNumber
       licenseState
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
+      items {
+        items {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      facility
       createdAt
       updatedAt
     }
   }
 `;
-export const listCustomers = /* GraphQL */ `
-  query ListCustomers(
-    $filter: ModelCustomerFilterInput
+export const listTenants = /* GraphQL */ `
+  query ListTenants(
+    $filter: ModelTenantFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listCustomers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listTenants(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         name
         email
         phone
-        address
-        specialInstructions
-        size
-        building
-        parking
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
         licenseNumber
         licenseState
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        items {
+          nextToken
+        }
+        facility
         createdAt
         updatedAt
       }
@@ -46,34 +128,153 @@ export const listCustomers = /* GraphQL */ `
     }
   }
 `;
-export const getItem = /* GraphQL */ `
-  query GetItem($id: ID!) {
-    getItem(id: $id) {
+export const getAddress = /* GraphQL */ `
+  query GetAddress($id: ID!) {
+    getAddress(id: $id) {
       id
-      description
+      owner {
+        id
+        name
+        email
+        phone
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        licenseNumber
+        licenseState
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        items {
+          nextToken
+        }
+        facility
+        createdAt
+        updatedAt
+      }
+      streetAddress
+      building
+      city
+      state
+      zip
+      parking
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listAddresss = /* GraphQL */ `
+  query ListAddresss(
+    $filter: ModelAddressFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listAddresss(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        owner {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        streetAddress
+        building
+        city
+        state
+        zip
+        parking
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getBox = /* GraphQL */ `
+  query GetBox($id: ID!) {
+    getBox(id: $id) {
+      id
       owner
+      date
+      time
       inStorage
       photo
       location
+      facility {
+        id
+        address
+        boxes {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        customers {
+          nextToken
+        }
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
+        createdAt
+        updatedAt
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const listItems = /* GraphQL */ `
-  query ListItems(
-    $filter: ModelItemFilterInput
+export const listBoxs = /* GraphQL */ `
+  query ListBoxs(
+    $filter: ModelBoxFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listItems(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listBoxs(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        description
         owner
+        date
+        time
         inStorage
         photo
         location
+        facility {
+          id
+          address
+          createdAt
+          updatedAt
+        }
         createdAt
         updatedAt
       }
@@ -81,38 +282,111 @@ export const listItems = /* GraphQL */ `
     }
   }
 `;
-export const getOrder = /* GraphQL */ `
-  query GetOrder($id: ID!) {
-    getOrder(id: $id) {
+export const getFacility = /* GraphQL */ `
+  query GetFacility($id: ID!) {
+    getFacility(id: $id) {
       id
-      date
-      time
       address
-      email
-      phone
-      type
-      items
+      boxes {
+        id
+        owner
+        date
+        time
+        inStorage
+        photo
+        location
+        facility {
+          id
+          address
+          createdAt
+          updatedAt
+        }
+        createdAt
+        updatedAt
+      }
+      customers {
+        items {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
+      orders {
+        id
+        date
+        time
+        tenant {
+          id
+          name
+          email
+          phone
+          licenseNumber
+          licenseState
+          facility
+          createdAt
+          updatedAt
+        }
+        address {
+          id
+          streetAddress
+          building
+          city
+          state
+          zip
+          parking
+          createdAt
+          updatedAt
+        }
+        jobType
+        items
+        email
+        phone
+      }
       createdAt
       updatedAt
     }
   }
 `;
-export const listOrders = /* GraphQL */ `
-  query ListOrders(
-    $filter: ModelOrderFilterInput
+export const listFacilitys = /* GraphQL */ `
+  query ListFacilitys(
+    $filter: ModelFacilityFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listOrders(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listFacilitys(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        date
-        time
         address
-        email
-        phone
-        type
-        items
+        boxes {
+          id
+          owner
+          date
+          time
+          inStorage
+          photo
+          location
+          createdAt
+          updatedAt
+        }
+        customers {
+          nextToken
+        }
+        orders {
+          id
+          date
+          time
+          jobType
+          items
+          email
+          phone
+        }
         createdAt
         updatedAt
       }

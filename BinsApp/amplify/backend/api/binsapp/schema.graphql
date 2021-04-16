@@ -1,33 +1,67 @@
-type Customer @model {
+type Tenant @model 
+  @key(name: "tenantsByFacility", fields: ["facilityID"]){
   id: ID!
-  name: String
+  name: String!
   email: String
   phone: String
   address: String
-  specialInstructions: String
-  size: String
-  building: String
-  parking: String
   licenseNumber: String
   licenseState: String
+  orders: [Order]
+  items: [Box] @connection(keyName: "itemsByTenant", fields: ["id"])
+  facilityID: ID!
 }
 
-type Item @model {
+#type Address @model 
+#  @key(name:"byTenant", fields: ["tenantID"]){
+#  id: ID!
+#  tenantID: ID
+#  tenant: Tenant @connection(fields: ["tenantID"])
+#  streetAddress: String
+#  building: String
+#  city: String
+#  state: String
+#  zip: Int
+#  parking: String
+#}
+
+type Box @model 
+  @key(name: "itemsByTenant", fields: ["tenantID"])
+  @key(name: "itemsByFacility", fields: ["facilityID"], queryField: "itemsByFacility"){
   id: ID!
+  tenantID: ID!
+  tenant: [Tenant]
+  facilityID: ID!
   description: String
-  owner: String
-  inStorage: String
-  photo: String
+  inStorage: Boolean
+  photo: String # map to the s3 url
   location: String
 }
 
-type Order @model {
+type Facility @model {
   id: ID!
+  address: String
+  boxes: [Box] @connection(keyName: "itemsByFacility", fields: ["id"])
+  customers: [Tenant] @connection(keyName: "tenantsByFacility", fields: ["id"])
+  orders: [Order] 
+}
+
+enum JobType {
+  PICKUP
+  DELIVERY
+}
+
+type Order @model 
+  @key(name: "byTenant", fields: ["tenantID"])
+  @key(name: "byFacility", fields: ["facilityID"]){  
+  id: ID!
+  tenantID: ID!
+  facilityID: ID!
   date: String
   time: String
   address: String
+  jobType: JobType
+  items: String
   email: String
   phone: String
-  type: String
-  items: String
 }
