@@ -7,8 +7,8 @@ type Tenant @model
   address: String
   licenseNumber: String
   licenseState: String
-  orders: [Order]
-  items: [Box] @connection(keyName: "itemsByTenant", fields: ["id"])
+  orders: [Order] @connection(keyName: "ordersByTenant", fields: ["id"])
+  boxes: [Box] @connection(keyName: "itemsByTenant", fields: ["id"])
   facilityID: ID!
 }
 
@@ -30,20 +30,27 @@ type Box @model
   @key(name: "itemsByFacility", fields: ["facilityID"], queryField: "itemsByFacility"){
   id: ID!
   tenantID: ID!
-  tenant: [Tenant]
   facilityID: ID!
   description: String
-  inStorage: Boolean
+  status: BoxLocation
   photo: String # map to the s3 url
   location: String
 }
 
 type Facility @model {
   id: ID!
+  name: String
   address: String
   boxes: [Box] @connection(keyName: "itemsByFacility", fields: ["id"])
   customers: [Tenant] @connection(keyName: "tenantsByFacility", fields: ["id"])
-  orders: [Order] 
+  orders: [Order] @connection(keyName: "ordersbyFacility", fields: ["id"])
+}
+
+enum BoxLocation {
+  IN_STORAGE
+  RETURNED
+  TO_PICKUP
+  TO_DELIVER
 }
 
 enum JobType {
@@ -51,9 +58,14 @@ enum JobType {
   DELIVERY
 }
 
+enum Status {
+  COMPLETED
+  INCOMPLETE
+}
+
 type Order @model 
-  @key(name: "byTenant", fields: ["tenantID"])
-  @key(name: "byFacility", fields: ["facilityID"]){  
+  @key(name: "ordersByTenant", fields: ["tenantID"])
+  @key(name: "ordersbyFacility", fields: ["facilityID"], queryField: "ordersbyFacility"){  
   id: ID!
   tenantID: ID!
   facilityID: ID!
@@ -61,7 +73,5 @@ type Order @model
   time: String
   address: String
   jobType: JobType
-  items: String
-  email: String
-  phone: String
+  status: Status
 }
