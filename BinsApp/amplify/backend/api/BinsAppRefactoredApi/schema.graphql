@@ -1,0 +1,95 @@
+# type Task
+#   @model
+#   @auth(
+#     rules: [
+#       { allow: groups, groups: ["Managers"], queries: null, mutations: [create, update, delete] }
+#       { allow: groups, groups: ["Employees"], queries: [get, list], mutations: null }
+#     ]
+#   ) {
+#   id: ID!
+#   title: String!
+#   description: String
+#   status: String
+# }
+# type PrivateNote @model @auth(rules: [{ allow: owner }]) {
+#   id: ID!
+#   content: String!
+# }
+
+type Tenant @model
+  @auth(rules: [{ allow: owner }, {allow: groups}])
+  @key(name: "tenantByEmail", fields: ["email"], queryField: "tenantByEmail")
+  @key(name: "tenantsByFacility", fields: ["facilityID"]){
+  id: ID!
+  name: String
+  email: String!
+  phone: String
+  address: [Address]
+  licenseNumber: String
+  licenseState: String
+  orders: [Order] @connection(keyName: "ordersByTenant", fields: ["id"])
+  boxes: [Box] @connection(keyName: "boxesByTenant", fields: ["id"])
+  facilityID: ID!
+}
+
+type Address {
+ id: ID!
+ tenantID: ID
+ streetAddress: String
+ building: String
+ city: String
+ state: String
+ zip: Int
+ parking: String
+}
+
+type Box @model 
+  @key(name: "boxesByTenant", fields: ["tenantID"], queryField: "boxesByTenant")
+  @key(name: "itemsByFacility", fields: ["facilityID"], queryField: "itemsByFacility"){
+  id: ID!
+  tenantID: ID!
+  facilityID: ID!
+  description: String
+  status: BoxLocation
+  photo: String # map to the s3 url
+  location: String
+}
+
+type Facility @model {
+  id: ID!
+  name: String
+  address: String
+  boxes: [Box] @connection(keyName: "itemsByFacility", fields: ["id"])
+  customers: [Tenant] @connection(keyName: "tenantsByFacility", fields: ["id"])
+  orders: [Order] @connection(keyName: "ordersbyFacility", fields: ["id"])
+}
+
+enum BoxLocation {
+  IN_STORAGE
+  RETURNED
+  TO_PICKUP
+  TO_DELIVER
+}
+
+enum JobType {
+  PICKUP
+  DELIVERY
+}
+
+enum Status {
+  COMPLETED
+  INCOMPLETE
+}
+
+type Order @model
+  @key(name: "ordersByTenant", fields: ["tenantID"])
+  @key(name: "ordersbyFacility", fields: ["facilityID"], queryField: "ordersbyFacility"){  
+  id: ID!
+  tenantID: ID!
+  facilityID: ID!
+  date: String
+  time: String
+  address: String
+  jobType: JobType
+  status: Status
+}
