@@ -1,11 +1,11 @@
 {
-    "AppSyncApiName": "binsapp",
-    "DynamoDBBillingMode": "PAY_PER_REQUEST",
-    "DynamoDBEnableServerSideEncryption": false,
-    "AuthCognitoUserPoolId": {
-        "Fn::GetAtt": [
-            "authbinsapp54a02567",
-            "Outputs.UserPoolId"
-        ]
-    }
+  "AppSyncApiName": "binsapp",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authbinsapp54a02567",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

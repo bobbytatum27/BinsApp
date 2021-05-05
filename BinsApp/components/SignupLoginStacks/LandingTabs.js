@@ -7,7 +7,6 @@ import Landing3 from '../../screens/Landing3.js';
 import Landing4 from '../../screens/Landing4.js';
 
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import GraphQLTest from '../../screens/Test.js';
 const LandingTabStack = createMaterialTopTabNavigator();
 
 export default LandingTabs = (props) => {
@@ -17,7 +16,6 @@ export default LandingTabs = (props) => {
             <LandingTabStack.Screen name='Landing2' component={Landing2}/>
             <LandingTabStack.Screen name='Landing3' component={Landing3}/>
             <LandingTabStack.Screen name='Landing4' component={Landing4}/>
-            <LandingTabStack.Screen name='testscreen' component={GraphQLTest}/>
         </LandingTabStack.Navigator>
     );
 }

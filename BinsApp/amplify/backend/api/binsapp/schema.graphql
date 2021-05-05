@@ -1,42 +1,3 @@
-type Tenant @model 
-  @key(name: "tenantsByFacility", fields: ["facilityID"]){
-  id: ID!
-  name: String!
-  email: String
-  phone: String
-  address: String
-  licenseNumber: String
-  licenseState: String
-  orders: [Order] @connection(keyName: "ordersByTenant", fields: ["id"])
-  boxes: [Box] @connection(keyName: "itemsByTenant", fields: ["id"])
-  facilityID: ID!
-}
-
-#type Address @model 
-#  @key(name:"byTenant", fields: ["tenantID"]){
-#  id: ID!
-#  tenantID: ID
-#  tenant: Tenant @connection(fields: ["tenantID"])
-#  streetAddress: String
-#  building: String
-#  city: String
-#  state: String
-#  zip: Int
-#  parking: String
-#}
-
-type Box @model 
-  @key(name: "itemsByTenant", fields: ["tenantID"])
-  @key(name: "itemsByFacility", fields: ["facilityID"], queryField: "itemsByFacility"){
-  id: ID!
-  tenantID: ID!
-  facilityID: ID!
-  description: String
-  status: BoxLocation
-  photo: String # map to the s3 url
-  location: String
-}
-
 type Facility @model {
   id: ID!
   name: String
@@ -44,9 +5,74 @@ type Facility @model {
   boxes: [Box] @connection(keyName: "itemsByFacility", fields: ["id"])
   customers: [Tenant] @connection(keyName: "tenantsByFacility", fields: ["id"])
   orders: [Order] @connection(keyName: "ordersbyFacility", fields: ["id"])
+  units: [Unit] @connection(keyName: "unitsByFacility", fields: ["id"])
 }
 
-enum BoxLocation {
+type Unit @model
+  @key(name: "unitsByFacility", fields: ["facilityID"]) {
+  id: ID!
+  facilityID: ID!
+  size: String
+  usage: String
+  boxes: [Box] @connection(keyName: "itemsByUnit", fields: ["id"])
+}
+
+type Tenant @model
+  @auth(rules: [{ allow: owner }, {allow: groups}])
+  @key(name: "tenantByEmail", fields: ["email"], queryField: "tenantByEmail")
+  @key(name: "tenantsByFacility", fields: ["facilityID"]) {
+  id: ID!
+  facilityID: ID!
+  name: String
+  email: String!
+  phone: String
+  unit: Unit @connection
+  address: [Address]
+  licenseNumber: String
+  licenseState: String
+  orders: [Order] @connection(keyName: "ordersByTenant", fields: ["id"])
+  boxes: [Box] @connection(keyName: "boxesByTenant", fields: ["id"])
+}
+
+type Box @model 
+  @key(name: "boxesByTenant", fields: ["tenantID"], queryField: "boxesByTenant")
+  @key(name: "itemsByFacility", fields: ["facilityID"], queryField: "itemsByFacility")
+  @key(name: "itemsByUnit", fields: ["unitID"], queryField: "itemsByUnit") {
+  id: ID!
+  tenantID: ID!
+  facilityID: ID!
+  unitID: ID
+  description: String
+  status: BoxStatus
+  photo: String # map to the s3 url
+  location: String
+}
+
+type Order @model
+  @key(name: "ordersByTenant", fields: ["tenantID"])
+  @key(name: "ordersbyFacility", fields: ["facilityID"], queryField: "ordersbyFacility"){  
+  id: ID!
+  tenantID: ID!
+  facilityID: ID!
+  date: String
+  time: String
+  address: String
+  jobType: JobType
+  status: Status
+}
+
+type Address {
+ id: ID!
+ tenantID: ID
+ streetAddress: String
+ building: String
+ city: String
+ state: String
+ zip: Int
+ parking: String
+}
+
+enum BoxStatus {
   IN_STORAGE
   RETURNED
   TO_PICKUP
@@ -61,17 +87,4 @@ enum JobType {
 enum Status {
   COMPLETED
   INCOMPLETE
-}
-
-type Order @model 
-  @key(name: "ordersByTenant", fields: ["tenantID"])
-  @key(name: "ordersbyFacility", fields: ["facilityID"], queryField: "ordersbyFacility"){  
-  id: ID!
-  tenantID: ID!
-  facilityID: ID!
-  date: String
-  time: String
-  address: String
-  jobType: JobType
-  status: Status
 }
