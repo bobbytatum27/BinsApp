@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Tenant": {
-            "name": "Tenant",
+        "Facility": {
+            "name": "Facility",
             "fields": {
                 "id": {
                     "name": "id",
@@ -17,55 +17,39 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "email": {
-                    "name": "email",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "phone": {
-                    "name": "phone",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
                 "address": {
                     "name": "address",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "boxes": {
+                    "name": "boxes",
                     "isArray": true,
                     "type": {
-                        "nonModel": "Address"
+                        "model": "Box"
                     },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true
-                },
-                "licenseNumber": {
-                    "name": "licenseNumber",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "licenseState": {
-                    "name": "licenseState",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "unit": {
-                    "name": "unit",
-                    "isArray": false,
-                    "type": {
-                        "model": "Unit"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
+                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "tenantUnitId"
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "facilityID"
+                    }
+                },
+                "customers": {
+                    "name": "customers",
+                    "isArray": true,
+                    "type": {
+                        "model": "Tenant"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "facilityID"
                     }
                 },
                 "orders": {
@@ -79,153 +63,30 @@ export const schema = {
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "tenantID"
+                        "associatedWith": "facilityID"
                     }
                 },
-                "boxes": {
-                    "name": "boxes",
+                "units": {
+                    "name": "units",
                     "isArray": true,
                     "type": {
-                        "model": "Box"
+                        "model": "Unit"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true,
                     "association": {
                         "connectionType": "HAS_MANY",
-                        "associatedWith": "tenantID"
-                    }
-                },
-                "facilityID": {
-                    "name": "facilityID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                }
-            },
-            "syncable": true,
-            "pluralName": "Tenants",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "tenantByEmail",
-                        "fields": [
-                            "email"
-                        ],
-                        "queryField": "tenantByEmail"
-                    }
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "tenantsByFacility",
-                        "fields": [
-                            "facilityID"
-                        ],
-                        "queryField": "tenantsByFacility"
-                    }
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "groupClaim": "cognito:groups",
-                                "provider": "userPools",
-                                "allow": "groups",
-                                "groupField": "groups",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Unit": {
-            "name": "Unit",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "facilityID": {
-                    "name": "facilityID",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "size": {
-                    "name": "size",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "usage": {
-                    "name": "usage",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "boxes": {
-                    "name": "boxes",
-                    "isArray": true,
-                    "type": {
-                        "model": "Box"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "unitID"
+                        "associatedWith": "facilityID"
                     }
                 }
             },
             "syncable": true,
-            "pluralName": "Units",
+            "pluralName": "Facilities",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "name": "unitsByFacility",
-                        "fields": [
-                            "facilityID"
-                        ],
-                        "queryField": "unitsByFacility"
-                    }
                 }
             ]
         },
@@ -330,6 +191,233 @@ export const schema = {
                 }
             ]
         },
+        "Tenant": {
+            "name": "Tenant",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "facilityID": {
+                    "name": "facilityID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "phone": {
+                    "name": "phone",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "unit": {
+                    "name": "unit",
+                    "isArray": false,
+                    "type": {
+                        "model": "Unit"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "tenantUnitId"
+                    }
+                },
+                "address": {
+                    "name": "address",
+                    "isArray": true,
+                    "type": {
+                        "nonModel": "Address"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "licenseNumber": {
+                    "name": "licenseNumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "licenseState": {
+                    "name": "licenseState",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "orders": {
+                    "name": "orders",
+                    "isArray": true,
+                    "type": {
+                        "model": "Order"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "tenantID"
+                    }
+                },
+                "boxes": {
+                    "name": "boxes",
+                    "isArray": true,
+                    "type": {
+                        "model": "Box"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "tenantID"
+                    }
+                }
+            },
+            "syncable": true,
+            "pluralName": "Tenants",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "tenantByEmail",
+                        "fields": [
+                            "email"
+                        ],
+                        "queryField": "tenantByEmail"
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "tenantsByFacility",
+                        "fields": [
+                            "facilityID"
+                        ]
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "groupClaim": "cognito:groups",
+                                "provider": "userPools",
+                                "allow": "groups",
+                                "groupField": "groups",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Unit": {
+            "name": "Unit",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "facilityID": {
+                    "name": "facilityID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "size": {
+                    "name": "size",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "usage": {
+                    "name": "usage",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "boxes": {
+                    "name": "boxes",
+                    "isArray": true,
+                    "type": {
+                        "model": "Box"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "unitID"
+                    }
+                }
+            },
+            "syncable": true,
+            "pluralName": "Units",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "unitsByFacility",
+                        "fields": [
+                            "facilityID"
+                        ]
+                    }
+                }
+            ]
+        },
         "Order": {
             "name": "Order",
             "fields": {
@@ -370,13 +458,10 @@ export const schema = {
                 },
                 "address": {
                     "name": "address",
-                    "isArray": true,
-                    "type": {
-                        "nonModel": "Address"
-                    },
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "attributes": []
                 },
                 "jobType": {
                     "name": "jobType",
@@ -424,96 +509,6 @@ export const schema = {
                     }
                 }
             ]
-        },
-        "Facility": {
-            "name": "Facility",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "name": {
-                    "name": "name",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "address": {
-                    "name": "address",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "boxes": {
-                    "name": "boxes",
-                    "isArray": true,
-                    "type": {
-                        "model": "Box"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "facilityID"
-                    }
-                },
-                "customers": {
-                    "name": "customers",
-                    "isArray": true,
-                    "type": {
-                        "model": "Tenant"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "facilityID"
-                    }
-                },
-                "orders": {
-                    "name": "orders",
-                    "isArray": true,
-                    "type": {
-                        "model": "Order"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "facilityID"
-                    }
-                },
-                "units": {
-                    "name": "units",
-                    "isArray": true,
-                    "type": {
-                        "model": "Unit"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "facilityID"
-                    }
-                }
-            },
-            "syncable": true,
-            "pluralName": "Facilities",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                }
-            ]
         }
     },
     "enums": {
@@ -550,6 +545,13 @@ export const schema = {
                     "isArray": false,
                     "type": "ID",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "tenantID": {
+                    "name": "tenantID",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "streetAddress": {
@@ -597,5 +599,5 @@ export const schema = {
             }
         }
     },
-    "version": "863fdd06745eb6706e382d3fecf613d6"
+    "version": "33560b2824996a30c74918a48abc439c"
 };

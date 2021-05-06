@@ -22,7 +22,7 @@ type Tenant @model
   @key(name: "tenantByEmail", fields: ["email"], queryField: "tenantByEmail")
   @key(name: "tenantsByFacility", fields: ["facilityID"]) {
   id: ID!
-  facilityID: ID!
+  facilityID: ID
   name: String
   email: String!
   phone: String

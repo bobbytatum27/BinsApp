@@ -1,34 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const syncFacilities = /* GraphQL */ `
-  query SyncFacilities(
-    $filter: ModelFacilityFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncFacilities(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        name
-        address
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getFacility = /* GraphQL */ `
   query GetFacility($id: ID!) {
     getFacility(id: $id) {
@@ -37,23 +9,16 @@ export const getFacility = /* GraphQL */ `
       address
       boxes {
         nextToken
-        startedAt
       }
       customers {
         nextToken
-        startedAt
       }
       orders {
         nextToken
-        startedAt
       }
       units {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -70,43 +35,10 @@ export const listFacilitys = /* GraphQL */ `
         id
         name
         address
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncUnits = /* GraphQL */ `
-  query SyncUnits(
-    $filter: ModelUnitFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncUnits(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        facilityID
-        size
-        usage
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -119,11 +51,7 @@ export const getUnit = /* GraphQL */ `
       usage
       boxes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -141,47 +69,10 @@ export const listUnits = /* GraphQL */ `
         facilityID
         size
         usage
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncTenants = /* GraphQL */ `
-  query SyncTenants(
-    $filter: ModelTenantFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncTenants(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        facilityID
-        name
-        email
-        phone
-        licenseNumber
-        licenseState
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        owner
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -198,9 +89,6 @@ export const getTenant = /* GraphQL */ `
         facilityID
         size
         usage
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -218,15 +106,10 @@ export const getTenant = /* GraphQL */ `
       licenseState
       orders {
         nextToken
-        startedAt
       }
       boxes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -248,48 +131,11 @@ export const listTenants = /* GraphQL */ `
         phone
         licenseNumber
         licenseState
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncBoxes = /* GraphQL */ `
-  query SyncBoxes(
-    $filter: ModelBoxFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncBoxes(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        tenantID
-        facilityID
-        unitID
-        description
-        status
-        photo
-        location
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -304,9 +150,6 @@ export const getBox = /* GraphQL */ `
       status
       photo
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -328,47 +171,10 @@ export const listBoxs = /* GraphQL */ `
         status
         photo
         location
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
-    }
-  }
-`;
-export const syncOrders = /* GraphQL */ `
-  query SyncOrders(
-    $filter: ModelOrderFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncOrders(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        tenantID
-        facilityID
-        date
-        time
-        address
-        jobType
-        status
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-      nextToken
-      startedAt
     }
   }
 `;
@@ -383,9 +189,6 @@ export const getOrder = /* GraphQL */ `
       address
       jobType
       status
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -407,14 +210,10 @@ export const listOrders = /* GraphQL */ `
         address
         jobType
         status
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -441,15 +240,11 @@ export const tenantByEmail = /* GraphQL */ `
         phone
         licenseNumber
         licenseState
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
         owner
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -477,14 +272,10 @@ export const boxesByTenant = /* GraphQL */ `
         status
         photo
         location
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -512,14 +303,10 @@ export const itemsByFacility = /* GraphQL */ `
         status
         photo
         location
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -547,14 +334,10 @@ export const itemsByUnit = /* GraphQL */ `
         status
         photo
         location
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
   }
 `;
@@ -582,14 +365,10 @@ export const ordersbyFacility = /* GraphQL */ `
         address
         jobType
         status
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
   }
 `;

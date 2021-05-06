@@ -6,7 +6,7 @@ import { LoginContext } from '../components/LoginProvider.js';
 import {Url} from '../src/components/url.js';
 import DropdownMenu from '../components/DropdownMenu.js'
 import {ListOfStates} from '../src/components/ListOfStates.js';
-import { API, graphqlOperation } from 'aws-amplify'
+import { API, graphqlOperation, DataStore } from 'aws-amplify'
 import { createTenant } from '../src/graphql/mutations'
 
 export default class UserInfo extends React.Component {
@@ -43,24 +43,22 @@ export default class UserInfo extends React.Component {
     };
   }
 
-  async addCustomer() {
-    try {
-      const user = { name: this.state.name, 
-                     email: this.state.email, 
-                     phone: this.state.phone, 
-                     address: this.state.address, 
-                     specialInstructions: this.state.specialInstructions, 
-                     size: this.state.size, 
-                     building: this.state.building, 
-                     parking: this.state.parking, 
-                     licenseNumber: this.state.licenseNumber, 
-                     licenseState: this.state.licenseState 
-                    }
-      await API.graphql(graphqlOperation(createTenant, {input: user}))
-    } catch (err) {
-      console.log('error creating:', err)
+    async addCustomer(){
+      try {
+        await DataStore.save(
+          new Tenant({
+            name: this.state.name, 
+            email: this.state.email,
+            phone: this.state.phone, 
+            licenseNumber: this.state.licenseNumber, 
+            licenseState: this.state.licenseState 
+          })
+        )
+      }
+      catch (err) {
+        console.log('error creating:', err)
+      }
     }
-  }
 
   checkAllFields = () => {
     if (this.state.validEmail && this.state.validPassword && this.state.validPhone && this.state.nonemptyName && this.state.validPasswordReentry && this.state.validLicense) {

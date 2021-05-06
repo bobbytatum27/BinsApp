@@ -12,23 +12,16 @@ export const createFacility = /* GraphQL */ `
       address
       boxes {
         nextToken
-        startedAt
       }
       customers {
         nextToken
-        startedAt
       }
       orders {
         nextToken
-        startedAt
       }
       units {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -45,23 +38,16 @@ export const updateFacility = /* GraphQL */ `
       address
       boxes {
         nextToken
-        startedAt
       }
       customers {
         nextToken
-        startedAt
       }
       orders {
         nextToken
-        startedAt
       }
       units {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -78,23 +64,16 @@ export const deleteFacility = /* GraphQL */ `
       address
       boxes {
         nextToken
-        startedAt
       }
       customers {
         nextToken
-        startedAt
       }
       orders {
         nextToken
-        startedAt
       }
       units {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -112,11 +91,7 @@ export const createUnit = /* GraphQL */ `
       usage
       boxes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -134,11 +109,7 @@ export const updateUnit = /* GraphQL */ `
       usage
       boxes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -156,11 +127,7 @@ export const deleteUnit = /* GraphQL */ `
       usage
       boxes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -182,9 +149,6 @@ export const createTenant = /* GraphQL */ `
         facilityID
         size
         usage
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -202,15 +166,10 @@ export const createTenant = /* GraphQL */ `
       licenseState
       orders {
         nextToken
-        startedAt
       }
       boxes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -233,9 +192,6 @@ export const updateTenant = /* GraphQL */ `
         facilityID
         size
         usage
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -253,15 +209,10 @@ export const updateTenant = /* GraphQL */ `
       licenseState
       orders {
         nextToken
-        startedAt
       }
       boxes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -284,9 +235,6 @@ export const deleteTenant = /* GraphQL */ `
         facilityID
         size
         usage
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
@@ -304,15 +252,10 @@ export const deleteTenant = /* GraphQL */ `
       licenseState
       orders {
         nextToken
-        startedAt
       }
       boxes {
         nextToken
-        startedAt
       }
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
       owner
@@ -333,9 +276,6 @@ export const createBox = /* GraphQL */ `
       status
       photo
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -355,9 +295,6 @@ export const updateBox = /* GraphQL */ `
       status
       photo
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -377,9 +314,6 @@ export const deleteBox = /* GraphQL */ `
       status
       photo
       location
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -399,9 +333,6 @@ export const createOrder = /* GraphQL */ `
       address
       jobType
       status
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -421,9 +352,6 @@ export const updateOrder = /* GraphQL */ `
       address
       jobType
       status
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }
@@ -443,9 +371,6 @@ export const deleteOrder = /* GraphQL */ `
       address
       jobType
       status
-      _version
-      _deleted
-      _lastChangedAt
       createdAt
       updatedAt
     }

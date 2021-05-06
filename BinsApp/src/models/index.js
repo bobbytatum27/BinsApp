@@ -19,14 +19,14 @@ const Status = {
   "INCOMPLETE": "INCOMPLETE"
 };
 
-const { Tenant, Unit, Box, Order, Facility, Address } = initSchema(schema);
+const { Facility, Box, Tenant, Unit, Order, Address } = initSchema(schema);
 
 export {
+  Facility,
+  Box,
   Tenant,
   Unit,
-  Box,
   Order,
-  Facility,
   BoxStatus,
   JobType,
   Status,
