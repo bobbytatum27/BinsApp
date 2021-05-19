@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { SafeAreaView, ScrollView, View, Text, Button, TouchableOpacity, FlatList, StyleSheet, Image, ActivityIndicator, RefreshControl } from 'react-native';
-import {LoginContext} from '../components/LoginProvider.js'
+import {UserInfoContext} from '../components/Providers/UserInfoProvider.js'
 import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -9,11 +9,13 @@ import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import {Url} from '../src/components/url.js';
 import {S3url} from '../src/components/s3url.js';
-
+import { API, graphqlOperation, DataStore } from 'aws-amplify'
+import { Tenant } from '../src/models';
+import * as queries from '../src/graphql/queries'
 import moment from "moment";
 
 class Home extends Component {
-  static contextType = LoginContext;
+  static contextType = UserInfoContext;
   constructor() {
     super();
     this.state = {
@@ -27,7 +29,7 @@ class Home extends Component {
     }
   }
 
-  fetchData() {
+  /*fetchData() {
     let email = ''
     Auth.currentUserInfo().then((userInfo) => {
       const { attributes = {} } = userInfo;
@@ -50,7 +52,7 @@ class Home extends Component {
     })
   }
 
-  fetchOrders(){
+    fetchOrders(){
     let email = ''
     Auth.currentUserInfo().then((userInfo) => {
       const { attributes = {} } = userInfo;
@@ -68,12 +70,25 @@ class Home extends Component {
       console.log(error)
     })
   }
+  */
 
+  fetchData(){
+    this.context.fetchData().then(() => {
+      this.setState({dataSourceHome: this.context.dataSourceHome,
+                     dataSourceStorage: this.context.dataSourceStorage,
+                     dataSourceOrders: this.context.dataSourceNewOrders,
+                     isLoading:false,
+                     refreshing: false
+                    })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+  
   componentDidMount() {
     this.fetchData();
-    this.fetchOrders();
   }
-
 
   renderItem = ({item}) => {
       return (
@@ -94,8 +109,8 @@ class Home extends Component {
           <Image style={{width: 150, height: 150}}
                  source={{uri: S3url + item.photo}}/>
           <View style={{padding: 10, flexDirection: 'column'}}>
-            <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{item.description}</Text>
-            <Text allowFontScaling={false}>ID #{item.id}</Text>
+            <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{item.description.slice(0,12)}</Text>
+            <Text allowFontScaling={false}>ID #{item.id.slice(0,12)}</Text>
           </View>
         </View>
     )
@@ -117,7 +132,6 @@ class Home extends Component {
   onRefresh = () => {
     this.setState({refreshing: true});
     this.fetchData();
-    this.fetchOrders();
   }
 
   render() {

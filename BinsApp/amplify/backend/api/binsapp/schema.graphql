@@ -9,7 +9,7 @@ type Facility @model {
 }
 
 type Unit @model
-  @key(name: "unitsByFacility", fields: ["facilityID"]) {
+  @key(name: "unitsByFacility", fields: ["facilityID"], queryField: "unitsByFacility") {
   id: ID!
   facilityID: ID!
   size: String
@@ -20,7 +20,7 @@ type Unit @model
 type Tenant @model
   @auth(rules: [{ allow: owner }, {allow: groups}])
   @key(name: "tenantByEmail", fields: ["email"], queryField: "tenantByEmail")
-  @key(name: "tenantsByFacility", fields: ["facilityID"]) {
+  @key(name: "tenantsByFacility", fields: ["facilityID"], queryField: "tenantsByFacility") {
   id: ID!
   facilityID: ID
   name: String
@@ -36,8 +36,8 @@ type Tenant @model
 
 type Box @model 
   @key(name: "boxesByTenant", fields: ["tenantID"], queryField: "boxesByTenant")
-  @key(name: "itemsByFacility", fields: ["facilityID"], queryField: "itemsByFacility")
-  @key(name: "itemsByUnit", fields: ["unitID"], queryField: "itemsByUnit") {
+  @key(name: "itemsByFacility", fields: ["facilityID"], queryField: "boxesByFacility")
+  @key(name: "itemsByUnit", fields: ["unitID"], queryField: "boxesByUnit") {
   id: ID!
   tenantID: ID!
   facilityID: ID!
@@ -49,7 +49,7 @@ type Box @model
 }
 
 type Order @model
-  @key(name: "ordersByTenant", fields: ["tenantID"])
+  @key(name: "ordersByTenant", fields: ["tenantID"], queryField: "ordersByTenant")
   @key(name: "ordersbyFacility", fields: ["facilityID"], queryField: "ordersbyFacility"){  
   id: ID!
   tenantID: ID!
@@ -62,7 +62,6 @@ type Order @model
 }
 
 type Address {
- id: ID!
  tenantID: ID
  streetAddress: String
  building: String

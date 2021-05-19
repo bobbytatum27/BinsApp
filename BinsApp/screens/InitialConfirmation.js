@@ -6,7 +6,7 @@ import LongButton from '../components/LongButton.js'
 import {Auth} from 'aws-amplify';
 import moment from "moment";
 
-import { LoginContext } from '../components/LoginProvider.js';
+import { LoginContext } from '../components/Providers/LoginProvider.js';
 
 export default class InitialConfirmation extends Component {
 

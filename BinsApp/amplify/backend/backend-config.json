@@ -7,12 +7,7 @@
       "customAuth": false
     }
   },
-  "storage": {
-    "BinsAppUserPics": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation"
-    }
-  },
+  "storage": {},
   "api": {
     "binsapp": {
       "service": "AppSync",

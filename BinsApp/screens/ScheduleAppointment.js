@@ -73,7 +73,7 @@ export default class ScheduleAppointment extends Component {
             <TouchableOpacity style={styles.textbox}
                               onPress={() => this.props.navigation.navigate('EditAddress')}>
               <Text allowFontScaling={false} style={styles.header}>{this.state.address}</Text>
-              <Text allowFontScaling={false} style={styles.header}>></Text>
+              <Text allowFontScaling={false} style={styles.header}>{'>'}</Text>
             </TouchableOpacity>
           <LongButton
             title="NEXT"

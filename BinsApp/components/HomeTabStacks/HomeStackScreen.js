@@ -1,4 +1,5 @@
 import React from 'react';
+import {UserInfoProvider, UserInfoContext} from '../../components/Providers/UserInfoProvider.js'
 
 // Home Stack Screens
 import Home from '../../screens/Home.js'
@@ -15,6 +16,7 @@ import ViewOrder from '../../screens/ViewOrder.js'
 import NewAppointment from '../../screens/NewAppointment.js'
 import Pickup from '../../screens/Pickup.js'
 import ViewStorageInventory from '../../screens/ViewStorageInventory.js'
+
 
 // create Home Stack Obj with Nav, Screen Stack Components
 import { createStackNavigator } from '@react-navigation/stack';
@@ -36,6 +38,7 @@ export default HomeStackScreen = (props) => {
     }
 
     return (
+        <UserInfoProvider>
         <HomeStack.Navigator screenOptions={screenOpts}>
             <HomeStack.Screen name='Home' component={Home} options={{headerLeft: null}}/>
             <HomeStack.Screen name='HelpScreen' component={Help} options={{title: "Help"}}/>
@@ -52,5 +55,6 @@ export default HomeStackScreen = (props) => {
             <HomeStack.Screen name="Pickup" component={Pickup} options={{title: "Pickup"}}/>
             <HomeStack.Screen name="ViewStorageInventory" component={ViewStorageInventory} options={{title: "Stored Items"}}/>
         </HomeStack.Navigator>
+        </UserInfoProvider>
     );
 }

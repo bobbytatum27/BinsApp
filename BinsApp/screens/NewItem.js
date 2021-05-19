@@ -7,7 +7,7 @@ import Item from '../components/Item.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
 import FormInputHandler from '../components/FormInputHandler.js'
-import {LoginContext} from '../components/LoginProvider.js'
+import {LoginContext} from '../components/Providers/LoginProvider.js'
 import {Url} from '../src/components/url.js';
 
 export default class NewItem extends Component {

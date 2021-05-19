@@ -7,7 +7,7 @@ export default class Pickup extends Component {
   constructor() {
     super();
     this.state = {
-      type: "Pickup",
+      type: "PICKUP",
       checked: false,
       selectedButton: '',
       selected: [],

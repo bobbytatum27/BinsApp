@@ -132,7 +132,6 @@ export const onCreateTenant = /* GraphQL */ `
         updatedAt
       }
       address {
-        id
         tenantID
         streetAddress
         building
@@ -172,7 +171,6 @@ export const onUpdateTenant = /* GraphQL */ `
         updatedAt
       }
       address {
-        id
         tenantID
         streetAddress
         building
@@ -212,7 +210,6 @@ export const onDeleteTenant = /* GraphQL */ `
         updatedAt
       }
       address {
-        id
         tenantID
         streetAddress
         building

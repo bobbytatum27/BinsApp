@@ -56,7 +56,7 @@ export declare class Box {
 
 export declare class Tenant {
   readonly id: string;
-  readonly facilityID: string;
+  readonly facilityID?: string;
   readonly name?: string;
   readonly email: string;
   readonly phone?: string;

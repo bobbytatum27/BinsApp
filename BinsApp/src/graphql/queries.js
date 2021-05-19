@@ -93,7 +93,6 @@ export const getTenant = /* GraphQL */ `
         updatedAt
       }
       address {
-        id
         tenantID
         streetAddress
         building
@@ -217,6 +216,33 @@ export const listOrders = /* GraphQL */ `
     }
   }
 `;
+export const unitsByFacility = /* GraphQL */ `
+  query UnitsByFacility(
+    $facilityID: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelUnitFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    unitsByFacility(
+      facilityID: $facilityID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        facilityID
+        size
+        usage
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const tenantByEmail = /* GraphQL */ `
   query TenantByEmail(
     $email: String
@@ -227,6 +253,37 @@ export const tenantByEmail = /* GraphQL */ `
   ) {
     tenantByEmail(
       email: $email
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        facilityID
+        name
+        email
+        phone
+        licenseNumber
+        licenseState
+        createdAt
+        updatedAt
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const tenantsByFacility = /* GraphQL */ `
+  query TenantsByFacility(
+    $facilityID: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelTenantFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    tenantsByFacility(
+      facilityID: $facilityID
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -279,15 +336,15 @@ export const boxesByTenant = /* GraphQL */ `
     }
   }
 `;
-export const itemsByFacility = /* GraphQL */ `
-  query ItemsByFacility(
+export const boxesByFacility = /* GraphQL */ `
+  query BoxesByFacility(
     $facilityID: ID
     $sortDirection: ModelSortDirection
     $filter: ModelBoxFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    itemsByFacility(
+    boxesByFacility(
       facilityID: $facilityID
       sortDirection: $sortDirection
       filter: $filter
@@ -310,15 +367,15 @@ export const itemsByFacility = /* GraphQL */ `
     }
   }
 `;
-export const itemsByUnit = /* GraphQL */ `
-  query ItemsByUnit(
+export const boxesByUnit = /* GraphQL */ `
+  query BoxesByUnit(
     $unitID: ID
     $sortDirection: ModelSortDirection
     $filter: ModelBoxFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    itemsByUnit(
+    boxesByUnit(
       unitID: $unitID
       sortDirection: $sortDirection
       filter: $filter
@@ -334,6 +391,37 @@ export const itemsByUnit = /* GraphQL */ `
         status
         photo
         location
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const ordersByTenant = /* GraphQL */ `
+  query OrdersByTenant(
+    $tenantID: ID
+    $sortDirection: ModelSortDirection
+    $filter: ModelOrderFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ordersByTenant(
+      tenantID: $tenantID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        tenantID
+        facilityID
+        date
+        time
+        address
+        jobType
+        status
         createdAt
         updatedAt
       }

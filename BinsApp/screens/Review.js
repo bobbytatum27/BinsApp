@@ -3,13 +3,16 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import Textbox from '../components/Textbox.js'
 import LongButton from '../components/LongButton.js'
-import { LoginContext } from '../components/LoginProvider.js';
+import { UserInfoContext } from '../components/Providers/UserInfoProvider.js';
 import {Auth} from 'aws-amplify';
 import {Url} from '../src/components/url.js';
 import moment from "moment";
+import { API, graphqlOperation, DataStore } from 'aws-amplify'
+import { Order } from '../src/models';
+import { createOrder } from '../src/graphql/mutations';
 
 export default class Review extends Component {
-  static contextType = LoginContext;
+  static contextType = UserInfoContext;
 
   constructor(props) {
     super(props);
@@ -25,8 +28,31 @@ export default class Review extends Component {
       isInStorage: 'In Progress',
     }
   }
+  
+  async onSubmit() {
+    try {
+      const order = {
+        address: this.state.address,
+        date: this.state.dateSelected,
+        facilityID: this.context.facilityID,
+        tenantID: this.state.email,
+        jobType: this.state.type,
+        status: "INCOMPLETE",
+        time: this.state.timeSelected
+      }
+      await API.graphql(graphqlOperation(createOrder, { input: order}));
+      console.log('success!');
+    }
+    catch (err) {
+      console.log('error creating:', err);
+    }
+  }
 
-  onSubmit() {
+
+
+
+  /*
+    onSubmit() {
     fetch(Url+'/orders',{
       method: 'POST',
       headers: {
@@ -35,10 +61,10 @@ export default class Review extends Component {
     },
       body: JSON.stringify(this.state)
   })}
-
+    
   //Changing storage status of an item does not currently work if there are multiple items
 
-  /*onSubmit2() {
+  onSubmit2() {
     fetch(Url+'/modifybin',{
       method: 'POST',
       headers: {

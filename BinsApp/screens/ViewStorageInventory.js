@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, Button, TouchableOpacity, FlatList, StyleSheet, Image, RefreshControl, Alert } from 'react-native';
-import {LoginContext} from '../components/LoginProvider.js'
+import {LoginContext} from '../components/Providers/LoginProvider.js'
 import {Auth} from 'aws-amplify';
 import DropDownPicker from 'react-native-dropdown-picker';
 

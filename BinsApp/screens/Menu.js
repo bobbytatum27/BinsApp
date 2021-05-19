@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView, TouchableOpacity } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
-import { LoginContext } from '../components/LoginProvider.js';
+import { LoginContext } from '../components/Providers/LoginProvider.js';
 import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
 import {Url} from '../src/components/url.js';
@@ -26,40 +26,6 @@ export default class Menu extends React.Component {
     }
   }
 
-  onSubmit() {
-      this.updateUser()
-      fetch(Url+'/modifycustomers',{
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-    },
-      body: JSON.stringify(this.state)
-  })}
-
-  async updateUser() {
-    let user = await Auth.currentAuthenticatedUser();
-
-    let result = await Auth.updateUserAttributes(user, {
-      'name': this.state.name,
-      'phone_number': this.state.phone,
-      'address': this.state.address,
-      'custom:specialInstructions': this.state.specialInstructions,
-    });
-      }
-
-  componentDidMount(){
-    Auth.currentUserInfo().then((userInfo) => {
-      const { attributes = {} } = userInfo;
-      this.setState({name:attributes['name']});
-      this.setState({email:attributes['email']});
-      this.setState({phone:attributes['phone_number']});
-      this.setState({address:attributes['address']});
-      this.setState({specialInstructions:attributes['custom:specialInstructions']});
-      this.setState({selectedButton:attributes['custom:size']});
-    })
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -69,27 +35,27 @@ export default class Menu extends React.Component {
           <View style={{flex:1}}>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('ViewProfile')}>
               <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Account Information</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
             </TouchableOpacity>
             <View style={styles.line}/>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Billing')}>
               <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Billing Information</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
             </TouchableOpacity>
             <View style={styles.line}/>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('ViewPlan')}>
               <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Your Storage Plan</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
             </TouchableOpacity>
             <View style={styles.line}/>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('FAQ')}>
               <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>FAQ</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
             </TouchableOpacity>
             <View style={styles.line}/>
             <TouchableOpacity style={styles.button}>
               <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Terms and Conditions</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>></Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
             </TouchableOpacity>
           </View>
           <View style={{flex:1, justifyContent: 'flex-end', padding: 25}}>

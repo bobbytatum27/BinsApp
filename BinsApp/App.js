@@ -11,10 +11,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeTab from './components/HomeTab';
 import SignupLoginStack from './components/SignupLoginStacks/SignupLoginStack.js'
 
-import {LoginProvider, LoginContext} from './components/LoginProvider.js'
+import {LoginProvider, LoginContext} from './components/Providers/LoginProvider.js'
 
 import Amplify from "aws-amplify"
-import config from "./aws-exports"
+import config from "./src/aws-exports"
 
 Amplify.configure(config);
 

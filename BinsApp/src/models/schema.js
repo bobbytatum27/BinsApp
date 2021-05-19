@@ -205,7 +205,7 @@ export const schema = {
                     "name": "facilityID",
                     "isArray": false,
                     "type": "ID",
-                    "isRequired": true,
+                    "isRequired": false,
                     "attributes": []
                 },
                 "name": {

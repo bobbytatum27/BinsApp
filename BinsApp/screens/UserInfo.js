@@ -2,12 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, KeyboardAvoidingView } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
-import { LoginContext } from '../components/LoginProvider.js';
+import { LoginContext } from '../components/Providers/LoginProvider.js';
 import {Url} from '../src/components/url.js';
 import DropdownMenu from '../components/DropdownMenu.js'
 import {ListOfStates} from '../src/components/ListOfStates.js';
 import { API, graphqlOperation, DataStore } from 'aws-amplify'
-import { createTenant } from '../src/graphql/mutations'
+import { Tenant } from '../src/models';
+import { createTenant } from '../src/graphql/mutations';
 
 export default class UserInfo extends React.Component {
   static contextType = LoginContext;
@@ -42,8 +43,30 @@ export default class UserInfo extends React.Component {
       validLicenseUI: true,
     };
   }
+    async addCustomer() {
+      try {
+        const user = {
+          id: this.state.email,
+          name: this.state.name,
+          email: this.state.email,
+          phone: this.state.phone,
+          address: {
+            id: "2",
+            streetAddress: this.state.address
+          },
+          licenseNumber: this.state.licenseNumber,
+          licenseState: this.state.licenseState,
+        }
+        await API.graphql(graphqlOperation(createTenant, { input: user}));
+        console.log('success!');
+      }
+      catch (err) {
+        console.log('error creating:', err);
+      }
+    }
 
-    async addCustomer(){
+
+    /*async addCustomer(){
       try {
         await DataStore.save(
           new Tenant({
@@ -58,7 +81,7 @@ export default class UserInfo extends React.Component {
       catch (err) {
         console.log('error creating:', err)
       }
-    }
+    }*/
 
   checkAllFields = () => {
     if (this.state.validEmail && this.state.validPassword && this.state.validPhone && this.state.nonemptyName && this.state.validPasswordReentry && this.state.validLicense) {

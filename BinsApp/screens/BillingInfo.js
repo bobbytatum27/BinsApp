@@ -9,7 +9,7 @@ import {Auth} from 'aws-amplify';
 import {Url} from '../src/components/url.js';
 import moment from "moment";
 
-import { LoginContext } from '../components/LoginProvider.js';
+import { LoginContext } from '../components/Providers/LoginProvider.js';
 
 export default class BillingInfo extends React.Component {
   static contextType = LoginContext;

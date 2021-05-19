@@ -3,7 +3,7 @@ import { View, Text, Button, TouchableOpacity } from 'react-native';
 
 import { styles } from '../styles/styles.js'
 
-import {LoginProvider, LoginContext} from '../components/LoginProvider.js'
+import {LoginProvider, LoginContext} from '../components/Providers/LoginProvider.js'
 import {Auth, API, graphqlOperation } from 'aws-amplify';
 
 export default class Landing extends Component {

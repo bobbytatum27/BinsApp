@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
-import {LoginContext} from '../components/LoginProvider.js'
+import {LoginContext} from '../components/Providers/LoginProvider.js'
 
 // for testing, can remove(?) after
 import {Auth} from 'aws-amplify';

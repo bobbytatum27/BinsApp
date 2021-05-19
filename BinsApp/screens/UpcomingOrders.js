@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
-import {LoginContext} from '../components/LoginProvider.js'
+import {LoginContext} from '../components/Providers/LoginProvider.js'
 import {Auth} from 'aws-amplify';
 import {Url} from '../src/components/url.js';
 import moment from "moment";

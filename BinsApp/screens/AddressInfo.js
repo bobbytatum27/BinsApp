@@ -17,14 +17,14 @@ export default class AddressInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      addressLine1: '',
+      addressLine1: 'address',
       addressLine2: '',
-      city: '',
+      city: 'City',
       state: 'CA',
-      zip: '',
-      specialInstructions: '',
-      building: '',
-      parking: '',
+      zip: '94925',
+      specialInstructions: 'none',
+      building: 'Apartment',
+      parking: 'Parking Lot',
     };
   }
 

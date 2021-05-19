@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
-import {LoginContext} from '../components/LoginProvider.js'
+import {LoginContext} from '../components/Providers/LoginProvider.js'
+import {UserInfoContext} from '../components/Providers/UserInfoProvider.js'
 import {Auth} from 'aws-amplify';
 import DropDownPicker from 'react-native-dropdown-picker';
 import {Url} from '../src/components/url.js';
 import moment from "moment";
 
 export default class PastOrders extends Component {
-  static contextType = LoginContext;
+  static contextType = UserInfoContext;
   constructor() {
     super();
     this.state = {
@@ -27,7 +28,7 @@ export default class PastOrders extends Component {
             <Text allowFontScaling={false} style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
             <Text allowFontScaling={false}>{data.item.time} | {data.item.type}</Text>
           </View>
-          <Text allowFontScaling={false}>></Text>
+          <Text allowFontScaling={false}>{'>'}</Text>
         </TouchableOpacity>
       )
     }
@@ -37,6 +38,7 @@ export default class PastOrders extends Component {
     this.fetchData();
   }
 
+  /*
   fetchData(){
     fetch(Url+'/renderpastorders')
     .then((response) => response.json())
@@ -53,9 +55,22 @@ export default class PastOrders extends Component {
       console.log(error)
     })
   }
+  */
+
+  fetchData(){
+    this.context.fetchData().then(() => {
+      this.setState({dataSource: this.context.dataSourcePastOrders,
+                     refreshing: false,
+                     isLoading: false
+                    })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
 
   componentDidMount() {
-    this.fetchData();
+      this.fetchData()
   }
 
   render() {
@@ -74,6 +89,10 @@ export default class PastOrders extends Component {
           <View style = {styles.textbox}>
             <Text allowFontScaling={false} style = {{textAlign: 'center'}}>None of Your Items Have Been Returned Yet</Text>
           </View>
+          <TouchableOpacity style = {{padding: 10,}}
+                              onPress = {() => console.log(this.context.dataSourcePastOrders)}>
+          <Text>Press</Text>
+          </TouchableOpacity>
         </>
       ) : (
         <>

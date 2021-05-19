@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, TouchableOpacity, RefreshControl, ActivityIndicator } from 'react-native';
 import Textbox from '../components/Textbox.js'
-import {LoginContext} from '../components/LoginProvider.js'
+import {UserInfoContext} from '../components/Providers/UserInfoProvider.js'
 import {Auth} from 'aws-amplify';
 import {Url} from '../src/components/url.js';
 import moment from "moment";
 
 export default class ViewPastOrder extends Component {
-  static contextType = LoginContext;
+  static contextType = UserInfoContext;
   constructor() {
     super();
     this.state = {
       isLoading: true,
       dataSource: [],
-      dateSelected: '',
-      timeSelected: '',
       refreshing: false,
-      email: '',
-      id: ''
     }
   }
 
@@ -31,7 +27,7 @@ export default class ViewPastOrder extends Component {
           <Textbox header='Address'
                    body={data.item.address}/>
           <Textbox header='Order Type'
-                   body='Pickup'/>
+                   body={data.item.jobType}/>
           <Textbox header='Items'
                    body={data.item.items}/>
         </View>
@@ -43,7 +39,15 @@ export default class ViewPastOrder extends Component {
     this.fetchData();
   }
 
-  fetchData(){
+  fetchData() {
+    const id = this.props.route.params?.id??'';
+    const order = this.context.dataSourcePastOrders.filter(function(item){
+      return item.id == id
+    })
+    this.setState({dataSource: order, isLoading: false, refreshing: false})    
+  }
+
+  /*fetchData(){
     fetch(Url+'/renderpastorders')
     .then((response) => response.json())
     .then((responseJson) => {
@@ -59,7 +63,7 @@ export default class ViewPastOrder extends Component {
     .catch((error) => {
       console.log(error)
     })
-  }
+  }*/
 
   componentDidMount() {
     this.fetchData();
