@@ -96,8 +96,8 @@ class Home extends Component {
         <Image style={{width: 150, height: 150}}
                source={{uri: S3url + item.photo}}/>
         <View style={{padding: 10, flexDirection: 'column'}}>
-          <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{item.description}</Text>
-          <Text allowFontScaling={false}>ID #{item.id}</Text>
+          <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{item.description.slice(0,12)}</Text>
+          <Text allowFontScaling={false}>ID #{item.id.slice(0,12)}</Text>
         </View>
       </View>
     )

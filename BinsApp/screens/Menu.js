@@ -6,9 +6,10 @@ import { LoginContext } from '../components/Providers/LoginProvider.js';
 import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
 import {Url} from '../src/components/url.js';
+import { UserInfoContext } from '../components/Providers/UserInfoProvider.js';
 
 export default class Menu extends React.Component {
-  static contextType = LoginContext;
+  static contextType = UserInfoContext;
 
   constructor(props) {
     super(props);
@@ -25,47 +26,55 @@ export default class Menu extends React.Component {
       selectedButton: '',
     }
   }
+  
+  componentDidMount(){
+    this.context.fetchData();
+  }
 
   render() {
     return (
-      <View style={styles.container}>
-          <View style = {{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flex:1}}>
-            <Text allowFontScaling={false} style={styles.bins}>Bins</Text>
-          </View>
-          <View style={{flex:1}}>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('ViewProfile')}>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Account Information</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
-            </TouchableOpacity>
-            <View style={styles.line}/>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Billing')}>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Billing Information</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
-            </TouchableOpacity>
-            <View style={styles.line}/>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('ViewPlan')}>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Your Storage Plan</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
-            </TouchableOpacity>
-            <View style={styles.line}/>
-            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('FAQ')}>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>FAQ</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
-            </TouchableOpacity>
-            <View style={styles.line}/>
-            <TouchableOpacity style={styles.button}>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Terms and Conditions</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={{flex:1, justifyContent: 'flex-end', padding: 25}}>
-          <LongButton
-            title="SIGN OUT"
-            onPress={()=>{this.context.logout();}}
-          />
-          </View>
-      </View>
-
+        <LoginContext.Consumer>{(context) => {
+          const { logout } = context;
+          return(
+            <View style={styles.container}>
+            <View style = {{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', flex:1}}>
+              <Text allowFontScaling={false} style={styles.bins}>Bins</Text>
+            </View>
+            <View style={{flex:1}}>
+              <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('ViewProfile')}>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Account Information</Text>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
+              </TouchableOpacity>
+              <View style={styles.line}/>
+              <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Billing')}>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Billing Information</Text>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
+              </TouchableOpacity>
+              <View style={styles.line}/>
+              <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('ViewPlan')}>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Your Storage Plan</Text>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
+              </TouchableOpacity>
+              <View style={styles.line}/>
+              <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('FAQ')}>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>FAQ</Text>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
+              </TouchableOpacity>
+              <View style={styles.line}/>
+              <TouchableOpacity style={styles.button}>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>Terms and Conditions</Text>
+                <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{flex:1, justifyContent: 'flex-end', padding: 25}}>
+            <LongButton
+              title="SIGN OUT"
+              onPress={()=>{logout();}}
+            />
+            </View>
+            </View>
+            )}}
+        </LoginContext.Consumer>
     );
   }
 }

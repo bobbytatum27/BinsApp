@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, Button, TouchableOpacity, FlatList, StyleSheet, Image, RefreshControl, Alert } from 'react-native';
-import {LoginContext} from '../components/Providers/LoginProvider.js'
+import {UserInfoContext} from '../components/Providers/UserInfoProvider.js'
 import {Auth} from 'aws-amplify';
 import DropDownPicker from 'react-native-dropdown-picker';
 
@@ -11,7 +11,7 @@ import {Url} from '../src/components/url.js';
 import {S3url} from '../src/components/s3url.js';
 
 export default class StorageInventory extends Component {
-  static contextType = LoginContext;
+  static contextType = UserInfoContext;
   constructor() {
     super();
     this.state = {
@@ -44,9 +44,9 @@ export default class StorageInventory extends Component {
           <Image style={{width: 150, height: 150}}
                  source={{uri: S3url + data.item.photo}}/>
           <View style={{padding: 10, flexDirection: 'column'}}>
-            <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{data.item.description}</Text>
+            <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{data.item.description.slice(0,12)}</Text>
             <View style = {{flexDirection: 'row', justifyContent: 'space-between', marginTop: 5}}>
-              <Text allowFontScaling={false}>ID #{data.item.id}</Text>
+              <Text allowFontScaling={false}>ID #{data.item.id.slice(0,5)}</Text>
               <TouchableOpacity style = {styles.button, data.item.selectedClass}
                                 onPress={() => {this.selectItem(data); this.getSelected(this.state.dataSource);}}>
               {data.item.isSelect ? (<Text allowFontScaling={false} style={{color:'white'}}>Selected</Text> ) : (<Text allowFontScaling={false} style={{color:'white'}}>Select</Text> )}
@@ -78,7 +78,7 @@ export default class StorageInventory extends Component {
      }
    }
 
-  fetchData() {
+  /*fetchData() {
     fetch(Url+'/render')
     .then((response) => response.json())
     .then((responseJson) => {
@@ -99,6 +99,29 @@ export default class StorageInventory extends Component {
     .then(() => {
      this.setState({refreshing: false});
     })
+    .catch((error) => {
+      console.log(error)
+    })
+  }*/
+
+  fetchData(){
+    this.context.fetchData().then(() => {
+      const dataSourceStorage = this.context.dataSourceStorage.map(item => {
+          item.isSelect = false;
+          item.selectedClass = styles.button;
+          return item;
+        })
+      this.setState({dataSource: dataSourceStorage,
+                     isLoading:false,
+                     refreshing: false
+                    })
+      if (this.state.filter == 'Alphabetical') {
+        this.state.dataSource.sort((a, b) => a.description.localeCompare(b.description));
+      }
+    })
+    .then(() => {
+      this.setState({refreshing: false});
+     })
     .catch((error) => {
       console.log(error)
     })

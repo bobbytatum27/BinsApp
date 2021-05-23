@@ -133,11 +133,13 @@ export const onCreateTenant = /* GraphQL */ `
       }
       address {
         tenantID
-        streetAddress
-        building
+        addressLine1
+        addressLine2
         city
         state
         zip
+        specialInstructions
+        building
         parking
       }
       licenseNumber
@@ -172,11 +174,13 @@ export const onUpdateTenant = /* GraphQL */ `
       }
       address {
         tenantID
-        streetAddress
-        building
+        addressLine1
+        addressLine2
         city
         state
         zip
+        specialInstructions
+        building
         parking
       }
       licenseNumber
@@ -211,11 +215,13 @@ export const onDeleteTenant = /* GraphQL */ `
       }
       address {
         tenantID
-        streetAddress
-        building
+        addressLine1
+        addressLine2
         city
         state
         zip
+        specialInstructions
+        building
         parking
       }
       licenseNumber

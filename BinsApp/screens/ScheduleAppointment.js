@@ -34,12 +34,7 @@ export default class ScheduleAppointment extends Component {
 
   componentDidMount(){
     this.fetchData();
-    this.willFocusSubscription = this.props.navigation.addListener('focus', () => {this.fetchData();});
   }
-
-  componentWillUnmount() {
-    this.props.navigation.removeListener();
- }
 
   render() {
 

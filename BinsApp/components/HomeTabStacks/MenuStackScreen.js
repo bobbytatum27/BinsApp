@@ -1,4 +1,5 @@
 import React from 'react';
+import {UserInfoProvider, UserInfoContext} from '../../components/Providers/UserInfoProvider.js'
 
 // Menu Stack Screens
 import Help from '../../screens/Help.js'
@@ -32,6 +33,7 @@ export default MenuStackScreen = (props) => {
     }
 
     return (
+        <UserInfoProvider>
         <MenuStack.Navigator screenOptions={screenOpts}>
             <MenuStack.Screen name="Menu" component={Menu}/>
             <MenuStack.Screen name="ViewProfile" component={ViewProfile} options={{title: "View Profile"}}/>
@@ -44,5 +46,6 @@ export default MenuStackScreen = (props) => {
             <MenuStack.Screen name="EditPlan" component={EditPlan} options={{title: "Edit Storage Plan"}}/>
             <MenuStack.Screen name='FAQ' component={Help}/>
         </MenuStack.Navigator>
+        </UserInfoProvider>
     );
 }

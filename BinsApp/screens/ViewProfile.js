@@ -2,13 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView, TouchableOpacity } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
-import { LoginContext } from '../components/Providers/LoginProvider.js';
+import { UserInfoContext } from '../components/Providers/UserInfoProvider.js';
 import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
 import {Url} from '../src/components/url.js';
 
 export default class ViewProfile extends React.Component {
-  static contextType = LoginContext;
+  static contextType = UserInfoContext;
 
   constructor(props) {
     super(props);
@@ -16,41 +16,37 @@ export default class ViewProfile extends React.Component {
       name: '',
       email: '',
       phone: '',
-      address: '',
-      specialInstructions: '',
-      nameOnCard: '',
-      creditCardNum: '',
-      expirationDate: '',
-      securityCode: '',
-      selectedButton: '',
+      addressline1: '',
+      city: '',
+      state: '',
+      zip: '',      
     }
   }
 
-/*
- * this.willFocusSubscription refreshes the screen when going back in React Navigation.
- * The docs recommend using componentWillUnmount, but it seems to cause an issue when navigating back, so I didn't include it here.
-*/
-
   componentDidMount(){
     this.fetchData();
-    this.willFocusSubscription = this.props.navigation.addListener('focus', () => {this.fetchData();});
   }
 
-  componentWillUnmount() {
-    this.props.navigation.removeListener();
- }
-
   fetchData(){
+    this.setState({name: this.context.name,
+                  email: this.context.email,
+                  phone: this.context.phone,
+                  addressLine1: this.context.addressLine1,
+                  city: this.context.city,
+                  state: this.context.state,
+                  zip: this.context.zip,
+                })
+  }
+
+  /*fetchData(){
     Auth.currentUserInfo().then((userInfo) => {
       const { attributes = {} } = userInfo;
       this.setState({name:attributes['name']});
       this.setState({email:attributes['email']});
       this.setState({phone:attributes['phone_number']});
       this.setState({address:attributes['address']});
-      this.setState({specialInstructions:attributes['custom:specialInstructions']});
-      this.setState({selectedButton:attributes['custom:size']});
     })
-  }
+  }*/
 
   render() {
     return (
@@ -75,7 +71,7 @@ export default class ViewProfile extends React.Component {
           <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('EditAddress')}>
             <View>
               <Text allowFontScaling={false} style={{color: 'grey', fontSize: 15, marginBottom: 5}}>Address</Text>
-              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20, marginRight: 15}}>{this.state.address}</Text>
+              <Text allowFontScaling={false} style={{color: 'white', fontSize: 20, marginRight: 15}}>{this.state.addressLine1 + ", " + this.state.city + " " + this.state.state + " " + this.state.zip}</Text>
             </View>
             <Text allowFontScaling={false} style={{color: 'white', fontSize: 20}}>{'>'}</Text>
           </TouchableOpacity>

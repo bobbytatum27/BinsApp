@@ -2,31 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView } from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
-import { LoginContext } from '../components/Providers/LoginProvider.js';
+import { UserInfoContext } from '../components/Providers/UserInfoProvider.js';
 import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
 import {Url} from '../src/components/url.js';
 
 export default class EditName extends React.Component {
-  static contextType = LoginContext;
+  static contextType = UserInfoContext;
 
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      email: '',
-      phone: '',
-      address: '',
-      specialInstructions: '',
-      nameOnCard: '',
-      creditCardNum: '',
-      expirationDate: '',
-      securityCode: '',
-      selectedButton: '',
     }
   }
 
-  onSubmit() {
+  /*onSubmit() {
       this.updateUser()
       fetch(Url+'/modifycustomers',{
       method: 'POST',
@@ -47,18 +38,14 @@ export default class EditName extends React.Component {
       'custom:specialInstructions': this.state.specialInstructions,
     });
       }
-
-  componentDidMount(){
-    Auth.currentUserInfo().then((userInfo) => {
-      const { attributes = {} } = userInfo;
-      this.setState({name:attributes['name']});
-      this.setState({email:attributes['email']});
-      this.setState({phone:attributes['phone_number']});
-      this.setState({address:attributes['address']});
-      this.setState({specialInstructions:attributes['custom:specialInstructions']});
-      this.setState({selectedButton:attributes['custom:size']});
-    })
+*/
+  onSubmit(){
+    this.context.updateUserName(this.context.email, this.state.name);
   }
+      
+  componentDidMount(){
+      this.setState({name: this.context.name})
+    }
 
   render() {
     return (
@@ -75,7 +62,7 @@ export default class EditName extends React.Component {
         <View style={{flex:1, justifyContent: 'flex-end'}}>
           <LongButton
             title="SAVE INFO"
-            onPress={()=>{this.onSubmit(); Alert.alert("Your Information Has Been Saved")}}
+            onPress={()=>{this.onSubmit(); Alert.alert("Your Information Has Been Saved"); this.props.navigation.navigate('Menu')}}
           />
         </View>
       </View>

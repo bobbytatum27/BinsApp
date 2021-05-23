@@ -26,7 +26,7 @@ export default class PastOrders extends Component {
         <TouchableOpacity style={styles.orderbox} onPress={() => this.props.navigation.navigate('ViewPastOrder', {id: data.item.id})}>
           <View>
             <Text allowFontScaling={false} style={{fontWeight:"bold"}}>{moment(data.item.date).format('dddd, MMMM DD, YYYY')}</Text>
-            <Text allowFontScaling={false}>{data.item.time} | {data.item.type}</Text>
+            <Text allowFontScaling={false}>{data.item.time} | {data.item.jobType}</Text>
           </View>
           <Text allowFontScaling={false}>{'>'}</Text>
         </TouchableOpacity>

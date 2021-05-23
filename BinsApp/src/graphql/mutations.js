@@ -154,11 +154,13 @@ export const createTenant = /* GraphQL */ `
       }
       address {
         tenantID
-        streetAddress
-        building
+        addressLine1
+        addressLine2
         city
         state
         zip
+        specialInstructions
+        building
         parking
       }
       licenseNumber
@@ -196,11 +198,13 @@ export const updateTenant = /* GraphQL */ `
       }
       address {
         tenantID
-        streetAddress
-        building
+        addressLine1
+        addressLine2
         city
         state
         zip
+        specialInstructions
+        building
         parking
       }
       licenseNumber
@@ -238,11 +242,13 @@ export const deleteTenant = /* GraphQL */ `
       }
       address {
         tenantID
-        streetAddress
-        building
+        addressLine1
+        addressLine2
         city
         state
         zip
+        specialInstructions
+        building
         parking
       }
       licenseNumber

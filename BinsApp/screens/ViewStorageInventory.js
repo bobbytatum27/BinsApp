@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, View, Text, Button, TouchableOpacity, FlatList, StyleSheet, Image, RefreshControl, Alert } from 'react-native';
-import {LoginContext} from '../components/Providers/LoginProvider.js'
+import {UserInfoContext} from '../components/Providers/UserInfoProvider.js'
 import {Auth} from 'aws-amplify';
 import DropDownPicker from 'react-native-dropdown-picker';
 
@@ -11,32 +11,16 @@ import {Url} from '../src/components/url.js';
 import {S3url} from '../src/components/s3url.js';
 
 export default class ViewStorageInventory extends Component {
-  static contextType = LoginContext;
+  static contextType = UserInfoContext;
   constructor() {
     super();
     this.state = {
       dataSource: [],
-      selected: [],
-      type: "Delivery",
       refreshing: false,
       filter: '',
       id: '',
     }
   }
-
-  selectItem = data => {
-    data.item.isSelect = !data.item.isSelect;
-    data.item.selectedClass = data.item.isSelect
-     ? styles.selected: styles.button;
-
-  const index = this.state.dataSource.findIndex(
-     item => data.item.id === item.id
-  );
-  this.state.dataSource[index] = data.item;
-   this.setState({
-     dataSource: this.state.dataSource
-   });
-  };
 
   renderItem = data => {
       return (
@@ -44,21 +28,14 @@ export default class ViewStorageInventory extends Component {
           <Image style={{width: 150, height: 150}}
                  source={{uri: S3url + data.item.photo}}/>
           <View style={{padding: 10, flexDirection: 'column'}}>
-            <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{data.item.description}</Text>
+            <Text allowFontScaling={false} style={{fontWeight: 'bold'}}>{data.item.description.slice(0,12)}</Text>
             <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <Text allowFontScaling={false}>ID #{data.item.id}</Text>
+              <Text allowFontScaling={false}>ID #{data.item.id.slice(0,12)}</Text>
             </View>
         </View>
       </View>
     )
   }
-
-    getSelected = array => {
-      const arr = array.filter(d => d.isSelect)
-      const result = arr.map(a => a.description)
-      const result2 = arr.map(a => a.id)
-      this.setState({selected: result, id: result2})
-    }
 
   onRefresh = () => {
      this.setState({refreshing: true});
@@ -74,48 +51,26 @@ export default class ViewStorageInventory extends Component {
      }
    }
 
-  fetchData() {
-    fetch(Url+'/render')
-    .then((response) => response.json())
-    .then((responseJson) => {
-      responseJson = responseJson.map(item => {
-        item.isSelect = false;
-        item.selectedClass = styles.button;
-        return item;
-      });
-      const responseJson2 = responseJson.filter(function(item){
-        return item.isInStorage == 'Yes' && item.owner == Auth.user.attributes.email
-      });
-      this.setState({dataSource: responseJson2});
-      this.setState({count: responseJson2.length});
+   fetchData(){
+    this.context.fetchData().then(() => {
+      this.setState({dataSource: this.context.dataSourceStorage,
+                     isLoading:false,
+                     refreshing: false
+                    })
       if (this.state.filter == 'Alphabetical') {
-      this.state.dataSource.sort((a, b) => a.description.localeCompare(b.description));
+        this.state.dataSource.sort((a, b) => a.description.localeCompare(b.description));
       }
     })
     .then(() => {
-     this.setState({refreshing: false});
-    })
+      this.setState({refreshing: false});
+     })
     .catch((error) => {
       console.log(error)
     })
   }
 
-  getMax(){
-    Auth.currentUserInfo().then((userInfo) => {
-      const { attributes = {} } = userInfo;
-      if (attributes['custom:size']=='2x2'){
-        this.setState({max:'/20'});
-      } else if (attributes['custom:size']=='2x4'){
-        this.setState({max:'/50'});
-      } else if (attributes['custom:size']=='5x5'){
-        this.setState({max:'/75'});
-      }
-    })
-  }
-
   componentDidMount() {
     this.fetchData();
-    this.getMax();
   }
 
   render() {

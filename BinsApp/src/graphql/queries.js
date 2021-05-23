@@ -94,11 +94,13 @@ export const getTenant = /* GraphQL */ `
       }
       address {
         tenantID
-        streetAddress
-        building
+        addressLine1
+        addressLine2
         city
         state
         zip
+        specialInstructions
+        building
         parking
       }
       licenseNumber

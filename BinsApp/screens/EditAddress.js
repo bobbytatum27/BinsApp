@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert, ScrollView,} from 'react-native';
 import FormInputHandler from '../components/FormInputHandler.js'
 import LongButton from '../components/LongButton.js'
-import { LoginContext } from '../components/Providers/LoginProvider.js';
+import { UserInfoContext } from '../components/Providers/UserInfoProvider.js';
 import {Auth} from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
 import {Url} from '../src/components/url.js';
@@ -11,15 +11,11 @@ import {ZipCodes} from '../src/components/zipcodes.js';
 import DropdownMenu from '../components/DropdownMenu.js'
 
 export default class EditAddress extends React.Component {
-  static contextType = LoginContext;
+  static contextType = UserInfoContext;
 
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
       addressLine1: '',
       addressLine2: '',
       city: '',
@@ -37,45 +33,11 @@ export default class EditAddress extends React.Component {
     if (this.state.addressLine1 == '' || this.state.city == '' || this.state.state == '' || this.state.zip == '' || this.state.building == '' || this.state.parking == '') {
       Alert.alert('You\'ve left an important field empty in your address!');
     } else if (this.checkAddress()){
-      this.setState({address: this.state.addressLine1 + ' ' + this.state.addressLine2 + ' ' + this.state.city + ', ' + this.state.state + ' ' + this.state.zip}, this.onSubmit);
+      this.context.updateUserAddress(this.context.email, this.state)
       Alert.alert("Your Information Has Been Saved");
     } else {
       Alert.alert('Sorry, there are no available facilities near this address yet');
     }
-  }
-
-  onSubmit = () => {
-      this.updateUser()
-      fetch(Url+'/modifyAddress',{
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-    },
-      body: JSON.stringify(this.state)
-  })}
-
-  async updateUser() {
-    let user = await Auth.currentAuthenticatedUser();
-
-    let result = await Auth.updateUserAttributes(user, {
-      'name': this.state.name,
-      'phone_number': this.state.phone,
-      'address': this.state.address,
-      'custom:specialInstructions': this.state.specialInstructions,
-    });
-      }
-
-  componentDidMount(){
-    Auth.currentUserInfo().then((userInfo) => {
-      const { attributes = {} } = userInfo;
-      this.setState({name:attributes['name']});
-      this.setState({email:attributes['email']});
-      this.setState({phone:attributes['phone_number']});
-      this.setState({address:attributes['address']});
-      this.setState({specialInstructions:attributes['custom:specialInstructions']});
-      this.setState({selectedButton:attributes['custom:size']});
-    })
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React, {createContext, useState} from 'react';
 import { Auth, API } from 'aws-amplify';
-import * as queries from '../../src/graphql/queries'
+import * as queries from '../../src/graphql/queries';
+import * as mutations from '../../src/graphql/mutations';
 import { AppRegistry } from 'react-native';
 
 // for login/signup context
@@ -10,12 +11,21 @@ export class UserInfoProvider extends React.Component{
     constructor(props) {
         super(props);
         this.fetchData = this.fetchData.bind(this)
+        this.updateUserName = this.updateUserName.bind(this)
+        this.updateUserPhone = this.updateUserPhone.bind(this)
+        this.updateUserAddress = this.updateUserAddress.bind(this)
         this.state = {
             name: '',
             email: '',
             phone: '',
-            address: '',
+            addressLine1: '',
+            addressLine2: '',
+            city: '',
+            state: '',
+            zip: '',
             specialInstructions: '',
+            building: '',
+            parking: '',
             facilityID: '',
             dataSourceStorage: [],
             dataSourceHome: [],
@@ -27,9 +37,18 @@ export class UserInfoProvider extends React.Component{
     async fetchData() {
         const currentUserInfo = await Auth.currentUserInfo();
         const userEmail = currentUserInfo.attributes['email'];
-        const userName = currentUserInfo.attributes['name'];
         const tenantInfo = await API.graphql({query: queries.getTenant, variables: {id: userEmail}});
             const tenantFacilityID = tenantInfo.data.getTenant.facilityID
+            const userName = tenantInfo.data.getTenant.name
+            const userPhone = tenantInfo.data.getTenant.phone
+            const userAddressBuilding = tenantInfo.data.getTenant.address[0].building
+            const userAddressCity = tenantInfo.data.getTenant.address[0].city
+            const userAddressParking = tenantInfo.data.getTenant.address[0].parking
+            const userAddressState = tenantInfo.data.getTenant.address[0].state
+            const userAddressAddressLine1 = tenantInfo.data.getTenant.address[0].addressLine1
+            const userAddressAddressLine2 = tenantInfo.data.getTenant.address[0].addressLine2
+            const userAddressZip = tenantInfo.data.getTenant.address[0].zip
+            const userAddressSpecialInstructions = tenantInfo.data.getTenant.address[0].specialInstructions
         const tenantBoxes = await API.graphql({query: queries.boxesByTenant, variables: { tenantID: userEmail }});
             const boxesInStorage = tenantBoxes.data.boxesByTenant.items.filter(function(item){
                 return item.status == 'IN_STORAGE'
@@ -46,6 +65,15 @@ export class UserInfoProvider extends React.Component{
             }); 
         this.setState({email: userEmail,
                        name: userName,
+                       phone: userPhone,
+                       addressLine1: userAddressAddressLine1,
+                       addressLine2: userAddressAddressLine2,
+                       city: userAddressCity,
+                       state: userAddressState,
+                       zip: userAddressZip,
+                       specialInstructions: userAddressSpecialInstructions,
+                       building: userAddressBuilding,
+                       parking: userAddressParking,
                        facilityID: tenantFacilityID,
                        dataSourceHome: boxesReturned,
                        dataSourceStorage: boxesInStorage,
@@ -54,55 +82,50 @@ export class UserInfoProvider extends React.Component{
                     });
     }
 
-
-    /*
-     * Login Promise
-     * To login a user via AWS Amplify. Also changes isLoggedIn boolean, which
-     * conditionally renders appropriate screens (pending state).
-     *
-     * @param email: string of user email
-     * @param password: string of user password
-     * @return Promise
-     */
-    login = (email, password) => {
-        return new Promise((resolve, reject) => {
-            Auth.signIn({
-                username: email,
-                password: password,
-            })
-            .then(() => {
-                this.setState({isLoggedIn: true});
-                resolve('Successful Sign In');
-            })
-            .catch(err => reject(err));
-        });
+    async updateUserName(userEmail, updatedName) {
+        const tenantDetails = {
+            id: userEmail,
+            name: updatedName,
+        };
+        const updatedUser = await API.graphql({query: mutations.updateTenant, variables: {input: tenantDetails}});
+        this.setState({name:updatedName});
     }
 
-    /*
-     * Logout Promise
-     * To log a user out via AWS Amplify. Also changes isLoggedIn boolean, which forces user back
-     * to Landing page.
-     *
-     * @return Promise
-     */
-    logout = () => {
-        return new Promise((resolve, reject) => {
-            console.log('login state before signout: ' + this.state.isLoggedIn);
-            Auth.signOut()
-            .then(() => {
-                this.setState({isLoggedIn: false});
-                console.log('login state after logout: ' + this.state.isLoggedIn);
-                resolve('successful sign out');
-            })
-            .catch(err => reject('error signing out!'));
-        });
+    async updateUserPhone(userEmail, updatedPhone) {
+        const tenantDetails = {
+            id: userEmail,
+            phone: updatedPhone,
+        };
+        const updatedUser = await API.graphql({query: mutations.updateTenant, variables: {input: tenantDetails}});
+        this.setState({phone:updatedPhone});
     }
 
-
+    async updateUserAddress(userEmail, updatedAddress) {
+        const tenantDetails = {
+            id: userEmail,
+            address: updatedAddress,
+        };
+        const updatedUser = await API.graphql({query: mutations.updateTenant, variables: {input: tenantDetails}});
+        this.setState({
+            addressLine1: updatedAddress.addressLine1,
+            addressLine2: updatedAddress.AddressLine2,
+            city: updatedAddress.city,
+            state: updatedAddress.state,
+            zip: updatedAddress.zip,
+            specialInstructions: updatedAddress.specialInstructions,
+            building: updatedAddress.building,
+            parking: updatedAddress.parking,
+        })
+    }
 
     render() {
         return (
-            <UserInfoContext.Provider value={{...this.state, fetchData: this.fetchData}}>
+            <UserInfoContext.Provider value={{...this.state,
+                                              fetchData: this.fetchData,
+                                              updateUserName: this.updateUserName,
+                                              updateUserPhone: this.updateUserPhone,
+                                              updateUserAddress: this.updateUserAddress
+                                              }}>
                 {this.props.children}
             </UserInfoContext.Provider>
         );

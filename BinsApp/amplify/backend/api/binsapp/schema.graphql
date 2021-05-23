@@ -63,11 +63,13 @@ type Order @model
 
 type Address {
  tenantID: ID
- streetAddress: String
- building: String
+ addressLine1: String
+ addressLine2: String
  city: String
  state: String
- zip: Int
+ zip: String
+ specialInstructions: String
+ building: String
  parking: String
 }
 
