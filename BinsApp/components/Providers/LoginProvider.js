@@ -69,7 +69,7 @@ export class LoginProvider extends React.Component{
      * @param address: The user's address as a string, fields separated by a space
      * @return Promise (for now only a promise, potentially Error obj in future)
      */
-    signup = (email, password, name, phone_num, address, specialInstructions, size) => {
+    signup = (email, password, name, phone_num, specialInstructions, size) => {
         return new Promise((resolve, reject) => {
             console.log('signing up!');
             Auth.signUp({
@@ -78,7 +78,6 @@ export class LoginProvider extends React.Component{
                 attributes: {
                   name: name,
                   phone_number: phone_num,
-                  address: address,
                   'custom:specialInstructions': specialInstructions,
                   'custom:size': size,
                 },

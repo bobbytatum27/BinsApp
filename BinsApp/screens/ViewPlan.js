@@ -44,7 +44,7 @@ export default class ViewPlan extends React.Component {
     }
   }
 
-  fetchData(){
+ /* fetchData(){
     fetch(Url+'/%used')
     .then((response) => response.json())
     .then((responseJson) => {
@@ -57,6 +57,7 @@ export default class ViewPlan extends React.Component {
       console.log(error)
     })
   }
+*/
 
   componentDidMount(){
     Auth.currentUserInfo().then((userInfo) => {
@@ -68,7 +69,6 @@ export default class ViewPlan extends React.Component {
       this.setState({specialInstructions:attributes['custom:specialInstructions']});
       this.setState({selectedButton:attributes['custom:size']});
     })
-    this.fetchData();
   }
 
   render() {
@@ -85,7 +85,7 @@ export default class ViewPlan extends React.Component {
                 <Text allowFontScaling={false}>855 Parr Boulevard, Richmond, CA 94801</Text>
               </View>
             </View>
-          <Text allowFontScaling={false} style={styles.descriptionText}>Your Plan - {this.state.percentageUsed} Used</Text>
+          <Text allowFontScaling={false} style={styles.descriptionText}>Your Plan</Text>
           <FlatList
             data={this.state.options}
             renderItem={this.renderItem}

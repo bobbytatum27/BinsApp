@@ -6,9 +6,6 @@ import { LoginContext } from '../components/Providers/LoginProvider.js';
 import {Url} from '../src/components/url.js';
 import DropdownMenu from '../components/DropdownMenu.js'
 import {ListOfStates} from '../src/components/ListOfStates.js';
-import { API, graphqlOperation, DataStore } from 'aws-amplify'
-import { Tenant } from '../src/models';
-import { createTenant } from '../src/graphql/mutations';
 
 export default class UserInfo extends React.Component {
   static contextType = LoginContext;
@@ -21,11 +18,6 @@ export default class UserInfo extends React.Component {
       password: '',
       passwordReentry: '',
       phone: '',
-      address: '',
-      specialInstructions: '',
-      size: '',
-      building: '',
-      parking: '',
       licenseNumber: '',
       licenseState: 'CA',
       validInput: false,
@@ -43,16 +35,24 @@ export default class UserInfo extends React.Component {
       validLicenseUI: true,
     };
   }
-    async addCustomer() {
+    /*async addCustomer() {
       try {
         const user = {
           id: this.state.email,
+          facilityID: '1',
           name: this.state.name,
           email: this.state.email,
           phone: this.state.phone,
           address: {
-            id: "2",
-            streetAddress: this.state.address
+            addressLine1: this.props.route.params.addressLine1,
+            addressLine2: this.props.route.params.addressLine2,
+            city: this.props.route.params.city,
+            state: this.props.route.params.state,
+            zip: this.props.route.params.zip,
+            specialInstructions: this.props.route.params.specialInstructions,
+            size: this.props.route.params.unitSize,
+            parking: this.props.route.params.parking,
+            building: this.props.route.params.building,
           },
           licenseNumber: this.state.licenseNumber,
           licenseState: this.state.licenseState,
@@ -66,7 +66,7 @@ export default class UserInfo extends React.Component {
     }
 
 
-    /*async addCustomer(){
+    async addCustomer(){
       try {
         await DataStore.save(
           new Tenant({
@@ -83,6 +83,29 @@ export default class UserInfo extends React.Component {
       }
     }*/
 
+    confirmEmail = () => {
+      let userData = {
+        id: this.state.email,
+        facilityID: '1',
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        phone: this.state.phone,
+        addressLine1: this.props.route.params.addressLine1,
+        addressLine2: this.props.route.params.addressLine2,
+        city: this.props.route.params.city,
+        state: this.props.route.params.state,
+        zip: this.props.route.params.zip,
+        specialInstructions: this.props.route.params.specialInstructions,
+        size: this.props.route.params.size,
+        parking: this.props.route.params.parking,
+        building: this.props.route.params.building,
+        licenseNumber: this.state.licenseNumber,
+        licenseState: this.state.licenseState,
+      };
+      this.props.navigation.navigate('ConfirmContactInfo', userData);
+    }
+
   checkAllFields = () => {
     if (this.state.validEmail && this.state.validPassword && this.state.validPhone && this.state.nonemptyName && this.state.validPasswordReentry && this.state.validLicense) {
       this.setState({validInput: true});
@@ -97,19 +120,6 @@ export default class UserInfo extends React.Component {
     }
   }
 
-  componentDidMount() {
-    const wholeAddress = this.props.route.params.addressLine1 + ' ' + this.props.route.params.addressLine2 + ' ' +
-                         this.props.route.params.city + ', ' + this.props.route.params.state + ' ' + this.props.route.params.zip;
-    const specialInstructions = this.props.route.params.specialInstructions;
-    const size = this.props.route.params.size;
-    const parking = this.props.route.params.parking;
-    const building = this.props.route.params.building;
-    this.setState({address: wholeAddress});
-    this.setState({specialInstructions: specialInstructions});
-    this.setState({size: size});
-    this.setState({parking: parking});
-    this.setState({building: building});
-  }
 /* This is used for Google Sheets
   onSubmit() {
     fetch(Url+'/customers',{
@@ -196,12 +206,12 @@ export default class UserInfo extends React.Component {
           defaultText='Enter your email here'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
-          onChangeText={(val)=>this.setState({email: val, validInput: false})}
+          onChangeText={(val)=>this.setState({email: val.toLowerCase(), validInput: false})}
           keyboardType='email-address'
           onEndEditing={(prev) => {
             // i got this regex online so we should test it (but it had the most upvotes on stack overflow lol)
             const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (emailRegex.test(this.state.email.toLowerCase())) {
+            if (emailRegex.test(this.state.email)) {
               this.setState({validEmail: true, validEmailUI: true})
             } else {
               this.setState({validEmail: false, validEmailUI: false})
@@ -262,8 +272,8 @@ export default class UserInfo extends React.Component {
             <LongButton
               title="NEXT"
               onPress={()=>{
-                this.context.signup(this.state.email, this.state.password, this.state.name, '+1' + this.state.phone, this.state.address, this.props.route.params.specialInstructions, this.state.size)
-                .then(() => {this.addCustomer(); this.props.navigation.navigate('ConfirmContactInfo', {email: this.state.email, password: this.state.password})})
+                this.context.signup(this.state.email, this.state.password, this.state.name, '+1' + this.state.phone, this.props.route.params.specialInstructions, this.props.route.params.size)
+                .then(() => {this.confirmEmail();})
                 .catch((err) => {
                   console.log('error signing up - see below', JSON.stringify(err));
                   if (err.code == 'UsernameExistsException') {

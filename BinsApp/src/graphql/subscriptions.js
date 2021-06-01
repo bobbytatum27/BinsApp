@@ -116,8 +116,8 @@ export const onDeleteUnit = /* GraphQL */ `
   }
 `;
 export const onCreateTenant = /* GraphQL */ `
-  subscription OnCreateTenant($owner: String) {
-    onCreateTenant(owner: $owner) {
+  subscription OnCreateTenant {
+    onCreateTenant {
       id
       facilityID
       name
@@ -152,13 +152,12 @@ export const onCreateTenant = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateTenant = /* GraphQL */ `
-  subscription OnUpdateTenant($owner: String) {
-    onUpdateTenant(owner: $owner) {
+  subscription OnUpdateTenant {
+    onUpdateTenant {
       id
       facilityID
       name
@@ -193,13 +192,12 @@ export const onUpdateTenant = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteTenant = /* GraphQL */ `
-  subscription OnDeleteTenant($owner: String) {
-    onDeleteTenant(owner: $owner) {
+  subscription OnDeleteTenant {
+    onDeleteTenant {
       id
       facilityID
       name
@@ -234,7 +232,6 @@ export const onDeleteTenant = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;

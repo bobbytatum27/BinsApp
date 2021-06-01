@@ -9,7 +9,6 @@ import ScheduleAppointment from '../../screens/ScheduleAppointment.js'
 import Review from '../../screens/Review.js'
 import Confirmation from '../../screens/Confirmation.js'
 import HomeInventory from '../../screens/HomeInventory.js'
-import NewItem from '../../screens/NewItem.js'
 import Menu from '../../screens/Menu.js'
 import EditAddress from '../../screens/EditAddress.js'
 import ViewOrder from '../../screens/ViewOrder.js'
@@ -47,7 +46,6 @@ export default HomeStackScreen = (props) => {
             <HomeStack.Screen name='ReviewScreen' component={Review} options={{title: "Review"}}/>
             <HomeStack.Screen name='ConfirmationScreen' component={Confirmation} options={{title: "Confirmation", headerLeft: null}}/>
             <HomeStack.Screen name='HomeInventoryScreen' component={HomeInventory} options={{title: "Returned Items"}}/>
-            <HomeStack.Screen name='NewItemScreen' component={NewItem} options={{title: "Pickup"}}/>
             <HomeStack.Screen name='Menu' component={Menu}/>
             <HomeStack.Screen name="EditAddress" component={EditAddress} options={{title: "Edit Address"}}/>
             <HomeStack.Screen name="ViewOrder" component={ViewOrder} options={{title: "View Order"}}/>

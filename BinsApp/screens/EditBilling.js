@@ -26,7 +26,7 @@ export default class EditBilling extends React.Component {
     }
   }
 
-  onSubmit() {
+  /*onSubmit() {
     fetch(Url+'/modifycustomers',{
       method: 'POST',
       headers: {
@@ -36,13 +36,13 @@ export default class EditBilling extends React.Component {
       body: JSON.stringify(this.state)
   })}
 
-  /*async updateUser() {
+  async updateUser() {
     let user = await Auth.currentAuthenticatedUser();
 
     let result = await Auth.updateUserAttributes(user, {
       'custom:size': this.state.selectedButton
     });
-  }*/
+  }
 
   componentDidMount(){
     Auth.currentUserInfo().then((userInfo) => {
@@ -54,7 +54,7 @@ export default class EditBilling extends React.Component {
       this.setState({specialInstructions:attributes['custom:specialInstructions']});
       this.setState({selectedButton:attributes['custom:size']});
     })
-  }
+  }*/
 
   render() {
     return (

@@ -173,7 +173,6 @@ export const createTenant = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -217,7 +216,6 @@ export const updateTenant = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -261,7 +259,6 @@ export const deleteTenant = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;

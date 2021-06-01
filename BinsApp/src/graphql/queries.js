@@ -113,7 +113,6 @@ export const getTenant = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -134,7 +133,6 @@ export const listTenants = /* GraphQL */ `
         licenseState
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -270,7 +268,6 @@ export const tenantByEmail = /* GraphQL */ `
         licenseState
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -301,7 +298,6 @@ export const tenantsByFacility = /* GraphQL */ `
         licenseState
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }

@@ -6,11 +6,9 @@ import InitialAppointment from '../../screens/InitialAppointment.js'
 import InitialConfirmation from '../../screens/InitialConfirmation.js'
 import UserInfo from '../../screens/UserInfo.js'
 import Login from '../../screens/Login.js'
-import AdminLogin from '../../screens/AdminLogin.js'
 import PasswordReset from '../../screens/PasswordReset.js'
 import ConfirmContactInfo from '../../screens/ConfirmContactInfo.js'
 import LandingTabs from './LandingTabs.js'
-import NewItem from '../../screens/NewItem.js'
 import SelectFacility from '../../screens/SelectFacility.js'
 import InitialPickup from '../../screens/InitialPickup.js'
 import InitialTerms from '../../screens/InitialTerms.js'
@@ -40,15 +38,13 @@ export default SignupLoginStack = (props) => {
         <SignupLoginStacks.Navigator screenOptions={screenOpts}>
            <SignupLoginStacks.Screen name='Landing' component={LandingTabs} options={{headerShown: false}}/>
            <SignupLoginStacks.Screen name='Login' component={Login}/>
-           <SignupLoginStacks.Screen name='ConfirmContactInfo' component={ConfirmContactInfo} options={{title: "Email Confirmation"}}/>
+           <SignupLoginStacks.Screen name='ConfirmContactInfo' component={ConfirmContactInfo} options={{title: "Email Confirmation", headerLeft: null}}/>
            <SignupLoginStacks.Screen name='PasswordReset' component={PasswordReset}/>
            <SignupLoginStacks.Screen name='AddressInfo' component={AddressInfo} options={{title: "Address Info"}}/>
-           <SignupLoginStacks.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment"}}/>
+           <SignupLoginStacks.Screen name='InitialAppointmentScreen' component={InitialAppointment} options={{title: "Schedule Appointment", headerLeft: null}}/>
            <SignupLoginStacks.Screen name='AccountInfoScreen' component={UserInfo} options={{title: "Create an Account"}}/>
            <SignupLoginStacks.Screen name='BillingInfoScreen' component={BillingInfo} options={{title: "Review"}}/>
-           <SignupLoginStacks.Screen name='InitialConfirmationScreen' component={InitialConfirmation} options={{title: "Confirmation", headerLeft: null}}/>
-           <SignupLoginStacks.Screen name='AdminLogin' component={AdminLogin} options={{title: "Admin Login"}}/>
-           <SignupLoginStacks.Screen name='NewItem' component={NewItem} options={{title: "New Item", headerLeft: null}}/>
+           <SignupLoginStacks.Screen name='InitialConfirmationScreen' component={InitialConfirmation} options={{title: "Confirmation", }}/>
            <SignupLoginStacks.Screen name='SelectFacility' component={SelectFacility} options={{title: "Select Facility"}}/>
            <SignupLoginStacks.Screen name='InitialPickup' component={InitialPickup} options={{title: "Select Items"}}/>
            <SignupLoginStacks.Screen name='InitialTermsScreen' component={InitialTerms} options={{title: "Terms and Conditions"}}/>

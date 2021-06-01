@@ -5,6 +5,9 @@ import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import LongButton from '../components/LongButton.js'
 import {Auth} from 'aws-amplify';
 import moment from 'moment';
+import { API, graphqlOperation, DataStore } from 'aws-amplify'
+import { Tenant } from '../src/models';
+import { createTenant } from '../src/graphql/mutations';
 
 export default class InitialAppointment extends React.Component {
   constructor(props) {
@@ -23,11 +26,42 @@ export default class InitialAppointment extends React.Component {
     this.setState({selectedButton: userType})
   }
 
+  async addCustomer() {
+    try {
+      const user = {
+        id: this.props.route.params.email,
+        facilityID: this.props.route.params.facilityID,
+        name: this.props.route.params.name,
+        email: this.props.route.params.email,
+        phone: this.props.route.params.phone,
+        address: {
+          addressLine1: this.props.route.params.addressLine1,
+          addressLine2: this.props.route.params.addressLine2,
+          city: this.props.route.params.city,
+          state: this.props.route.params.state,
+          zip: this.props.route.params.zip,
+          specialInstructions: this.props.route.params.specialInstructions,
+          parking: this.props.route.params.parking,
+          building: this.props.route.params.building,
+        },
+        licenseNumber: this.props.route.params.licenseNumber,
+        licenseState: this.props.route.params.licenseState,
+      }
+      await API.graphql(graphqlOperation(createTenant, { input: user}));
+      console.log('success!');
+    }
+    catch (err) {
+      console.log('error creating:', err);
+    }
+  }
+
   componentDidMount(){
     Auth.signIn({
-        username: this.props.route.params?.email??'',
-        password: this.props.route.params?.password??'',
+        username: this.props.route.params.email,
+        password: this.props.route.params.password,
     })
+    .then(() => {this.addCustomer();})
+    .catch((err) => Alert.alert(err.message))
   }
 
   render() {

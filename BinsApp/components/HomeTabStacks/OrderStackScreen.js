@@ -1,7 +1,6 @@
 import React from 'react';
 
 //Order Stack Screens
-import UpcomingOrders from '../../screens/UpcomingOrders.js'
 import PastOrders from '../../screens/PastOrders.js'
 import ViewOrder from '../../screens/ViewOrder.js'
 import ViewPastOrder from '../../screens/ViewPastOrder.js'

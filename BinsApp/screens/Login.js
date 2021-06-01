@@ -38,7 +38,7 @@ export default class Login extends React.Component {
           defaultText='Enter your email here'
           defaultTextColor='#8B8B8B'
           style={styles.userInfoText}
-          onChangeText={(val)=>this.setState({email:val, validInput: false})}
+          onChangeText={(val)=>this.setState({email:val.toLowerCase(), validInput: false})}
           keyboardType='email-address'
           onEndEditing={(val) => {
             if (this.state.email.length > 0) {

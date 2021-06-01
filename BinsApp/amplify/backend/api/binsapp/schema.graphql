@@ -18,7 +18,6 @@ type Unit @model
 }
 
 type Tenant @model
-  @auth(rules: [{ allow: owner }, {allow: groups}])
   @key(name: "tenantByEmail", fields: ["email"], queryField: "tenantByEmail")
   @key(name: "tenantsByFacility", fields: ["facilityID"], queryField: "tenantsByFacility") {
   id: ID!
